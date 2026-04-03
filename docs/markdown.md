@@ -3,8 +3,6 @@ title: Markdown in 5min
 icon: simple/markdown
 ---
 
-# Markdown in 5min
-
 ## Headers
 
 ```plain
