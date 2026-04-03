@@ -6,7 +6,7 @@ backend:
 media_folder: docs/assets/images
 public_folder: /assets/images
 
-site_url: https://codesigils.github.io/zensicle-site
+site_url: https://codesigils.github.io/
 
 collections:
   - name: "pages"
