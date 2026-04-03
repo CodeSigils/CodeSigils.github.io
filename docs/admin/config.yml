@@ -19,7 +19,13 @@ collections:
     format: frontmatter
     fields:
       - { label: "Title", name: "title", widget: "string", required: false }
-      - { label: "Icon", name: "icon", widget: "string", required: false, hint: "e.g. lucide/rocket" }
+      - {
+          label: "Icon",
+          name: "icon",
+          widget: "string",
+          required: false,
+          hint: "e.g. lucide/rocket",
+        }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "home"
@@ -29,6 +35,7 @@ collections:
         label: "Home"
         name: "home"
         fields:
+          - { label: "Title", name: "title", widget: "string", required: false }
           - { label: "Icon", name: "icon", widget: "string", required: false }
           - { label: "Body", name: "body", widget: "markdown" }
 
