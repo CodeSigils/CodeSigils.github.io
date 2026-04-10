@@ -67,7 +67,7 @@ In essence, Oh My OpenCode does the heavy lifting of configuring a reliable AI c
 **Using Bun (recommended):**
 
 ```bash
-bunx oh-my-opencode install
+bunx oh-my-openagent install
 ```
 
 **Using npm:**
