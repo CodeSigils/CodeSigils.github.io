@@ -94,7 +94,7 @@ curl https://mise.run | sh
 echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 
 # Install Node via mise
-mise install nodejs lts
+mise use -g node@lts
 
 # Verify (open NEW terminal)
 node --version
