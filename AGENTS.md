@@ -114,3 +114,56 @@ zensical serve
 # Build for production
 zensical build --clean
 ```
+
+## Markdown Standards
+
+These standards **MUST** be followed for all articles in this repo:
+
+### Admonitions (Important Notes)
+
+```markdown
+!!! tip "Title of the tip"
+    Important content here.
+
+!!! warning "Title of the warning"
+    Warning content here.
+
+!!! note "Title of the note"
+    Note content here.
+```
+
+### Collapsible Sections
+
+```markdown
+??? tip "Click to expand"
+    
+    Hidden content here.
+```
+
+### Table Headers
+
+Always use aligned table headers:
+
+```markdown
+| Header 1 | Header 2 | Header 3 |
+| :--- | :--- | :--- |
+| Data    | Data     | Data    |
+```
+
+**DO NOT use:**
+```markdown
+|---|---|---|  # WRONG
+```
+
+### Icons in Front Matter
+
+Use Lucide icons:
+
+```markdown
+---
+title: My Article Title
+icon: lucide/rocket
+---
+```
+
+Common icons: `lucide/terminal`, `lucide/box`, `lucide/fish`, `lucide/cpu`, `lucide/book-open`, `lucide/bot`, `lucide/rocket`
