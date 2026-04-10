@@ -1,6 +1,13 @@
 ---
 title: Markdown in 5min
 icon: lucide/file-text
+description: Quick markdown reference guide - learn markdown syntax for headers, lists, links, images, tables, code blocks and more in 5 minutes.
+keywords:
+  - markdown
+  - syntax
+  - reference
+  - cheat sheet
+  - formatting
 ---
 
 ## Headers

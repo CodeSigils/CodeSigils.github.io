@@ -33,6 +33,13 @@ collections:
           hint: "Short summary for SEO and previews",
         }
       - {
+          label: "Keywords",
+          name: "keywords",
+          widget: "list",
+          required: false,
+          hint: "Comma-separated keywords for SEO",
+        }
+      - {
           label: "Icon",
           name: "icon",
           widget: "string",
@@ -68,6 +75,13 @@ collections:
           required: false,
           hint: "Short summary for SEO",
         }
+      - {
+          label: "Keywords",
+          name: "keywords",
+          widget: "list",
+          required: false,
+          hint: "Comma-separated keywords for SEO",
+        }
       - { label: "Icon", name: "icon", widget: "string", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
@@ -86,6 +100,13 @@ collections:
           widget: "text",
           required: false,
           hint: "Short summary for SEO",
+        }
+      - {
+          label: "Keywords",
+          name: "keywords",
+          widget: "list",
+          required: false,
+          hint: "Comma-separated keywords for SEO",
         }
       - { label: "Icon", name: "icon", widget: "string", required: false }
       - { label: "Body", name: "body", widget: "markdown" }

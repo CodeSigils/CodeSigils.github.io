@@ -1,6 +1,14 @@
 ---
 title: Hermes AI vs OpenCode
 icon: lucide/rocket
+description: Comparison between Hermes AI and OpenCode - two powerful open source AI coding agents. Features, tools, memory, and use case differences.
+keywords:
+  - hermes
+  - opencode
+  - comparison
+  - AI agent
+  - Nous Research
+  - open source
 ---
 
 ![Hermes Agent Banner](/assets/images/hermes-banner.png){ width=900 }

@@ -1,6 +1,13 @@
 ---
 title: Zensical
 icon: lucide/rocket
+description: Personal documentation site built with Zensical - a modern Python static site generator with Sveltia CMS for content management.
+keywords:
+  - Zensical
+  - static site generator
+  - documentation
+  - GitHub Pages
+  - Sveltia CMS
 ---
 
 Zensicle is a Python static site generator written by the MKDocs team.

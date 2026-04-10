@@ -1,3 +1,16 @@
+---
+title: OXC Formatter Guide
+icon: simple/typescript
+description: Guide to OXC formatter - the next-generation JavaScript/TypeScript code formatter written in Rust. Fast, configurable, and modern.
+keywords:
+  - OXC
+  - formatter
+  - JavaScript
+  - TypeScript
+  - Rust
+  - code formatting
+---
+
 # The OXC tools
 
 ![OXC Logo](/assets/images/oxc-logo.svg){ align=center width=200 }

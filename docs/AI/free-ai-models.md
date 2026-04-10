@@ -1,6 +1,15 @@
 ---
 title: Free AI Models Guide
 icon: lucide/bot
+description: Guide to free AI models for coding with OpenCode - including Big Pickle, Google AI Studio, Hugging Face, and other free LLM providers.
+keywords:
+  - free AI models
+  - Big Pickle
+  - Gemini
+  - Google AI Studio
+  - Hugging Face
+  - free LLM
+  - no-cost AI
 ---
 
 ![AI Models](/assets/images/opencode-screenshot.webp){ width=800 }

@@ -1,6 +1,16 @@
 ---
 title: Dolphin LLM Guide
 icon: lucide/fish
+description: Guide to Dolphin LLM - an open source, uncensored, and steerable large language model family. Learn about installation, usage, and model options.
+keywords:
+  - dolphin
+  - LLM
+  - open source
+  - uncensored
+  - Ollama
+  - LM Studio
+  - Hugging Face
+  - local AI
 ---
 
 ![Dolphin LLM](/assets/images/dolphin-llm.png){ width=900 }

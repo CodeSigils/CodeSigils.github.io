@@ -1,6 +1,13 @@
 ---
 title: JS and TS
 icon: simple/typescript
+description: JavaScript and TypeScript articles - programming guides, best practices, and tutorials for modern web development.
+keywords:
+  - JavaScript
+  - TypeScript
+  - programming
+  - web development
+  - frontend
 ---
 
 This section covers tools, best practices, and guides
