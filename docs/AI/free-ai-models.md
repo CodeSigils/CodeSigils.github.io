@@ -21,13 +21,29 @@ icon: lucide/bot
 
 ## Free AI Models Overview
 
-<iframe width="100%" height="450" src="https://www.youtube.com/embed/XNm1pVab8-A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe src="https://www.youtube.com/embed/XNm1pVab8-A" 
+            frameborder="0" 
+            allowfullscreen 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+    </iframe>
+  </div>
+</div>
 
 ## Hugging Face Inference Providers
 
 OpenCode natively supports Hugging Face Inference Providers - giving you access to open models from 17+ providers.
 
-<iframe width="100%" height="450" src="https://www.youtube.com/embed/b665B04CWkI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe src="https://www.youtube.com/embed/b665B04CWkI" 
+            frameborder="0" 
+            allowfullscreen 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+    </iframe>
+  </div>
+</div>
 
 ### Quick Setup
 
@@ -98,7 +114,7 @@ OpenCode natively supports Hugging Face Inference Providers - giving you access 
 OpenCode offers some built-in free models developed by [Zen Labs](https://zenlabs.ai/):
 
 | Model                 | Best For       | Notes                |
-| --------------------- | -------------- | -------------------- |
+| :--- | :--- | :--- |
 | **Big Pickle**        | General coding | OpenCode's free tier - developed by Zen |
 | **GLM 4.7 Free**      | General tasks  | Limited              |
 | **MiniMax M2.1 Free** | General tasks  | Limited              |
@@ -107,7 +123,15 @@ OpenCode offers some built-in free models developed by [Zen Labs](https://zenlab
 
 **Big Pickle** is a free LLM developed by [Zen Labs](https://zenlabs.ai/), the team behind OpenCode. It's available directly in OpenCode and optimized for coding tasks.
 
-<iframe width="100%" height="450" src="https://www.youtube.com/embed/tuW0IKNZ2UI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe src="https://www.youtube.com/embed/tuW0IKNZ2UI" 
+            frameborder="0" 
+            allowfullscreen 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+    </iframe>
+  </div>
+</div>
 
 ### How to Access
 

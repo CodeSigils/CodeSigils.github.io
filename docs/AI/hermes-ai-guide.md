@@ -49,7 +49,15 @@ Access Hermes from multiple platforms:
 - **MCP Integration** — Connect any MCP server
 - **Tool-calling Training** — Export to ShareGPT format
 
-<iframe width="100%" height="450" src="https://www.youtube.com/embed/YtfROZK1BDM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe src="https://www.youtube.com/embed/YtfROZK1BDM" 
+            frameborder="0" 
+            allowfullscreen 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+    </iframe>
+  </div>
+</div>
 
 ## Installation
 
