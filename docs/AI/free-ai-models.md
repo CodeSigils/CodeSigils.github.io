@@ -30,28 +30,16 @@ keywords:
 
 ## Free AI Models Overview
 
-<div>
-  <div style="position:relative;padding-top:56.25%;">
-    <iframe src="https://www.youtube.com/embed/XNm1pVab8-A" 
-            frameborder="0" 
-            allowfullscreen 
-            style="position:absolute;top:0;left:0;width:100%;height:100%;">
-    </iframe>
-  </div>
+<div class="youtube-video-wrapper">
+  <iframe src="https://www.youtube.com/embed/XNm1pVab8-A" allowfullscreen></iframe>
 </div>
 
 ## Hugging Face Inference Providers
 
 OpenCode natively supports Hugging Face Inference Providers - giving you access to open models from 17+ providers.
 
-<div>
-  <div style="position:relative;padding-top:56.25%;">
-    <iframe src="https://www.youtube.com/embed/b665B04CWkI" 
-            frameborder="0" 
-            allowfullscreen 
-            style="position:absolute;top:0;left:0;width:100%;height:100%;">
-    </iframe>
-  </div>
+<div class="youtube-video-wrapper">
+  <iframe src="https://www.youtube.com/embed/b665B04CWkI" allowfullscreen></iframe>
 </div>
 
 ### Quick Setup
@@ -132,14 +120,8 @@ OpenCode offers some built-in free models developed by [Zen Labs](https://zenlab
 
 **Big Pickle** is a free LLM developed by [Zen Labs](https://zenlabs.ai/), the team behind OpenCode. It's available directly in OpenCode and optimized for coding tasks.
 
-<div>
-  <div style="position:relative;padding-top:56.25%;">
-    <iframe src="https://www.youtube.com/embed/tuW0IKNZ2UI" 
-            frameborder="0" 
-            allowfullscreen 
-            style="position:absolute;top:0;left:0;width:100%;height:100%;">
-    </iframe>
-  </div>
+<div class="youtube-video-wrapper">
+  <iframe src="https://www.youtube.com/embed/tuW0IKNZ2UI" allowfullscreen></iframe>
 </div>
 
 ### How to Access
