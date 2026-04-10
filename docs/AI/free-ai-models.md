@@ -93,13 +93,19 @@ opencode auth login
 
 ## OpenCode Free Models
 
-OpenCode offers some built-in free models:
+OpenCode offers some built-in free models developed by [Zen Labs](https://zenlabs.ai/):
 
 | Model                 | Best For       | Notes                |
 | --------------------- | -------------- | -------------------- |
-| **Big Pickle**        | General coding | OpenCode's free tier |
+| **Big Pickle**        | General coding | OpenCode's free tier - developed by Zen |
 | **GLM 4.7 Free**      | General tasks  | Limited              |
 | **MiniMax M2.1 Free** | General tasks  | Limited              |
+
+### About Big Pickle
+
+**Big Pickle** is a free LLM developed by [Zen Labs](https://zenlabs.ai/), the team behind OpenCode. It's available directly in OpenCode and optimized for coding tasks.
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/tuW0IKNZ2UI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### How to Access
 
