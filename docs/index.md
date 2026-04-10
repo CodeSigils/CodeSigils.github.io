@@ -182,3 +182,11 @@ simple starter pages.
 [Hover me][example]
 
 [example]: https://example.com "I'm a tooltip!"
+
+***
+
+!!! warning "Disclaimer"
+
+    This site contains personal opinions and experimental notes. The author is not responsible for any loss of data, system damage, or issues from following the content here. 
+
+    [Read full disclaimer](./disclaimer.md)

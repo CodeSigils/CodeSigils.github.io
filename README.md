@@ -33,6 +33,21 @@ A personal knowledge base documenting tools, techniques, and experimentation in 
 
 [MIT License](LICENSE) - Copyright 2026 Tom Geo
 
+## Disclaimer
+
+This site contains personal opinions, research, and experimental notes. 
+
+**The author is not responsible for any loss of data, system damage, or other issues arising from following the content here.**
+
+!!! warning "Reader Beware"
+
+    - Verify all commands against official documentation before running
+    - Understand code before execution
+    - Always back up data before making system changes
+    - Your experience may differ from mine
+
+See [disclaimer docs page](./docs/disclaimer.md) for full details.
+
 ## Local Development
 
 ```bash
