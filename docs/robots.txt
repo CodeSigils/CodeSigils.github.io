@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://codesigils.github.io/sitemap.xml

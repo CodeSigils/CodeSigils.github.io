@@ -17,7 +17,7 @@ site_name = "Code Sigils"
 # meaningful description of the site content for use by search engines.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_description
-site_description = "A new project generated from the default template project."
+site_description = "Personal documentation site with guides for OpenCode, Oh My OpenAgent, Dolphin LLM, Hermes AI, free AI models, and more. Built with Zensical and hosted on GitHub Pages."
 
 site_author = "Tom Geo"
 
