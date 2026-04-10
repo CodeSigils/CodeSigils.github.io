@@ -1,3 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>https://codesigils.github.io/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/markdown/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/free-ai-models/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/hermes-vs-opencode/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/notebooklm-opencode-tutorial/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/oh-my-opencode-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/opencode-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/JS-TS/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/JS-TS/oxc-formatting/</loc>
+      </url>
 </urlset>

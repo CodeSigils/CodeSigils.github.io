@@ -1,0 +1,4519 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="Tom Geo">
+      
+      
+        <link rel="canonical" href="https://codesigils.github.io/AI/opencode-guide/">
+      
+      
+        <link rel="prev" href="../oh-my-opencode-guide/">
+      
+      
+        <link rel="next" href="../../JS-TS/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.png">
+      <meta name="generator" content="zensical-0.0.29">
+    
+    
+      
+        <title>OpenCode Guide - Code Sigils</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.6f2fbb28.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetbrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Jetbrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#table-of-contents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Code Sigils" class="md-header__button md-logo" aria-label="Code Sigils" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Code Sigils
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OpenCode Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Code Sigils" class="md-nav__button md-logo" aria-label="Code Sigils" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Code Sigils
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Zensical
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../markdown/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8M16 13H8M16 17H8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown in 5min
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../free-ai-models/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Free AI Models Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hermes-vs-opencode/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Hermes AI vs OpenCode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooklm-opencode-tutorial/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    NotebookLM + OpenCode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oh-my-opencode-guide/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Oh My OpenCode Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-terminal" viewBox="0 0 24 24"><path d="M12 19h8M4 17l6-6-6-6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-terminal" viewBox="0 0 24 24"><path d="M12 19h8M4 17l6-6-6-6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-opencode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is OpenCode?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is OpenCode?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Statistics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#official-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Official Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodejs-installation-common-foot-guns-to-avoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node.js Installation (Common "Foot Guns" to Avoid)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-mise-best-for-opencode-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended: mise (Best for OpenCode Users)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-fnm-fast-node-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative: fnm (Fast Node Manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-pnpm-corepack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative: pnpm + corepack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for MCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-via-script-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install via Script (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-managers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Package Managers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desktop-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desktop App
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-terminal-user-interface-tui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Terminal User Interface (TUI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-plan-and-build-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Plan and Build Modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lsp-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. LSP Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-git-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Git Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-share-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Share Sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-multi-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Multi-Session
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-model-context-protocol-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Model Context Protocol (MCP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-file-watching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. File Watching
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Support
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#75-llm-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        75+ LLM Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hugging-face-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hugging Face Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hugging Face Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-zen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCode Zen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugins-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugins &amp; Extensions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugins &amp; Extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading Plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#built-in-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built-in Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#most-used-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Most Used Plugins
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Most Used Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-oh-my-opencode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Oh My OpenCode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-opencode-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. OpenCode Swarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-opencode-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. opencode-prompts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-open-reload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. open-reload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-opencode-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. opencode-mcp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-opencode-ecc-everything-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. opencode-ecc (Everything Claude Code)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-session-analytics-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Session &amp; Analytics Plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-mcp-servers-1200-available" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. MCP Servers (1,200+ Available)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basic-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface Options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-terminal-tui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Terminal (TUI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-desktop-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Desktop App
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ide-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. IDE Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-web-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Web Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-acp-agent-coding-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. ACP (Agent Coding Protocol)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enterprise-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enterprise Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enterprise Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#privacy-first-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy-First Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enterprise Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zen-for-teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zen for Teams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#developer-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Developer Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developer Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-review-and-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Review and Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaffolding-new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaffolding New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#large-scale-refactoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Large-Scale Refactoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-driven-development-tdd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test-Driven Development (TDD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation Maintenance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Language Migration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#average-user-use-cases-non-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Average User Use Cases (Non-Developers)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Average User Use Cases (Non-Developers)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-creation-and-marketing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Creation and Marketing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translation-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Translation Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-analysis-and-reporting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Analysis and Reporting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Organization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#excel-and-spreadsheet-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Excel and Spreadsheet Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-real-world-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Real-World Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Real-World Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#legacy-code-refactoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Legacy Code Refactoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd-automated-code-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Automated Code Review
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-issue-triage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Issue Triage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-operations-via-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Operations via MCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slack-bot-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slack Bot Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#planbuild-pattern-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan/Build Pattern (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-mode-autonomous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Mode (Autonomous)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparison">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opencode-vs-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCode vs Claude Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-vs-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCode vs Cursor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-opencode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Use OpenCode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further Reading
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Further Reading">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#official-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Official Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Community Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparisons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-reviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Research &amp; Reviews
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../JS-TS/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75q.918 0 1.627.111a6.4 6.4 0 0 1 1.306.34v2.458a4 4 0 0 0-.643-.361 5 5 0 0 0-.717-.26 5.5 5.5 0 0 0-1.426-.2q-.45 0-.819.086a2.1 2.1 0 0 0-.623.242q-.254.156-.393.374a.9.9 0 0 0-.14.49q0 .294.156.529.156.234.443.444c.287.21.423.276.696.41q.41.203.926.416.705.296 1.266.628.561.333.963.753.402.418.614.957.213.538.214 1.253 0 .986-.373 1.656a3.03 3.03 0 0 1-1.012 1.085 4.4 4.4 0 0 1-1.487.596q-.85.18-1.79.18a10 10 0 0 1-1.84-.164 5.5 5.5 0 0 1-1.512-.493v-2.63a5.03 5.03 0 0 0 3.237 1.2q.5 0 .872-.09.373-.09.623-.25.249-.162.373-.38a1.02 1.02 0 0 0-.074-1.089 2.1 2.1 0 0 0-.537-.5 5.6 5.6 0 0 0-.807-.444 28 28 0 0 0-1.007-.436q-1.377-.575-2.053-1.405t-.676-2.005q0-.92.369-1.582.368-.662 1.004-1.089a4.5 4.5 0 0 1 1.47-.629 7.5 7.5 0 0 1 1.77-.201m-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    JS TS
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    JS TS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JS-TS/oxc-formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The OXC tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-opencode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is OpenCode?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is OpenCode?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Statistics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#official-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Official Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodejs-installation-common-foot-guns-to-avoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node.js Installation (Common "Foot Guns" to Avoid)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-mise-best-for-opencode-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended: mise (Best for OpenCode Users)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-fnm-fast-node-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative: fnm (Fast Node Manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-pnpm-corepack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative: pnpm + corepack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for MCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-via-script-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install via Script (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-managers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Package Managers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desktop-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desktop App
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-terminal-user-interface-tui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Terminal User Interface (TUI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-plan-and-build-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Plan and Build Modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lsp-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. LSP Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-git-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Git Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-share-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Share Sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-multi-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Multi-Session
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-model-context-protocol-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Model Context Protocol (MCP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-file-watching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. File Watching
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Support
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#75-llm-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        75+ LLM Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hugging-face-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hugging Face Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hugging Face Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-zen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCode Zen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugins-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugins &amp; Extensions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugins &amp; Extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loading Plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#built-in-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built-in Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#most-used-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Most Used Plugins
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Most Used Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-oh-my-opencode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Oh My OpenCode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-opencode-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. OpenCode Swarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-opencode-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. opencode-prompts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-open-reload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. open-reload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-opencode-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. opencode-mcp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-opencode-ecc-everything-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. opencode-ecc (Everything Claude Code)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-session-analytics-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Session &amp; Analytics Plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-mcp-servers-1200-available" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. MCP Servers (1,200+ Available)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basic-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface Options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-terminal-tui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Terminal (TUI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-desktop-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Desktop App
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ide-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. IDE Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-web-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Web Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-acp-agent-coding-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. ACP (Agent Coding Protocol)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enterprise-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enterprise Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enterprise Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#privacy-first-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy-First Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enterprise Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zen-for-teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zen for Teams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#developer-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Developer Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Developer Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-review-and-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Review and Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaffolding-new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaffolding New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#large-scale-refactoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Large-Scale Refactoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-driven-development-tdd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test-Driven Development (TDD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation Maintenance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Language Migration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#average-user-use-cases-non-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Average User Use Cases (Non-Developers)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Average User Use Cases (Non-Developers)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-creation-and-marketing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Creation and Marketing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translation-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Translation Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-analysis-and-reporting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Analysis and Reporting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Organization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#excel-and-spreadsheet-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Excel and Spreadsheet Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-real-world-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Real-World Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Real-World Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#legacy-code-refactoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Legacy Code Refactoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd-automated-code-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Automated Code Review
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-issue-triage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Issue Triage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-operations-via-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Operations via MCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slack-bot-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slack Bot Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#planbuild-pattern-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan/Build Pattern (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-mode-autonomous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Mode (Autonomous)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparison">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opencode-vs-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCode vs Claude Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-vs-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCode vs Cursor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-opencode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Use OpenCode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further Reading
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Further Reading">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#official-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Official Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Community Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparisons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-reviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Research &amp; Reviews
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Zensical
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../free-ai-models/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    AI
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <h1 id="__skip">OpenCode Guide</h1>
+
+<p>The open source AI coding agent for terminal, desktop, and IDE.</p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#what-is-opencode">What is OpenCode?</a></li>
+<li><a href="#official-links">Official Links</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#core-features">Core Features</a></li>
+<li><a href="#model-support">Model Support</a></li>
+<li><a href="#plugins--extensions">Plugins &amp; Extensions</a></li>
+<li><a href="#most-used-plugins">Most Used Plugins</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#interface-options">Interface Options</a></li>
+<li><a href="#enterprise-features">Enterprise Features</a></li>
+<li><a href="#use-cases">Use Cases</a></li>
+<li><a href="#comparison">Comparison</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#further-reading">Further Reading</a></li>
+</ol>
+<hr />
+<h2 id="what-is-opencode">What is OpenCode?<a class="headerlink" href="#what-is-opencode" title="Permanent link">&para;</a></h2>
+<p>OpenCode is an <strong>open source AI coding agent</strong> that helps developers write, debug, refactor, and understand code. It operates as a terminal-native interface with optional desktop app and IDE extensions.</p>
+<h3 id="key-statistics">Key Statistics<a class="headerlink" href="#key-statistics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub Stars</strong></td>
+<td>140K+</td>
+</tr>
+<tr>
+<td><strong>Contributors</strong></td>
+<td>850+</td>
+</tr>
+<tr>
+<td><strong>Monthly Developers</strong></td>
+<td>6.5M+</td>
+</tr>
+<tr>
+<td><strong>Commits</strong></td>
+<td>11,000+</td>
+</tr>
+<tr>
+<td><strong>License</strong></td>
+<td>MIT / Apache 2.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="core-philosophy">Core Philosophy<a class="headerlink" href="#core-philosophy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>100% Open Source</strong> — Complete transparency with MIT license</li>
+<li><strong>Provider Agnostic</strong> — Works with Claude, OpenAI, Google, or local models</li>
+<li><strong>Privacy First</strong> — No code or context stored on servers</li>
+<li><strong>Local-First</strong> — Run locally with optional cloud services</li>
+</ul>
+<hr />
+<h2 id="official-links">Official Links<a class="headerlink" href="#official-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Website</strong>: <a href="https://opencode.ai">https://opencode.ai</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/anomalyco/opencode">https://github.com/anomalyco/opencode</a></li>
+<li><strong>Documentation</strong>: <a href="https://opencode.ai/docs">https://opencode.ai/docs</a></li>
+<li><strong>Zen (Curated Models)</strong>: <a href="https://opencode.ai/zen">https://opencode.ai/zen</a></li>
+<li><strong>Enterprise</strong>: <a href="https://opencode.ai/enterprise">https://opencode.ai/enterprise</a></li>
+<li><strong>Discord</strong>: <a href="https://opencode.ai/discord">https://opencode.ai/discord</a></li>
+<li><strong>Desktop App</strong>: <a href="https://opencode.ai/download">https://opencode.ai/download</a></li>
+</ul>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ol>
+<li>A modern terminal emulator (WezTerm, Alacritty, Ghostty, or Kitty recommended)</li>
+<li>API keys for your preferred LLM provider(s)</li>
+<li>Node.js 18+ (required for MCP servers and plugins)</li>
+</ol>
+<h4 id="nodejs-installation-common-foot-guns-to-avoid">Node.js Installation (Common "Foot Guns" to Avoid)<a class="headerlink" href="#nodejs-installation-common-foot-guns-to-avoid" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong>⚠️ AVOID THESE COMMON MISTAKES:</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>❌ Don't Do This</th>
+<th>✅ Do This Instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sudo apt install nodejs</code> (Ubuntu - installs ancient Node)</td>
+<td>Use mise, fnm, n, or nvm</td>
+</tr>
+<tr>
+<td>Rely on <code>source ~/.nvm/nvm.sh</code> manually</td>
+<td>Use mise or fnm (auto-loads)</td>
+</tr>
+<tr>
+<td>Assume Node persists across terminals</td>
+<td>Test in a NEW terminal</td>
+</tr>
+<tr>
+<td>Use different Node versions per project</td>
+<td>Use a version manager</td>
+</tr>
+</tbody>
+</table>
+<h4 id="recommended-mise-best-for-opencode-users">Recommended: mise (Best for OpenCode Users)<a class="headerlink" href="#recommended-mise-best-for-opencode-users" title="Permanent link">&para;</a></h4>
+<p><a href="https://mise.jdx.dev">mise</a> is a "tool runner" that manages Node, Python, Go, etc. - persistent and project-aware.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Install mise (if you have curl or build from source)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>curl<span class="w"> </span>https://mise.run<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Or if you have pnpm already:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>pnpm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>mise-enforce
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Add to shell config (~/.zshrc or ~/.bashrc):</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;eval &quot;$(mise activate zsh)&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Install Node via mise</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>mise<span class="w"> </span>install<span class="w"> </span>nodejs<span class="w"> </span>lts
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># Verify (open NEW terminal)</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>node<span class="w"> </span>--version
+</span></code></pre></div>
+<h4 id="alternative-fnm-fast-node-manager">Alternative: fnm (Fast Node Manager)<a class="headerlink" href="#alternative-fnm-fast-node-manager" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Install fnm</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://fnm.vercel.app/install<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Add to shell config:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;source $(fnm env --shell-only)&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Install LTS</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>fnm<span class="w"> </span>install<span class="w"> </span>--lts
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>fnm<span class="w"> </span>default<span class="w"> </span>lts-latest
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># Verify (new terminal)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>node<span class="w"> </span>--version
+</span></code></pre></div>
+<h4 id="alternative-pnpm-corepack">Alternative: pnpm + corepack<a class="headerlink" href="#alternative-pnpm-corepack" title="Permanent link">&para;</a></h4>
+<p>If you already use pnpm, enable corepack (comes with Node 18+):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Enable corepack (enables pnpm without separate install)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>corepack<span class="w"> </span><span class="nb">enable</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># This gives you pnpm AND the right Node version for pnpm</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>pnpm<span class="w"> </span>--version
+</span></code></pre></div>
+<h4 id="quick-verification">Quick Verification<a class="headerlink" href="#quick-verification" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. Open a BRAND NEW terminal (not the same one)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 2. Run:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>node<span class="w"> </span>--version
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>npm<span class="w"> </span>--version
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Both should show versions</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># If errors → Node not persistent</span>
+</span></code></pre></div>
+<h4 id="why-this-matters-for-mcp">Why This Matters for MCP<a class="headerlink" href="#why-this-matters-for-mcp" title="Permanent link">&para;</a></h4>
+<p>MCP servers run as subprocesses. If Node isn't persistent:</p>
+<ul>
+<li>MCP tools fail silently or hang</li>
+<li><code>npx</code> commands don't work</li>
+<li>Plugin loading fails</li>
+</ul>
+<h3 id="install-via-script-recommended">Install via Script (Recommended)<a class="headerlink" href="#install-via-script-recommended" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://opencode.ai/install<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div>
+<h3 id="package-managers">Package Managers<a class="headerlink" href="#package-managers" title="Permanent link">&para;</a></h3>
+<p><strong>Using Node.js:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>opencode-ai<span class="w">   </span><span class="c1"># npm</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>bun<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>opencode-ai<span class="w">   </span><span class="c1"># bun</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>pnpm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>opencode-ai<span class="w">  </span><span class="c1"># pnpm</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>yarn<span class="w"> </span>global<span class="w"> </span>add<span class="w"> </span>opencode-ai<span class="w">  </span><span class="c1"># yarn</span>
+</span></code></pre></div>
+<p><strong>Using Homebrew (macOS/Linux):</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>brew<span class="w"> </span>install<span class="w"> </span>anomalyco/tap/opencode
+</span></code></pre></div>
+<p><strong>Using Arch Linux:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>opencode<span class="w">           </span><span class="c1"># Stable</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>paru<span class="w"> </span>-S<span class="w"> </span>opencode-bin<span class="w">              </span><span class="c1"># AUR (Latest)</span>
+</span></code></pre></div>
+<h3 id="windows-installation">Windows Installation<a class="headerlink" href="#windows-installation" title="Permanent link">&para;</a></h3>
+<p><strong>Using Chocolatey:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>choco<span class="w"> </span>install<span class="w"> </span>opencode
+</span></code></pre></div>
+<p><strong>Using Scoop:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>scoop<span class="w"> </span>install<span class="w"> </span>opencode
+</span></code></pre></div>
+<p><strong>Using Docker:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>ghcr.io/anomalyco/opencode
+</span></code></pre></div>
+<p><strong>Using WSL (Recommended):</strong>
+OpenCode works best on Windows through WSL (Windows Subsystem for Linux).</p>
+<h3 id="desktop-app">Desktop App<a class="headerlink" href="#desktop-app" title="Permanent link">&para;</a></h3>
+<p>Download the beta for macOS, Windows, and Linux:</p>
+<ul>
+<li><a href="https://opencode.ai/download">https://opencode.ai/download</a></li>
+</ul>
+<hr />
+<h2 id="core-features">Core Features<a class="headerlink" href="#core-features" title="Permanent link">&para;</a></h2>
+<h3 id="1-terminal-user-interface-tui">1. Terminal User Interface (TUI)<a class="headerlink" href="#1-terminal-user-interface-tui" title="Permanent link">&para;</a></h3>
+<p>OpenCode's primary interface is a terminal-based UI with:</p>
+<ul>
+<li>Session management</li>
+<li>File browsing</li>
+<li>Real-time code editing</li>
+<li>Multi-session support</li>
+<li>Theme customization</li>
+</ul>
+<h3 id="2-plan-and-build-modes">2. Plan and Build Modes<a class="headerlink" href="#2-plan-and-build-modes" title="Permanent link">&para;</a></h3>
+<p><strong>Plan Mode</strong> (<code>Tab</code> key):</p>
+<ul>
+<li>Analyzes and explains code</li>
+<li>Creates implementation plans</li>
+<li>No code changes made</li>
+<li>Perfect for reviewing before building</li>
+</ul>
+<p><strong>Build Mode</strong> (<code>Tab</code> key):</p>
+<ul>
+<li>Executes code changes</li>
+<li>Makes file edits</li>
+<li>Runs tests and commands</li>
+</ul>
+<h3 id="3-lsp-integration">3. LSP Integration<a class="headerlink" href="#3-lsp-integration" title="Permanent link">&para;</a></h3>
+<p>Auto-loads Language Server Protocol servers for:</p>
+<ul>
+<li>Real-time type checking</li>
+<li>Code navigation (Go to Definition, Find References)</li>
+<li>Refactoring tools</li>
+<li>Diagnostics</li>
+</ul>
+<p><strong>Supported Languages:</strong></p>
+<ul>
+<li>TypeScript/JavaScript (tsserver)</li>
+<li>Python (Pyright, Pylsp)</li>
+<li>Rust (rust-analyzer)</li>
+<li>Go (gopls)</li>
+<li>And many more via custom LSP servers</li>
+</ul>
+<h3 id="4-git-integration">4. Git Integration<a class="headerlink" href="#4-git-integration" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub Integration:</strong></p>
+<ul>
+<li>Trigger via <code>/opencode</code> comments in issues and PRs</li>
+<li>Execute in GitHub Actions runners</li>
+<li>Automatic commit messages</li>
+</ul>
+<p><strong>GitLab Integration:</strong></p>
+<ul>
+<li>Merge request comments</li>
+<li>CI/CD integration</li>
+</ul>
+<h3 id="5-share-sessions">5. Share Sessions<a class="headerlink" href="#5-share-sessions" title="Permanent link">&para;</a></h3>
+<p>Share conversation links with your team:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>/share
+</span></code></pre></div>
+<p>Creates a link to the current conversation for collaboration and review.</p>
+<h3 id="6-multi-session">6. Multi-Session<a class="headerlink" href="#6-multi-session" title="Permanent link">&para;</a></h3>
+<p>Run parallel agents on the same project:</p>
+<ul>
+<li>Multiple independent sessions</li>
+<li>Shared context when needed</li>
+<li>Share links for each session</li>
+</ul>
+<h3 id="7-model-context-protocol-mcp">7. Model Context Protocol (MCP)<a class="headerlink" href="#7-model-context-protocol-mcp" title="Permanent link">&para;</a></h3>
+<p>Connect to 1,200+ MCP servers for extended capabilities:</p>
+<ul>
+<li>Database access</li>
+<li>External tools</li>
+<li>API integrations</li>
+<li>Browser automation</li>
+</ul>
+<h3 id="8-file-watching">8. File Watching<a class="headerlink" href="#8-file-watching" title="Permanent link">&para;</a></h3>
+<p>Auto-reload and respond to file changes:</p>
+<ul>
+<li>Real-time updates</li>
+<li>Build on save</li>
+<li>Test on change</li>
+</ul>
+<hr />
+<h2 id="model-support">Model Support<a class="headerlink" href="#model-support" title="Permanent link">&para;</a></h2>
+<h3 id="75-llm-providers">75+ LLM Providers<a class="headerlink" href="#75-llm-providers" title="Permanent link">&para;</a></h3>
+<p>OpenCode connects to virtually any LLM via Models.dev:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Providers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cloud APIs</strong></td>
+<td>OpenAI, Anthropic, Google, Mistral, Cohere</td>
+</tr>
+<tr>
+<td><strong>Local Models</strong></td>
+<td>Ollama, LM Studio, LocalAI</td>
+</tr>
+<tr>
+<td><strong>Subscriptions</strong></td>
+<td>GitHub Copilot, ChatGPT Plus/Pro</td>
+</tr>
+<tr>
+<td><strong>Routers</strong></td>
+<td>OpenRouter, Models.dev</td>
+</tr>
+<tr>
+<td><strong>Open Models</strong></td>
+<td>Hugging Face (17+ providers)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hugging-face-integration">Hugging Face Integration<a class="headerlink" href="#hugging-face-integration" title="Permanent link">&para;</a></h3>
+<p>OpenCode natively supports <strong>Hugging Face Inference Providers</strong> - giving you access to open models from 17+ providers including Hugging Face, Together AI, Hyperbolic, and more.</p>
+<h4 id="quick-setup">Quick Setup<a class="headerlink" href="#quick-setup" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 1. Create token at huggingface.co/settings/tokens</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">#    (needs &quot;Make calls to Inference Providers&quot; permission)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># 2. Run auth login</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>opencode<span class="w"> </span>auth<span class="w"> </span>login
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># 3. Select Hugging Face when prompted</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1">#    Enter your token: hf_...</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1"># 4. Select a model</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>/models
+</span></code></pre></div>
+<h4 id="available-models">Available Models<a class="headerlink" href="#available-models" title="Permanent link">&para;</a></h4>
+<p>Access to open models from multiple providers:</p>
+<ul>
+<li>Llama variants</li>
+<li>Qwen</li>
+<li>Phi</li>
+<li>Mistral</li>
+<li>GLM</li>
+<li>And more...</li>
+</ul>
+<h4 id="config-optional">Config (Optional)<a class="headerlink" href="#config-optional" title="Permanent link">&para;</a></h4>
+<p>For organization billing:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://opencode.ai/config.json&quot;</span><span class="p">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">&quot;huggingface&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">      </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="nt">&quot;headers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">          </span><span class="nt">&quot;X-HF-Bill-To&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-org-name&quot;</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Resources:</strong></p>
+<ul>
+<li><a href="https://huggingface.co/docs/inference-providers/main/integrations/opencode">OpenCode + Hugging Face</a></li>
+<li><a href="https://opencode.ai/docs/providers/">OpenCode Providers Docs</a></li>
+<li><a href="https://huggingface.co/inference-providers">HF Inference Providers</a></li>
+</ul>
+<h3 id="recommended-models">Recommended Models<a class="headerlink" href="#recommended-models" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-5.2</td>
+<td>General coding, speed</td>
+</tr>
+<tr>
+<td>GPT-5.1 Codex</td>
+<td>Code-heavy tasks</td>
+</tr>
+<tr>
+<td>Claude Opus 4.5</td>
+<td>Complex reasoning</td>
+</tr>
+<tr>
+<td>Claude Sonnet 4.5</td>
+<td>Balanced performance</td>
+</tr>
+<tr>
+<td>Gemini 3 Pro</td>
+<td>Long context tasks</td>
+</tr>
+<tr>
+<td>Big Pickle</td>
+<td>Free tier</td>
+</tr>
+</tbody>
+</table>
+<h3 id="opencode-zen">OpenCode Zen<a class="headerlink" href="#opencode-zen" title="Permanent link">&para;</a></h3>
+<p>A curated list of tested and verified models:</p>
+<ul>
+<li>Benchmarked specifically for coding agents</li>
+<li>No performance downgrade or routing to cheaper models</li>
+<li>Pay-as-you-go pricing</li>
+<li>Team workspace management</li>
+</ul>
+<p><strong>Free Models:</strong></p>
+<ul>
+<li>GLM 4.7 Free</li>
+<li>Big Pickle Free</li>
+<li>MiniMax M2.1 Free</li>
+</ul>
+<hr />
+<h2 id="plugins-extensions">Plugins &amp; Extensions<a class="headerlink" href="#plugins-extensions" title="Permanent link">&para;</a></h2>
+<h3 id="plugin-system">Plugin System<a class="headerlink" href="#plugin-system" title="Permanent link">&para;</a></h3>
+<p>OpenCode's plugin system allows hooking into various events and customizing behavior.</p>
+<h4 id="loading-plugins">Loading Plugins<a class="headerlink" href="#loading-plugins" title="Permanent link">&para;</a></h4>
+<p><strong>From local files:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>.opencode/plugins/<span class="w">      </span><span class="c1"># Project-level</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>~/.config/opencode/plugins/<span class="w">  </span><span class="c1"># Global plugins</span>
+</span></code></pre></div>
+<p><strong>From npm:</strong></p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">&quot;plugin&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;opencode-helicone-session&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;opencode-wakatime&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;@my-org/custom-plugin&quot;</span><span class="p">]</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="plugin-events">Plugin Events<a class="headerlink" href="#plugin-events" title="Permanent link">&para;</a></h4>
+<p>OpenCode supports 20+ events for plugins:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Command</strong></td>
+<td><code>command.executed</code></td>
+</tr>
+<tr>
+<td><strong>File</strong></td>
+<td><code>file.edited</code>, <code>file.watcher.updated</code></td>
+</tr>
+<tr>
+<td><strong>Session</strong></td>
+<td><code>session.created</code>, <code>session.compacted</code>, <code>session.deleted</code>, <code>session.diff</code>, <code>session.error</code>, <code>session.idle</code></td>
+</tr>
+<tr>
+<td><strong>Tool</strong></td>
+<td><code>tool.execute.before</code>, <code>tool.execute.after</code></td>
+</tr>
+<tr>
+<td><strong>LSP</strong></td>
+<td><code>lsp.client.diagnostics</code>, <code>lsp.updated</code></td>
+</tr>
+<tr>
+<td><strong>TUI</strong></td>
+<td><code>tui.prompt.append</code>, <code>tui.command.execute</code>, <code>tui.toast.show</code></td>
+</tr>
+<tr>
+<td><strong>Permission</strong></td>
+<td><code>permission.asked</code>, <code>permission.replied</code></td>
+</tr>
+<tr>
+<td><strong>Shell</strong></td>
+<td><code>shell.env</code></td>
+</tr>
+<tr>
+<td><strong>Server</strong></td>
+<td><code>server.connected</code></td>
+</tr>
+<tr>
+<td><strong>Todo</strong></td>
+<td><code>todo.updated</code></td>
+</tr>
+<tr>
+<td><strong>Installation</strong></td>
+<td><code>installation.updated</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="built-in-tools">Built-in Tools<a class="headerlink" href="#built-in-tools" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bash</code></td>
+<td>Execute shell commands</td>
+</tr>
+<tr>
+<td><code>read</code></td>
+<td>Read files with glob support</td>
+</tr>
+<tr>
+<td><code>edit</code></td>
+<td>Apply string replacements</td>
+</tr>
+<tr>
+<td><code>write</code></td>
+<td>Write content to files</td>
+</tr>
+<tr>
+<td><code>grep</code></td>
+<td>Search file contents</td>
+</tr>
+<tr>
+<td><code>glob</code></td>
+<td>Find files by pattern</td>
+</tr>
+<tr>
+<td><code>lsp</code></td>
+<td>Language server queries</td>
+</tr>
+<tr>
+<td><code>apply_patch</code></td>
+<td>Apply patches</td>
+</tr>
+<tr>
+<td><code>skill</code></td>
+<td>Load skill documentation</td>
+</tr>
+<tr>
+<td><code>todowrite</code></td>
+<td>Manage todo lists</td>
+</tr>
+<tr>
+<td><code>webfetch</code></td>
+<td>Fetch web content</td>
+</tr>
+<tr>
+<td><code>websearch</code></td>
+<td>Search the web</td>
+</tr>
+<tr>
+<td><code>question</code></td>
+<td>Ask user questions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="custom-tools">Custom Tools<a class="headerlink" href="#custom-tools" title="Permanent link">&para;</a></h3>
+<p>Plugins can add custom tools via the <code>tool</code> helper:</p>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">tool</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@opencode-ai/plugin&quot;</span><span class="p">;</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">MyTool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tool</span><span class="p">({</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my_tool&quot;</span><span class="p">,</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;A custom tool&quot;</span><span class="p">,</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">  </span><span class="nx">parameters</span><span class="o">:</span><span class="w"> </span><span class="kt">z.object</span><span class="p">({</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="nx">foo</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">(),</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span><span class="p">}),</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="nx">execute</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="nx">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`Hello </span><span class="si">${</span><span class="nx">args</span><span class="p">.</span><span class="nx">foo</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="p">});</span>
+</span></code></pre></div>
+<hr />
+<h2 id="most-used-plugins">Most Used Plugins<a class="headerlink" href="#most-used-plugins" title="Permanent link">&para;</a></h2>
+<h3 id="1-oh-my-opencode">1. Oh My OpenCode<a class="headerlink" href="#1-oh-my-opencode" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/code-yeongyu/oh-my-openagent">https://github.com/code-yeongyu/oh-my-openagent</a></p>
+<p>Orchestration layer with specialized agents, hooks, MCPs, and workflow automation.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Planner-Sisyphus agent</li>
+<li>20+ automation hooks</li>
+<li>Pre-configured Context7 and grep.app MCPs</li>
+<li>LSP defaults</li>
+</ul>
+<h3 id="2-opencode-swarm">2. OpenCode Swarm<a class="headerlink" href="#2-opencode-swarm" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/zaxbysauce/opencode-swarm">https://github.com/zaxbysauce/opencode-swarm</a></p>
+<p>Architect-centric agentic swarm with 11 specialized agents.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Hub-and-spoke orchestration</li>
+<li>Gated pipeline (code needs reviewer + test engineer approval)</li>
+<li>11 specialized agents</li>
+<li>SAST and secrets scanning</li>
+<li>11 language support</li>
+<li>Free tier available</li>
+</ul>
+<h3 id="3-opencode-prompts">3. opencode-prompts<a class="headerlink" href="#3-opencode-prompts" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/minipuft/opencode-prompts">https://github.com/minipuft/opencode-prompts</a></p>
+<p>Chain tracking, gate reminders, and state preservation for prompt engineering.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Gate enforcement</li>
+<li>Chain progress tracking</li>
+<li>State preservation</li>
+<li>Shell verify tracking</li>
+</ul>
+<h3 id="4-open-reload">4. open-reload<a class="headerlink" href="#4-open-reload" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/veemex/open-reload">https://github.com/veemex/open-reload</a></p>
+<p>Hot-reload MCP meta-plugin for development.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Live tool updates without restart</li>
+<li>Plugin development workflow</li>
+<li>Context threading</li>
+</ul>
+<h3 id="5-opencode-mcp">5. opencode-mcp<a class="headerlink" href="#5-opencode-mcp" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/AlaeddineMessadi/opencode-mcp">https://github.com/AlaeddineMessadi/opencode-mcp</a></p>
+<p>MCP server bridging OpenCode to other AI tools.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>79 tools</li>
+<li>Multi-project support</li>
+<li>Auto-start capability</li>
+</ul>
+<h3 id="6-opencode-ecc-everything-claude-code">6. opencode-ecc (Everything Claude Code)<a class="headerlink" href="#6-opencode-ecc-everything-claude-code" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub</strong>: <a href="https://github.com/affaan-m/everything-claude-code">https://github.com/affaan-m/everything-claude-code</a></p>
+<p>Complete Claude Code compatibility for OpenCode.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>12 specialized agents</li>
+<li>24 commands</li>
+<li>16 skills</li>
+<li>Hook system parity</li>
+</ul>
+<h3 id="7-session-analytics-plugins">7. Session &amp; Analytics Plugins<a class="headerlink" href="#7-session-analytics-plugins" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>opencode-helicone-session</code></td>
+<td>Session logging and analytics</td>
+</tr>
+<tr>
+<td><code>opencode-wakatime</code></td>
+<td>Automatic time tracking</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-mcp-servers-1200-available">8. MCP Servers (1,200+ Available)<a class="headerlink" href="#8-mcp-servers-1200-available" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Popular Servers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Browser</strong></td>
+<td>Playwright, Puppeteer</td>
+</tr>
+<tr>
+<td><strong>Database</strong></td>
+<td>PostgreSQL, Supabase, SQLite</td>
+</tr>
+<tr>
+<td><strong>Search</strong></td>
+<td>Brave Search, Google Search</td>
+</tr>
+<tr>
+<td><strong>Communication</strong></td>
+<td>Slack, Discord, Linear, Notion</td>
+</tr>
+<tr>
+<td><strong>Cloud</strong></td>
+<td>AWS, GCP, Azure</td>
+</tr>
+<tr>
+<td><strong>Development</strong></td>
+<td>GitHub, GitLab, Docker</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>Memory (context persistence)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Resources:</strong></p>
+<ul>
+<li><a href="https://github.com/modelcontextprotocol/servers">https://github.com/modelcontextprotocol/servers</a></li>
+<li><a href="https://github.com/wong2/awesome-mcp-servers">https://github.com/wong2/awesome-mcp-servers</a></li>
+<li><a href="https://mcp-awesome.com">https://mcp-awesome.com</a></li>
+</ul>
+<hr />
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<h3 id="configuration-files">Configuration Files<a class="headerlink" href="#configuration-files" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Location</th>
+<th>Priority</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>opencode.json</code></td>
+<td>Project</td>
+<td>Project-specific settings</td>
+</tr>
+<tr>
+<td><code>~/.config/opencode/opencode.json</code></td>
+<td>Global</td>
+<td>User-wide settings</td>
+</tr>
+</tbody>
+</table>
+<h3 id="basic-configuration">Basic Configuration<a class="headerlink" href="#basic-configuration" title="Permanent link">&para;</a></h3>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://opencode.ai/config.json&quot;</span><span class="p">,</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anthropic/claude-sonnet-4-20250514&quot;</span><span class="p">,</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="nt">&quot;permission&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nt">&quot;bash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;allow&quot;</span><span class="p">,</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nt">&quot;read&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;allow&quot;</span><span class="p">,</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="nt">&quot;edit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;allow&quot;</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="advanced-configuration">Advanced Configuration<a class="headerlink" href="#advanced-configuration" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>{
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  &quot;$schema&quot;: &quot;https://opencode.ai/config.json&quot;,
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  &quot;model&quot;: &quot;opencode/gpt-5.1-codex&quot;,
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>  &quot;provider&quot;: {
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    &quot;openai&quot;: {
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>      &quot;models&quot;: {
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>        &quot;gpt-5&quot;: {
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>          &quot;options&quot;: {
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>            &quot;reasoningEffort&quot;: &quot;high&quot;,
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>            &quot;textVerbosity&quot;: &quot;low&quot;,
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>          },
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>        },
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>      },
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    },
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>  },
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>  &quot;plugin&quot;: [&quot;oh-my-opencode&quot;],
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>  &quot;mcp&quot;: {
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>    &quot;enabled&quot;: true,
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>  },
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>  &quot;permission&quot;: {
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    &quot;bash&quot;: &quot;allow&quot;,
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>    &quot;mcp_*&quot;: &quot;ask&quot;,
+</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>  },
+</span><span id="__span-18-24"><a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>}
+</span></code></pre></div>
+<h3 id="provider-setup">Provider Setup<a class="headerlink" href="#provider-setup" title="Permanent link">&para;</a></h3>
+<p>Connect to providers using the <code>/connect</code> command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>/opencode
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>/connect
+</span></code></pre></div>
+<p>Then:</p>
+<ol>
+<li>Sign in to your provider</li>
+<li>Add billing details</li>
+<li>Copy API key</li>
+<li>Paste into terminal</li>
+</ol>
+<hr />
+<h2 id="interface-options">Interface Options<a class="headerlink" href="#interface-options" title="Permanent link">&para;</a></h2>
+<h3 id="1-terminal-tui">1. Terminal (TUI)<a class="headerlink" href="#1-terminal-tui" title="Permanent link">&para;</a></h3>
+<p>The primary interface with full features:</p>
+<ul>
+<li>Interactive chat</li>
+<li>Session management</li>
+<li>File editing</li>
+<li>Real-time output</li>
+</ul>
+<h3 id="2-desktop-app">2. Desktop App<a class="headerlink" href="#2-desktop-app" title="Permanent link">&para;</a></h3>
+<p>Beta available for:</p>
+<ul>
+<li>macOS</li>
+<li>Windows</li>
+<li>Linux</li>
+</ul>
+<p>Download: <a href="https://opencode.ai/download">https://opencode.ai/download</a></p>
+<h3 id="3-ide-extensions">3. IDE Extensions<a class="headerlink" href="#3-ide-extensions" title="Permanent link">&para;</a></h3>
+<p>Available for:</p>
+<ul>
+<li>VS Code</li>
+<li>Cursor</li>
+<li>Zed</li>
+<li>Windsurf</li>
+<li>VSCodium</li>
+</ul>
+<h3 id="4-web-interface">4. Web Interface<a class="headerlink" href="#4-web-interface" title="Permanent link">&para;</a></h3>
+<p>Access via browser at:</p>
+<ul>
+<li><a href="https://opencode.ai/go">https://opencode.ai/go</a></li>
+</ul>
+<h3 id="5-acp-agent-coding-protocol">5. ACP (Agent Coding Protocol)<a class="headerlink" href="#5-acp-agent-coding-protocol" title="Permanent link">&para;</a></h3>
+<p>Connect to ACP-compatible editors for deep IDE integration.</p>
+<hr />
+<h2 id="enterprise-features">Enterprise Features<a class="headerlink" href="#enterprise-features" title="Permanent link">&para;</a></h2>
+<h3 id="privacy-first-architecture">Privacy-First Architecture<a class="headerlink" href="#privacy-first-architecture" title="Permanent link">&para;</a></h3>
+<ul>
+<li>No code or context stored on OpenCode servers</li>
+<li>Local-first operation</li>
+<li>Self-hosting options</li>
+<li>BYOK (Bring Your Own Key) model</li>
+</ul>
+<h3 id="enterprise-deployment">Enterprise Deployment<a class="headerlink" href="#enterprise-deployment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Self-Hosted</strong></td>
+<td>Run entirely on your infrastructure</td>
+</tr>
+<tr>
+<td><strong>Custom Providers</strong></td>
+<td>Use your own LLM infrastructure</td>
+</tr>
+<tr>
+<td><strong>Privacy Controls</strong></td>
+<td>Data never leaves your environment</td>
+</tr>
+<tr>
+<td><strong>SSO Support</strong></td>
+<td>Enterprise authentication</td>
+</tr>
+</tbody>
+</table>
+<h3 id="zen-for-teams">Zen for Teams<a class="headerlink" href="#zen-for-teams" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Invite teammates</li>
+<li>Assign roles (Admin, Member)</li>
+<li>Curate model access</li>
+<li>Monthly spending limits</li>
+<li>Shared API keys</li>
+</ul>
+<hr />
+<h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
+<p>OpenCode serves different types of users, from developers to non-programmers.</p>
+<h3 id="developer-use-cases">Developer Use Cases<a class="headerlink" href="#developer-use-cases" title="Permanent link">&para;</a></h3>
+<h4 id="code-review-and-analysis">Code Review and Analysis<a class="headerlink" href="#code-review-and-analysis" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Review code for security issues</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Review src/auth.ts for security issues&quot;</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># Analyze code architecture</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Explain the architecture of the middleware system&quot;</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="c1"># Find all TODO comments in the project</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Find all TODO comments and create a summary&quot;</span>
+</span></code></pre></div>
+<h4 id="scaffolding-new-features">Scaffolding New Features<a class="headerlink" href="#scaffolding-new-features" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Initialize repository context first</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>opencode<span class="w"> </span>init
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># Then scaffold a new feature with handler, validation, and tests</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Add a new POST /api/widgets endpoint with handler, validation, and tests&quot;</span>
+</span></code></pre></div>
+<h4 id="large-scale-refactoring">Large-Scale Refactoring<a class="headerlink" href="#large-scale-refactoring" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Rename a function across all files</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Rename getUserProfile to fetchUserProfile and update all imports and docs&quot;</span>
+</span></code></pre></div>
+<h4 id="test-driven-development-tdd">Test-Driven Development (TDD)<a class="headerlink" href="#test-driven-development-tdd" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Create failing test first, then implement</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Run npm test. Read the failure. Implement the code in feature.ts to make the test pass&quot;</span>
+</span></code></pre></div>
+<h4 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Find and fix bugs</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Find and fix the memory leak in the application&quot;</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># Explain error messages</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Explain what this error means in context of our codebase&quot;</span>
+</span></code></pre></div>
+<h4 id="documentation-maintenance">Documentation Maintenance<a class="headerlink" href="#documentation-maintenance" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># Update outdated documentation</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Read all exported functions in src/api. Update docs/API.md to match the current signatures&quot;</span>
+</span></code></pre></div>
+<h4 id="language-migration">Language Migration<a class="headerlink" href="#language-migration" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Convert React class components to hooks</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Read Component.jsx. Rewrite it as a Functional Component using Hooks&quot;</span>
+</span></code></pre></div>
+<h3 id="average-user-use-cases-non-developers">Average User Use Cases (Non-Developers)<a class="headerlink" href="#average-user-use-cases-non-developers" title="Permanent link">&para;</a></h3>
+<h4 id="content-creation-and-marketing">Content Creation and Marketing<a class="headerlink" href="#content-creation-and-marketing" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># White papers, LinkedIn posts, video scripts</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Write a white paper on [topic] using the style guide in docs/writing-style.md&quot;</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1"># Social media content</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Create 5 tweet thread concepts for [product launch]&quot;</span>
+</span></code></pre></div>
+<h4 id="translation-work">Translation Work<a class="headerlink" href="#translation-work" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Translate documents</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Translate the content in jp/ folder to English following the style in TRANSLATION_NOTES.md&quot;</span>
+</span></code></pre></div>
+<h4 id="data-analysis-and-reporting">Data Analysis and Reporting<a class="headerlink" href="#data-analysis-and-reporting" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1"># Analyze data and generate reports</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Analyze parcel data in data/ and generate summary report with trends&quot;</span>
+</span></code></pre></div>
+<h4 id="file-organization">File Organization<a class="headerlink" href="#file-organization" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># Organize downloads folder</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Organize the downloads folder: put movies in Movies/, TV shows in TV/&quot;</span>
+</span></code></pre></div>
+<h4 id="excel-and-spreadsheet-work">Excel and Spreadsheet Work<a class="headerlink" href="#excel-and-spreadsheet-work" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># Generate formulas</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Create a formula in column D that calculates the sum of columns A and B&quot;</span>
+</span></code></pre></div>
+<h3 id="common-real-world-examples">Common Real-World Examples<a class="headerlink" href="#common-real-world-examples" title="Permanent link">&para;</a></h3>
+<h4 id="legacy-code-refactoring">Legacy Code Refactoring<a class="headerlink" href="#legacy-code-refactoring" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>opencode<span class="w"> </span>start<span class="w"> </span><span class="s2">&quot;Take main.py. Split the database logic into db.py and the utils into utils.py&quot;</span>
+</span></code></pre></div>
+<h4 id="cicd-automated-code-review">CI/CD Automated Code Review<a class="headerlink" href="#cicd-automated-code-review" title="Permanent link">&para;</a></h4>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1"># .github/workflows/opencode-review.yml</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencode-review</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="nt">jobs</span><span class="p">:</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">  </span><span class="nt">opencode</span><span class="p">:</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+</span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run OpenCode</span>
+</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">anomalyco/opencode/github@latest</span>
+</span><span id="__span-33-11"><a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+</span><span id="__span-33-12"><a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a><span class="w">          </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">anthropic/claude-sonnet-4-20250514</span>
+</span><span id="__span-33-13"><a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a><span class="w">          </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Code</span><span class="nv"> </span><span class="s">review</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">PR</span><span class="nv"> </span><span class="s">changes&quot;</span>
+</span></code></pre></div>
+<h4 id="github-issue-triage">GitHub Issue Triage<a class="headerlink" href="#github-issue-triage" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1"># In a GitHub issue comment</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>/opencode<span class="w"> </span>explain<span class="w"> </span>this<span class="w"> </span>issue
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="c1"># In a GitHub PR comment</span>
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>/opencode<span class="w"> </span>fix<span class="w"> </span>this
+</span></code></pre></div>
+<h4 id="database-operations-via-mcp">Database Operations via MCP<a class="headerlink" href="#database-operations-via-mcp" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># Connect to database via MCP</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>opencode<span class="w"> </span>run<span class="w"> </span><span class="s2">&quot;Show me the schema for the &#39;users&#39; table&quot;</span>
+</span></code></pre></div>
+<h4 id="slack-bot-integration">Slack Bot Integration<a class="headerlink" href="#slack-bot-integration" title="Permanent link">&para;</a></h4>
+<p>Connect OpenCode to Slack for team questions like:</p>
+<ul>
+<li>"Where is the retry logic for payment processing?"</li>
+<li>"Summarize what changed in the last sprint"</li>
+</ul>
+<h3 id="workflow-patterns">Workflow Patterns<a class="headerlink" href="#workflow-patterns" title="Permanent link">&para;</a></h3>
+<h4 id="planbuild-pattern-recommended">Plan/Build Pattern (Recommended)<a class="headerlink" href="#planbuild-pattern-recommended" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Start in Plan mode (<code>Tab</code> key) to outline approach</li>
+<li>Review and refine the plan</li>
+<li>Switch to Build mode to implement</li>
+</ol>
+<h4 id="agent-mode-autonomous">Agent Mode (Autonomous)<a class="headerlink" href="#agent-mode-autonomous" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>opencode<span class="w"> </span>--agent
+</span></code></pre></div>
+<p>Best for: Project setup, large refactors, debugging, testing, code migration.</p>
+<hr />
+<h2 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h2>
+<h3 id="opencode-vs-claude-code">OpenCode vs Claude Code<a class="headerlink" href="#opencode-vs-claude-code" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><strong>OpenCode</strong></th>
+<th><strong>Claude Code</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub Stars</strong></td>
+<td>140K+</td>
+<td>20K+</td>
+</tr>
+<tr>
+<td><strong>License</strong></td>
+<td>MIT</td>
+<td>Proprietary</td>
+</tr>
+<tr>
+<td><strong>Provider Support</strong></td>
+<td>75+ providers</td>
+<td>Anthropic only</td>
+</tr>
+<tr>
+<td><strong>Plugin System</strong></td>
+<td>20+ events</td>
+<td>3 phases</td>
+</tr>
+<tr>
+<td><strong>Interface</strong></td>
+<td>TUI, Desktop, IDE</td>
+<td>CLI only</td>
+</tr>
+<tr>
+<td><strong>Pricing</strong></td>
+<td>Free + optional Zen</td>
+<td>Uses Anthropic API</td>
+</tr>
+</tbody>
+</table>
+<h3 id="opencode-vs-cursor">OpenCode vs Cursor<a class="headerlink" href="#opencode-vs-cursor" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><strong>OpenCode</strong></th>
+<th><strong>Cursor</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Focus</strong></td>
+<td>Terminal-native</td>
+<td>IDE-centric</td>
+</tr>
+<tr>
+<td><strong>Model Support</strong></td>
+<td>Any provider</td>
+<td>Custom models</td>
+</tr>
+<tr>
+<td><strong>Open Source</strong></td>
+<td>Yes</td>
+<td>Partial</td>
+</tr>
+<tr>
+<td><strong>Price</strong></td>
+<td>Free</td>
+<td>$20/mo+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="when-to-use-opencode">When to Use OpenCode<a class="headerlink" href="#when-to-use-opencode" title="Permanent link">&para;</a></h3>
+<ul>
+<li>You want full control over your models</li>
+<li>You prefer terminal-based workflows</li>
+<li>You need cross-platform consistency</li>
+<li>You value open-source software</li>
+<li>You want to avoid vendor lock-in</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="installation-issues">Installation Issues<a class="headerlink" href="#installation-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Verify installation:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>opencode<span class="w"> </span>--version
+</span></code></pre></div>
+<p><strong>Update OpenCode:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1"># Re-run install script</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://opencode.ai/install<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</span></code></pre></div>
+<h3 id="configuration-issues">Configuration Issues<a class="headerlink" href="#configuration-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Check config syntax:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>cat<span class="w"> </span>~/.config/opencode/opencode.json
+</span></code></pre></div>
+<p><strong>Validate JSON:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="c1"># Use jq to validate</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>cat<span class="w"> </span>~/.config/opencode/opencode.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.
+</span></code></pre></div>
+<h3 id="provider-issues">Provider Issues<a class="headerlink" href="#provider-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Check API key:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>/opencode
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>/connect
+</span></code></pre></div>
+<p><strong>Test connection:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>/opencode
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>/model<span class="w"> </span>&lt;model-name&gt;
+</span></code></pre></div>
+<h3 id="plugin-issues">Plugin Issues<a class="headerlink" href="#plugin-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Verify plugin loading:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>opencode<span class="w"> </span>--version
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="c1"># Should list loaded plugins</span>
+</span></code></pre></div>
+<p><strong>Debug mode:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>opencode<span class="w"> </span>--debug
+</span></code></pre></div>
+<h3 id="performance-issues">Performance Issues<a class="headerlink" href="#performance-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Clear cache:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>~/.cache/opencode
+</span></code></pre></div>
+<p><strong>Check logs:</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="c1"># Default log location</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>~/.config/opencode/logs/
+</span></code></pre></div>
+<hr />
+<h2 id="further-reading">Further Reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<h3 id="official-documentation">Official Documentation<a class="headerlink" href="#official-documentation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://opencode.ai/docs">OpenCode Docs</a></li>
+<li><a href="https://opencode.ai/docs/config/">Configuration Guide</a></li>
+<li><a href="https://opencode.ai/docs/plugins/">Plugins Guide</a></li>
+<li><a href="https://opencode.ai/docs/mcp-servers/">MCP Servers</a></li>
+<li><a href="https://opencode.ai/docs/lsp/">LSP Configuration</a></li>
+</ul>
+<h3 id="model-resources">Model Resources<a class="headerlink" href="#model-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://opencode.ai/zen">OpenCode Zen</a></li>
+<li><a href="https://models.dev">Models.dev</a></li>
+<li><a href="https://sdk.vercel.ai">AI SDK</a></li>
+</ul>
+<h3 id="community-resources">Community Resources<a class="headerlink" href="#community-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://opencode.ai/discord">Discord Community</a></li>
+<li><a href="https://github.com/anomalyco/opencode/discussions">GitHub Discussions</a></li>
+</ul>
+<h3 id="plugin-resources">Plugin Resources<a class="headerlink" href="#plugin-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://opencode.ai/docs/plugins/">Official Plugins</a></li>
+<li><a href="https://ohmyopencode.com">Oh My OpenCode</a></li>
+<li><a href="https://github.com/zaxbysauce/opencode-swarm">OpenCode Swarm</a></li>
+<li><a href="https://github.com/wong2/awesome-mcp-servers">Awesome MCP Servers</a></li>
+</ul>
+<h3 id="comparisons">Comparisons<a class="headerlink" href="#comparisons" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://opencode.ai/docs/compare/">OpenCode vs Claude Code</a></li>
+<li><a href="https://opencode.ai/compare/cursor">OpenCode vs Cursor</a></li>
+</ul>
+<h3 id="research-reviews">Research &amp; Reviews<a class="headerlink" href="#research-reviews" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://agentwiki.org/opencode">AgentWiki OpenCode</a></li>
+<li><a href="https://rywalker.com/research/opencode">Ry Walker Research</a></li>
+</ul>
+<hr />
+<p><em>Guide last updated: April 2026</em></p>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../oh-my-opencode-guide/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Oh My OpenCode Guide">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Oh My OpenCode Guide
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../JS-TS/" class="md-footer__link md-footer__link--next" aria-label="Next: JS and TS">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                JS and TS
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Tom Geo. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.action.edit","content.action.view","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.prune","navigation.sections","navigation.icons","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c2b142ea.min.js"></script>
+      
+    
+  </body>
+</html>

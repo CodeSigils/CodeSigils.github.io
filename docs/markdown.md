@@ -1,6 +1,6 @@
 ---
 title: Markdown in 5min
-icon: simple/markdown
+icon: lucide/file-text
 ---
 
 ## Headers
