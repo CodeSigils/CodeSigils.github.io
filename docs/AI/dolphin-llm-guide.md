@@ -3,7 +3,7 @@ title: Dolphin LLM Guide
 icon: lucide/fish
 ---
 
-![Dolphin LLM](/assets/images/hermes-banner.png){ width=900 }
+![Dolphin LLM](/assets/images/dolphin-llm.png){ width=900 }
 
 The Dolphin family of LLMs — open source, uncensored, and steerable models from the community.
 
