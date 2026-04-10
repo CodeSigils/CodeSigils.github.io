@@ -30,7 +30,7 @@ The open source AI coding agent for terminal, desktop, and IDE.
 
 OpenCode is an **open source AI coding agent** that helps developers write, debug, refactor, and understand code. It operates as a terminal-native interface with optional desktop app and IDE extensions.
 
-<iframe width="100%" height="515" src="https://www.youtube.com/embed/ul7zuyATDqE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/ul7zuyATDqE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Key Statistics
 
