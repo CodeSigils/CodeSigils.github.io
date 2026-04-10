@@ -53,9 +53,11 @@ Access Hermes from multiple platforms:
 
 ## Installation
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
-```
+!!! tip "Quick Install"
+
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+    ```
 
 After installation:
 
