@@ -103,6 +103,8 @@ mise install nodejs lts
 node --version
 ```
 
+> **Note for Distrobox Users**: If you're using distrobox to develop in a different distribution, be aware that mise-installed packages (like Node.js tools via `mise install nodejs`) can sometimes conflict with packages installed in the host distribution's package manager. For example, tools installed globally via `pipx` on the host may not be accessible inside the container, or vice versa. This is because distrobox shares the host's home directory but uses the container's binary paths. If you encounter issues, consider whether you're running tools from the host or the container — consistency is key.
+
 #### Alternative: fnm (Fast Node Manager)
 
 ```bash
