@@ -3,7 +3,7 @@ title: Hermes AI vs OpenCode
 icon: lucide/rocket
 ---
 
-![Hermes Agent Banner](/assets/images/hermes-banner.png){ width=700 }
+![Hermes Agent Banner](/assets/images/hermes-banner.png){ width=900 }
 
 A comparison of two open-source AI agent platforms.
 

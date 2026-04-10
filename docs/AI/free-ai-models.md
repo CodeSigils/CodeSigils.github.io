@@ -3,7 +3,7 @@ title: Free AI Models Guide
 icon: lucide/bot
 ---
 
-![AI Models](/assets/images/opencode-screenshot.webp){ width=700 }
+![AI Models](/assets/images/opencode-screenshot.webp){ width=800 }
 
 > **Last Updated:** April 2026
 
