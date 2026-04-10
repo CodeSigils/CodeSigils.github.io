@@ -3,7 +3,7 @@ title: Oh My OpenCode Guide
 icon: lucide/box
 ---
 
-![OpenCode Screenshot](/assets/images/opencode-screenshot.webp){ width=900 }
+![Oh My OpenCode](/assets/images/opencode-screenshot.webp){ width=900 }
 
 A batteries-included orchestration layer for OpenCode that adds specialized agents, hooks, MCPs, and workflow automation.
 
@@ -42,9 +42,9 @@ In essence, Oh My OpenCode does the heavy lifting of configuring a reliable AI c
 
 ## Official Links
 
-- **Website**: https://ohmyopencode.com
+- **Website**: https://ohmyopenagent.com
 - **GitHub**: https://github.com/code-yeongyu/oh-my-openagent
-- **Documentation**: https://ohmyopencode.com/documentation/
+- **Documentation**: https://ohmyopenagent.com/installation/
 - **NPM Package**: https://www.npmjs.com/package/oh-my-opencode
 - **Discord Community**: https://discord.gg/oh-my-opencode
 
