@@ -7,6 +7,12 @@ icon: lucide/terminal
 
 The open source AI coding agent for terminal, desktop, and IDE.
 
+## Video Overview
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/ul7zuyATDqE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Hermes AI Agent is the companion agent that grows with you — it creates skills from experience, improves them during use, and builds a deepening model of who you are across sessions.
+
 ## Table of Contents
 
 1. [What is OpenCode?](#what-is-opencode)

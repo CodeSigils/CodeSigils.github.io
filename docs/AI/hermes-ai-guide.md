@@ -168,7 +168,7 @@ hermes gateway start
 
 ## Video Overview
 
-[!Video: Hermes AI Agent Introduction](https://youtu.be/YtfROZK1BDM)
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/YtfROZK1BDM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Resources
 
