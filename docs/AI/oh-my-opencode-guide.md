@@ -57,7 +57,7 @@ In essence, Oh My OpenCode does the heavy lifting of configuring a reliable AI c
 1. Install OpenCode first:
 
    ```bash
-   curl -fsSL https://opencode.ai/install | bash
+   curl -fsSL https://opencode.ai/install.sh | sh
    ```
 
 2. Ensure you have **Node.js 18+** or **Bun** installed

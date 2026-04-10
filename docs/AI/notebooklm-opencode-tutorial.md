@@ -92,7 +92,7 @@ Before starting, ensure you have:
 
 **This guide assumes you have:**
 
-- OpenCode installed (`curl -fsSL https://opencode.ai/install | bash`)
+- OpenCode installed (`curl -fsSL https://opencode.ai/install.sh | sh`)
 - Node.js 18+ persistently installed
 
 **Node.js not working?** See [OpenCode Prerequisites](../opencode-guide.md#prerequisites) for setup.
@@ -865,7 +865,7 @@ A: Add your Gemini API key for higher limits, or wait and retry.
 1. **Install OpenCode first:**
 
    ```bash
-   curl -fsSL https://opencode.ai/install | bash
+   curl -fsSL https://opencode.ai/install.sh | sh
    ```
 
 2. **Connect a model:**

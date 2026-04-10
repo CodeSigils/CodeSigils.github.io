@@ -155,6 +155,10 @@ MCP servers run as subprocesses. If Node isn't persistent:
 ### Install via Script (Recommended)
 
 ```bash
+# Official install script (recommended)
+curl -fsSL https://opencode.ai/install.sh | sh
+
+# Alternative URL (also works)
 curl -fsSL https://opencode.ai/install | bash
 ```
 
@@ -180,6 +184,13 @@ brew install anomalyco/tap/opencode
 ```bash
 sudo pacman -S opencode           # Stable
 paru -S opencode-bin              # AUR (Latest)
+```
+
+**Using Go:**
+
+```bash
+# Requires Go 1.21+
+go install github.com/anomalyco/opencode@latest
 ```
 
 ### Windows Installation
@@ -598,8 +609,14 @@ Complete Claude Code compatibility for OpenCode.
 
 | Location | Priority | Purpose |
 | --- | --- | --- |
-| `opencode.json` | Project | Project-specific settings |
-| `~/.config/opencode/opencode.json` | Global | User-wide settings |
+| `./opencode.json` | 1st | Project directory |
+| `~/.config/opencode/opencode.json` | 2nd | XDG config directory |
+| `~/.opencode.json` | 3rd | Home directory |
+
+**Note**: Config file locations (verified 2026):
+- `$HOME/.opencode.json`
+- `$XDG_CONFIG_HOME/opencode/.opencode.json`
+- `./.opencode.json` (local directory)
 
 ### Basic Configuration
 
@@ -962,14 +979,17 @@ curl -fsSL https://opencode.ai/install | bash
 **Check config syntax:**
 
 ```bash
-cat ~/.config/opencode/opencode.json
+# Config locations checked in priority order:
+cat ~/.opencode.json                    # Home directory
+cat ~/.config/opencode/opencode.json  # XDG config directory
+cat ./opencode.json                # Project directory
 ```
 
 **Validate JSON:**
 
 ```bash
-# Use jq to validate
-cat ~/.config/opencode/opencode.json | jq .
+# Use jq to validate any location
+cat ~/.opencode.json | jq .
 ```
 
 ### Provider Issues
