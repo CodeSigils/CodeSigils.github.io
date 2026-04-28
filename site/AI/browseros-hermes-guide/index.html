@@ -1,0 +1,2959 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Complete guide to integrating BrowserOS (agentic browser) with Hermes Agent for autonomous web automation, research, data extraction, and monitoring.">
+      
+      
+        <meta name="author" content="Tom Geo">
+      
+      
+        <link rel="canonical" href="https://codesigils.github.io/AI/browseros-hermes-guide/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../dolphin-llm-guide/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.png">
+      <meta name="generator" content="zensical-0.0.37">
+    
+    
+      
+        <title>BrowserOS + Hermes Agent Integration Guide - Code Sigils</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.1e981d71.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetbrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Jetbrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Code Sigils" class="md-header__button md-logo" aria-label="Code Sigils" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Code Sigils
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BrowserOS + Hermes Agent Integration Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Code Sigils" class="md-nav__button md-logo" aria-label="Code Sigils" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Code Sigils
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Sigils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-shield-alert" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1zM12 8v4M12 16h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../markdown/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8M16 13H8M16 17H8"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown in 5min
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    BrowserOS + Hermes Agent Integration Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    BrowserOS + Hermes Agent Integration Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Introduction
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-browseros" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What is BrowserOS?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-browseros-vs-hermes-browser-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        When to Use BrowserOS vs Hermes Browser Tools
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Integration Setup
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Prerequisites
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Quick Start
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verification
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tool Categories
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pagetab-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Page/Tab Management
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-content-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Content Extraction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Interaction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-media-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Media &amp; Export
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-window-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Window Management
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-bookmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Bookmarks
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. History
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-tab-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Tab Groups
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-script-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Script Execution
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-connect-apps-40-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        10. Connect Apps (40+ integrations)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Practical Examples
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-quick-page-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 1: Quick Page Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-multi-source-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 2: Multi-Source Research
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-product-price-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 3: Product Price Tracking
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-4-form-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 4: Form Submission
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-5-bookmarks-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 5: Bookmarks Management
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-6-screenshot-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 6: Screenshot Walkthrough
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Built-in Skills
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Advanced Workflows
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-deep-research-multi-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A. Deep Research (Multi-Day)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-price-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        B. Price Comparison
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-web-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        C. Web Monitoring
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-connect-apps-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        D. Connect Apps Actions
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Best Practices
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-always-take-a-snapshot-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Always Take a Snapshot First
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-save-data-incrementally" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Save Data Incrementally
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-limit-concurrent-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Limit Concurrent Tabs
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-handle-dynamic-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Handle Dynamic Content
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-use-javascript-for-complex-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Use JavaScript for Complex Extraction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-clean-up-after-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Clean Up After Automation
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-handle-dialogs-proactively" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Handle Dialogs Proactively
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-record-source-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Record Source URLs
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Troubleshooting
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcp-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MCP Connection Refused
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-not-appearing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tools Not Appearing
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-load-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Page Load Timeout
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#screenshot-not-supported-on-hidden-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Screenshot Not Supported on Hidden Tab
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#element-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Element Not Found
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Additional Resources
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dolphin-llm-guide/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-fish" viewBox="0 0 24 24"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6s6.06 2.54 7 6c-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6M18 12v.5"/><path d="M16 17.93a9.77 9.77 0 0 1 0-11.86M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/><path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4M16.01 17.93l-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Dolphin LLM Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../free-ai-models/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Free AI Models Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hermes-ai-guide/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-cpu" viewBox="0 0 24 24"><path d="M12 20v2M12 2v2M17 20v2M17 2v2M2 12h2M2 17h2M2 7h2M20 12h2M20 17h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Hermes AI Agent Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hermes-vs-opencode/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Hermes AI vs OpenCode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooklm-opencode-tutorial/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    NotebookLM + OpenCode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oh-my-opencode-guide/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    Oh My OpenAgent Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opencode-guide/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-terminal" viewBox="0 0 24 24"><path d="M12 19h8M4 17l6-6-6-6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenCode Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../JS-TS/" class="md-nav__link ">
+              
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75q.918 0 1.627.111a6.4 6.4 0 0 1 1.306.34v2.458a4 4 0 0 0-.643-.361 5 5 0 0 0-.717-.26 5.5 5.5 0 0 0-1.426-.2q-.45 0-.819.086a2.1 2.1 0 0 0-.623.242q-.254.156-.393.374a.9.9 0 0 0-.14.49q0 .294.156.529.156.234.443.444c.287.21.423.276.696.41q.41.203.926.416.705.296 1.266.628.561.333.963.753.402.418.614.957.213.538.214 1.253 0 .986-.373 1.656a3.03 3.03 0 0 1-1.012 1.085 4.4 4.4 0 0 1-1.487.596q-.85.18-1.79.18a10 10 0 0 1-1.84-.164 5.5 5.5 0 0 1-1.512-.493v-2.63a5.03 5.03 0 0 0 3.237 1.2q.5 0 .872-.09.373-.09.623-.25.249-.162.373-.38a1.02 1.02 0 0 0-.074-1.089 2.1 2.1 0 0 0-.537-.5 5.6 5.6 0 0 0-.807-.444 28 28 0 0 0-1.007-.436q-1.377-.575-2.053-1.405t-.676-2.005q0-.92.369-1.582.368-.662 1.004-1.089a4.5 4.5 0 0 1 1.47-.629 7.5 7.5 0 0 1 1.77-.201m-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    JS TS
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    JS TS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JS-TS/oxc-formatting/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75q.918 0 1.627.111a6.4 6.4 0 0 1 1.306.34v2.458a4 4 0 0 0-.643-.361 5 5 0 0 0-.717-.26 5.5 5.5 0 0 0-1.426-.2q-.45 0-.819.086a2.1 2.1 0 0 0-.623.242q-.254.156-.393.374a.9.9 0 0 0-.14.49q0 .294.156.529.156.234.443.444c.287.21.423.276.696.41q.41.203.926.416.705.296 1.266.628.561.333.963.753.402.418.614.957.213.538.214 1.253 0 .986-.373 1.656a3.03 3.03 0 0 1-1.012 1.085 4.4 4.4 0 0 1-1.487.596q-.85.18-1.79.18a10 10 0 0 1-1.84-.164 5.5 5.5 0 0 1-1.512-.493v-2.63a5.03 5.03 0 0 0 3.237 1.2q.5 0 .872-.09.373-.09.623-.25.249-.162.373-.38a1.02 1.02 0 0 0-.074-1.089 2.1 2.1 0 0 0-.537-.5 5.6 5.6 0 0 0-.807-.444 28 28 0 0 0-1.007-.436q-1.377-.575-2.053-1.405t-.676-2.005q0-.92.369-1.582.368-.662 1.004-1.089a4.5 4.5 0 0 1 1.47-.629 7.5 7.5 0 0 1 1.77-.201m-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    OXC Formatter Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Introduction
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-browseros" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What is BrowserOS?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-browseros-vs-hermes-browser-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        When to Use BrowserOS vs Hermes Browser Tools
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Integration Setup
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Prerequisites
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Quick Start
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Verification
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tool Categories
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pagetab-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Page/Tab Management
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-content-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Content Extraction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Interaction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-media-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Media &amp; Export
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-window-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Window Management
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-bookmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Bookmarks
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. History
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-tab-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Tab Groups
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-script-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Script Execution
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-connect-apps-40-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        10. Connect Apps (40+ integrations)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Practical Examples
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-quick-page-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 1: Quick Page Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-multi-source-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 2: Multi-Source Research
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-product-price-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 3: Product Price Tracking
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-4-form-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 4: Form Submission
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-5-bookmarks-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 5: Bookmarks Management
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-6-screenshot-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Example 6: Screenshot Walkthrough
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Built-in Skills
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Advanced Workflows
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-deep-research-multi-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        A. Deep Research (Multi-Day)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-price-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        B. Price Comparison
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-web-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        C. Web Monitoring
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-connect-apps-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        D. Connect Apps Actions
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Best Practices
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-always-take-a-snapshot-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Always Take a Snapshot First
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-save-data-incrementally" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Save Data Incrementally
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-limit-concurrent-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Limit Concurrent Tabs
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-handle-dynamic-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Handle Dynamic Content
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-use-javascript-for-complex-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Use JavaScript for Complex Extraction
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-clean-up-after-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Clean Up After Automation
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-handle-dialogs-proactively" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Handle Dialogs Proactively
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-record-source-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Record Source URLs
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Troubleshooting
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcp-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MCP Connection Refused
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-not-appearing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tools Not Appearing
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-load-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Page Load Timeout
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#screenshot-not-supported-on-hidden-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Screenshot Not Supported on Hidden Tab
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#element-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Element Not Found
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Summary
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Additional Resources
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Code Sigils
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    AI
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <h1 id="__skip">BrowserOS + Hermes Agent Integration Guide</h1>
+
+<p><img alt="BrowserOS + Hermes Agent" src="/assets/images/browseros/hermes-browseros-banner.png" width="900" /></p>
+<p>BrowserOS is an agentic browser — a Chrome-based browser with a built-in MCP (Model Context Protocol) server that exposes 66+ browser automation tools to AI agents. When paired with Hermes Agent, you get autonomous web control through natural language.</p>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-browseros">What is BrowserOS?<a class="headerlink" href="#what-is-browseros" title="Permanent link">&para;</a></h3>
+<p>BrowserOS is an AI-native browser built on Chromium (version 146) that provides:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>MCP Server</strong></td>
+<td style="text-align: left;">Built-in server on <code>localhost:9200</code> exposing all tools via JSON-RPC</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tab Management</strong></td>
+<td style="text-align: left;">Group, organize, move tabs with full metadata</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hidden Tabs</strong></td>
+<td style="text-align: left;">Run background automation without disturbing user's view</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bookmarks API</strong></td>
+<td style="text-align: left;">Full CRUD on browser bookmarks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>History API</strong></td>
+<td style="text-align: left;">Search and manage browsing history</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tab Groups</strong></td>
+<td style="text-align: left;">Organize tabs into colored groups</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Built-in Skills</strong></td>
+<td style="text-align: left;">12 pre-built workflows (deep-research, extract-data, monitor-page, etc.)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Screenshots</strong></td>
+<td style="text-align: left;">Full-page and element-level screenshots</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PDF Export</strong></td>
+<td style="text-align: left;">Save any page as PDF</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Connect Apps</strong></td>
+<td style="text-align: left;">Integration with 40+ services (Gmail, GitHub, Slack, etc.)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Why Use BrowserOS with Hermes?</p>
+<ul>
+<li><strong>Natural language control</strong> — Tell Hermes what to do in the browser, and it executes autonomously</li>
+<li><strong>Persistent browser state</strong> — Browser tabs, history, bookmarks, and sessions persist across conversations</li>
+<li><strong>MCP-first design</strong> — Tools are exposed standards-compliant for any MCP client</li>
+<li><strong>Local privacy</strong> — All browsing stays on your machine; no external proxies</li>
+</ul>
+</div>
+<h3 id="when-to-use-browseros-vs-hermes-browser-tools">When to Use BrowserOS vs Hermes Browser Tools<a class="headerlink" href="#when-to-use-browseros-vs-hermes-browser-tools" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Use Case</th>
+<th style="text-align: left;">Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Complex multi-step workflows</strong></td>
+<td style="text-align: left;">BrowserOS MCP tools — full control, persistent tabs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Quick URL checks</strong></td>
+<td style="text-align: left;">Hermes built-in browser — simpler, ephemeral</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Research, extraction, monitoring</strong></td>
+<td style="text-align: left;">BrowserOS — stateful, resumable</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Simple navigation + screenshot</strong></td>
+<td style="text-align: left;">Either works</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="integration-setup">Integration Setup<a class="headerlink" href="#integration-setup" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>BrowserOS installed</strong> — AppImage in <code>~/Downloads/browseros</code> or extracted to <code>~/.local/bin/browseros</code></li>
+<li><strong>Hermes Agent</strong> with MCP support — Python venv with <code>mcp</code> package</li>
+<li><strong>Config updated</strong> — MCP server added to <code>~/.hermes/config.yaml</code></li>
+</ol>
+<h3 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Browse to the BrowserOS AppImage and run it:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>~/Downloads/BrowserOS
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Wait for the browser window to open and the server to start.</p>
+</li>
+<li>
+<p>Verify the MCP server is running:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>http://127.0.0.1:9200/health
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># Returns: {&quot;status&quot;: &quot;ok&quot;, &quot;cdpConnected&quot;: true}</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Ensure Hermes config has the MCP server:
+   <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># ~/.hermes/config.yaml</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">mcp_servers</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">browseros</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:9200/mcp&quot;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">connect_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Restart Hermes to pick up the config:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>hermes
+</span></code></pre></div></p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Common Setup Issues</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Issue</th>
+<th style="text-align: left;">Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">MCP connection refused</td>
+<td style="text-align: left;">Start BrowserOS: <code>~/Downloads/BrowserOS</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Tools not appearing</td>
+<td style="text-align: left;">Restart Hermes Agent in a new session</td>
+</tr>
+<tr>
+<td style="text-align: left;">Timeout errors</td>
+<td style="text-align: left;">Increase timeout in config: <code>timeout: 180</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h3>
+<p>After restart, you should see:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>MCP servers have been reloaded. Added servers: browseros.
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>70 MCP tool(s) now available.
+</span></code></pre></div></p>
+<p>Tools are now available as <code>mcp_browseros_&lt;tool_name&gt;</code> (e.g., <code>mcp_browseros_navigate_page</code>).</p>
+<hr />
+<h2 id="tool-categories">Tool Categories<a class="headerlink" href="#tool-categories" title="Permanent link">&para;</a></h2>
+<p>BrowserOS exposes 66 tools across 7 categories:</p>
+<h3 id="1-pagetab-management">1. Page/Tab Management<a class="headerlink" href="#1-pagetab-management" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>get_active_page</code></td>
+<td style="text-align: left;">Get the currently active (focused) page</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>list_pages</code></td>
+<td style="text-align: left;">List all open tabs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>navigate_page</code></td>
+<td style="text-align: left;">Navigate to URL, or back/forward/reload</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>new_page</code></td>
+<td style="text-align: left;">Open a new tab (background by default)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>new_hidden_page</code></td>
+<td style="text-align: left;">Open a hidden tab for background work</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>show_page</code></td>
+<td style="text-align: left;">Restore a hidden tab to visibility</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>move_page</code></td>
+<td style="text-align: left;">Move a tab to a different window/position</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>close_page</code></td>
+<td style="text-align: left;">Close a tab</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-content-extraction">2. Content Extraction<a class="headerlink" href="#2-content-extraction" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>take_snapshot</code></td>
+<td style="text-align: left;">Get interactive element IDs for automation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>take_enhanced_snapshot</code></td>
+<td style="text-align: left;">Detailed accessibility tree with context</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>get_page_content</code></td>
+<td style="text-align: left;">Extract clean markdown content</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>get_page_links</code></td>
+<td style="text-align: left;">Extract all links as <code>[text](url)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>get_dom</code></td>
+<td style="text-align: left;">Get raw HTML DOM structure</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>search_dom</code></td>
+<td style="text-align: left;">Search DOM with text/CSS/XPath</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>get_console_logs</code></td>
+<td style="text-align: left;">Get browser console output</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-interaction">3. Interaction<a class="headerlink" href="#3-interaction" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>click</code></td>
+<td style="text-align: left;">Click an element by snapshot ID</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>click_at</code></td>
+<td style="text-align: left;">Click at coordinates</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hover</code></td>
+<td style="text-align: left;">Hover over an element</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hover_at</code></td>
+<td style="text-align: left;">Hover at coordinates</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>type_at</code></td>
+<td style="text-align: left;">Type at coordinates</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>drag_at</code></td>
+<td style="text-align: left;">Drag from one coordinate to another</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>focus</code></td>
+<td style="text-align: left;">Focus an element</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>clear</code></td>
+<td style="text-align: left;">Clear input text</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fill</code></td>
+<td style="text-align: left;">Type into an input</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>check</code></td>
+<td style="text-align: left;">Check a checkbox/radio</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>uncheck</code></td>
+<td style="text-align: left;">Uncheck a checkbox</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>upload_file</code></td>
+<td style="text-align: left;">Upload file to input</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>press_key</code></td>
+<td style="text-align: left;">Press a key/key combo</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>drag</code></td>
+<td style="text-align: left;">Drag from element to element/coords</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>scroll</code></td>
+<td style="text-align: left;">Scroll page or element</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>handle_dialog</code></td>
+<td style="text-align: left;">Accept/dismiss JS dialog</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>select_option</code></td>
+<td style="text-align: left;">Select dropdown option</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-media-export">4. Media &amp; Export<a class="headerlink" href="#4-media-export" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>take_screenshot</code></td>
+<td style="text-align: left;">Screenshot of current page</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>save_pdf</code></td>
+<td style="text-align: left;">Save page as PDF</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>save_screenshot</code></td>
+<td style="text-align: left;">Screenshot to file</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>download_file</code></td>
+<td style="text-align: left;">Click to download file</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-window-management">5. Window Management<a class="headerlink" href="#5-window-management" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>list_windows</code></td>
+<td style="text-align: left;">List all windows</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>create_window</code></td>
+<td style="text-align: left;">Create new window</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>create_hidden_window</code></td>
+<td style="text-align: left;">Create hidden window</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>close_window</code></td>
+<td style="text-align: left;">Close window</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>activate_window</code></td>
+<td style="text-align: left;">Focus window</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-bookmarks">6. Bookmarks<a class="headerlink" href="#6-bookmarks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>get_bookmarks</code></td>
+<td style="text-align: left;">List all bookmarks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>create_bookmark</code></td>
+<td style="text-align: left;">Create bookmark or folder</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>remove_bookmark</code></td>
+<td style="text-align: left;">Remove bookmark/folder</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>update_bookmark</code></td>
+<td style="text-align: left;">Update title/URL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>move_bookmark</code></td>
+<td style="text-align: left;">Move to folder</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>search_bookmarks</code></td>
+<td style="text-align: left;">Search by title/URL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-history">7. History<a class="headerlink" href="#7-history" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>search_history</code></td>
+<td style="text-align: left;">Search history</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>get_recent_history</code></td>
+<td style="text-align: left;">Recent items</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>delete_history_url</code></td>
+<td style="text-align: left;">Delete specific URL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>delete_history_range</code></td>
+<td style="text-align: left;">Delete by date range</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-tab-groups">8. Tab Groups<a class="headerlink" href="#8-tab-groups" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>list_tab_groups</code></td>
+<td style="text-align: left;">List all groups</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>group_tabs</code></td>
+<td style="text-align: left;">Group tabs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>update_tab_group</code></td>
+<td style="text-align: left;">Update title/color/collapsed</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ungroup_tabs</code></td>
+<td style="text-align: left;">Remove from group</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>close_tab_group</code></td>
+<td style="text-align: left;">Close group and tabs</td>
+</tr>
+</tbody>
+</table>
+<h3 id="9-script-execution">9. Script Execution<a class="headerlink" href="#9-script-execution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>evaluate_script</code></td>
+<td style="text-align: left;">Execute JavaScript in page context</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-connect-apps-40-integrations">10. Connect Apps (40+ integrations)<a class="headerlink" href="#10-connect-apps-40-integrations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tool</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>discover_server_categories_or_actions</code></td>
+<td style="text-align: left;">Discover available services</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>get_category_actions</code></td>
+<td style="text-align: left;">Get actions for a category</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>get_action_details</code></td>
+<td style="text-align: left;">Get action parameters</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>execute_action</code></td>
+<td style="text-align: left;">Execute a Connect App action</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>handle_auth_failure</code></td>
+<td style="text-align: left;">Handle auth errors</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="practical-examples">Practical Examples<a class="headerlink" href="#practical-examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-quick-page-summary">Example 1: Quick Page Summary<a class="headerlink" href="#example-1-quick-page-summary" title="Permanent link">&para;</a></h3>
+<p><strong>Request:</strong></p>
+<blockquote>
+<p>"Summarize the current state of quantum computing from Wikipedia"</p>
+</blockquote>
+<p><strong>Tools used:</strong>
+1. <code>navigate_page</code> → go to Wikipedia quantum computing page
+2. <code>get_page_content</code> → extract clean markdown
+3. Summarize the content</p>
+<h3 id="example-2-multi-source-research">Example 2: Multi-Source Research<a class="headerlink" href="#example-2-multi-source-research" title="Permanent link">&para;</a></h3>
+<p><strong>Request:</strong></p>
+<blockquote>
+<p>"Research the best noise-canceling headphones from 5 sources and create a comparison table"</p>
+</blockquote>
+<p><strong>Workflow:</strong>
+1. Create workspace: <code>create_hidden_window</code>
+2. Open 5 hidden tabs: <code>new_hidden_page</code> × 5
+3. Navigate each: <code>navigate_page</code>
+4. Extract: <code>get_page_content</code> or <code>evaluate_script</code>
+5. Save each: write to <code>raw/</code>
+6. Close: <code>close_page</code>
+7. Merge: Read all raw files, create <code>merged.csv</code>
+8. Report: Generate <code>report.html</code></p>
+<h3 id="example-3-product-price-tracking">Example 3: Product Price Tracking<a class="headerlink" href="#example-3-product-price-tracking" title="Permanent link">&para;</a></h3>
+<p><strong>Request:</strong></p>
+<blockquote>
+<p>"Track the price of 'NVIDIA RTX 5090' on Amazon, Newegg, and Best Buy. Alert me if any drop below $1000."</p>
+</blockquote>
+<p><strong>Workflow:</strong>
+1. Create 3 hidden tabs for each retailer
+2. Navigate to product pages
+3. Use <code>evaluate_script</code> to extract price text
+4. Save price history to a local file
+5. Compare against threshold
+6. Alert user if condition met</p>
+<h3 id="example-4-form-submission">Example 4: Form Submission<a class="headerlink" href="#example-4-form-submission" title="Permanent link">&para;</a></h3>
+<p><strong>Request:</strong></p>
+<blockquote>
+<p>"Fill out the signup form at example.com/signup with test credentials"</p>
+</blockquote>
+<p><strong>Tools used:</strong>
+1. <code>navigate_page</code> → go to form
+2. <code>take_snapshot</code> → get element IDs
+3. <code>fill</code> → fill name/email fields
+4. <code>select_option</code> → select dropdown
+5. <code>click</code> → submit button
+6. <code>handle_dialog</code> → accept confirmation</p>
+<h3 id="example-5-bookmarks-management">Example 5: Bookmarks Management<a class="headerlink" href="#example-5-bookmarks-management" title="Permanent link">&para;</a></h3>
+<p><strong>Request:</strong></p>
+<blockquote>
+<p>"Create a bookmark folder for 'AI Research' and save these 5 URLs as bookmarks inside it"</p>
+</blockquote>
+<p><strong>Workflow:</strong>
+1. <code>create_bookmark</code> → create folder
+2. <code>create_bookmark</code> × 5 → add each URL with the folder ID</p>
+<h3 id="example-6-screenshot-walkthrough">Example 6: Screenshot Walkthrough<a class="headerlink" href="#example-6-screenshot-walkthrough" title="Permanent link">&para;</a></h3>
+<p><strong>Request:</strong></p>
+<blockquote>
+<p>"Create a step-by-step screenshot walkthrough of logging into Gmail"</p>
+</blockquote>
+<p><strong>Workflow:</strong>
+1. <code>new_page</code> → navigate to Gmail
+2. <code>take_snapshot</code> → get login elements
+3. <code>save_screenshot</code> → capture each step
+4. Continue until logged in
+5. Compile into markdown with image paths</p>
+<hr />
+<h2 id="built-in-skills">Built-in Skills<a class="headerlink" href="#built-in-skills" title="Permanent link">&para;</a></h2>
+<p>BrowserOS comes with 12 built-in skills at <code>~/.browseros/skills/builtin/</code>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Skill</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>deep-research</code></td>
+<td style="text-align: left;">Multi-source research with HTML report + PDF</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>extract-data</code></td>
+<td style="text-align: left;">Extract structured data (tables, products, pricing)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>monitor-page</code></td>
+<td style="text-align: left;">Track changes on a web page over time</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>compare-prices</code></td>
+<td style="text-align: left;">Compare prices across multiple retailers</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>find-alternatives</code></td>
+<td style="text-align: left;">Find alternative products/services</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fill-form</code></td>
+<td style="text-align: left;">Automate form filling and submission</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>save-page</code></td>
+<td style="text-align: left;">Save pages for offline reading</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>read-later</code></td>
+<td style="text-align: left;">Queue pages to read later</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>manage-bookmarks</code></td>
+<td style="text-align: left;">CRUD on bookmarks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>organize-tabs</code></td>
+<td style="text-align: left;">Organize tabs into groups</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>screenshot-walkthrough</code></td>
+<td style="text-align: left;">Document workflows with screenshots</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>summarize-page</code></td>
+<td style="text-align: left;">Extract and summarize page content</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="advanced-workflows">Advanced Workflows<a class="headerlink" href="#advanced-workflows" title="Permanent link">&para;</a></h2>
+<h3 id="a-deep-research-multi-day">A. Deep Research (Multi-Day)<a class="headerlink" href="#a-deep-research-multi-day" title="Permanent link">&para;</a></h3>
+<p>BrowserOS has a built-in <code>deep-research</code> skill:</p>
+<blockquote>
+<p>"Research the current state of AI coding assistants. Compare at least 5 sources including GitHub, papers with code, and industry blogs. Create both an HTML report and a PDF."</p>
+</blockquote>
+<p>Hermes will:
+1. Plan 5 search queries
+2. Open parallel hidden tabs (10 max)
+3. Navigate, extract, save each source
+4. Merge findings into <code>findings.md</code>
+5. Generate <code>report.html</code>
+6. Save as PDF with <code>save_pdf</code></p>
+<h3 id="b-price-comparison">B. Price Comparison<a class="headerlink" href="#b-price-comparison" title="Permanent link">&para;</a></h3>
+<p>Build a price comparison workflow:</p>
+<ol>
+<li><strong>Define products</strong> — Create a CSV with product names and URLs</li>
+<li><strong>Hidden window</strong> — Use <code>create_hidden_window</code> for automation</li>
+<li><strong>Parallel extraction</strong> — Open up to 10 tabs</li>
+<li><strong>Price regex</strong> — Use <code>evaluate_script</code> with regex to extract prices</li>
+<li><strong>Merge</strong> — Combine into comparison CSV</li>
+<li><strong>Report</strong> — Generate HTML with price columns and links</li>
+</ol>
+<h3 id="c-web-monitoring">C. Web Monitoring<a class="headerlink" href="#c-web-monitoring" title="Permanent link">&para;</a></h3>
+<p>Set up monitoring with cron:</p>
+<ol>
+<li>Use BrowserOS to navigate to target pages</li>
+<li>Extract current state with <code>get_page_content</code></li>
+<li>Compare against previous saved state</li>
+<li>If changes detected, alert via Hermes</li>
+<li>Save new state</li>
+</ol>
+<p>Example cron job:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># Check Hacker News top post every hour
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>0 * * * * hermes exec &quot;check HN and save top story&quot;
+</span></code></pre></div></p>
+<h3 id="d-connect-apps-actions">D. Connect Apps Actions<a class="headerlink" href="#d-connect-apps-actions" title="Permanent link">&para;</a></h3>
+<p>BrowserOS can connect to 40+ services:</p>
+<ol>
+<li><code>discover_server_categories_or_actions</code> — List available services</li>
+<li><code>get_category_actions</code> — Get actions for a service (e.g., GitHub)</li>
+<li><code>get_action_details</code> — Get required parameters</li>
+<li><code>execute_action</code> — Execute with parameters</li>
+<li><code>handle_auth_failure</code> — If auth fails, get auth URL</li>
+</ol>
+<hr />
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="1-always-take-a-snapshot-first">1. Always Take a Snapshot First<a class="headerlink" href="#1-always-take-a-snapshot-first" title="Permanent link">&para;</a></h3>
+<p>Before any automation, always:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a># Get interactive elements
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>snapshot = take_snapshot()
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a># Then use the element IDs for clicks, fills, etc.
+</span></code></pre></div></p>
+<h3 id="2-save-data-incrementally">2. Save Data Incrementally<a class="headerlink" href="#2-save-data-incrementally" title="Permanent link">&para;</a></h3>
+<p>Never accumulate data in memory:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a># GOOD: Save each page immediately
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>for page in pages:
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    data = extract(page)
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    save(f&quot;raw/{page.slug}.json&quot;)
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>merge_from_files(&quot;raw/&quot;)
+</span></code></pre></div>
+<h3 id="3-limit-concurrent-tabs">3. Limit Concurrent Tabs<a class="headerlink" href="#3-limit-concurrent-tabs" title="Permanent link">&para;</a></h3>
+<p>Max 10 open tabs at a time:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a># Process in batches of 10
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>for batch in chunks(urls, 10):
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    tabs = [new_hidden_page(url) for url in batch]
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    extract_all(tabs)
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    close_all(tabs)
+</span></code></pre></div>
+<h3 id="4-handle-dynamic-content">4. Handle Dynamic Content<a class="headerlink" href="#4-handle-dynamic-content" title="Permanent link">&para;</a></h3>
+<p>For pages with infinite scroll or lazy loading:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># Scroll to load more content
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>await scroll(direction=&quot;down&quot;)
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a># Or use JavaScript
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>evaluate_script(script=&quot;window.scrollTo(0, document.body.scrollHeight)&quot;)
+</span></code></pre></div>
+<h3 id="5-use-javascript-for-complex-extraction">5. Use JavaScript for Complex Extraction<a class="headerlink" href="#5-use-javascript-for-complex-extraction" title="Permanent link">&para;</a></h3>
+<p>For nested structures (product cards, etc.):</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">// extract.js</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.product-card&#39;</span><span class="p">);</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">return</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">items</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.title&#39;</span><span class="p">).</span><span class="nx">innerText</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.price&#39;</span><span class="p">).</span><span class="nx">innerText</span><span class="p">,</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">).</span><span class="nx">href</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">})));</span>
+</span></code></pre></div>
+<h3 id="6-clean-up-after-automation">6. Clean Up After Automation<a class="headerlink" href="#6-clean-up-after-automation" title="Permanent link">&para;</a></h3>
+<p>Always close hidden windows and tabs:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>await close_window(window_id=hidden_window_id)
+</span></code></pre></div>
+<h3 id="7-handle-dialogs-proactively">7. Handle Dialogs Proactively<a class="headerlink" href="#7-handle-dialogs-proactively" title="Permanent link">&para;</a></h3>
+<p>Before triggering potential dialogs:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># First, set the dialog handler
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>await handle_dialog(accept=True)
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a># Then click the element that might trigger a dialog
+</span></code></pre></div>
+<h3 id="8-record-source-urls">8. Record Source URLs<a class="headerlink" href="#8-record-source-urls" title="Permanent link">&para;</a></h3>
+<p>Every extracted data point should include its source:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>product,price,source_url
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>NVIDIA RTX 5090,$999,https://newegg.com/product/...
+</span></code></pre></div>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="mcp-connection-refused">MCP Connection Refused<a class="headerlink" href="#mcp-connection-refused" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> <code>Failed to connect to MCP server 'browseros'</code></p>
+<p><strong>Fix:</strong>
+1. Verify BrowserOS is running: <code>curl http://127.0.0.1:9200/health</code>
+2. If not, start BrowserOS: <code>~/Downloads/BrowserOS</code>
+3. Restart Hermes</p>
+<h3 id="tools-not-appearing">Tools Not Appearing<a class="headerlink" href="#tools-not-appearing" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Tools listed but not available</p>
+<p><strong>Fix:</strong>
+1. Restart Hermes: <code>hermes</code> (new session)
+2. Check config: <code>cat ~/.hermes/config.yaml | grep -A5 mcp_servers</code></p>
+<h3 id="page-load-timeout">Page Load Timeout<a class="headerlink" href="#page-load-timeout" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> <code>navigate_page</code> times out</p>
+<p><strong>Fix:</strong>
+- Increase timeout in config:
+  <div class="language-yaml highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">mcp_servers</span><span class="p">:</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">browseros</span><span class="p">:</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:9200/mcp&quot;</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">180</span><span class="w">  </span><span class="c1"># increased from 120</span>
+</span></code></pre></div></p>
+<h3 id="screenshot-not-supported-on-hidden-tab">Screenshot Not Supported on Hidden Tab<a class="headerlink" href="#screenshot-not-supported-on-hidden-tab" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> <code>take_screenshot</code> fails on hidden tab</p>
+<p><strong>Fix:</strong>
+- Use <code>show_page</code> first to make the tab visible:
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>await show_page(page_id=page_id)
+</span></code></pre></div></p>
+<h3 id="element-not-found">Element Not Found<a class="headerlink" href="#element-not-found" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> <code>click</code> or <code>fill</code> fails — element not in snapshot</p>
+<p><strong>Fix:</strong>
+1. Wait for page to settle: <code>evaluate_script</code> with a small delay
+2. Re-take snapshot: <code>take_snapshot</code>
+3. Use <code>search_dom</code> to find element by text/CSS
+4. Use <code>scroll</code> to bring element into view</p>
+<hr />
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>BrowserOS transforms web automation from brittle scripts into reliable AI-driven workflows. Combined with Hermes Agent's memory, skills, and MCP integration, you get:</p>
+<ul>
+<li><strong>Natural language control</strong> over any web task</li>
+<li><strong>Persistent state</strong> across sessions</li>
+<li><strong>66+ tools</strong> for every browser interaction</li>
+<li><strong>40+ integrations</strong> via Connect Apps</li>
+<li><strong>Built-in skills</strong> for research, extraction, monitoring</li>
+</ul>
+<p>Pair BrowserOS with Hermes for the most powerful local AI browser experience available.</p>
+<hr />
+<h2 id="additional-resources">Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>MCP Protocol:</strong> <a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a></li>
+<li><strong>Hermes MCP:</strong> See <code>hermes-agent</code> skill for MCP configuration</li>
+<li><strong>BrowserOS Skills:</strong> Built-in workflows at <code>~/.browseros/skills/builtin/</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: AI Tools">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                AI Tools
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../dolphin-llm-guide/" class="md-footer__link md-footer__link--next" aria-label="Next: Dolphin LLM Guide">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Dolphin LLM Guide
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Tom Geo. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.action.edit","content.action.view","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.prune","navigation.sections","navigation.icons","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>
