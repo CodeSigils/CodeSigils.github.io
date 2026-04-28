@@ -50,12 +50,12 @@ docs/
 
 Configured in `docs/admin/config.yml`:
 
-| Collection | Folder | Purpose |
-|------------|--------|---------|
-| **pages** | `docs/` | General pages |
-| **home** | `docs/index.md` | Homepage only |
-| **jsts** | `docs/JS-TS/` | JS-TS section |
-| **ai** | `docs/AI/` | AI section articles |
+| Collection | Folder          | Purpose             |
+| :--------- | :-------------- | :------------------ |
+| **pages**  | `docs/`         | General pages       |
+| **home**   | `docs/index.md` | Homepage only       |
+| **jsts**   | `docs/JS-TS/`   | JS-TS section       |
+| **ai**     | `docs/AI/`      | AI section articles |
 
 Front matter fields: `title`, `icon` (Lucide icon name, e.g., `lucide/rocket`), `body` (markdown).
 
@@ -123,20 +123,20 @@ These standards **MUST** be followed for all articles in this repo:
 
 ```markdown
 !!! tip "Title of the tip"
-    Important content here.
+Important content here.
 
 !!! warning "Title of the warning"
-    Warning content here.
+Warning content here.
 
 !!! note "Title of the note"
-    Note content here.
+Note content here.
 ```
 
 ### Collapsible Sections
 
 ```markdown
 ??? tip "Click to expand"
-    
+
     Hidden content here.
 ```
 
@@ -146,13 +146,14 @@ Always use aligned table headers:
 
 ```markdown
 | Header 1 | Header 2 | Header 3 |
-| :--- | :--- | :--- |
-| Data    | Data     | Data    |
+| :------- | :------- | :------- |
+| Data     | Data     | Data     |
 ```
 
 **DO NOT use:**
+
 ```markdown
-|---|---|---|  # WRONG
+|---|---|---| # WRONG
 ```
 
 ### Icons in Front Matter
@@ -220,9 +221,9 @@ Use this pattern to embed YouTube videos responsively (maintains 16:9 aspect rat
 ```markdown
 <div>
   <div style="position:relative;padding-top:56.25%;">
-    <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
-            frameborder="0" 
-            allowfullscreen 
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+            frameborder="0"
+            allowfullscreen
             style="position:absolute;top:0;left:0;width:100%;height:100%;">
     </iframe>
   </div>
@@ -242,6 +243,7 @@ Use this pattern for responsive images:
 ```
 
 **Key points:**
+
 - Use `loading=lazy` for below-the-fold images
 - Do NOT lazy-load the first image (hero/LCP image)
 - Always specify width/height when possible to prevent layout shift
