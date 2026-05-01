@@ -20,7 +20,7 @@ A comparison of two open-source AI agent platforms.
 ### Hermes AI
 
 - **Website**: https://hermes-agent.ai
-- **GitHub**: https://github.com/nousresearch/hermes-agent
+- **GitHub**: https://github.com/NousResearch/hermes-agent
 - **Documentation**: https://hermes-agent.nousresearch.com/docs
 - **Cloud Service**: https://flyhermes.ai
 
@@ -33,18 +33,19 @@ A comparison of two open-source AI agent platforms.
 
 ## Overview
 
-| Feature               | **Hermes AI**                                                  | **OpenCode**                                       |
-| :------ | :------------ | :----------- |
-| **Focus**             | General autonomous agent for automation, memory, and workflows | Coding-focused AI assistant                        |
-| **Publisher**         | Nous Research (open source)                                    | Anomaly (open source)                              |
-| **GitHub Stars**      | ~27K                                                           | ~140K                                              |
-| **Persistent Memory** | Built-in, learns and improves over time                        | No (session-based)                                 |
-| **Skills System**     | Auto-creates reusable skills from tasks                        | Not built-in                                       |
-| **Scheduling**        | Cron-based task scheduling                                     | Not supported                                      |
-| **Subagents**         | Spawn parallel workers (up to 3 concurrent)                    | Multi-session parallel agents                      |
-| **Platforms**         | Telegram, Discord, Slack, WhatsApp, CLI                        | Terminal, Desktop app, IDE extension               |
-| **Model Support**     | 200+ providers, BYOK, local via Ollama                         | 75+ providers, Claude, GPT, Gemini, GitHub Copilot |
-| **Use Case**          | General automation, research, personal assistant               | Software engineering, coding tasks                 |
+| Feature               | **Hermes AI**                                                 | **OpenCode**                                      |
+| :-------------------- | :------------------------------------------------------------ | :---------------------------------------------- |
+| **Focus**            | General autonomous agent for automation, memory, workflows     | Coding-focused AI assistant                       |
+| **Publisher**        | Nous Research (open source)                                    | Anomaly (open source)                            |
+| **GitHub Stars**     | ~128K                                                        | ~153K                                            |
+| **Persistent Memory**| Built-in, learns and improves over time                        | No (session-based)                               |
+| **Skills System**    | Auto-creates reusable skills from tasks                        | Not built-in                                     |
+| **Scheduling**       | Cron-based task scheduling                                     | Not supported                                    |
+| **Subagents**        | Spawn parallel workers (up to 3 concurrent)                    | Multi-session parallel agents                    |
+| **Built-in Tools**   | 68                                                           | Varies by model                                  |
+| **Platforms**        | Telegram, Discord, Slack, WhatsApp, CLI                        | Terminal, Desktop app, IDE extension             |
+| **Model Support**    | 200+ providers, BYOK, local via Ollama                         | Claude, GPT, Gemini, Copilot, 75+ total          |
+| **Use Case**        | General automation, research, personal assistant               | Software engineering, coding tasks                |
 
 ## Key Differences
 
