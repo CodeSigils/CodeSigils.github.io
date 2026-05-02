@@ -259,3 +259,13 @@ Use this pattern for responsive images:
 ```markdown
 ![Alt text](/assets/images/hero.png){ width=900 }
 ```
+
+### Inline HTML
+
+Inline HTML is **allowed and encouraged** for:
+
+- Responsive images (`<p><img ... style="..." /></p>`)
+- Embedded videos (YouTube iframes)
+- Custom styling not possible with markdown
+
+MD033 (no inline HTML) is **disabled** in `.markdownlint.json` for this repo.
