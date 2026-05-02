@@ -21,6 +21,10 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install zensical
+      - name: Fix zensical config bug
+        run: |
+          SITE=$(python -c "import site; print(site.getsitepackages()[0])")
+          sed -i 's/mdx_configs\[ext\] = config or {}/mdx_configs[ext] = config if isinstance(config, dict) else {}/g' "$SITE/zensical/config.py"
       - run: zensical build --clean
       - uses: actions/upload-pages-artifact@v4
         with:
