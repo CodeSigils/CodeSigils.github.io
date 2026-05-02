@@ -259,10 +259,11 @@ features = [
 # Markdown extensions enable additional Markdown syntax and features.
 # Read more: https://zensical.org/docs/authoring/markdown/
 #
+# NOTE: Do NOT add a [project.markdown_extensions] section here.
+# Setting any key in it overrides Zensical's full defaults list,
+# breaking extensions like admonition, superfences, etc.
+# Zensical's built-in defaults already include attr_list and md_in_html.
 # ============================================================================
-[project.markdown_extensions]
-attr_list = true
-md_in_html = true
 
 # ----------------------------------------------------------------------------
 # If you don't have a dedicated project logo, you can use a built-in icon from
