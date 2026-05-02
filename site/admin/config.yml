@@ -3,117 +3,99 @@ backend:
   repo: CodeSigils/CodeSigils.github.io
   branch: master
 
+site_url: https://codesigils.github.io/
+
 media_folder: docs/assets/images
 public_folder: /assets/images
 
 media_library:
+  name: assets
   config:
     image:
       choose_url: true
-      folder: docs/assets/images
-
-site_url: https://codesigils.github.io/
 
 collections:
-  - name: "pages"
-    label: "Pages"
-    label_singular: "Page"
-    folder: "docs"
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: docs
     create: true
-    slug: "{{slug}}"
+    slug: '{{slug}}'
     extension: md
     format: frontmatter
     fields:
-      - { label: "Title", name: "title", widget: "string", required: false }
+      - {label: Title, name: title, widget: string, required: false}
       - {
-          label: "Description",
-          name: "description",
-          widget: "text",
+          label: Description,
+          name: description,
+          widget: text,
           required: false,
-          hint: "Short summary for SEO and previews",
+          hint: Short summary for SEO and previews,
         }
       - {
-          label: "Keywords",
-          name: "keywords",
-          widget: "list",
+          label: Keywords,
+          name: keywords,
+          widget: list,
           required: false,
-          hint: "Comma-separated keywords for SEO",
+          hint: Comma-separated keywords for SEO,
         }
       - {
-          label: "Icon",
-          name: "icon",
-          widget: "string",
+          label: Icon,
+          name: icon,
+          widget: string,
           required: false,
-          hint: "e.g. lucide/rocket",
+          hint: e.g. lucide/rocket,
         }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - {label: Body, name: body, widget: markdown}
 
-  - name: "home"
-    label: "Homepage"
-    files:
-      - file: "docs/index.md"
-        label: "Home"
-        name: "home"
-        fields:
-          - { label: "Title", name: "title", widget: "string", required: false }
-          - {
-              label: "Description",
-              name: "description",
-              widget: "text",
-              required: false,
-              hint: "Short summary for SEO",
-            }
-          - { label: "Icon", name: "icon", widget: "string", required: false }
-          - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: "jsts"
-    label: "JS-TS Section"
-    folder: "docs/JS-TS"
+  - name: jsts
+    label: JS-TS Section
+    folder: docs/JS-TS
     create: true
-    slug: "{{year}}-{{slug}}"
+    slug: '{{slug}}'
     extension: md
     format: frontmatter
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - {label: Title, name: title, widget: string}
       - {
-          label: "Description",
-          name: "description",
-          widget: "text",
+          label: Description,
+          name: description,
+          widget: text,
           required: false,
-          hint: "Short summary for SEO",
+          hint: Short summary for SEO,
         }
       - {
-          label: "Keywords",
-          name: "keywords",
-          widget: "list",
+          label: Keywords,
+          name: keywords,
+          widget: list,
           required: false,
-          hint: "Comma-separated keywords for SEO",
+          hint: Comma-separated keywords for SEO,
         }
-      - { label: "Icon", name: "icon", widget: "string", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Body, name: body, widget: markdown}
 
-  - name: "ai"
-    label: "AI Section"
-    folder: "docs/AI"
+  - name: ai
+    label: AI Section
+    folder: docs/AI
     create: true
-    slug: "{{year}}-{{slug}}"
+    slug: '{{slug}}'
     extension: md
     format: frontmatter
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - {label: Title, name: title, widget: string}
       - {
-          label: "Description",
-          name: "description",
-          widget: "text",
+          label: Description,
+          name: description,
+          widget: text,
           required: false,
-          hint: "Short summary for SEO",
+          hint: Short summary for SEO,
         }
       - {
-          label: "Keywords",
-          name: "keywords",
-          widget: "list",
+          label: Keywords,
+          name: keywords,
+          widget: list,
           required: false,
-          hint: "Comma-separated keywords for SEO",
+          hint: Comma-separated keywords for SEO,
         }
-      - { label: "Icon", name: "icon", widget: "string", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Body, name: body, widget: markdown}
