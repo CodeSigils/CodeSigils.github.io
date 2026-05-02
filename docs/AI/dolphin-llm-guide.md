@@ -13,7 +13,7 @@ keywords:
   - local AI
 ---
 
-![Dolphin LLM](/assets/images/dolphin-llm.png){ width=900 }
+<p><img src="/assets/images/dolphin-llm.png" alt="Dolphin LLM" style="max-width:100%;width:900px;height:auto;display:block;margin:1em 0;" /></p>
 
 The Dolphin family of LLMs — open source, uncensored, and steerable models from the community.
 

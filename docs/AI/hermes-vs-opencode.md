@@ -11,7 +11,7 @@ keywords:
   - open source
 ---
 
-![Hermes Agent Banner](/assets/images/hermes-banner.png){ width=900 }
+<p><img src="/assets/images/hermes-banner.png" alt="Hermes Agent Banner" style="max-width:100%;width:900px;height:auto;display:block;margin:1em 0;" /></p>
 
 A comparison of two open-source AI agent platforms.
 

@@ -13,7 +13,7 @@ keywords:
   - Nous Research
 ---
 
-![BrowserOS + Hermes Agent](/assets/images/browseros/hermes-browseros-banner.png){ width=900 }
+<p><img src="/assets/images/browseros/hermes-browseros-banner.png" alt="BrowserOS + Hermes Agent" style="max-width:100%;width:900px;height:auto;display:block;margin:1em 0;" /></p>
 
 BrowserOS is an agentic browser — a Chrome-based browser with a built-in MCP (Model Context Protocol) server that exposes 66+ browser automation tools to AI agents. When paired with Hermes Agent, you get autonomous web control through natural language.
 

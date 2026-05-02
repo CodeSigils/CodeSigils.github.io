@@ -12,7 +12,7 @@ keywords:
   - workflow automation
 ---
 
-![Oh My OpenCode](/assets/images/oh-my-opencode.png){ width=900 }
+<p><img src="/assets/images/oh-my-opencode.png" alt="Oh My OpenCode" style="max-width:100%;width:900px;height:auto;display:block;margin:1em 0;" /></p>
 
 A batteries-included orchestration layer for OpenCode that adds specialized agents, hooks, MCPs, and workflow automation.
 

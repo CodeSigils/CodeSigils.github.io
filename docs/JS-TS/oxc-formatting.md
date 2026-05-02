@@ -13,7 +13,7 @@ keywords:
 
 # The OXC tools
 
-![OXC Logo](/assets/images/oxc-logo.svg){ align=center width=200 }
+<p><img src="/assets/images/oxc-logo.svg" alt="OXC Logo" style="max-width:100%;width:200px;height:auto;display:block;margin:1em auto;" /></p>
 
 [OXC](https://oxc.rs/) is a collection of JavaScript/TypeScript tooling written in Rust.
 The OXC formatter is a fast, configurable code formatter for JavaScript, TypeScript, JSX, and JSON.

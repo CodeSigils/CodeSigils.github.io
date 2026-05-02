@@ -12,7 +12,7 @@ keywords:
   - open source
 ---
 
-![Hermes AI Agent](/assets/images/hermes-banner.png){ width=900 }
+<p><img src="/assets/images/hermes-banner.png" alt="Hermes AI Agent" style="max-width:100%;width:900px;height:auto;display:block;margin:1em 0;" /></p>
 
 The self-improving AI agent built by Nous Research — the only AI agent with a built-in learning loop.
 
