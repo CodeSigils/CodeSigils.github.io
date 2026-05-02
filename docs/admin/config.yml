@@ -20,7 +20,7 @@ collections:
     label_singular: Page
     folder: docs
     create: true
-    slug: "{{slug}}"
+    slug: '{{slug}}'
     extension: md
     format: frontmatter
     fields:
@@ -47,28 +47,12 @@ collections:
           hint: e.g. lucide/rocket,
         }
       - {label: Body, name: body, widget: markdown}
-  - name: home
-    label: Homepage
-    files:
-      - file: docs/index.md
-        label: Home
-        name: home
-        fields:
-          - {label: Title, name: title, widget: string, required: false}
-          - {
-              label: Description,
-              name: description,
-              widget: text,
-              required: false,
-              hint: Short summary for SEO,
-            }
-          - {label: Icon, name: icon, widget: string, required: false}
-          - {label: Body, name: body, widget: markdown}
+
   - name: jsts
     label: JS-TS Section
     folder: docs/JS-TS
     create: true
-    slug: "{{slug}}"
+    slug: '{{slug}}'
     extension: md
     format: frontmatter
     fields:
@@ -89,11 +73,12 @@ collections:
         }
       - {label: Icon, name: icon, widget: string, required: false}
       - {label: Body, name: body, widget: markdown}
+
   - name: ai
     label: AI Section
     folder: docs/AI
     create: true
-    slug: "{{slug}}"
+    slug: '{{slug}}'
     extension: md
     format: frontmatter
     fields:
