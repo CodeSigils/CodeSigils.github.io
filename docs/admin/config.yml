@@ -2,16 +2,17 @@ backend:
   name: github
   repo: CodeSigils/CodeSigils.github.io
   branch: master
-  site_url: https://codesigils.github.io/
+
+site_url: https://codesigils.github.io/
 
 media_folder: docs/assets/images
 public_folder: /assets/images
 
 media_library:
+  name: assets
   config:
     image:
       choose_url: true
-      folder: docs/assets/images
 
 collections:
 
