@@ -12,7 +12,7 @@ keywords:
   - no-cost AI
 ---
 
-![AI Models](/assets/images/opencode-screenshot.webp){ width=800 }
+![AI Models](/assets/images/opencode-screenshot.png){ width=800 }
 
 > **Last Updated:** April 2026
 
