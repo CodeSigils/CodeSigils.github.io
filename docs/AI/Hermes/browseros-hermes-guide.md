@@ -40,8 +40,6 @@ BrowserOS is an AI-native browser built on Chromium (version 146) that provides:
 
 !!! tip "Why Use BrowserOS with Hermes?"
 
-<!-- markdownlint-disable-next-line MD046 -->
-
     - **Natural language control** — Tell Hermes what to do in the browser, and it executes autonomously
     - **Persistent browser state** — Browser tabs, history, bookmarks, and sessions persist across conversations
     - **MCP-first design** — Tools are exposed standards-compliant for any MCP client
@@ -101,8 +99,6 @@ BrowserOS is an AI-native browser built on Chromium (version 146) that provides:
    ```
 
 !!! warning "Common Setup Issues"
-
-    <!-- markdownlint-disable-next-line MD046 -->
 
     | Issue                  | Solution                                   |
     | :--------------------- | :----------------------------------------- |
