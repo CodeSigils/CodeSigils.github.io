@@ -90,17 +90,34 @@ OpenCode natively supports Hugging Face Inference Providers - giving you access 
 
 ## OpenCode Free Models
 
-OpenCode offers some built-in free models developed by [Zen Labs](https://zenlabs.ai/):
+OpenCode offers built-in free models through **OpenCode Zen** - a curated set of models developed by [Zen Labs](https://zenlabs.ai/) that have been tested and benchmarked specifically for coding agents.
 
-| Model                 | Best For       | Notes                |
-| :--- | :--- | :--- |
-| **Big Pickle**        | General coding | OpenCode's free tier - developed by Zen |
-| **GLM 4.7 Free**      | General tasks  | Limited              |
-| **MiniMax M2.5 Free** | General tasks  | Limited              |
+!!! tip "Getting Started"
+
+    OpenCode comes with free models ready to use. Just run:
+    ```bash
+    opencode
+    /models
+    # Select from available free models
+    ```
+
+### Available Free Models
+
+| Model                  | Context | Best For           | Notes                                   |
+| :--- | :------ | :----------------- | :-------------------------------------- |
+| **Big Pickle**         | 200K    | Complex coding     | Stealth model, optimized for agents    |
+| **MiniMax M2.5 Free**  | 128K+   | General coding    | Strong at tool use                     |
+| **Qwen3.6 Plus Free**  | 131K+   | Complex tasks      | High performance, reasoning capable    |
+| **MiMo V2 Pro Free**   | 131K+   | Fast inference     | One of the fastest available           |
+| **Nemotron 3 Super Free** | 1M    | Long context       | NVIDIA's open-weight agent model       |
+
+!!! note "Limited Time"
+
+    These free models are available while OpenCode collects feedback. During this period, data may be used to improve the model. For sensitive code, consider paid options or local models (Ollama).
 
 ### About Big Pickle
 
-**Big Pickle** is a free LLM developed by [Zen Labs](https://zenlabs.ai/), the team behind OpenCode. It's available directly in OpenCode and optimized for coding tasks.
+**Big Pickle** is a stealth model developed by [Zen Labs](https://zenlabs.ai/), the team behind OpenCode. It's optimized specifically for coding agents with a 200K token context window - the largest among free options.
 
 <div class="youtube-video-wrapper">
   <iframe src="https://www.youtube.com/embed/tuW0IKNZ2UI" allowfullscreen></iframe>
@@ -129,7 +146,7 @@ opencode
 | **GitHub Models**    | 50-150 req/day   | o3-mini, GPT-4.1          | github.com/models   |
 | **NVIDIA NIM**       | 1,000 credits    | DeepSeek R1, Llama   | build.nvidia.com    |
 | **Hugging Face**     | Monthly credits  | 300+ models          | huggingface.co      |
-| **Groq**             | Limited          | Llama, Qwen          | console.groq.com    |
+| **Groq**             | 30 RPM, 1K RPD   | Llama 3.1, Qwen3    | console.groq.com    |
 | **xAI**              | $25 credits      | Grok 4               | x.ai                |
 
 ### Google AI Studio (Recommended for Free)
