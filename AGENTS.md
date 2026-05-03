@@ -117,6 +117,30 @@ zensical serve
 zensical build --clean
 ```
 
+## OpenCode Settings
+
+This repo uses `opencode-mem` plugin for persistence.
+
+### Memory Commands
+
+Add important updates to memory:
+
+```bash
+memory({ mode: "add", content: "Description of what changed" })
+```
+
+Search memories:
+
+```bash
+memory({ mode: "search", query: "search term" })
+```
+
+List memories:
+
+```bash
+memory({ mode: "list", limit: 10 })
+```
+
 ## Markdown Standards
 
 These standards **MUST** be followed for all articles in this repo:
