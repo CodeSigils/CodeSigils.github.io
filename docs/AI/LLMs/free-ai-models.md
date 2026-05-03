@@ -146,7 +146,7 @@ opencode
 | **GitHub Models**    | 50-150 req/day   | o3-mini, GPT-4.1          | github.com/models   |
 | **NVIDIA NIM**       | 1,000 credits    | DeepSeek R1, Llama   | build.nvidia.com    |
 | **Hugging Face**     | Monthly credits  | 300+ models          | huggingface.co      |
-| **Groq**             | 30 RPM, 1K RPD   | Llama 3.1, Qwen3    | console.groq.com    |
+| **Groq**             | Low-cost   | Llama 3.3, DeepSeek R1, Qwen QwQ    | console.groq.com    |
 | **xAI**              | $25 credits      | Grok 4               | x.ai                |
 
 ### Google AI Studio (Recommended for Free)
@@ -167,6 +167,25 @@ opencode
 **Resources:**
 
 - [Awesome Free AI APIs](https://awesomeagents.ai/tools/free-ai-inference-providers-2026/)
+
+### Groq (Fastest Inference)
+
+!!! tip "Fastest Inference Available"
+
+    Groq is not free - but it offers the **fastest inference speed** available (~1000+ tokens/second). It's low-cost and integrates natively with OpenCode.
+
+    | Model                 | Context | Notes                    |
+    | :--- | :------- | :----------------------- |
+    | llama-3.3-70b-versatile | 128K   | Best overall             |
+    | deepseek-r1-distill-llama-70b | 128K | Strong reasoning        |
+    | qwen-qwq-32b           | 128K   | Fast reasoning           |
+    | gemma-2-9b-it          | 8K     | Lightweight              |
+
+#### Setup
+
+1. Get a free API key at [console.groq.com/keys](https://console.groq.com/keys)
+2. In OpenCode, run `/connect` → search for "Groq" → paste your API key
+3. Run `/models` to select a Groq model
 
 ---
 
