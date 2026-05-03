@@ -124,14 +124,14 @@ Create an [`oxc.config.json`](https://oxc.rs/docs/guide/usage/linter-config.html
 
 ### Configuration Options
 
-| Option        | Type                     | Default    | Description                            |
+| Option        | Type                          | Default    | Description                            |
 | :----- | :--- | :------ | :---------- |
-| `enabled`     | boolean                  | `true`     | Enable/disable formatter               |
-| `indentStyle` | `"tab" \| "space"`       | `"tab"`    | Indentation style                      |
-| `indentWidth` | number                   | `2`        | Number of spaces per indentation level |
-| `lineEnding`  | `"lf" \| "crlf" \| "cr"` | `"lf"`     | Line ending character                  |
-| `printWidth`  | number                   | `80`       | Maximum line length                    |
-| `quoteStyle`  | `"single" \| "double"`   | `"double"` | Quote style for strings                |
+| `enabled`     | boolean                       | `true`     | Enable/disable formatter               |
+| `indentStyle` | `"tab" &#124; "space"`       | `"tab"`    | Indentation style                      |
+| `indentWidth` | number                       | `2`        | Number of spaces per indentation level |
+| `lineEnding`  | `"lf" &#124; "crlf" &#124; "cr"` | `"lf"`     | Line ending character                  |
+| `printWidth`  | number                       | `80`       | Maximum line length                    |
+| `quoteStyle`  | `"single" &#124; "double"`   | `"double"` | Quote style for strings                |
 
 ## Formatting Examples
 
