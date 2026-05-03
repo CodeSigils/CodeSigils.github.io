@@ -119,26 +119,26 @@ zensical build --clean
 
 ## OpenCode Settings
 
-This repo uses `opencode-mem` plugin for persistence.
+This repo uses `open-mem` plugin for persistence.
 
 ### Memory Commands
 
 Add important updates to memory:
 
 ```bash
-memory({ mode: "add", content: "Description of what changed" })
+memory.store({ content: "Description of what changed" })
 ```
 
 Search memories:
 
 ```bash
-memory({ mode: "search", query: "search term" })
+memory.find({ query: "search term" })
 ```
 
 List memories:
 
 ```bash
-memory({ mode: "list", limit: 10 })
+memory.list({ scope: "project", limit: 10 })
 ```
 
 ## Markdown Standards
