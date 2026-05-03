@@ -10,7 +10,6 @@ keywords:
   - LM Studio
   - Hugging Face
   - local AI
-icon: lucide/fish
 ---
 
 <div class="image-wrapper">

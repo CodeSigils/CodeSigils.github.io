@@ -9,7 +9,6 @@ keywords:
   - AI search
   - Nous Research
   - open source
-icon: lucide/search
 ---
 
 <div class="image-wrapper">

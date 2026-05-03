@@ -1,6 +1,5 @@
 ---
 title: NotebookLM + OpenCode
-icon: lucide/book-open
 description: Tutorial for combining Google NotebookLM audio overviews with OpenCode - how to use NotebookLM generated audio files in your OpenCode workflow for context.
 keywords:
   - NotebookLM

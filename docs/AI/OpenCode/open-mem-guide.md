@@ -1,6 +1,5 @@
 ---
 title: Open-Mem Plugin
-icon: lucide/brain
 description: Persistent memory system for OpenCode - automatic session capture, AI compression, and context injection across coding sessions.
 keywords:
   - opencode

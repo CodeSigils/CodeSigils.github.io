@@ -1,6 +1,5 @@
 ---
 title: BrowserOS + Hermes Agent Integration Guide
-icon: lucide/globe
 description: Complete guide to integrating BrowserOS (agentic browser) with Hermes Agent for autonomous web automation, research, data extraction, and monitoring.
 keywords:
   - browseros

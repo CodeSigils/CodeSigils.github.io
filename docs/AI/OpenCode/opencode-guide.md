@@ -1,6 +1,5 @@
 ---
 title: OpenCode Guide
-icon: lucide/terminal
 description: Complete guide to OpenCode - the open source AI coding agent for terminal-based development with multi-model support, MCP integration, and slash commands.
 keywords:
   - opencode

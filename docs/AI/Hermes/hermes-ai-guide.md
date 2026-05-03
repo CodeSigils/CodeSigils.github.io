@@ -1,6 +1,5 @@
 ---
 title: Hermes AI Agent Guide
-icon: lucide/cpu
 description: Complete guide to Hermes AI Agent - an open source AI agent with 68 built-in tools, memory system, MCP integration, and cross-session recall capabilities.
 keywords:
   - hermes

@@ -1,6 +1,5 @@
 ---
 title: Oh My OpenAgent Guide
-icon: lucide/box
 description: Guide to Oh My OpenAgent - the batteries-included orchestration layer for OpenCode with specialized agents, hooks, MCPs, and workflow automation.
 keywords:
   - oh-my-openagent
