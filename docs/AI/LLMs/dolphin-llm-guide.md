@@ -13,7 +13,7 @@ keywords:
 ---
 
 <div class="image-wrapper">
-  <img src="/assets/images/dolphin-llm.webp"
+  <img src="/assets/images/llm-model-dolphincoder.webp"
        alt="Dolphin LLM" />
 </div>
 
@@ -47,7 +47,7 @@ Dolphin is a family of open-source LLMs developed by [Eric Hartford](https://hug
 ### Recent Models
 
 | Model | Size | Base Model | Context | License |
-| --- | --- | --- | --- | --- |
+| :---- | :--- | :--------- | :------ | :------ |
 | **Dolphin 3.0 Llama 3.1 8B** | 8B | Llama 3.1 | 8K+ | Meta Llama 3.1 |
 | **Dolphin 3.0 Llama 3.2 1B** | 1B | Llama 3.2 | 8K+ | Meta Llama 3.2 |
 | **Dolphin 3.0 Llama 3.2 3B** | 3B | Llama 3.2 | 8K+ | Meta Llama 3.2 |
@@ -76,7 +76,7 @@ Dolphin models are available in various GGUF formats for different use cases:
 ### Cost Options
 
 | Method | Cost | Requirements |
-| --- | --- | --- |
+| :----- | :--- | :----------- |
 | **Self-hosted (Ollama/LM Studio)** | Free | GPU with 4-24GB VRAM |
 | **Hugging Face Inference** | Varies | API credits |
 | **Cloud vLLM** | Compute cost | GPU rental |
@@ -84,7 +84,7 @@ Dolphin models are available in various GGUF formats for different use cases:
 ### Hardware Requirements
 
 | Model Size | Minimum VRAM | Recommended |
-| --- | --- | --- |
+| :--------- | :----------- | :---------- |
 | 1B parameters | 2GB | 4GB |
 | 3B parameters | 6GB | 8GB |
 | 8B parameters | 16GB | 24GB |
@@ -141,6 +141,6 @@ vllm serve cognitivecomputations/Dolphin3.0-Llama3.1-8B
 - [Eric Hartford's Blog](https://erichartford.com/uncensored-models)
 - [Discord Community](https://discord.gg/cognitivecomputations)
 
-***
+---
 
 > **Disclaimer:** Dolphin is an uncensored model. You're responsible for the content you create using it.
