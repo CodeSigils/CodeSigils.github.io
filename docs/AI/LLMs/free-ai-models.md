@@ -50,19 +50,16 @@ OpenCode natively supports Hugging Face Inference Providers - giving you access 
     ```bash
     # 1. Create token at huggingface.co/settings/tokens
     #    (needs "Make calls to Inference Providers" permission)
-    
+
     # 2. Run auth login
     opencode auth login
-    
+
     # 3. Select Hugging Face when prompted
+    # Enter your token: hf_
 
-# Enter your token: hf_
-
-# 4. Select a model
-
-/models
-
-```
+    # 4. Select a model
+    /models
+    ```
 
 ### Best Coding Models
 

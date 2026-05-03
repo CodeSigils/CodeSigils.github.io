@@ -1,13 +1,51 @@
-{#-
-  This file was automatically generated - do not edit
--#}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {%- for page in pages -%}
-    {%- if page.canonical_url %}
       <url>
-        <loc>{{ page.canonical_url }}</loc>
+        <loc>https://codesigils.github.io/</loc>
       </url>
-    {%- endif -%}
-  {%- endfor %}
+      <url>
+        <loc>https://codesigils.github.io/disclaimer/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/markdown/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/Hermes/browseros-hermes-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/Hermes/hermes-ai-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/Hermes/hermes-perplexity/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/Hermes/hermes-vs-opencode/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/LLMs/dolphin-llm-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/LLMs/free-ai-models/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/OpenCode/notebooklm-opencode-tutorial/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/OpenCode/oh-my-opencode-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/OpenCode/open-mem-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/AI/OpenCode/opencode-guide/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/JS-TS/</loc>
+      </url>
+      <url>
+        <loc>https://codesigils.github.io/JS-TS/oxc-formatting/</loc>
+      </url>
 </urlset>
