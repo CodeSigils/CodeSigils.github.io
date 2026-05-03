@@ -543,7 +543,7 @@ This is the most common workflow - research, then implement.
 
 ---
 
-## Suggestions & Prompts
+## Suggestions & Prompts {#suggestions--prompts}
 
 ### Research Prompts
 

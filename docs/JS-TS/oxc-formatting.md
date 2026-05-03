@@ -255,12 +255,12 @@ repos:
 
 Migration steps:
 
-1. [ ] Install OXC: `npm install --save-dev oxc`
-2. [ ] Create `oxc.config.json` with your preferred settings
-3. [ ] Run formatter: `npx oxc format .`
-4. [ ] Compare output with your Prettier-formatted code
-5. [ ] Update CI/CD pipelines to use OXC
-6. [ ] Remove Prettier (optional)
+1. Install OXC: `npm install --save-dev oxc`
+2. Create `oxc.config.json` with your preferred settings
+3. Run formatter: `npx oxc format .`
+4. Compare output with your Prettier-formatted code
+5. Update CI/CD pipelines to use OXC
+6. Remove Prettier (optional)
 
 ## Performance Comparison
 

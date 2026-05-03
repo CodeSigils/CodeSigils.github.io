@@ -24,7 +24,7 @@ keywords:
 ## Table of Contents
 
 1. [Hugging Face Inference Providers](#hugging-face-inference-providers)
-2. [OpenCode Free Models](#open-code-free-models)
+2. [OpenCode Free Models](#opencode-free-models)
 3. [Other Free Tiers](#other-free-tiers)
 4. [Recommendations by Use Case](#recommendations-by-use-case)
 5. [Model Comparison Tables](#model-comparison-tables)
@@ -93,7 +93,7 @@ OpenCode natively supports Hugging Face Inference Providers - giving you access 
 
 ---
 
-## OpenCode Free Models
+## OpenCode Free Models {#opencode-free-models}
 
 OpenCode offers some built-in free models developed by [Zen Labs](https://zenlabs.ai/):
 

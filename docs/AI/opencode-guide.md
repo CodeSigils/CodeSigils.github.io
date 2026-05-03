@@ -27,7 +27,7 @@ The open source AI coding agent for terminal, desktop, and IDE.
 3. [Installation](#installation)
 4. [Core Features](#core-features)
 5. [Model Support](#model-support)
-6. [Plugins & Extensions](#plugins--extensions)
+6. [Plugins & Extensions](#plugins--extensions-1)
 7. [Most Used Plugins](#most-used-plugins)
 8. [Configuration](#configuration)
 9. [Interface Options](#interface-options)
@@ -80,7 +80,7 @@ OpenCode is an **open source AI coding agent** that helps developers write, debu
 
 ## Installation
 
-### Prerequisites
+### Prerequisites {#prerequisites}
 
 !!! tip "Requirements Before You Start"
 
@@ -438,7 +438,7 @@ A curated list of tested and verified models:
 
 ---
 
-## Plugins & Extensions
+## Plugins & Extensions {#plugins--extensions-1}
 
 ### Plugin System
 
