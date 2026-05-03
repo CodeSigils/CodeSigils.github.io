@@ -1,0 +1,22 @@
+# Build output
+site/
+
+# Python virtual environment
+.venv/
+
+# OpenCode memory
+.open-mem/
+
+# Environment secrets
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Linting config in build
+site/.markdownlint.json
