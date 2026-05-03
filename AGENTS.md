@@ -30,6 +30,7 @@ zensical serve
 docs/
 ├── index.md              # Homepage
 ├── markdown.md          # Markdown authoring reference
+├── disclaimer.md        # Disclaimer page
 ├── AI/                 # AI tools articles
 │   ├── index.md        # AI section landing
 │   ├── OpenCode/      # OpenCode articles
@@ -60,8 +61,8 @@ docs/
 
 Configured in `docs/admin/config.yml`:
 
-| Collection | Folder          | Purpose             |
-| :--------- | :-------------- | :------------------ |
+| Collection | Folder                | Purpose             |
+| :--------- | :----- | :------ |
 | **pages**  | `docs/`         | General pages       |
 | **home**   | `docs/index.md` | Homepage only       |
 | **jsts**   | `docs/JS-TS/`   | JS-TS section       |
@@ -115,8 +116,8 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 
 ## Front Matter SEO Fields
 
-| Field         | Purpose                     | Example                              |
-| :------------ | :-------------------------- | :------------------------------------ |
+| Field           | Purpose                       | Example                                |
+| :---- | :------ | :------ |
 | **title**       | Page title                 | OpenCode Guide                        |
 | **description** | Meta description (~150 chars) | Complete guide to OpenCode...        |
 | **keywords**    | SEO keywords (comma-separated) | opencode, AI coding agent, terminal  |
@@ -293,7 +294,7 @@ Use div with CSS class for responsive images (consistent with YouTube pattern):
 CSS classes available:
 
 | Class | Purpose |
-| :------- | :------ |
+| :---- | :------ |
 | `.image-wrapper` | Full-width responsive image |
 | `.logo-wrapper` | Small logo/icon |
 
