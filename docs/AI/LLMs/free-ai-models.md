@@ -63,9 +63,9 @@ OpenCode natively supports Hugging Face Inference Providers - giving you access 
 
 ### Best Coding Models
 
-|| Model                 | Best For          | Provider    | Context | Notes |
+| Model                 | Best For          | Provider    | Context | Notes |
 | :--- | :---- | :------- | :------- | :------ | :---- |
-|| **Qwen2.5-Coder-32B** | Code reasoning    | Featherless | 131K    | Good for complex code tasks |
+| **Qwen2.5-Coder-32B** | Code reasoning    | Featherless | 131K    | Good for complex code tasks |
 
 ### Other Notable Models
 
@@ -184,20 +184,20 @@ opencode
 
 ### Coding Models Comparison
 
-|| Model             | Provider    | Context | Speed   | Notes              | Best For          |
+| Model             | Provider    | Context | Speed   | Notes              | Best For          |
 | :--- | :---- | :------- | :------ | :---- | :---- | :------- |
-|| Qwen2.5-Coder-32B | Featherless | 131K    | Medium  | Good code reasoning| Code reasoning    |
-|| DeepSeek-R1       | Hyperbolic  | 131K    | Medium  | Chain-of-thought   | Complex reasoning |
-|| GPT-4.1           | GitHub      | 32K     | Fast    | Free tier          | General coding    |
+| Qwen2.5-Coder-32B | Featherless | 131K    | Medium  | Good code reasoning| Code reasoning    |
+| DeepSeek-R1       | Hyperbolic  | 131K    | Medium  | Chain-of-thought   | Complex reasoning |
+| GPT-4.1           | GitHub      | 32K     | Fast    | Free tier          | General coding    |
 
 ### Free Models Comparison
 
-|| Model            | Source       | Notes                    |
+| Model            | Source       | Notes                    |
 | :--- | :---- | :----- | :---- |
-|| Big Pickle       | OpenCode     | Works out of box         |
-|| GLM 4.7 Flash    | Hugging Face | Slower                   |
-|| Gemini 2.5 Flash | Google       | Generous free tier       |
-|| Gemma 4 31B      | Hugging Face | Google's best open model |
+| Big Pickle       | OpenCode     | Works out of box         |
+| GLM 4.7 Flash    | Hugging Face | Slower                   |
+| Gemini 2.5 Flash | Google       | Generous free tier       |
+| Gemma 4 31B      | Hugging Face | Google's best open model |
 
 ---
 
