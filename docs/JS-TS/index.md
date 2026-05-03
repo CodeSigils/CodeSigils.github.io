@@ -20,12 +20,6 @@ Whether you're building frontend applications, backend services, or
 full-stack solutions, having the right tools and workflows is essential
 for productive development.
 
-## Topics Covered
-
-### Code Quality & Formatting
-
-- [OXC Formatter](./oxc-formatting.md) - A high-performance JavaScript/TypeScript formatter written in Rust
-
 ## Why TypeScript?
 
 TypeScript adds static type checking to JavaScript, helping you catch errors
@@ -48,14 +42,9 @@ The JavaScript/TypeScript ecosystem offers a rich set of tools:
 | **Bundlers** | Vite, Webpack, Rollup, esbuild, Parcel |
 | **Package Managers** | npm, yarn, pnpm, bun |
 | **Linters** | ESLint, oxlint |
-| **Formatters** | Prettier, [OXC Formatter](./oxc-formatting.md) |
+| **Formatters** | Prettier, OXC Formatter |
 | **Testing** | Vitest, Jest, Playwright, Cypress |
 | **Type Checking** | TypeScript, tsc |
-
-## Quick Links
-
-- [OXC Formatter Guide](./oxc-formatting.md) - Learn about the fast Rust-based formatter
-- [TypeScript Official Website](https://www.typescriptlang.org/) - Documentation, playground, and resources
 
 ---
 
