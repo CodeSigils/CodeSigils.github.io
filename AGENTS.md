@@ -31,15 +31,23 @@ docs/
 ├── index.md              # Homepage
 ├── markdown.md          # Markdown authoring reference
 ├── AI/                 # AI tools articles
-│   ├── opencode-guide.md
-│   ├── oh-my-opencode-guide.md
-│   ├── dolphin-llm-guide.md
-│   ├── hermes-ai-guide.md
-│   ├── hermes-vs-opencode.md
-│   ├── hermes-perplexity.md
-│   ├── browseros-hermes-guide.md
-│   ├── free-ai-models.md
-│   └── notebooklm-opencode-tutorial.md
+│   ├── index.md        # AI section landing
+│   ├── OpenCode/      # OpenCode articles
+│   │   ├── index.md
+│   │   ├── opencode-guide.md
+│   │   ├── oh-my-opencode-guide.md
+│   │   ├── open-mem-guide.md
+│   │   └── notebooklm-opencode-tutorial.md
+│   ├── Hermes/        # Hermes articles
+│   │   ├── index.md
+│   │   ├── hermes-ai-guide.md
+│   │   ├── hermes-vs-opencode.md
+│   │   ├── browseros-hermes-guide.md
+│   │   └── hermes-perplexity.md
+│   └── LLMs/          # LLM articles
+│       ├── index.md
+│       ├── dolphin-llm-guide.md
+│       └── free-ai-models.md
 ├── JS-TS/              # JavaScript/TypeScript articles
 │   ├── index.md
 │   └── oxc-formatting.md
@@ -57,7 +65,10 @@ Configured in `docs/admin/config.yml`:
 | **pages**  | `docs/`         | General pages       |
 | **home**   | `docs/index.md` | Homepage only       |
 | **jsts**   | `docs/JS-TS/`   | JS-TS section       |
-| **ai**     | `docs/AI/`      | AI section articles |
+| **ai**     | `docs/AI/`      | AI section index    |
+| **ai_opencode** | `docs/AI/OpenCode/` | OpenCode articles |
+| **ai_hermes**  | `docs/AI/Hermes/`   | Hermes articles   |
+| **ai_llms**    | `docs/AI/LLMs/`     | LLM articles    |
 
 Front matter fields: `title`, `icon` (Lucide icon name, e.g., `lucide/rocket`), `body` (markdown).
 
@@ -81,17 +92,12 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 
 ## Adding New Articles
 
-1. Create new `.md` file in appropriate section folder (`docs/AI/`, `docs/JS-TS/`, etc.)
-2. Add front matter with title and icon:
-
-   ```markdown
-   ---
-   title: My Article Title
-   icon: lucide/rocket
-   ---
-   ```
-
+1. Create new `.md` file in appropriate section folder (`docs/AI/OpenCode/`, `docs/AI/Hermes/`, `docs/AI/LLMs/`, `docs/JS-TS/`, etc.)
+2. Add front matter with title (and icon for category indexes only):
 3. Commit and push - CI will build automatically
+
+!!! warning "Sveltia CMS"
+   When changing content structure (adding/moving/renaming folders), update `docs/admin/config.yml` to add new collections.
 
 ## Images
 
