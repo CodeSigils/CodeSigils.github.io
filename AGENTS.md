@@ -34,19 +34,16 @@ docs/
 ├── AI/                 # AI tools articles
 │   ├── index.md        # AI section landing
 │   ├── OpenCode/      # OpenCode articles
-│   │   ├── index.md
 │   │   ├── opencode-guide.md
 │   │   ├── oh-my-opencode-guide.md
 │   │   ├── open-mem-guide.md
 │   │   └── notebooklm-opencode-tutorial.md
 │   ├── Hermes/        # Hermes articles
-│   │   ├── index.md
 │   │   ├── hermes-ai-guide.md
 │   │   ├── hermes-vs-opencode.md
 │   │   ├── browseros-hermes-guide.md
 │   │   └── hermes-perplexity.md
 │   └── LLMs/          # LLM articles
-│       ├── index.md
 │       ├── dolphin-llm-guide.md
 │       └── free-ai-models.md
 ├── JS-TS/              # JavaScript/TypeScript articles
