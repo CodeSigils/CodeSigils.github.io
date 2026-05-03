@@ -175,10 +175,16 @@ features = [
   # https://zensical.org/docs/setup/footer/#navigation
   "navigation.footer",
 
-  # When section index pages are enabled, documents can be directly attached
+# When section index pages are enabled, documents can be directly attached
   # to sections, which is particularly useful for providing overview pages.
   # https://zensical.org/docs/setup/navigation/#section-index-pages
-  "navigation.indexes",
+  # "navigation.indexes",
+
+  # When navigation integration for the table of contents is enabled,
+  # it is always rendered as part of the navigation sidebar on the left.
+  # Note: Not compatible with navigation.indexes
+  # https://zensical.org/docs/setup/navigation/#navigation-integration
+  # "toc.integrate",
 
   # When instant navigation is enabled, clicks on all internal links will be
   # intercepted and dispatched via XHR without fully reloading the page.
