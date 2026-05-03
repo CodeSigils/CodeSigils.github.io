@@ -108,6 +108,15 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 !!! warning "Sveltia CMS"
    When changing content structure (adding/moving/renaming folders), update `docs/admin/config.yml` to add new collections.
 
+## Content Guidelines
+
+### No Local Article Links in Index Pages
+
+Index pages (section landing pages like `docs/AI/index.md`, `docs/JS-TS/index.md`) **must not** contain links to local articles. This prevents duplicate listings in the sidebar navigation.
+
+- **Don't**: List articles manually in index pages
+- **Do**: Let the navigation handle article links via subcategory folders
+
 ## Images
 
 - Source: `docs/assets/images/`
