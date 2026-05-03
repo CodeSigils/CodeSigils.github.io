@@ -99,3 +99,45 @@ collections:
         }
       - {label: Icon, name: icon, widget: string, required: false}
       - {label: Body, name: body, widget: markdown}
+
+  - name: ai_opencode
+    label: OpenCode
+    folder: docs/AI/OpenCode
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Description, name: description, widget: text, required: false}
+      - {label: Keywords, name: keywords, widget: list, required: false}
+      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Body, name: body, widget: markdown}
+
+  - name: ai_hermes
+    label: Hermes
+    folder: docs/AI/Hermes
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Description, name: description, widget: text, required: false}
+      - {label: Keywords, name: keywords, widget: list, required: false}
+      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Body, name: body, widget: markdown}
+
+  - name: ai_llms
+    label: LLMs
+    folder: docs/AI/LLMs
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Description, name: description, widget: text, required: false}
+      - {label: Keywords, name: keywords, widget: list, required: false}
+      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Body, name: body, widget: markdown}
