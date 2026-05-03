@@ -102,13 +102,13 @@ BrowserOS is an AI-native browser built on Chromium (version 146) that provides:
 
 !!! warning "Common Setup Issues"
 
-<!-- markdownlint-disable-next-line MD046 -->
+    <!-- markdownlint-disable-next-line MD046 -->
 
-| Issue                  | Solution                                   |
-| :--------------------- | :----------------------------------------- |
-| MCP connection refused | Start BrowserOS: `~/Downloads/BrowserOS`   |
-| Tools not appearing    | Restart Hermes Agent in a new session      |
-| Timeout errors         | Increase timeout in config: `timeout: 180` |
+    | Issue                  | Solution                                   |
+    | :--------------------- | :----------------------------------------- |
+    | MCP connection refused | Start BrowserOS: `~/Downloads/BrowserOS`   |
+    | Tools not appearing    | Restart Hermes Agent in a new session      |
+    | Timeout errors         | Increase timeout in config: `timeout: 180` |
 
 ### Verification
 
