@@ -16,24 +16,11 @@ AI-powered development tools for coding, debugging, and documentation.
 
 ## Subcategories
 
-### OpenCode
+### [OpenCode](./OpenCode/)
 
-- [OpenCode Guide](./OpenCode/opencode-guide.md) - Open source terminal-based AI coding agent
-- [Oh My OpenAgent](./OpenCode/oh-my-opencode-guide.md) - Orchestration layer for OpenCode
-- [Open-Mem Plugin](./OpenCode/open-mem-guide.md) - Persistent memory across sessions
-- [NotebookLM + OpenCode](./OpenCode/notebooklm-opencode-tutorial.md) - Audio-based workflow
+### [Hermes AI](./Hermes/)
 
-### Hermes AI
-
-- [Hermes AI Guide](./Hermes/hermes-ai-guide.md) - AI agent with 47 built-in tools
-- [Hermes vs OpenCode](./Hermes/hermes-vs-opencode.md) - Comparison of two agents
-- [BrowserOS + Hermes](./Hermes/browseros-hermes-guide.md) - Running Hermes in browser
-- [Hermes + Perplexity](./Hermes/hermes-perplexity.md) - Using Perplexity as provider
-
-### Language Models
-
-- [Dolphin LLM](./LLMs/dolphin-llm-guide.md) - Open source uncensored models
-- [Free AI Models](./LLMs/free-ai-models.md) - No-cost LLM options
+### [Language Models](./LLMs/)
 
 ## Why AI Tools?
 
