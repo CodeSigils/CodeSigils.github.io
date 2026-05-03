@@ -1086,6 +1086,7 @@ rm -rf ~/.cache/opencode
 ### Plugin Resources
 
 - [Official Plugins](https://opencode.ai/docs/plugins/)
+- [Plugin Ecosystem](https://opencode.ai/docs/ecosystem/)
 - [Oh My OpenCode](https://ohmyopencode.com)
 - [OpenCode Swarm](https://github.com/zaxbysauce/opencode-swarm)
 - [Awesome MCP Servers](https://github.com/wong2/awesome-mcp-servers)
