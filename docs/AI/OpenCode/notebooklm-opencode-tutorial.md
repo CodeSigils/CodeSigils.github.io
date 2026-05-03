@@ -106,7 +106,7 @@ Before starting, ensure you have:
     - OpenCode installed (`curl -fsSL https://opencode.ai/install.sh | sh`)
     - Node.js 18+ persistently installed
     
-    **Node.js not working?** See [OpenCode Prerequisites](../opencode-guide.md#prerequisites) for setup.
+    **Node.js not working?** See [Prerequisites](#prerequisites) for setup.
 
 ### Quick Node.js Verification
 
