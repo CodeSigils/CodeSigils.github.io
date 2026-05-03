@@ -108,10 +108,10 @@ collections:
     extension: md
     format: frontmatter
     fields:
-      - {label: Title, name: title, widget: string}
-      - {label: Description, name: description, widget: text, required: false}
-      - {label: Keywords, name: keywords, widget: list, required: false}
-      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Description, name: description, widget: text, required: false, hint: "Meta description (150 chars) for SEO"}
+      - {label: Keywords, name: keywords, widget: list, required: false, hint: "opencode, AI coding agent, terminal, LLM"}
+      - {label: Icon, name: icon, widget: string, required: false, hint: "lucide/terminal"}
       - {label: Body, name: body, widget: markdown}
 
   - name: ai_hermes
@@ -122,10 +122,10 @@ collections:
     extension: md
     format: frontmatter
     fields:
-      - {label: Title, name: title, widget: string}
-      - {label: Description, name: description, widget: text, required: false}
-      - {label: Keywords, name: keywords, widget: list, required: false}
-      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Description, name: description, widget: text, required: false, hint: "Meta description (150 chars) for SEO"}
+      - {label: Keywords, name: keywords, widget: list, required: false, hint: "hermes AI, Nous Research, AI agent"}
+      - {label: Icon, name: icon, widget: string, required: false, hint: "lucide/bot"}
       - {label: Body, name: body, widget: markdown}
 
   - name: ai_llms
@@ -136,8 +136,8 @@ collections:
     extension: md
     format: frontmatter
     fields:
-      - {label: Title, name: title, widget: string}
-      - {label: Description, name: description, widget: text, required: false}
-      - {label: Keywords, name: keywords, widget: list, required: false}
-      - {label: Icon, name: icon, widget: string, required: false}
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Description, name: description, widget: text, required: false, hint: "Meta description (150 chars) for SEO"}
+      - {label: Keywords, name: keywords, widget: list, required: false, hint: "LLM, open source, local AI, Ollama"}
+      - {label: Icon, name: icon, widget: string, required: false, hint: "lucide/cpu"}
       - {label: Body, name: body, widget: markdown}

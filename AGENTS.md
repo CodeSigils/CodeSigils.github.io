@@ -113,6 +113,21 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 - Deployed to: `/assets/images/`
 - Reference in markdown: `/assets/images/filename.ext`
 
+## Front Matter SEO Fields
+
+| Field         | Purpose                     | Example                              |
+| :------------ | :-------------------------- | :------------------------------------ |
+| **title**       | Page title                 | OpenCode Guide                        |
+| **description** | Meta description (~150 chars) | Complete guide to OpenCode...        |
+| **keywords**    | SEO keywords (comma-separated) | opencode, AI coding agent, terminal  |
+| **icon**        | Lucide icon name           | lucide/terminal                      |
+
+!!! tip "SEO Best Practices"
+    - Always add a unique `description` for each article
+    - Include primary keyword in title and description
+    - Use 3-5 relevant keywords, avoid keyword stuffing
+    - Description appears in search results and social previews
+
 ## Local Development
 
 ```bash
