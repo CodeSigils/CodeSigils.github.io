@@ -14,14 +14,6 @@ keywords:
 
 AI-powered development tools for coding, debugging, and documentation.
 
-## Subcategories
-
-### [OpenCode](./OpenCode/)
-
-### [Hermes AI](./Hermes/)
-
-### [Language Models](./LLMs/)
-
 ## Why AI Tools?
 
 Modern AI coding assistants offer:
