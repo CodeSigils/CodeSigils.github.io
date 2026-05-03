@@ -94,6 +94,14 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 
 1. Create new `.md` file in appropriate section folder (`docs/AI/OpenCode/`, `docs/AI/Hermes/`, `docs/AI/LLMs/`, `docs/JS-TS/`, etc.)
 2. Add front matter with title (and icon for category indexes only):
+
+   ```markdown
+   ---
+   title: My Article Title
+   icon: lucide/rocket
+   ---
+   ```
+
 3. Commit and push - CI will build automatically
 
 !!! warning "Sveltia CMS"
@@ -105,11 +113,6 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 - Deployed to: `/assets/images/`
 - Reference in markdown: `/assets/images/filename.ext`
 
-## Environment
-
-- `.env` contains GitHub OAuth token - do not commit
-- `.venv/` - Python virtual environment (gitignored)
-
 ## Local Development
 
 ```bash
@@ -119,9 +122,18 @@ source .venv/bin/activate
 # Run local server with hot reload
 zensical serve
 
-# Build for production
+# Build and verify before pushing
 zensical build --clean
 ```
+
+!!! tip "Test before push"
+    Always run `zensical build --clean` locally to catch link errors and warnings.
+
+## Environment
+
+- `.env` - GitHub OAuth token (gitignored)
+- `.venv/` - Python virtual environment (gitignored)
+- `.open-mem/` - OpenCode memory data (gitignored)
 
 ## OpenCode Settings
 
@@ -234,7 +246,7 @@ When documenting commands for any technology:
    - If in doubt, search the official docs again
    - Don't rely on a single source for critical commands
 
-5. **Article infoemation validation**:
+5. **Article information validation**:
    - **Check link validity** - Verify each URL returns a valid HTTP response
    - **Investigate content accuracy** - Ensure the linked content matches the article claims
    - **Check for broken links** - Identify 404 errors or domain changes
