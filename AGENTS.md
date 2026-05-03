@@ -36,6 +36,8 @@ docs/
 │   ├── dolphin-llm-guide.md
 │   ├── hermes-ai-guide.md
 │   ├── hermes-vs-opencode.md
+│   ├── hermes-perplexity.md
+│   ├── browseros-hermes-guide.md
 │   ├── free-ai-models.md
 │   └── notebooklm-opencode-tutorial.md
 ├── JS-TS/              # JavaScript/TypeScript articles
@@ -260,7 +262,16 @@ Inline HTML is **allowed and encouraged** for:
 
 - Embedded videos (YouTube iframes)
 - Custom styling not possible with markdown
+- Responsive images with CSS wrappers
 
-Images should use standard markdown with `{ width= }` — do **not** use inline HTML for images.
+**Images**: Use standard markdown with `{ width= }` — do **not** use inline HTML for images.
+
+```html
+<!-- Responsive image -->
+<div class="image-wrapper">
+  <img src="/assets/images/screenshot.webp"
+       alt="Description" />
+</div>
+```
 
 MD033 (no inline HTML) is **disabled** in `.markdownlint.json` for this repo.
