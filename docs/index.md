@@ -2,6 +2,8 @@
 title: Code Sigils
 icon: lucide/rocket
 description: Personal blog on technology, programming, AI tools, books, tutorials, and whatever catches my interest. Notes, experiments, and thoughts on the tools of the trade.
+
+> Welcome to my digital basement — where technology meets curiosity, security meets experimentation, and half-finished projects go to die. Here you'll find guides, notes, and stories from the trenches.
 keywords:
   - technology
   - programming
