@@ -83,20 +83,20 @@ OpenCode is an **open source AI coding agent** that helps developers write, debu
 
 !!! tip "Requirements Before You Start"
 
-1. A modern terminal emulator (WezTerm, Alacritty, Ghostty, or Kitty recommended)
-2. API keys for your preferred LLM provider(s)
-3. Node.js 18+ (required for MCP servers and plugins)
+    1. A modern terminal emulator (WezTerm, Alacritty, Ghostty, or Kitty recommended)
+    2. API keys for your preferred LLM provider(s)
+    3. Node.js 18+ (required for MCP servers and plugins)
 
 #### Node.js Installation (Common "Foot Guns" to Avoid)
 
 !!! warning "Common Mistakes to Avoid"
 
-| ❌ Don't Do This | ✅ Do This Instead |
-| :--------------- | :----------------- |
-| `sudo apt install nodejs` (Ubuntu - installs ancient Node) | Use mise, fnm, n, or nvm |
-| Rely on `source ~/.nvm/nvm.sh` manually | Use mise or fnm (auto-loads) |
-| Assume Node persists across terminals | Test in a NEW terminal |
-| Use different Node versions per project | Use a version manager |
+    | ❌ Don't Do This | ✅ Do This Instead |
+    | :--------------- | :----------------- |
+    | `sudo apt install nodejs` (Ubuntu - installs ancient Node) | Use mise, fnm, n, or nvm |
+    | Rely on `source ~/.nvm/nvm.sh` manually | Use mise or fnm (auto-loads) |
+    | Assume Node persists across terminals | Test in a NEW terminal |
+    | Use different Node versions per project | Use a version manager |
 
 #### Recommended: mise (Best for OpenCode Users)
 
@@ -175,13 +175,13 @@ MCP servers run as subprocesses. If Node isn't persistent:
 
 !!! tip "Quick Install (Recommended)"
 
-```bash
-# Official install script (recommended)
-curl -fsSL https://opencode.ai/install.sh | sh
+    ```bash
+    # Official install script (recommended)
+    curl -fsSL https://opencode.ai/install.sh | sh
 
-# Alternative URL (also works)
-curl -fsSL https://opencode.ai/install | bash
-```
+    # Alternative URL (also works)
+    curl -fsSL https://opencode.ai/install | bash
+    ```
 
 ### Package Managers
 
