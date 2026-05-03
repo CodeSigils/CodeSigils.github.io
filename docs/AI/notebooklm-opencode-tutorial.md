@@ -11,7 +11,10 @@ keywords:
   - tutorial
 ---
 
-![NotebookLM by Google](/assets/images/notebooklm-logo.png){ width=400 }
+<div class="logo-wrapper">
+  <img src="/assets/images/notebooklm-logo.png"
+       alt="NotebookLM by Google" />
+</div>
 
 A comprehensive guide to connecting Google NotebookLM with OpenCode for AI-powered research and development workflows.
 

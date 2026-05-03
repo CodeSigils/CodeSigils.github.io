@@ -13,7 +13,10 @@ keywords:
 icon: lucide/fish
 ---
 
-![Dolphin LLM](/assets/images/dolphin-llm.webp){ width=900 }
+<div class="image-wrapper">
+  <img src="/assets/images/dolphin-llm.webp"
+       alt="Dolphin LLM" />
+</div>
 
 The Dolphin family of LLMs — open source, uncensored, and steerable models from the community.
 

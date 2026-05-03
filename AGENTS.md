@@ -222,19 +222,21 @@ curl -fsSL https://example.com/install | sh
 
 ### Responsive Images
 
-Zensical supports standard markdown image syntax with the `attr_list` extension. Use the `{ width= }` attribute for sizing:
+Use div with CSS class for responsive images (consistent with YouTube pattern):
 
-```markdown
-![Alt text](/assets/images/image.webp){ width=900 }
+```html
+<div class="image-wrapper">
+  <img src="/assets/images/image.webp"
+       alt="Alt text" />
+</div>
 ```
 
-CSS classes used by Zensical for images:
+CSS classes available:
 
-| Selector | Purpose |
+| Class | Purpose |
 | :------- | :------ |
-| `.md-typeset img` | `max-width: 100%; height: auto;` |
-| `.md-typeset figure` | `display: flow-root; margin: 1em auto; max-width: 100%;` |
-| `.md-typeset figure img` | `display: block; margin: 0 auto;` |
+| `.image-wrapper` | Full-width responsive image |
+| `.logo-wrapper` | Small logo/icon |
 
 Image sources live in `docs/assets/images/` and deploy to `/assets/images/`. WebP preferred for screenshots (smaller files). PNG for logos/icons. JPEG for photos.
 

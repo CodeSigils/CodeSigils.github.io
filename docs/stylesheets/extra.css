@@ -23,8 +23,16 @@
   aspect-ratio: 16 / 9;
 }
 
-/* Responsive images — natural via .md-typeset img { max-width:100%; height:auto; } */
-.md-content img {
-  display: block;
-  margin: 1.5em auto;
+/* Responsive images */
+.md-content .image-wrapper img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.md-content .logo-wrapper img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 4px;
 }

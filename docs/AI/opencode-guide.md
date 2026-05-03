@@ -13,7 +13,10 @@ keywords:
   - developer tools
 ---
 
-![OpenCode Screenshot](/assets/images/opencode-screenshot.png){ width=900 }
+<div class="image-wrapper">
+  <img src="/assets/images/opencode-screenshot.webp"
+       alt="OpenCode Screenshot" />
+</div>
 
 The open source AI coding agent for terminal, desktop, and IDE.
 
