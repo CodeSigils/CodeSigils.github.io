@@ -179,11 +179,12 @@ $$
 $$
 
 !!! warning "Needs configuration"
-Note that MathJax is included via a `script` tag on this page and is not
-configured in the generated default configuration to avoid including it
-in a pages that do not need it. See the documentation for details on how
-to configure it on all your pages if they are more Maths-heavy than these
-simple starter pages.
+
+    Note that MathJax is included via a `script` tag on this page and is not
+    configured in the generated default configuration to avoid including it
+    in a pages that do not need it. See the documentation for details on how
+    to configure it on all your pages if they are more Maths-heavy than these
+    simple starter pages.
 
 <script id="MathJax-script" src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>
