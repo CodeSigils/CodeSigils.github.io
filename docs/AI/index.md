@@ -1,7 +1,7 @@
 ---
 title: AI Tools
 icon: lucide/bot
-description: Guides and tutorials for AI coding tools - OpenCode, Oh My OpenAgent, Hermes AI, Dolphin LLM, and more.
+description: Guides and tutorials for AI coding tools - OpenCode, Hermes AI, Dolphin LLM, and more.
 keywords:
   - AI
   - OpenCode
@@ -12,32 +12,28 @@ keywords:
   - Claude
 ---
 
-This section covers AI coding tools, language models, and workflows
-for intelligent development assistance.
+AI-powered development tools for coding, debugging, and documentation.
 
-## Overview
+## Subcategories
 
-AI-powered development tools are transforming how we write, debug, and understand code.
-From terminal-based agents to orchestration layers, having the right AI setup
-can dramatically improve productivity.
+### OpenCode
 
-## Categories
+- [OpenCode Guide](./OpenCode/opencode-guide.md) - Open source terminal-based AI coding agent
+- [Oh My OpenAgent](./OpenCode/oh-my-opencode-guide.md) - Orchestration layer for OpenCode
+- [Open-Mem Plugin](./OpenCode/open-mem-guide.md) - Persistent memory across sessions
+- [NotebookLM + OpenCode](./OpenCode/notebooklm-opencode-tutorial.md) - Audio-based workflow
 
-### AI Agents
+### Hermes AI
 
-- [OpenCode Guide](./opencode-guide.md) - Open source terminal-based AI coding agent
-- [Oh My OpenAgent](./oh-my-opencode-guide.md) - Orchestration layer for OpenCode
-- [Hermes AI](./hermes-ai-guide.md) - AI agent with 47 built-in tools
-- [Hermes vs OpenCode](./hermes-vs-opencode.md) - Comparison of two powerful agents
+- [Hermes AI Guide](./Hermes/hermes-ai-guide.md) - AI agent with 47 built-in tools
+- [Hermes vs OpenCode](./Hermes/hermes-vs-opencode.md) - Comparison of two agents
+- [BrowserOS + Hermes](./Hermes/browseros-hermes-guide.md) - Running Hermes in browser
+- [Hermes + Perplexity](./Hermes/hermes-perplexity.md) - Using Perplexity as provider
 
 ### Language Models
 
-- [Dolphin LLM](./dolphin-llm-guide.md) - Open source uncensored models
-- [Free AI Models](./free-ai-models.md) - No-cost LLM options
-
-### Workflows
-
-- [NotebookLM + OpenCode](./notebooklm-opencode-tutorial.md) - Audio-based development workflow
+- [Dolphin LLM](./LLMs/dolphin-llm-guide.md) - Open source uncensored models
+- [Free AI Models](./LLMs/free-ai-models.md) - No-cost LLM options
 
 ## Why AI Tools?
 
@@ -59,13 +55,6 @@ Modern AI coding assistants offer:
 | **Orchestration** | Oh My OpenAgent, Sisyphus |
 | **Local Models** | Dolphin, Ollama, LM Studio |
 | **Cloud APIs** | OpenAI, Anthropic, Google |
-
-## Quick Links
-
-- [OpenCode Guide](./opencode-guide.md) - Getting started with OpenCode
-- [Oh My OpenAgent](./oh-my-opencode-guide.md) - Advanced workflows
-- [Dolphin LLM](./dolphin-llm-guide.md) - Running models locally
-- [Free AI Models](./free-ai-models.md) - Cost-free alternatives
 
 ---
 
