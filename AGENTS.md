@@ -147,11 +147,7 @@ zensical build --clean
 
 - `.env` - GitHub OAuth token (gitignored)
 - `.venv/` - Python virtual environment (gitignored)
-- `.open-mem/` - OpenCode memory data (gitignored)
-
-## OpenCode Settings
-
-This repo uses the `open-mem` plugin for persistence. Memory commands (`.store`, `.find`, `.list`) are available via the OpenCode CLI.
+- `.open-mem/` - Agent memory data (gitignored)
 
 ## Markdown Standards
 
