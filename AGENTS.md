@@ -28,49 +28,35 @@ zensical serve
 
 ## Content Structure
 
+The site uses a flat category convention -- articles live in one-level subfolders under `docs/`:
+
 ```
 docs/
-├── index.md              # Homepage
-├── markdown.md          # Markdown authoring reference
-├── disclaimer.md        # Disclaimer page
-├── AI/                 # AI tools articles
-│   ├── index.md        # AI section landing
-│   ├── OpenCode/      # OpenCode articles
-│   │   ├── opencode-guide.md
-│   │   ├── oh-my-opencode-guide.md
-│   │   ├── open-mem-guide.md
-│   │   └── notebooklm-opencode-tutorial.md
-│   ├── Hermes/        # Hermes articles
-│   │   ├── hermes-ai-guide.md
-│   │   ├── hermes-vs-opencode.md
-│   │   ├── browseros-hermes-guide.md
-│   │   └── hermes-perplexity.md
-│   └── LLMs/          # LLM articles
-│       ├── dolphin-llm-guide.md
-│       └── free-ai-models.md
-├── JS-TS/              # JavaScript/TypeScript articles
-│   ├── index.md
-│   └── oxc-formatting.md
+├── <category>/          # Section or collection (e.g. AI/, JS-TS/)
+│   ├── index.md         # Section landing page
+│   └── *.md             # Articles in this section
 ├── admin/
-│   └── config.yml      # Sveltia CMS configuration
-└── assets/images/     # Images (deployed to /assets/images/)
+│   └── config.yml       # Sveltia CMS collections
+└── assets/images/       # Images (deployed to /assets/images/)
 ```
+
+For an exact listing of all articles, run: `find docs/ -name '*.md' | sort`
+
+New categories = new folder under `docs/` + new collection in `docs/admin/config.yml`.
+New articles = new `.md` file inside an existing category folder.
 
 ## Content Collections (via Sveltia CMS)
 
-Configured in `docs/admin/config.yml`:
+Configured in `docs/admin/config.yml`. Each category folder under `docs/` maps to a collection entry. For current collections, read `docs/admin/config.yml` directly -- or run:
 
-| Collection | Folder                | Purpose             |
-| :--------- | :----- | :------ |
-| **pages**  | `docs/`         | General pages       |
-| **home**   | `docs/index.md` | Homepage only       |
-| **jsts**   | `docs/JS-TS/`   | JS-TS section       |
-| **ai**     | `docs/AI/`      | AI section index    |
-| **ai_opencode** | `docs/AI/OpenCode/` | OpenCode articles |
-| **ai_hermes**  | `docs/AI/Hermes/`   | Hermes articles   |
-| **ai_llms**    | `docs/AI/LLMs/`     | LLM articles    |
+```bash
+grep -E '^\s+- name:|^\s+  label:|^\s+  folder:' docs/admin/config.yml
+```
 
 Front matter fields: `title`, `icon` (Lucide icon name, e.g., `lucide/rocket`), `body` (markdown).
+
+!!! warning "Adding a new category"
+    When creating a new folder under `docs/`, add a matching collection to `docs/admin/config.yml` so Sveltia CMS can manage its articles.
 
 ## Deployment
 
