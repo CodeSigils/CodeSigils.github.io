@@ -55,8 +55,8 @@ grep -E '^\s+- name:|^\s+  label:|^\s+  folder:' docs/admin/config.yml
 
 Front matter fields: `title`, `icon` (Lucide icon name, e.g., `lucide/rocket`), `body` (markdown).
 
-!!! warning "Adding a new category"
-    When creating a new folder under `docs/`, add a matching collection to `docs/admin/config.yml` so Sveltia CMS can manage its articles.
+> **Warning: Adding a new category**
+> When creating a new folder under `docs/`, add a matching collection to `docs/admin/config.yml` so Sveltia CMS can manage its articles.
 
 ## Deployment
 
