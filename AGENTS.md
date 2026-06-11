@@ -24,6 +24,8 @@ zensical serve
 
 **Important**: Build output goes to `./site/` directory, which is gitignored. Do not edit files in `site/` - edit source in `docs/` instead.
 
+**Current dependency**: zensical 0.0.45 (installed in `.venv/`)
+
 ## Content Structure
 
 ```
