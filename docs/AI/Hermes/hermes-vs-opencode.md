@@ -75,17 +75,15 @@ OpenCode is a **coding-focused AI assistant** optimized for:
 
 ## Summary
 
-Choose **Hermes AI** if you need:
+!!! tip "Choose Hermes AI if you need"
+    - A personal AI assistant with memory across sessions
+    - Multi-platform automation (chat, scheduling, subagents)
+    - Self-improving capabilities that compound over time
 
-- A personal AI assistant with memory across sessions
-- Multi-platform automation (chat, scheduling, subagents)
-- Self-improving capabilities that compound over time
-
-Choose **OpenCode** if you need:
-
-- A dedicated coding assistant with IDE support
-- LSP-aware code editing and navigation
-- Quick integration with GitHub Copilot or ChatGPT accounts
+!!! tip "Choose OpenCode if you need"
+    - A dedicated coding assistant with IDE support
+    - LSP-aware code editing and navigation
+    - Quick integration with GitHub Copilot or ChatGPT accounts
 
 ## Further Reading
 

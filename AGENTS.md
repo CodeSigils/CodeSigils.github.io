@@ -192,24 +192,74 @@ These standards **MUST** be followed for all articles in this repo:
 
 ### Admonitions (Important Notes)
 
+Always use admonitions to highlight important information, warnings, tips, and key takeaways. Every article should use them where relevant — they make content scannable and visually distinct.
+
+Supported admonition types in Zensical:
+
 ```markdown
-!!! tip "Title of the tip"
-Important content here.
+!!! note "Title"
+    Content here.
 
-!!! warning "Title of the warning"
-Warning content here.
+!!! tip "Title"
+    Content here.
 
-!!! note "Title of the note"
-Note content here.
+!!! warning "Title"
+    Content here.
+
+!!! danger "Title"
+    Content here.
+
+!!! success "Title"
+    Content here.
+
+!!! failure "Title"
+    Content here.
+
+!!! question "Title"
+    Content here.
+
+!!! info "Title"
+    Content here.
+
+!!! bug "Title"
+    Content here.
+
+!!! example "Title"
+    Content here.
+
+!!! quote "Title"
+    Content here.
 ```
 
 ### Collapsible Sections
 
+Use collapsible blocks for content that is optional or secondary — setup details, alternative methods, troubleshooting notes:
+
 ```markdown
 ??? tip "Click to expand"
 
-    Hidden content here.
+    Hidden content here.  The blank line and 4-space indent are required.
 ```
+
+### Content Tabs
+
+Use content tabs for multi-language examples, alternative package managers, or platform-specific instructions:
+
+```markdown
+=== "Python"
+
+    ```python
+    print("Hello!")
+    ```
+
+=== "Rust"
+
+    ```rust
+    println!("Hello!");
+    ```
+```
+
+Content tabs work without blank lines between them. Each tab body must be indented 4 spaces.
 
 ### Table Headers
 
