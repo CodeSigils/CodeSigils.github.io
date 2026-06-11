@@ -24,7 +24,7 @@ zensical serve
 
 **Important**: Build output goes to `./site/` directory, which is gitignored. Do not edit files in `site/` - edit source in `docs/` instead.
 
-**Current dependency**: zensical 0.0.45 (pinned in CI + `.venv/` via `>=0.0.45,<0.0.46`)
+**Current dependency**: zensical 0.0.45 (CI pins `==0.0.45`, `.venv/` uses `>=0.0.45,<0.0.46`)
 
 ## Content Structure
 
@@ -79,7 +79,7 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 
 ## Adding New Articles
 
-1. Create new `.md` file in appropriate section folder (`docs/AI/OpenCode/`, `docs/AI/Hermes/`, `docs/AI/LLMs/`, `docs/JS-TS/`, etc.)
+1. Create new `.md` file in the appropriate category folder under `docs/`
 2. Add front matter with title (and icon for category indexes only):
 
    ```markdown
@@ -91,8 +91,8 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 
 3. Commit and push - CI will build automatically
 
-!!! warning "Sveltia CMS"
-   When changing content structure (adding/moving/renaming folders), update `docs/admin/config.yml` to add new collections.
+> **Warning: Changing content structure**
+> When adding, moving, or renaming folders under `docs/`, update `docs/admin/config.yml` to match. See [Content Collections](#content-collections-via-sveltia-cms) above.
 
 ## Content Guidelines
 
@@ -118,11 +118,11 @@ Index pages (section landing pages like `docs/AI/index.md`, `docs/JS-TS/index.md
 | **keywords**    | SEO keywords (comma-separated) | opencode, AI coding agent, terminal  |
 | **icon**        | Lucide icon name           | lucide/terminal                      |
 
-!!! tip "SEO Best Practices"
-    - Always add a unique `description` for each article
-    - Include primary keyword in title and description
-    - Use 3-5 relevant keywords, avoid keyword stuffing
-    - Description appears in search results and social previews
+> **SEO Best Practices**
+> - Always add a unique `description` for each article
+> - Include primary keyword in title and description
+> - Use 3-5 relevant keywords, avoid keyword stuffing
+> - Description appears in search results and social previews
 
 ## Local Development
 
@@ -140,8 +140,8 @@ python oauth-proxy.py       # requires GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET
 zensical build --clean
 ```
 
-!!! tip "Test before push"
-    Always run `zensical build --clean` locally to catch link errors and warnings.
+> **Test before push**
+> Always run `zensical build --clean` locally to catch link errors and warnings.
 
 ## Environment
 
@@ -151,27 +151,7 @@ zensical build --clean
 
 ## OpenCode Settings
 
-This repo uses `open-mem` plugin for persistence.
-
-### Memory Commands
-
-Add important updates to memory:
-
-```bash
-memory.store({ content: "Description of what changed" })
-```
-
-Search memories:
-
-```bash
-memory.find({ query: "search term" })
-```
-
-List memories:
-
-```bash
-memory.list({ scope: "project", limit: 10 })
-```
+This repo uses the `open-mem` plugin for persistence. Memory commands (`.store`, `.find`, `.list`) are available via the OpenCode CLI.
 
 ## Markdown Standards
 
@@ -183,40 +163,10 @@ Always use admonitions to highlight important information, warnings, tips, and k
 
 Supported admonition types in Zensical:
 
-```markdown
-!!! note "Title"
-    Content here.
-
-!!! tip "Title"
-    Content here.
-
-!!! warning "Title"
-    Content here.
-
-!!! danger "Title"
-    Content here.
-
-!!! success "Title"
-    Content here.
-
-!!! failure "Title"
-    Content here.
-
-!!! question "Title"
-    Content here.
-
-!!! info "Title"
-    Content here.
-
-!!! bug "Title"
-    Content here.
-
-!!! example "Title"
-    Content here.
-
-!!! quote "Title"
-    Content here.
-```
+| Type | Usage |
+| :--- | :---- |
+| note, tip, warning, danger, success, failure | `!!! type "Title"` |
+| question, info, bug, example, quote | Followed by indented content body |
 
 ### Collapsible Sections
 
@@ -283,49 +233,26 @@ These standards **MUST** be followed for all articles in this repo:
 
 ### Links and References
 
-- **Double-check all links** before publishing
-- Verify external URLs are accessible and point to the correct page
-- Check that anchor links within the article work correctly
-- Ensure documentation links point to current versions (not outdated)
+- **Double-check all links** before publishing -- verify each URL returns 200, anchors work, and docs point to current versions.
+- **Cross-reference official sources**: check the documentation site, GitHub repo, and install guide for each tool mentioned.
 
 ### Command Verification
 
-When documenting commands for any technology:
+When documenting commands:
 
-1. **Verify against official sources**:
-   - Check the official documentation site
-   - Check the official GitHub repository
-   - Check official installation guides
-
-2. **Verify command syntax**:
-   - Ensure correct flags and options
-   - Check for version-specific differences
-   - Confirm the command exists (not deprecated)
-
-3. **Search for known issues**:
-   - Look for common mistakes users might encounter
-   - Note any prerequisites or dependencies
-
-4. **Cross-reference multiple times**:
-   - If in doubt, search the official docs again
-   - Don't rely on a single source for critical commands
-
-5. **Article information validation**:
-   - **Check link validity** - Verify each URL returns a valid HTTP response
-   - **Investigate content accuracy** - Ensure the linked content matches the article claims
-   - **Check for broken links** - Identify 404 errors or domain changes
-   - **Validate references** - Confirm citations are from reputable sources
-
-### Example Verification Workflow
+1. **Verify against official sources** (docs site, GitHub repo, install guide)
+2. **Verify syntax**: flags, version-specific differences, deprecation status
+3. **Search for known pitfalls** (prerequisites, common mistakes)
+4. **Cross-reference**: if in doubt, check official docs again -- don't rely on a single source
 
 ```bash
 # Before adding a command like:
 curl -fsSL https://example.com/install | sh
 
-# Verify by:
-# 1. Checking official docs at https://example.com/docs
-# 2. Checking the install script URL is correct
-# 3. Confirming the command works on your test environment
+# Verify:
+# 1. Official docs at https://example.com/docs
+# 2. Install script URL is correct
+# 3. Command works in your test environment
 ```
 
 ### Responsive Images
