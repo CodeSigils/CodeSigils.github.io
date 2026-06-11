@@ -76,9 +76,10 @@ Front matter fields: `title`, `icon` (Lucide icon name, e.g., `lucide/rocket`), 
 
 GitHub Actions workflow in `.github/workflows/docs.yml`:
 
-1. Trigger: Push to `master` or `main`
-2. Steps: `pip install zensical` → `zensical build --clean` → Deploy to GitHub Pages
-3. No manual build step needed - changes pushed to `docs/` auto-deploy
+1. Trigger: Push to `master` or `main` with changes to `docs/**`, `zensical.toml`, or `.github/workflows/docs.yml`
+2. Non-site files (README.md, AGENTS.md, LICENSE, .gitignore, etc.) do **not** trigger a build
+3. Steps: `pip install zensical` → `zensical build --clean` → Deploy to GitHub Pages
+4. No manual build step needed - changes pushed to `docs/` auto-deploy
 
 ## Zensical Configuration
 
