@@ -51,8 +51,8 @@ See [disclaimer docs page](./docs/disclaimer.md) for full details.
 ## Local Development
 
 ```bash
-# Install dependencies
-pip install zensical
+# Install dependencies (pin to version used by this project)
+pip install zensical==0.0.45
 
 # Build the site
 zensical build --clean

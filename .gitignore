@@ -1,6 +1,9 @@
 # Build output
 site/
 
+# Build cache
+.cache/
+
 # Python virtual environment
 .venv/
 
