@@ -67,16 +67,6 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 3. Steps: `pip install zensical` → `zensical build --clean` → Deploy to GitHub Pages
 4. No manual build step needed - changes pushed to `docs/` auto-deploy
 
-## Zensical Configuration
-
-`zensical.toml` contains:
-
-- Site metadata (name, URL, author, copyright)
-- Theme settings (Modern variant, dark/light mode toggle)
-- 60+ feature toggles enabled (instant navigation, search, code blocks, etc.)
-- Font: JetBrains Mono for code
-- Language: English
-
 ## Adding New Articles
 
 1. Create new `.md` file in the appropriate category folder under `docs/`
@@ -98,10 +88,7 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 
 ### No Local Article Links in Index Pages
 
-Index pages (section landing pages like `docs/AI/index.md`, `docs/JS-TS/index.md`) **must not** contain links to local articles. This prevents duplicate listings in the sidebar navigation.
-
-- **Don't**: List articles manually in index pages
-- **Do**: Let the navigation handle article links via subcategory folders
+Index pages (section landing pages like `docs/AI/index.md`, `docs/JS-TS/index.md`) **must not** contain links to local articles — this prevents duplicate listings in the sidebar navigation. Let the navigation handle article links.
 
 ## Images
 
@@ -194,22 +181,6 @@ Use content tabs for multi-language examples, alternative package managers, or p
 
 Content tabs work without blank lines between them. Each tab body must be indented 4 spaces.
 
-### Table Headers
-
-Always use aligned table headers:
-
-```markdown
-| Header 1 | Header 2 | Header 3 |
-| :------- | :------- | :------- |
-| Data     | Data     | Data     |
-```
-
-**DO NOT use:**
-
-```markdown
-|---|---|---| # WRONG
-```
-
 ### Icons in Front Matter
 
 Use Lucide icons:
@@ -225,82 +196,5 @@ Common icons: `lucide/terminal`, `lucide/box`, `lucide/fish`, `lucide/cpu`, `luc
 
 ## Verification Standards
 
-These standards **MUST** be followed for all articles in this repo:
-
-### Links and References
-
-- **Double-check all links** before publishing -- verify each URL returns 200, anchors work, and docs point to current versions.
-- **Cross-reference official sources**: check the documentation site, GitHub repo, and install guide for each tool mentioned.
-
-### Command Verification
-
-When documenting commands:
-
-1. **Verify against official sources** (docs site, GitHub repo, install guide)
-2. **Verify syntax**: flags, version-specific differences, deprecation status
-3. **Search for known pitfalls** (prerequisites, common mistakes)
-4. **Cross-reference**: if in doubt, check official docs again -- don't rely on a single source
-
-```bash
-# Before adding a command like:
-curl -fsSL https://example.com/install | sh
-
-# Verify:
-# 1. Official docs at https://example.com/docs
-# 2. Install script URL is correct
-# 3. Command works in your test environment
-```
-
-### Responsive Images
-
-Use div with CSS class for responsive images (consistent with YouTube pattern):
-
-```html
-<div class="image-wrapper">
-  <img src="/assets/images/image.webp"
-       alt="Alt text" />
-</div>
-```
-
-CSS classes available:
-
-| Class | Purpose |
-| :---- | :------ |
-| `.image-wrapper` | Full-width responsive image |
-| `.logo-wrapper` | Small logo/icon |
-
-Image sources live in `docs/assets/images/` and deploy to `/assets/images/`. WebP preferred for screenshots (smaller files). PNG for logos/icons. JPEG for photos.
-
-### Responsive Videos
-
-Always use the YouTube wrapper pattern to maintain 16:9 aspect ratio on all screens:
-
-```markdown
-<div class="youtube-video-wrapper">
-  <iframe src="https://www.youtube.com/embed/VIDEO_ID"
-          allowfullscreen>
-  </iframe>
-</div>
-```
-
-**Replace `VIDEO_ID`** with the actual YouTube video ID (e.g., `xSqnWcLFd6Y`).
-
-### Inline HTML
-
-Inline HTML is **allowed and encouraged** for:
-
-- Embedded videos (YouTube iframes)
-- Custom styling not possible with markdown
-- Responsive images with CSS wrappers
-
-**Images**: Use standard markdown with `{ width= }` — do **not** use inline HTML for images.
-
-```html
-<!-- Responsive image -->
-<div class="image-wrapper">
-  <img src="/assets/images/screenshot.webp"
-       alt="Description" />
-</div>
-```
-
+Use the same `image-wrapper` / `youtube-video-wrapper` CSS wrappers from existing articles for images and videos.
 MD033 (no inline HTML) is **disabled** in `.markdownlint.json` for this repo.
