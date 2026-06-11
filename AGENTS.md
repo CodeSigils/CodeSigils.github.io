@@ -146,6 +146,9 @@ source .venv/bin/activate
 # Run local server with hot reload
 zensical serve
 
+# OAuth proxy for Sveltia CMS admin authentication
+python oauth-proxy.py       # requires GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET
+
 # Build and verify before pushing
 zensical build --clean
 ```

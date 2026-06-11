@@ -21,9 +21,9 @@ This site is built with [Zensical](https://zensical.org) - a modern Python stati
 
 ### The Philosophy
 
-Zensical is the **evolution of Material for MkDocs**. The same team that brought you the popular MkDocs theme now built their own SSG from the ground up in Rust, focusing on:
+Zensical is the **evolution of Material for MkDocs**. The same team that brought you the popular MkDocs theme now built their own SSG with a Rust-based search indexer, focusing on:
 
-- **Performance**: Built in Rust - blazing fast builds
+- **Performance**: Blazing fast builds
 - **Scale**: Handles 10,000+ articles without breaking a sweat
 - **Batteries Included**: 60+ features enabled out of the box
 - **Compatibility**: Same Markdown syntax, same workflow
