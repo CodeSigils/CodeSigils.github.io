@@ -108,6 +108,12 @@ flow, transitions, examples, pacing, and a clear beginning, middle, and ending.
 Do not invent personal experience or opinions. If the author’s perspective is
 needed but missing, leave an explicit author note for review.
 
+For a tool or project evaluation, make the reader’s decision explicit. Put a
+measured recommendation near that decision, explain the trade-off, and give a
+safe next step. Do not bury the article’s judgment under a feature catalogue.
+Use a concrete situation or observation to carry the reader into the technical
+details; vary the structure when the article’s natural form calls for it.
+
 Use creative technical writing where it helps: open with a real reader problem,
 choose a concrete analogy or example, vary the rhythm, and leave the reader
 with a memorable practical insight. Creativity changes presentation, not the
@@ -133,6 +139,12 @@ use the repository guidelines directly. External documentation-style,
 technical-blog-writing, AI-writing-review, or SEO skills may inform a review,
 but they are references—not automatic dependencies—and none may override the
 author’s voice or the site’s evidence policy.
+
+Before adding a section, search the repository for an existing explanation,
+link, admonition, or article covering the same concern. Consolidate or
+cross-link where appropriate instead of creating parallel guidance that can
+drift. For volatile topics, record the source and review date in the article
+or its verification notes.
 
 Accumulate small article suggestions instead of creating a commit for each one.
 Group related observations until they justify a coherent change in scope,
