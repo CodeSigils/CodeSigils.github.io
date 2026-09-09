@@ -231,7 +231,12 @@ Use collapsible blocks for content that is optional or secondary — setup detai
 
 ### Content Tabs
 
-Use content tabs for multi-language examples, alternative package managers, or platform-specific instructions:
+Use content tabs for multi-language examples, alternative package managers, or
+platform-specific instructions. They are especially useful for keeping
+equivalent npm, pnpm, Yarn, and Python commands compact. When alternatives are
+genuinely parallel, check for a tabbed presentation before creating repeated
+subsections. Do not hide important prerequisites, warnings, or differences in a
+tab without explaining them in the surrounding text:
 
 ```markdown
 === "Python"
