@@ -86,18 +86,33 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 
 ## Content Guidelines
 
-These pages are authored technical articles, not search-result summaries. A
-useful page should explain the author’s recommendation and rationale, not only
-repeat vendor documentation or collect links. Lead with a recognizable reader
-problem, explain why before how, include a concrete scenario or experiment when
-appropriate, and close with a practical next step. Research and citations
-support the article’s judgment; they do not replace it. Community advice must
-be attributed and separated from official facts or locally reproduced practice.
+These pages are authored Code Sigils blog articles, not search-result summaries
+or a single uniform documentation template. A useful page should explain the
+author’s recommendation, interpretation, or observation—not only repeat vendor
+documentation or collect links. Choose the article’s natural form: guide, field
+note, explainer, comparison, experiment report, essay, or visual note. Variation
+is expected; repeated headings and identical openings are a quality problem.
+
+Lead with a recognizable reader problem, question, observation, or tension.
+Explain why before how when context is needed, include a concrete scenario or
+experiment where appropriate, and close with a practical takeaway or reflection.
+Research and citations support the article’s judgment; they do not replace it.
+Community advice must be attributed and separated from official facts or locally
+reproduced practice.
+
+For the editorial rationale and flexible article forms, read
+`/home/sand/projects/digital-basement/docs/blog-editorial-charter.md`.
 
 After factual verification, perform a developmental editing pass for human
 flow, transitions, examples, pacing, and a clear beginning, middle, and ending.
 Do not invent personal experience or opinions. If the author’s perspective is
 needed but missing, leave an explicit author note for review.
+
+Use creative technical writing where it helps: open with a real reader problem,
+choose a concrete analogy or example, vary the rhythm, and leave the reader
+with a memorable practical insight. Creativity changes presentation, not the
+facts. Never invent anecdotes, outcomes, sources, or certainty to make prose
+more engaging.
 
 SEO is supporting infrastructure, not the purpose of an article. Use accurate
 titles, descriptions, headings, internal links, and alt text to help readers
