@@ -83,11 +83,11 @@ not replacements for understanding Codex itself.
 
 For this project, the most interesting reasons to evaluate it are practical:
 
-- learn how a packaged orchestration layer composes agents and rules;
-- compare its delegation and continuation patterns with native Codex
-  collaboration;
-- test whether it helps with skill authoring or article review; and
-- extract useful patterns for future `AGENTS.md` files and project skills.
+- **Learn how a packaged orchestration layer composes agents and rules.**
+- **Compare its delegation and continuation patterns with native Codex
+  collaboration.**
+- **Test whether it helps with skill authoring or article review.**
+- **Extract useful patterns for future `AGENTS.md` files and project skills.**
 
 ### What you must weigh
 
