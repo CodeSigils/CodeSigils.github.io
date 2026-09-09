@@ -134,6 +134,10 @@ technical-blog-writing, AI-writing-review, or SEO skills may inform a review,
 but they are references—not automatic dependencies—and none may override the
 author’s voice or the site’s evidence policy.
 
+Accumulate small article suggestions instead of creating a commit for each one.
+Group related observations until they justify a coherent change in scope,
+structure, voice, or factual accuracy, then edit and publish one logical batch.
+
 ### No Local Article Links in Index Pages
 
 Index pages (section landing pages like `docs/AI/index.md`, `docs/JS-TS/index.md`) **must not** contain links to local articles — this prevents duplicate listings in the sidebar navigation. Let the navigation handle article links.
