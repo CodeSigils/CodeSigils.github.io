@@ -1,28 +1,88 @@
-# Build output
+# Build output and generated artifacts
 site/
+build/
+dist/
+artifacts/
 
-# Build cache
+# Build/dependency caches
 .cache/
+**/.cache/
+.uv-cache/
+**/.uv-cache/
+node_modules/
+.pyright/
+.pytype/
+.pyre/
+.ruff_cache/
+**/.ruff_cache/
+.pytest_cache/
+**/.pytest_cache/
+.mypy_cache/
+**/.mypy_cache/
+__pycache__/
+**/__pycache__/
+*.py[codz]
+*$py.class
+.tox/
+.nox/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
 
 # Python virtual environment
 .venv/
+**/.venv/
+venv/
+env/
+ENV/
 
 # OpenCode memory
 .open-mem/
 
-# Environment secrets
-.env
+# Agent runtime data (local-only)
+.agents/
+.hermes/
+.claude/
+.cursor/
+.gemini/
+.codex/
+.opencode/
+.omo/
+
+# Environment and package-manager secrets
+.env*
+!.env.example
+!.env.sample
+!.env.template
+.envrc
+.direnv/
+.npmrc
+.pypirc
 
 # IDE
 .idea/
 .vscode/
 
+# Temporary/editor files
+tmp/
+.tmp/
+*.swp
+*.swo
+*~
+
 # OS
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/
+Icon?
 Thumbs.db
-
-# Linting config in build
-site/.markdownlint.json
+ehthumbs.db
+[Dd]esktop.ini
 
 # open-mem: Auto-generated folder context files.
 # Uncomment to exclude from version control (recommended for large projects):
