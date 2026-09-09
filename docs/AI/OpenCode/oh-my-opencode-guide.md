@@ -22,10 +22,11 @@ system harder to explain when something goes wrong. My recommendation is to
 earn that complexity gradually: first learn the host, then add only the
 capability you can evaluate.
 
-Oh My OpenAgent (formerly associated with the Oh My OpenCode name) is a
-community project that adds opinionated agents, rules, hooks, skills, and MCP
-integrations around an agent host. It is not part of the OpenCode or OpenAI
-core distributions. Read the project’s [current installation
+[Oh My OpenAgent](https://github.com/code-yeongyu/oh-my-openagent) (formerly
+associated with the Oh My OpenCode name) is a community project that adds
+opinionated agents, rules, hooks, skills, and MCP integrations around an agent
+host. It is not part of the OpenCode or OpenAI core distributions. Read the
+project’s [current installation
 guide](https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md)
 before running an installer: names, editions, defaults, and supported hosts are
 under active development.
