@@ -1,6 +1,6 @@
 ---
 title: OpenCode Guide
-description: Complete guide to OpenCode - the open source AI coding agent for terminal-based development with multi-model support, MCP integration, and slash commands.
+description: A practical, current-minded guide to OpenCode for terminal-based development, model providers, MCP, plugins, and safe experimentation.
 keywords:
   - opencode
   - AI coding agent
@@ -17,7 +17,12 @@ keywords:
        alt="OpenCode Screenshot" />
 </div>
 
-The open source AI coding agent for terminal, desktop, and IDE.
+OpenCode is the kind of tool that becomes useful before it becomes
+interesting. Start with one repository and one repeatable task—understanding a
+module, fixing a failing test, or preparing a small refactor—then add providers,
+MCP servers, and plugins only when you can explain the problem each one solves.
+This guide covers the main surfaces and the decisions that matter when setting
+it up.
 
 ## Table of Contents
 
@@ -40,7 +45,9 @@ The open source AI coding agent for terminal, desktop, and IDE.
 
 ## What is OpenCode?
 
-OpenCode is an **open source AI coding agent** that helps developers write, debug, refactor, and understand code. It operates as a terminal-native interface with optional desktop app and IDE extensions.
+OpenCode is an **open-source AI coding agent** that helps developers write,
+debug, refactor, and understand code. It is primarily terminal-oriented, with
+additional desktop and IDE surfaces that vary by release.
 
 <div class="youtube-video-wrapper">
   <iframe src="https://www.youtube.com/embed/ul7zuyATDqE" allowfullscreen></iframe>
@@ -52,24 +59,30 @@ OpenCode is an actively developed open-source project. For current releases,
 supported features, and licensing details, use its [official
 documentation](https://dev.opencode.ai/docs) and [repository](https://github.com/anomalyco/opencode).
 
-### Core Philosophy
+### A useful mental model
 
-- **100% Open Source** — Complete transparency with MIT license
-- **Provider Agnostic** — Works with Claude, OpenAI, Google, or local models
-- **Privacy First** — No code or context stored on servers
-- **Local-First** — Run locally with optional cloud services
+OpenCode is a local client that coordinates a model provider, your repository,
+and optional tools. The client may run locally while the selected provider
+processes prompts or code remotely. Check the current provider terms and the
+project's privacy documentation rather than assuming that “local-first” means
+that no data leaves your machine.
+
+!!! tip "Establish a baseline"
+
+    Run OpenCode once with the default configuration, ask it to inspect a small
+    task, and review the proposed plan before adding plugins or external tools.
 
 ---
 
 ## Official Links
 
-- **Website**: https://opencode.ai
-- **GitHub**: https://github.com/anomalyco/opencode
-- **Documentation**: https://opencode.ai/docs
-- **Zen (Curated Models)**: https://opencode.ai/zen
-- **Enterprise**: https://opencode.ai/enterprise
-- **Discord**: https://opencode.ai/discord
-- **Desktop App**: https://opencode.ai/download
+- [Website](https://opencode.ai)
+- [GitHub repository](https://github.com/anomalyco/opencode)
+- [Documentation](https://dev.opencode.ai/docs/)
+- [Zen (curated models)](https://opencode.ai/zen)
+- [Enterprise](https://opencode.ai/enterprise)
+- [Discord community](https://opencode.ai/discord)
+- [Desktop app](https://opencode.ai/download)
 
 ---
 
@@ -311,7 +324,7 @@ Run parallel agents on the same project:
 
 ### 7. Model Context Protocol (MCP)
 
-Connect to 1,200+ MCP servers for extended capabilities:
+Connect to MCP servers for extended capabilities:
 
 - Database access
 - External tools
@@ -330,7 +343,7 @@ Auto-reload and respond to file changes:
 
 ## Model Support
 
-### 75+ LLM Providers
+### Providers
 
 OpenCode connects to virtually any LLM via Models.dev:
 
@@ -345,7 +358,9 @@ OpenCode connects to virtually any LLM via Models.dev:
 ### Hugging Face Integration
 
 OpenCode supports **Hugging Face Inference Providers**, giving you access to
-open models through the providers currently listed by Hugging Face.
+open models through the providers currently listed by Hugging Face. Treat the
+provider's data handling, rate limits, and model availability as separate
+decisions from installing OpenCode.
 
 #### Quick Setup
 
@@ -396,19 +411,17 @@ For organization billing:
 **Resources:**
 
 - [OpenCode + Hugging Face](https://huggingface.co/docs/inference-providers/main/integrations/opencode)
-- [OpenCode Providers Docs](https://opencode.ai/docs/providers/)
+- [OpenCode Providers Docs](https://dev.opencode.ai/docs/providers/)
 - [HF Inference Providers](https://huggingface.co/inference-providers)
 
-### Recommended Models
+### Choosing a model
 
-| Model | Best For |
-| :---- | :------- |
-| GPT-5.2 | General coding, speed |
-| GPT-5.1 Codex | Code-heavy tasks |
-| Claude Opus 4.5 | Complex reasoning |
-| Claude Sonnet 4.5 | Balanced performance |
-| Gemini 3 Pro | Long context tasks |
-| Big Pickle | Free tier |
+Model names, availability, and quality change quickly. Instead of treating a
+static list as a recommendation, choose a model against the task: fast edits,
+long-context exploration, careful reasoning, or local/offline work. Compare the
+current options in [Models.dev](https://models.dev/) and the [OpenCode provider
+documentation](https://dev.opencode.ai/docs/providers/), then record the model
+and date when a project depends on a particular behavior.
 
 ### OpenCode Zen
 
@@ -419,11 +432,8 @@ A curated list of tested and verified models:
 - Provider billing and usage terms vary
 - Team workspace management
 
-**Free Models:**
-
-- GLM 4.7 Free
-- Big Pickle Free
-- MiniMax M2.1 Free
+Model availability and free tiers are provider-controlled and should be
+verified immediately before use.
 
 ---
 
@@ -452,7 +462,7 @@ OpenCode's plugin system allows hooking into various events and customizing beha
 
 #### Plugin Events
 
-OpenCode supports 20+ events for plugins:
+OpenCode exposes lifecycle events for plugins, including:
 
 | Category | Events |
 | :------- | :----- |
@@ -518,7 +528,7 @@ Orchestration layer with specialized agents, hooks, MCPs, and workflow automatio
 **Features:**
 
 - Planner-Sisyphus agent
-- 20+ automation hooks
+- Automation hooks
 - Pre-configured Context7 and grep.app MCPs
 - LSP defaults
 
@@ -526,15 +536,15 @@ Orchestration layer with specialized agents, hooks, MCPs, and workflow automatio
 
 **GitHub**: https://github.com/zaxbysauce/opencode-swarm
 
-Architect-centric agentic swarm with 11 specialized agents.
+Architect-centric agentic swarm with specialized agents.
 
 **Features:**
 
 - Hub-and-spoke orchestration
 - Gated pipeline (code needs reviewer + test engineer approval)
-- 11 specialized agents
+- Specialized agents
 - SAST and secrets scanning
-- 11 language support
+- Multi-language support
 - Free tier available
 
 ### 3. opencode-prompts
@@ -582,7 +592,7 @@ Complete Claude Code compatibility for OpenCode.
 
 **Features:**
 
-- 12 specialized agents
+- Specialized agents
 - 24 commands
 - 16 skills
 - Hook system parity
@@ -594,7 +604,7 @@ Complete Claude Code compatibility for OpenCode.
 | `opencode-helicone-session` | Session logging and analytics |
 | `opencode-wakatime` | Automatic time tracking |
 
-### 8. MCP Servers (1,200+ Available)
+### 8. MCP Servers
 
 | Category | Popular Servers |
 | :------- | :-------------- |
@@ -736,12 +746,14 @@ Connect to ACP-compatible editors for deep IDE integration.
 
 ## Enterprise Features
 
-### Privacy-First Architecture
+### Data and deployment questions
 
-- No code or context stored on OpenCode servers
-- Local-first operation
-- Self-hosting options
-- BYOK (Bring Your Own Key) model
+OpenCode can run locally and supports bring-your-own-key configurations, but
+privacy depends on the model provider, enabled integrations, and deployment
+mode. Review the current [privacy and security
+documentation](https://dev.opencode.ai/docs/) before sending sensitive code or
+connecting external systems. Do not promise that data never leaves your
+environment unless your complete setup actually enforces that boundary.
 
 ### Enterprise Deployment
 
@@ -749,7 +761,7 @@ Connect to ACP-compatible editors for deep IDE integration.
 | :------ | :---------- |
 | **Self-Hosted** | Run entirely on your infrastructure |
 | **Custom Providers** | Use your own LLM infrastructure |
-| **Privacy Controls** | Data never leaves your environment |
+| **Privacy Controls** | Depends on provider, configuration, and deployment |
 | **SSO Support** | Enterprise authentication |
 
 ### Zen for Teams
@@ -945,7 +957,7 @@ Best for: Project setup, large refactors, debugging, testing, code migration.
 | Feature | **OpenCode** | **Claude Code** |
 | :------ | :----------- | :-------------- |
 | **License** | MIT | Proprietary |
-| **Plugin System** | 20+ events | 3 phases |
+| **Plugin System** | Event-driven plugins | 3 phases |
 | **Interface** | TUI, Desktop, IDE | CLI only |
 
 ### OpenCode vs Cursor
@@ -1053,11 +1065,11 @@ rm -rf ~/.cache/opencode
 
 ### Official Documentation
 
-- [OpenCode Docs](https://opencode.ai/docs)
-- [Configuration Guide](https://opencode.ai/docs/config/)
-- [Plugins Guide](https://opencode.ai/docs/plugins/)
-- [MCP Servers](https://opencode.ai/docs/mcp-servers/)
-- [LSP Configuration](https://opencode.ai/docs/lsp/)
+- [OpenCode Docs](https://dev.opencode.ai/docs/)
+- [Configuration Guide](https://dev.opencode.ai/docs/config/)
+- [Plugins Guide](https://dev.opencode.ai/docs/plugins/)
+- [MCP Servers](https://dev.opencode.ai/docs/mcp-servers/)
+- [LSP Configuration](https://dev.opencode.ai/docs/lsp/)
 
 ### Model Resources
 
@@ -1072,15 +1084,15 @@ rm -rf ~/.cache/opencode
 
 ### Plugin Resources
 
-- [Official Plugins](https://opencode.ai/docs/plugins/)
-- [Plugin Ecosystem](https://opencode.ai/docs/ecosystem/)
-- [Oh My OpenCode](https://ohmyopencode.com)
+- [Official Plugins](https://dev.opencode.ai/docs/plugins/)
+- [Plugin Ecosystem](https://dev.opencode.ai/docs/ecosystem/)
+- [Oh My OpenAgent](https://github.com/code-yeongyu/oh-my-openagent)
 - [OpenCode Swarm](https://github.com/zaxbysauce/opencode-swarm)
 - [Awesome MCP Servers](https://github.com/wong2/awesome-mcp-servers)
 
 ### Comparisons
 
-- [OpenCode vs Claude Code](https://opencode.ai/docs/compare/)
+- [OpenCode vs Claude Code](https://dev.opencode.ai/docs/compare/)
 - [OpenCode vs Cursor](https://opencode.ai/compare/cursor)
 
 ### Research & Reviews
@@ -1090,4 +1102,6 @@ rm -rf ~/.cache/opencode
 
 ---
 
-_Guide last updated: April 2026_
+_Guide last reviewed: September 2026. Installation commands, model names,
+provider availability, and plugin behavior are release-dependent; verify them
+against the linked upstream documentation before use._
