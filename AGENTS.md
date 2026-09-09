@@ -99,6 +99,26 @@ flow, transitions, examples, pacing, and a clear beginning, middle, and ending.
 Do not invent personal experience or opinions. If the author’s perspective is
 needed but missing, leave an explicit author note for review.
 
+SEO is supporting infrastructure, not the purpose of an article. Use accurate
+titles, descriptions, headings, internal links, and alt text to help readers
+find and understand a page. Never add keywords, headings, FAQs, statistics, or
+claims only to satisfy search algorithms. Preserve nuance and the author’s
+recommendation even when search-oriented phrasing suggests a simpler “best”
+answer.
+
+### Agent and skill use
+
+Agents editing articles should behave as bounded research assistants and
+developmental editors. They may inspect current sources, challenge claims,
+improve structure and flow, and suggest changes. The maintainer supplies
+personal context and judgment and approves substantive edits before publishing.
+
+Prefer the project’s eventual article-review skill when it exists. Until then,
+use the repository guidelines directly. External documentation-style,
+technical-blog-writing, AI-writing-review, or SEO skills may inform a review,
+but they are references—not automatic dependencies—and none may override the
+author’s voice or the site’s evidence policy.
+
 ### No Local Article Links in Index Pages
 
 Index pages (section landing pages like `docs/AI/index.md`, `docs/JS-TS/index.md`) **must not** contain links to local articles — this prevents duplicate listings in the sidebar navigation. Let the navigation handle article links.
