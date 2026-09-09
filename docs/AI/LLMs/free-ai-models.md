@@ -23,6 +23,14 @@ This guide’s recommendation is simple: use free access for experiments, learn
 how to measure it, and avoid making a temporary offer part of a critical
 workflow.
 
+!!! tip "Let OpenCode help with the setup"
+
+    After you research the current free-model options, ask OpenCode to help
+    configure its model settings. Give it the sources and the constraints you
+    care about, ask it to explain the proposed changes first, and review the
+    diff before accepting it. You do not have to do every configuration step by
+    hand—that is one of the fun parts of learning to work with an agent.
+
 ## Free AI Models Overview
 
 “Free” can mean a temporary promotion, an account-level allowance, a public
