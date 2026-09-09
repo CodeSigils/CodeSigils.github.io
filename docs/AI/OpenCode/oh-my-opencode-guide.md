@@ -47,6 +47,37 @@ documentation warns that a large tool catalog can consume significant context.
 The useful test is not whether the plugin looks impressive in a README. It is
 whether a task that matters to you becomes easier to plan, review, and repeat.
 
+### What you might gain
+
+The Codex CLI Light Edition is intended to bring a portable subset of the
+project’s workflow into Codex. Depending on the release, that can include
+reusable rules, specialist agent configurations, language-server support,
+structural code search, comment checks, durable continuation loops, and
+optional team-oriented components. These are conveniences for repeated work,
+not replacements for understanding Codex itself.
+
+For this project, the most interesting reasons to evaluate it are practical:
+
+- learn how a packaged orchestration layer composes agents and rules;
+- compare its delegation and continuation patterns with native Codex
+  collaboration;
+- test whether it helps with skill authoring or article review; and
+- extract useful patterns for future `AGENTS.md` files and project skills.
+
+### What you must weigh
+
+The same layer can make a workflow harder to explain. Hooks and agents may hide
+why a file changed, MCP tools add context and external access, and configuration
+can drift as the host and extension evolve. The upstream documentation also
+describes an autonomous mode with broad permissions; that is not a sensible
+default for a first evaluation.
+
+I would evaluate it without autonomous permissions in a disposable repository,
+using one bounded task and a short before-and-after record. Keep it only if it
+improves planning, review, or repeatability enough to justify the added
+complexity. If native Codex already handles the task clearly, the extension is
+not necessary.
+
 !!! warning "Treat it as privileged software"
 
     An orchestration plugin can run commands, edit files, call external MCP
