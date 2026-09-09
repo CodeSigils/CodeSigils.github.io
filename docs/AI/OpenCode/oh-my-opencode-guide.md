@@ -47,6 +47,31 @@ documentation warns that a large tool catalog can consume significant context.
 The useful test is not whether the plugin looks impressive in a README. It is
 whether a task that matters to you becomes easier to plan, review, and repeat.
 
+### Explore the official Codex ecosystem first
+
+Before adding a community layer, I recommend spending a little time with the
+native Codex documentation. It gives you a baseline for what Codex already
+provides, which makes the extension's value—and its extra moving parts—much
+easier to judge:
+
+- [Codex overview](https://developers.openai.com/codex/) — the main map of
+  Codex surfaces and workflows.
+- [Codex CLI](https://developers.openai.com/codex/cli/) — the terminal workflow
+  and its command reference.
+- [Codex IDE extension](https://developers.openai.com/codex/ide/) — the editor
+  integration, when you prefer to work inside an IDE.
+- [Build skills](https://developers.openai.com/codex/skills/) — how reusable
+  task-specific instructions are packaged and applied.
+- [MCP for Codex](https://developers.openai.com/codex/mcp/) — connecting Codex
+  to external tools and data through the Model Context Protocol.
+- [Configuration reference](https://developers.openai.com/codex/config-reference/)
+  — the settings and policy surface to review before changing defaults.
+
+!!! tip "Establish a baseline"
+
+    Try one small task with native Codex, note what you still need, and only
+    then evaluate whether the extension solves that specific gap.
+
 ### What you might gain
 
 The Codex CLI Light Edition is intended to bring a portable subset of the
