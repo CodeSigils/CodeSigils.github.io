@@ -1,6 +1,6 @@
 ---
 title: BrowserOS + Hermes Agent Integration Guide
-description: Complete guide to integrating BrowserOS (agentic browser) with Hermes Agent for autonomous web automation, research, data extraction, and monitoring.
+description: Practical guide to connecting BrowserOS to Hermes Agent through MCP for browser automation, research, data extraction, and monitoring.
 keywords:
   - browseros
   - hermes
@@ -17,33 +17,44 @@ keywords:
        alt="BrowserOS + Hermes Agent" />
 </div>
 
-BrowserOS is an agentic browser — a Chrome-based browser with a built-in MCP (Model Context Protocol) server that exposes 66+ browser automation tools to AI agents. When paired with Hermes Agent, you get autonomous web control through natural language.
+BrowserOS is a Chromium-based browser with a built-in Model Context Protocol
+(MCP) server. When paired with Hermes Agent, it lets Hermes use browser tools
+through a local HTTP connection. The available tools and connection details
+can change between BrowserOS releases, so treat the browser's MCP settings as
+the source of truth.
+
+!!! warning "Browser access is real access"
+
+    A connected agent can see pages available to the browser profile and may be
+    able to click, type, upload, download, or submit forms. Use a separate
+    browser profile for experiments, avoid sensitive accounts, and review each
+    action before allowing a write or external side effect.
 
 ## Introduction
 
 ### What is BrowserOS?
 
-BrowserOS is an AI-native browser built on Chromium (version 146) that provides:
+BrowserOS provides browser automation capabilities such as:
 
 | Feature             | Description                                                              |
 | :------------------ | :----------------------------------------------------------------------- |
-| **MCP Server**      | Built-in server on `localhost:9201` exposing all tools via JSON-RPC      |
+| **MCP Server**      | Built-in server whose URL is shown in the BrowserOS MCP settings          |
 | **Tab Management**  | Group, organize, move tabs with full metadata                            |
 | **Hidden Tabs**     | Run background automation without disturbing user's view                 |
 | **Bookmarks API**   | Full CRUD on browser bookmarks                                           |
 | **History API**     | Search and manage browsing history                                       |
 | **Tab Groups**      | Organize tabs into colored groups                                        |
-| **Built-in Skills** | 12 pre-built workflows (deep-research, extract-data, monitor-page, etc.) |
+| **Built-in Skills** | Optional workflows, depending on the installed release                 |
 | **Screenshots**     | Full-page and element-level screenshots                                  |
 | **PDF Export**      | Save any page as PDF                                                     |
-| **Connect Apps**    | Integration with 40+ services (Gmail, GitHub, Slack, etc.)               |
+| **Connect Apps**    | Optional connections to external services                                |
 
 !!! tip "Why Use BrowserOS with Hermes?"
 
     - **Natural language control** — Tell Hermes what to do in the browser, and it executes autonomously
-    - **Persistent browser state** — Browser tabs, history, bookmarks, and sessions persist across conversations
-    - **MCP-first design** — Tools are exposed standards-compliant for any MCP client
-    - **Local privacy** — All browsing stays on your machine; no external proxies
+    - **Persistent browser state** — Browser tabs, history, bookmarks, and sessions can persist in the browser profile
+    - **MCP connection** — Hermes can discover the tools exposed by the configured server
+    - **Local boundary** — The connection is local, but pages and connected services may still contain sensitive data
 
 ### When to Use BrowserOS vs Hermes Browser Tools
 
@@ -60,39 +71,32 @@ BrowserOS is an AI-native browser built on Chromium (version 146) that provides:
 
 ### Prerequisites
 
-1. **BrowserOS installed** — AppImage in `~/Downloads/browseros` or extracted to `~/.local/bin/browseros`
-2. **Hermes Agent** with MCP support — Python venv with `mcp` package
-3. **Config updated** — MCP server added to `~/.hermes/config.yaml`
+1. **BrowserOS installed and running**
+2. **Hermes Agent installed** — MCP support is included in the standard Hermes install
+3. **A dedicated browser profile** for agent experiments
 
 ### Quick Start
 
-1. Browse to the BrowserOS AppImage and run it:
+1. Start BrowserOS and open its MCP settings page. In current releases this is
+   available at `chrome://browseros/mcp`.
 
-   ```bash
-   ~/Downloads/BrowserOS
-   ```
+2. Copy the **Server URL** shown there. Do not assume a port from an older
+   article or installation; the browser may change it between releases.
 
-2. Wait for the browser window to open and the server to start.
-
-3. Verify the MCP server is running:
-
-   ```bash
-   curl http://127.0.0.1:9201/health
-   # Returns: {"status": "ok", "cdpConnected": true}
-   ```
-
-4. Ensure Hermes config has the MCP server:
+3. Add the copied URL to Hermes:
 
    ```yaml
    # ~/.hermes/config.yaml
    mcp_servers:
      browseros:
-       url: "http://127.0.0.1:9201/mcp"
+       url: "http://127.0.0.1:9239/mcp"
        timeout: 120
        connect_timeout: 30
    ```
 
-5. Restart Hermes to pick up the config:
+   Replace the example URL with the exact URL shown by BrowserOS.
+
+4. Start or reload Hermes:
 
    ```bash
    hermes
@@ -102,26 +106,30 @@ BrowserOS is an AI-native browser built on Chromium (version 146) that provides:
 
     | Issue                  | Solution                                   |
     | :--------------------- | :----------------------------------------- |
-    | MCP connection refused | Start BrowserOS: `~/Downloads/BrowserOS`   |
-    | Tools not appearing    | Restart Hermes Agent in a new session      |
+    | MCP connection refused | Start BrowserOS and copy its current MCP URL |
+    | Tools not appearing    | Run `hermes mcp list`, then reload Hermes    |
     | Timeout errors         | Increase timeout in config: `timeout: 180` |
 
 ### Verification
 
-After restart, you should see:
+Check the connection from Hermes:
 
 ```
-MCP servers have been reloaded. Added servers: browseros.
-70 MCP tool(s) now available.
+hermes mcp list
 ```
 
-Tools are now available as `mcp_browseros_<tool_name>` (e.g., `mcp_browseros_navigate_page`).
+Hermes registers discovered tools using the pattern
+`mcp_<server_name>_<tool_name>` (for example,
+`mcp_browseros_navigate_page`). The exact tool list depends on the BrowserOS
+release and your enabled connections.
 
 ---
 
 ## Tool Categories
 
-BrowserOS exposes 66 tools across 7 categories:
+BrowserOS exposes a release-dependent set of tools. The categories below are
+representative examples, not a promise that every installation contains every
+entry.
 
 ### 1. Page/Tab Management
 
@@ -225,7 +233,7 @@ BrowserOS exposes 66 tools across 7 categories:
 | :---------------- | :--------------------------------- |
 | `evaluate_script` | Execute JavaScript in page context |
 
-### 10. Connect Apps (40+ integrations)
+### 10. Connect Apps
 
 | Tool                                    | Description                  |
 | :-------------------------------------- | :--------------------------- |
@@ -268,18 +276,18 @@ BrowserOS exposes 66 tools across 7 categories:
 7. Merge: Read all raw files, create `merged.csv`
 8. Report: Generate `report.html`
 
-### Example 3: Product Price Tracking
+### Example 3: Product Availability Tracking
 
 **Request:**
 
-> "Track the price of 'NVIDIA RTX 5090' on Amazon, Newegg, and Best Buy. Alert me if any drop below $1000."
+> "Track the availability of 'NVIDIA RTX 5090' on Amazon, Newegg, and Best Buy. Alert me when one is in stock."
 
 **Workflow:**
 
 1. Create 3 hidden tabs for each retailer
 2. Navigate to product pages
-3. Use `evaluate_script` to extract price text
-4. Save price history to a local file
+3. Use `evaluate_script` to extract availability text
+4. Save availability history to a local file
 5. Compare against threshold
 6. Alert user if condition met
 
@@ -327,7 +335,9 @@ BrowserOS exposes 66 tools across 7 categories:
 
 ## Built-in Skills
 
-BrowserOS comes with 12 built-in skills at `~/.browseros/skills/builtin/`:
+Some BrowserOS releases include local workflows under
+`~/.browseros/skills/builtin/`. Treat this directory as installation-specific
+and inspect each workflow before enabling it:
 
 | Skill                    | Description                                         |
 | :----------------------- | :-------------------------------------------------- |
@@ -363,16 +373,16 @@ Hermes will:
 5. Generate `report.html`
 6. Save as PDF with `save_pdf`
 
-### B. Price Comparison
+### B. Product Comparison
 
-Build a price comparison workflow:
+Build a product comparison workflow:
 
 1. **Define products** — Create a CSV with product names and URLs
 2. **Hidden window** — Use `create_hidden_window` for automation
 3. **Parallel extraction** — Open up to 10 tabs
-4. **Price regex** — Use `evaluate_script` with regex to extract prices
+4. **Value extraction** — Use `evaluate_script` with a selector or regex to extract the relevant value
 5. **Merge** — Combine into comparison CSV
-6. **Report** — Generate HTML with price columns and links
+6. **Report** — Generate HTML with comparison columns and links
 
 ### C. Web Monitoring
 
@@ -393,7 +403,7 @@ Example cron job:
 
 ### D. Connect Apps Actions
 
-BrowserOS can connect to 40+ services:
+BrowserOS can connect to external services through its connected-apps layer:
 
 1. `discover_server_categories_or_actions` — List available services
 2. `get_category_actions` — Get actions for a service (e.g., GitHub)
@@ -461,7 +471,7 @@ const items = document.querySelectorAll(".product-card");
 return JSON.stringify(
   Array.from(items).map((item) => ({
     name: item.querySelector(".title").innerText,
-    price: item.querySelector(".price").innerText,
+    value: item.querySelector(".value").innerText,
     url: item.querySelector("a").href,
   })),
 );
@@ -490,8 +500,8 @@ await handle_dialog(accept=True)
 Every extracted data point should include its source:
 
 ```csv
-product,price,source_url
-NVIDIA RTX 5090,$999,https://newegg.com/product/...
+product,value,source_url
+NVIDIA RTX 5090,in stock,https://newegg.com/product/...
 ```
 
 ---
@@ -504,9 +514,9 @@ NVIDIA RTX 5090,$999,https://newegg.com/product/...
 
 **Fix:**
 
-1. Verify BrowserOS is running: `curl http://127.0.0.1:9201/health`
-2. If not, start BrowserOS: `~/Downloads/BrowserOS`
-3. Restart Hermes
+1. Verify BrowserOS is running and open `chrome://browseros/mcp`.
+2. Copy the current Server URL from that page.
+3. Restart or reload Hermes after changing `~/.hermes/config.yaml`.
 
 ### Tools Not Appearing
 
@@ -528,7 +538,7 @@ NVIDIA RTX 5090,$999,https://newegg.com/product/...
   ```yaml
   mcp_servers:
     browseros:
-      url: "http://127.0.0.1:9201/mcp"
+      url: "http://127.0.0.1:9239/mcp"
       timeout: 180 # increased from 120
   ```
 
@@ -563,11 +573,13 @@ BrowserOS transforms web automation from brittle scripts into reliable AI-driven
 
 - **Natural language control** over any web task
 - **Persistent state** across sessions
-- **66+ tools** for every browser interaction
-- **40+ integrations** via Connect Apps
+- Browser interaction tools for navigation, extraction, and page control
+- Connect Apps for extending workflows to external services
 - **Built-in skills** for research, extraction, monitoring
 
-Pair BrowserOS with Hermes for the most powerful local AI browser experience available.
+Pair BrowserOS with Hermes when you need Hermes to work through a real browser
+profile. Start with read-only tasks, then add write actions only after you have
+verified the scope and permissions of the connected tools.
 
 ---
 
@@ -575,4 +587,11 @@ Pair BrowserOS with Hermes for the most powerful local AI browser experience ava
 
 - **MCP Protocol:** https://modelcontextprotocol.io
 - **Hermes MCP:** See `hermes-agent` skill for MCP configuration
+- **BrowserOS MCP documentation:** https://docs.browseros.com/features/use-with-claude-code
 - **BrowserOS Skills:** Built-in workflows at `~/.browseros/skills/builtin/`
+
+## Verification
+
+- **Last reviewed:** 2026-09-09
+- **Primary sources:** [BrowserOS MCP client documentation](https://docs.browseros.com/features/use-with-claude-code), [Hermes MCP documentation](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp)
+- **Scope:** Setup flow, MCP configuration shape, and safety guidance were checked against the current primary documentation. Tool names and optional BrowserOS features remain release-dependent.

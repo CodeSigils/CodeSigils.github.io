@@ -1,257 +1,190 @@
 ---
 title: Free AI Models Guide
-description: Guide to free AI models for coding with OpenCode - including Big Pickle, Google AI Studio, Hugging Face, and other free LLM providers.
+description: A practical, verification-first guide to evaluating no-cost and free-tier models in OpenCode.
 keywords:
   - free AI models
-  - Big Pickle
-  - Gemini
-  - Google AI Studio
-  - Hugging Face
-  - free LLM
-  - no-cost AI
+  - OpenCode models
+  - Hugging Face Inference Providers
+  - free-tier AI
+  - model evaluation
 ---
 
 <div class="image-wrapper">
   <img src="/assets/images/opencode-screenshot.webp"
-       alt="AI Models" />
+       alt="OpenCode model selection screen" />
 </div>
 
-> **Last Updated:** April 2026
+If you are trying to learn OpenCode without committing to another bill, the
+first temptation is to ask for a list of the “best free models.” That list will
+be out of date almost as soon as it is published. The more useful question is:
+which model can I use safely and reliably for the work in front of me today?
 
----
-
-## Table of Contents
-
-1. [Hugging Face Inference Providers](#hugging-face-inference-providers)
-2. Other Free Tiers
-3. [Recommendations by Use Case](#recommendations-by-use-case)
-4. [Model Comparison Tables](#model-comparison-tables)
-
----
+This guide’s recommendation is simple: use free access for experiments, learn
+how to measure it, and avoid making a temporary offer part of a critical
+workflow.
 
 ## Free AI Models Overview
 
-<div class="youtube-video-wrapper">
-  <iframe src="https://www.youtube.com/embed/XNm1pVab8-A" allowfullscreen></iframe>
-</div>
+“Free” can mean a temporary promotion, an account-level allowance, a public
+endpoint with changing limits, or a model that runs locally after you install
+the required hardware and software. Treat those as different options. A model
+that is free to call can still have queueing, rate limits, or data-use terms
+that make it unsuitable for a particular project.
+
+This guide focuses on a durable workflow: discover the models available to your
+account, verify the provider’s current terms, and test candidates on a small,
+representative task before using them on important code.
+
+You do not need a benchmark suite to begin. One small repository, one known
+task, and a careful review of the resulting diff will teach you more about fit
+than a leaderboard detached from your workflow.
 
 ## Hugging Face Inference Providers
 
-OpenCode natively supports Hugging Face Inference Providers - giving you access to open models from 17+ providers.
+OpenCode supports Hugging Face Inference Providers. The models and providers
+available through that integration are dynamic, so the current model picker is
+the source of truth rather than a fixed list in an article.
 
-<div class="youtube-video-wrapper">
-  <iframe src="https://www.youtube.com/embed/b665B04CWkI" allowfullscreen></iframe>
-</div>
+### Quick setup
 
-### Quick Setup
+!!! tip "Connect Hugging Face"
 
-!!! tip "Hugging Face Setup"
+    1. Create a Hugging Face token with the **Make calls to Inference
+       Providers** permission.
+    2. Run `opencode auth login`, choose Hugging Face, and enter the token.
+    3. In OpenCode, run `/models` and select an exact `provider/model` ID.
 
-    ```bash
-    # 1. Create token at huggingface.co/settings/tokens
-    #    (needs "Make calls to Inference Providers" permission)
+The provider prefix matters: two providers may expose similarly named models
+with different limits, latency, and data policies.
 
-    # 2. Run auth login
-    opencode auth login
+!!! warning "Protect code and credentials"
 
-    # 3. Select Hugging Face when prompted
-    # Enter your token: hf_
+    Do not paste API keys into prompts or commit them to a repository. Review
+    the provider’s data policy before sending proprietary code. Start with a
+    disposable or redacted project when testing a new endpoint.
 
-    # 4. Select a model
-    /models
-    ```
+### How to choose a coding model
 
-### Best Coding Models
+Do not rely on a permanent “best model” ranking. Compare the current candidates
+using these dimensions:
 
-| Model                 | Best For          | Provider    | Context | Notes |
-| :--- | :--- | :--- | :--- | :--- |
-| **Qwen2.5-Coder-32B** | Code reasoning    | Featherless | 131K    | Good for complex code tasks |
+| Dimension | What to check | Why it matters |
+| :--- | :--- | :--- |
+| Task fit | Editing, debugging, explanation, or planning | Different tasks stress different capabilities |
+| Tool use | Reliable function/tool calls and bounded edits | An agent must act safely, not only produce prose |
+| Context | Context window and how the provider counts tokens | Large repositories may exceed a smaller context |
+| Quality | Tests passed, regressions, and review effort | A fluent answer is not necessarily a correct patch |
+| Operations | Latency, queueing, and rate limits | A usable model must fit the work’s feedback loop |
+| Terms | License, privacy, retention, and current allowance | “No-cost” does not remove usage conditions |
 
-### Other Notable Models
+## OpenCode Zen models
 
-**For Reasoning:**
+OpenCode’s Zen service exposes model IDs through the normal `/models` picker.
+The available catalog and any free period are controlled by the current Zen
+terms; they should be checked immediately before use. The Zen documentation
+also notes that model use may involve feedback or data-use conditions, so do
+not assume that a free model has the same privacy terms as a local model.
 
-- DeepSeek-R1 - Chain-of-thought reasoning, great for complex logic
-- Kimi-K2.5 - Fast, good for general tasks
-- GLM-4.7 - Free tier available
+### Access and verify
 
-**For General Use:**
-
-- Llama 3.1 8B - Fast, cheapest
-- Qwen2.5 7B - Good balance
-- Gemma 4 31B - Google's best
-
-**Resources:**
-
-- [HF Supported Models](https://huggingface.co/inference/models)
-- [HF Inference Providers](https://huggingface.co/docs/inference-providers/en/index)
-
----
-
-## OpenCode Free Models
-
-OpenCode offers built-in free models through **OpenCode Zen** - a curated set of models developed by [Zen Labs](https://zenlabs.ai/) that have been tested and benchmarked specifically for coding agents.
-
-!!! tip "Getting Started"
-
-    OpenCode comes with free models ready to use. Just run:
-    ```bash
-    opencode
-    /models
-    # Select from available free models
-    ```
-
-### Available Free Models
-
-| Model                  | Context | Best For           | Notes                                   |
-| :--- | :------ | :----------------- | :-------------------------------------- |
-| **Big Pickle**         | 200K    | Complex coding     | Stealth model, optimized for agents    |
-| **MiniMax M2.5 Free**  | 128K+   | General coding    | Strong at tool use                     |
-| **Qwen3.6 Plus Free**  | 131K+   | Complex tasks      | High performance, reasoning capable    |
-| **MiMo V2 Pro Free**   | 131K+   | Fast inference     | One of the fastest available           |
-| **Nemotron 3 Super Free** | 1M    | Long context       | NVIDIA's open-weight agent model       |
-
-!!! note "Limited Time"
-
-    These free models are available while OpenCode collects feedback. During this period, data may be used to improve the model. For sensitive code, consider paid options or local models (Ollama).
-
-### About Big Pickle
-
-**Big Pickle** is a stealth model developed by [Zen Labs](https://zenlabs.ai/), the team behind OpenCode. It's optimized specifically for coding agents with a 200K token context window - the largest among free options.
-
-<div class="youtube-video-wrapper">
-  <iframe src="https://www.youtube.com/embed/tuW0IKNZ2UI" allowfullscreen></iframe>
-</div>
-
-### How to Access
-
-```bash
+```text
 opencode
-
-# In terminal:
 /models
-
-# Select from available free models
 ```
 
----
+Select a model shown for your account, then record its full provider/model ID
+and the date you tested it. If a model disappears or its terms change, update
+the record instead of preserving an old recommendation.
 
-## Other Free Tiers
+!!! example "A small, repeatable test"
 
-### Free Tier Comparison
+    1. Use a small, non-sensitive repository with a known failing test.
+    2. Give each candidate the same concise task and constraints.
+    3. Record whether the patch is correct, how many edits were needed, elapsed
+       time, and whether the test passes.
+    4. Review the diff yourself before accepting it.
 
-| Provider             | Free Credits     | Best Models          | Sign Up             |
-| :------- | :----------- | :---------- | :------ |
-| **Google AI Studio** | 15 RPM, 250K TPM | Gemini 2.5 Pro/Flash | aistudio.google.com |
-| **GitHub Models**    | 50-150 req/day   | o3-mini, GPT-4.1          | github.com/models   |
-| **NVIDIA NIM**       | 1,000 credits    | DeepSeek R1, Llama   | build.nvidia.com    |
-| **Hugging Face**     | Monthly credits  | 300+ models          | huggingface.co      |
-| **Groq**             | Low-cost   | Llama 3.3, DeepSeek R1, Qwen QwQ    | console.groq.com    |
-| **xAI**              | $25 credits      | Grok 4               | x.ai                |
+This produces evidence for your workload without claiming that one model is
+universally superior.
 
-### Google AI Studio (Recommended for Free)
+## Other no-cost and free-tier providers
 
-!!! tip "Best Free Option"
+Provider offers change frequently. Instead of maintaining a quota table here,
+check each provider at the moment you connect it:
 
-    - Gemini 2.5 Pro (best free model)
-    - Gemini 2.5 Flash (fastest)
-    - 1M token context
-    - Sign up at aistudio.google.com
+| Check | Question to answer |
+| :--- | :--- |
+| Account | Is an account, verification, or billing profile required? |
+| Authentication | Does OpenCode use `/connect`, `opencode auth login`, or a local endpoint? |
+| Catalog | Which exact models are shown to this account today? |
+| Limits | What rate, daily, or concurrency limits apply, and when do they reset? |
+| Data | Are prompts retained, used for improvement, or excluded by an opt-out? |
+| Failure mode | What happens when the allowance is exhausted? |
 
-### GitHub Models
+Google AI Studio, GitHub Models, Groq, NVIDIA, and other services can be useful
+comparison points, but their model catalogs and allowances should be read from
+their current documentation. OpenCode’s `/models` command is useful for
+confirming that a configured provider is actually available in your session.
 
-- GPT-4.1 (excellent coding)
-- o3-mini (reasoning)
-- Direct integration with OpenCode via /connect
+## Recommendations by use case
 
-**Resources:**
+Use the following criteria instead of a fixed ranking:
 
-- [Awesome Free AI APIs](https://awesomeagents.ai/tools/free-ai-inference-providers-2026/)
+- **Coding and edits:** prioritize reliable tool calls, small accurate diffs,
+  and tests that pass on the first or second attempt.
+- **Reasoning:** use a representative problem and inspect intermediate actions;
+  a longer answer is not evidence of better reasoning.
+- **Large-context work:** confirm the real context limit and test retrieval on
+  the size of repository you use.
+- **Speed-sensitive work:** measure end-to-end response time, including queueing
+  and tool execution, rather than quoting a provider’s peak token rate.
+- **No-billing experiments:** confirm account requirements and current terms
+  before sending project data.
+- **Sensitive or offline work:** prefer a local model when its quality and
+  hardware requirements are acceptable.
 
-### Groq (Fastest Inference)
+## Keep an evaluation record
 
-!!! tip "Fastest Inference Available"
+When a model is useful, save a short record next to your project notes:
 
-    Groq is not free - but it offers the **fastest inference speed** available (~1000+ tokens/second). It's low-cost and integrates natively with OpenCode.
+```text
+Provider/model ID:
+Date checked:
+Task and repository size:
+Tool calls or integrations used:
+Result and test status:
+Observed latency or limits:
+Data-use and license notes:
+```
 
-    | Model                 | Context | Notes                    |
-    | :--- | :------- | :----------------------- |
-    | llama-3.3-70b-versatile | 128K   | Best overall             |
-    | deepseek-r1-distill-llama-70b | 128K | Strong reasoning        |
-    | qwen-qwq-32b           | 128K   | Fast reasoning           |
-    | gemma-2-9b-it          | 8K     | Lightweight              |
+This makes later updates auditable and prevents an old model name, quota, or
+assumption from silently becoming project policy.
 
-#### Setup
+## Keeping this guide current
 
-1. Get a free API key at [console.groq.com/keys](https://console.groq.com/keys)
-2. In OpenCode, run `/connect` → search for "Groq" → paste your API key
-3. Run `/models` to select a Groq model
-
----
-
-## Recommendations by Use Case
-
-### Best for Coding Tasks
-
-1. **Qwen2.5-Coder-32B** (HF) - Code reasoning
-2. **GPT-4.1** (GitHub Models) - General coding
-3. **Gemini 2.5 Pro** (Google AI Studio) - Long context
-
-### Best for Reasoning
-
-1. **DeepSeek-R1** (HF Hyperbolic) - Chain-of-thought
-2. **o3-mini** (GitHub Models) - Reasoning
-3. **Gemini 2.5 Pro** (Google) - Long context
-
-### Best for Speed
-
-1. **Groq** - Fastest inference (1000+ t/s)
-2. **Qwen3-Coder-Next** - 128 t/s
-
-### Best for Free Tier (No Credit Card)
-
-1. **Big Pickle** (OpenCode built-in)
-2. **GLM-4.7 Flash** (HF)
-3. **Gemini 2.5 Flash** (Google)
-
----
-
-## Model Comparison Tables
-
-### Coding Models Comparison
-
-| Model             | Provider    | Context | Speed   | Notes              | Best For          |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Qwen2.5-Coder-32B | Featherless | 131K    | Medium  | Good code reasoning| Code reasoning    |
-| DeepSeek-R1       | Hyperbolic  | 131K    | Medium  | Chain-of-thought   | Complex reasoning |
-| GPT-4.1           | GitHub      | 32K     | Fast    | Free tier          | General coding    |
-
-### Free Models Comparison
-
-| Model            | Source       | Notes                    |
-| :--- | :--- | :--- |
-| Big Pickle       | OpenCode     | Works out of box         |
-| GLM 4.7 Flash    | Hugging Face | Slower                   |
-| Gemini 2.5 Flash | Google       | Generous free tier       |
-| Gemma 4 31B      | Hugging Face | Google's best open model |
-
----
-
-## TODO: Review Schedule
-
-- [ ] Review monthly - check for new models
-- [ ] Check free tier limits changed
-- [ ] Update recommendations based on benchmarks
-
----
+Free-model availability, limits, model names, and terms change frequently.
+Before following a recommendation, open the provider documentation and compare
+the current conditions with your needs. Re-test recommendations after a
+provider changes its catalog or authentication flow; do not infer current
+availability from a cached screenshot or an old article.
 
 ## Resources
 
-- [OpenCode + Hugging Face](https://huggingface.co/docs/inference-providers/main/integrations/opencode)
-- [HF Inference Providers Pricing](https://huggingface.co/docs/inference-providers/en/pricing)
-- [OpenCode Providers](https://opencode.ai/docs/providers/)
-- [Awesome Free AI APIs](https://awesomeagents.ai/tools/free-ai-inference-providers-2026/)
+- [OpenCode models](https://dev.opencode.ai/docs/models/)
+- [OpenCode CLI](https://dev.opencode.ai/docs/cli/)
+- [OpenCode providers](https://dev.opencode.ai/docs/providers/)
+- [OpenCode Zen](https://dev.opencode.ai/docs/zen/)
+- [Hugging Face OpenCode integration](https://huggingface.co/docs/inference-providers/main/integrations/opencode)
+- [Hugging Face Inference Providers pricing and terms](https://huggingface.co/docs/inference-providers/en/pricing)
 
----
+## Verification
 
-_This is a living document. Revisit and update regularly._
+- **Last reviewed:** 2026-09-09
+- **Primary sources:** OpenCode models, CLI, providers, and Zen documentation;
+  Hugging Face’s OpenCode integration documentation.
+- **Scope:** setup flow, model discovery, and the recommendation method were
+  checked. Catalogs, allowances, latency, and provider terms remain
+  release- and account-dependent.
+
+_This is a living guide. Update the method and verification notes when the
+provider interfaces or terms change._

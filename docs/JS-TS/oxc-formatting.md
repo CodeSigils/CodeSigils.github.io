@@ -33,10 +33,10 @@ OXC formatter parses your JavaScript/TypeScript source code into an Abstract Syn
 
 ## Why OXC Formatter?
 
-!!! success "Performance"
+!!! tip "Performance"
 
-    OXC formatter is written in Rust and is significantly faster than other JavaScript formatters.
-    It can format large codebases in milliseconds.
+    Oxfmt is written in Rust and is designed for high throughput. Measure it on
+    your own files before treating benchmark results as a production guarantee.
 
 !!! tip "Compatibility"
 
@@ -272,6 +272,13 @@ Prettier:   ~2000ms
 
 Speedup: 40x faster
 ```
+
+!!! note "Verify current behavior"
+
+    Oxfmt is actively developed. Check the [official formatter
+    documentation](https://oxc.rs/docs/guide/usage/formatter.html) for current
+    language support, compatibility, and installation commands. Last editorial
+    review: 2026-09-09.
 
 ## Resources
 

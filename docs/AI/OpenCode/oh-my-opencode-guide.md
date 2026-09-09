@@ -1,559 +1,171 @@
 ---
 title: Oh My OpenAgent Guide
-description: Guide to Oh My OpenAgent - the batteries-included orchestration layer for OpenCode with specialized agents, hooks, MCPs, and workflow automation.
+description: A cautious guide to evaluating and configuring the Oh My OpenAgent extensions for OpenCode and Codex CLI.
 keywords:
   - oh-my-openagent
   - OpenCode
-  - orchestration
+  - Codex CLI
   - agents
   - MCP
-  - Sisyphus
-  - workflow automation
+  - orchestration
 ---
 
 <div class="image-wrapper">
   <img src="/assets/images/oh-my-opencode.webp"
-       alt="Oh My OpenCode" />
+       alt="Oh My OpenAgent" />
 </div>
 
-A batteries-included orchestration layer for OpenCode that adds specialized agents, hooks, MCPs, and workflow automation.
+There is a familiar moment in an AI coding project: the basic chat works, but
+every new repository needs the same rules, delegation prompts, and tool setup.
+An orchestration layer can reduce that repetition—but it can also make the
+system harder to explain when something goes wrong. My recommendation is to
+earn that complexity gradually: first learn the host, then add only the
+capability you can evaluate.
 
-## Table of Contents
+Oh My OpenAgent (formerly associated with the Oh My OpenCode name) is a
+community project that adds opinionated agents, rules, hooks, skills, and MCP
+integrations around an agent host. It is not part of the OpenCode or OpenAI
+core distributions. Read the project’s current installation guide before
+running an installer: names, editions, defaults, and supported hosts are under
+active development.
 
-1. [What is Oh My OpenCode?](#what-is-oh-my-opencode)
-2. [Official Links](#official-links)
-3. [Installation](#installation)
-4. [Core Features](#core-features)
-   - [Agents](#agents)
-   - [Hooks](#hooks)
-   - [MCPs](#model-context-protocol-mcps)
-   - [LSP Support](#lsp-support)
-5. [Most Used Plugins](#most-used-plugins)
-6. [Configuration](#configuration)
-7. [Use Cases](#use-cases)
-8. [Comparison with OpenCode](#comparison-with-opencode)
-9. [Troubleshooting](#troubleshooting)
-10. [Further Reading](#further-reading)
+This page is a decision guide, not a feature catalogue. It helps you decide
+whether the extra layer earns its place in your workflow and how to test it
+without giving up control of the repository.
 
----
+## Decide whether you need it
 
-## What is Oh My OpenCode?
+Start with plain OpenCode or Codex CLI if you are still learning the host. Add
+an orchestration layer when you can name the repeated problem it should solve,
+such as delegating repository exploration or applying shared project rules.
 
-Oh My OpenCode is an **orchestration plugin** that sits on top of OpenCode, wrapping it with opinionated agents, hooks, MCPs, and configuration defaults. It transforms OpenCode into a production-ready agent harness with:
+The trade-off is additional behavior to understand and maintain. More agents,
+hooks, and MCP tools also add context and permissions. OpenCode’s own MCP
+documentation warns that a large tool catalog can consume significant context.
 
-- **Specialized agents** for different development tasks (planning, exploration, documentation)
-- **20+ automation hooks** for context management and session recovery
-- **Pre-configured MCPs** for docs and code search
-- **LSP integration** with sensible defaults for common languages
-- **Multi-agent workflows** that understand complex project structures
+The useful test is not whether the plugin looks impressive in a README. It is
+whether a task that matters to you becomes easier to plan, review, and repeat.
 
-In essence, Oh My OpenCode does the heavy lifting of configuring a reliable AI coding workflow so you don't have to.
+!!! warning "Treat it as privileged software"
 
----
+    An orchestration plugin can run commands, edit files, call external MCP
+    servers, and send prompts to configured model providers. Review its source,
+    permissions, telemetry policy, and release notes. Test it in a disposable
+    repository before enabling autonomous or multi-agent modes.
 
-## Official Links
+## Editions and naming
 
-- **Website**: https://ohmyopenagent.com
-- **GitHub**: https://github.com/code-yeongyu/oh-my-openagent
-- **Documentation**: https://ohmyopenagent.com/installation/
-- **NPM Package**: https://www.npmjs.com/package/oh-my-opencode
-- **Discord Community**: https://discord.gg/oh-my-opencode
+The upstream project currently documents separate paths for an OpenCode
+edition, a Codex CLI light edition, and a standalone beta edition. The package
+and command names are in transition, so copy the command from the current
+upstream installation guide rather than from a cached blog post.
 
----
+Official project links:
 
-## Installation
+- [Repository and README](https://github.com/code-yeongyu/oh-my-openagent)
+- [Current installation guide](https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md)
+- [OpenCode MCP documentation](https://dev.opencode.ai/docs/mcp-servers/)
 
-### Prerequisites
+## Installation workflow
 
-!!! tip "Before You Start"
+1. Update OpenCode or Codex CLI first and confirm the host works without the
+   plugin.
+2. Read the upstream installation guide end to end, including its uninstall,
+   telemetry, and permissions sections.
+3. Choose one edition and one installation method. Avoid installing multiple
+   similarly named packages until you understand which host each targets.
+4. Record the package name, version or commit, configuration paths, and enabled
+   features in project notes.
+5. Start with optional features disabled; enable one capability at a time.
 
-    1. Install OpenCode first:
-    
-       ```bash
-       curl -fsSL https://opencode.ai/install.sh | sh
-       ```
-    
-    2. Ensure you have **Node.js 18+** or **Bun** installed
-
-### Install Oh My OpenCode
-
-**Using Bun (recommended):**
+The upstream README currently shows this OpenCode command as its primary path:
 
 ```bash
 bunx oh-my-openagent install
 ```
 
-**Using npm:**
+Treat that command as release-specific. Verify the package and requested
+permissions immediately before execution. Do not pipe an unfamiliar installer
+into a shell without first reading its source or release documentation.
 
-```bash
-npm install -g oh-my-opencode  # or: npm install -g oh-my-openagent
-```
+## Configuration principles
 
-**Manual installation:**
-Add to your OpenCode config file (`~/.config/opencode/opencode.json` or `.opencode/opencode.json`):
+Keep host configuration and project policy separate. Put project-specific rules
+in reviewed files such as `AGENTS.md` or the plugin’s documented project config;
+keep personal tokens and account settings outside version control.
 
-```json
-{
-  "plugin": ["oh-my-openagent"]
-}
-```
+Use this progression:
 
-### Verification
+| Stage | Enable | Review |
+| :--- | :--- | :--- |
+| Baseline | One host and one model | Normal edit, test, and rollback behavior |
+| Guided | Rules and one specialist agent | Whether delegation improves results |
+| Connected | One MCP server | Tool permissions, context size, and data flow |
+| Autonomous | Loops or background work | Stop conditions, logs, and cost or quota exposure |
+| Team | Parallel agents | File ownership, merge conflicts, and review gates |
 
-```bash
-opencode --version
-# Should show Oh My OpenCode plugin loaded
-```
+### MCP tools
 
----
+**MCP (Model Context Protocol)** lets an agent call tools exposed by another
+process. Prefer a least-privilege configuration: enable only the server needed
+for the task, restrict credentials to the smallest scope, and disable it when
+finished. Ask the agent to name the MCP tool it plans to use before an action
+that changes external state.
 
-## Core Features
+### Agents and hooks
 
-### Agents
+Agent names, hook names, and model mappings are implementation details, not a
+stable API. Discover them from the installed release and keep a short local
+inventory. A hook that injects context or retries work can be useful, but it can
+also hide why a task changed files or kept running.
 
-Oh My OpenCode includes specialized agents designed for different tasks:
+## A safe first experiment
 
-#### Planner-Sisyphus (Default)
+Use a small repository with tests and no secrets. Ask the orchestrator to:
 
-The main orchestrator agent that provides intelligent planning and execution.
-It breaks down complex tasks into manageable steps and coordinates other agents.
+1. inspect the project and propose a plan;
+2. delegate read-only exploration;
+3. wait for your approval;
+4. make one bounded change;
+5. run the project’s checks and show the diff.
 
-**Key Features:**
+Compare this with a plain OpenCode session. Keep the plugin only if the saved
+time or consistency is worth the extra configuration and review burden.
 
-- Task decomposition and planning
-- Coordinates Librarian, Explore, and Oracle agents
-- Replaces the default plan with more structured approaches
+!!! example "Useful acceptance criteria"
 
-#### Librarian
-
-A specialized agent for documentation and code exploration. Perfect for:
-
-- Finding relevant code in large codebases
-- Understanding code structure
-- Generating documentation
-
-#### Explore
-
-Fast codebase navigation agent focused on:
-
-- Quick grep and search operations
-- File structure analysis
-- Fast discovery of code patterns
-
-#### Oracle
-
-Question-answering agent that provides intelligent responses
-based on codebase context. Best for:
-
-- Debugging explanations
-- Architecture questions
-- "Why does this work?" type queries
-
-#### Prometheus (Planner)
-
-Works alongside Sisyphus to provide:
-
-- Task planning consultation
-- Plan validation
-- Strategy suggestions
-
-### Hooks
-
-Hooks automate and enhance your workflow.
-Oh My OpenCode includes 20+ built-in hooks:
-
-#### Context Management
-
-| Hook                          | Description                                           |
-| :--- | :---------- |
-| `preemptive-compaction`       | Preemptive context compaction to prevent token limits |
-| `compaction-context-injector` | Manages context during compaction                     |
-| `ralph-loop`                  | Ralph agent loop management                           |
-
-#### Code Quality
-
-| Hook                       | Description                            |
-| :--- | :---------- |
-| `comment-checker`          | Validates code comments                |
-| `thinking-block-validator` | Validates thinking blocks in responses |
-| `empty-message-sanitizer`  | Cleans empty messages                  |
-
-#### Output Management
-
-| Hook                    | Description                       |
-| :--- | :---------- |
-| `tool-output-truncator` | Manages tool output sizes         |
-| `grep-output-truncator` | Truncates large grep outputs      |
-| `keyword-detector`      | Detects keywords in conversations |
-
-#### Workflow Automation
-
-| Hook                        | Description                       |
-| :--- | :---------- |
-| `directory-agents-injector` | Injects directory-specific agents |
-| `directory-readme-injector` | Adds README context automatically |
-| `rules-injector`            | Injects custom rules              |
-| `claude-code-hooks`         | Claude-specific hooks             |
-
-#### Notifications & Updates
-
-| Hook                      | Description                      |
-| :--- | :---------- |
-| `startup-toast`           | Shows startup notifications      |
-| `auto-update-checker`     | Checks for updates automatically |
-| `background-notification` | Background notifications         |
-
-#### Environment Handling
-
-| Hook                                      | Description                          |
-| :--- | :---------- |
-| `interactive-bash-session`                | Manages interactive sessions         |
-| `non-interactive-env`                     | Handles non-interactive environments |
-| `anthropic-context-window-limit-recovery` | Handles Anthropic limits             |
-
-### Model Context Protocol (MCPs)
-
-MCP integration provides enhanced capabilities through external tools:
-
-#### Context7 (Enabled by Default)
-
-Fetches up-to-date official documentation for libraries and frameworks.
-Ensures you always have access to the latest API references.
-
-**Configuration:**
-
-```json
-{
-  "disabled_mcps": ["context7"] // Set to disable
-}
-```
-
-#### grep.app (Enabled by Default)
-
-Ultra-fast code search across millions of public GitHub repositories.
-Perfect for finding similar implementations or examples.
-
-**Configuration:**
-
-```json
-{
-  "disabled_mcps": ["grep_app"] // Set to disable
-}
-```
-
-#### Other Popular MCPs
-
-| MCP Server     | Purpose                | Use Case                               |
-| :--------- | :------ | :------- |
-| `filesystem`   | File system operations | Read/write files, directory management |
-| `github`       | GitHub integration     | Issues, PRs, repo management           |
-| `playwright`   | Browser automation     | Testing, web scraping                  |
-| `brave-search` | Web search             | Research, documentation lookup         |
-| `supabase`     | Database operations    | Analytics, queries                     |
-| `postgres`     | PostgreSQL integration | Database management                    |
-| `notion`       | Notion workspace       | Documentation, notes                   |
-| `linear`       | Issue tracking         | Project management                     |
-| `slack`        | Slack integration      | Team notifications                     |
-
-### LSP Support
-
-Full Language Server Protocol support with refactoring tools:
-
-**Features:**
-
-- Priority management for multiple servers
-- Custom LSP server configuration
-- Refactoring tools (rename, code actions)
-- Code analysis and type checking
-
-**Supported Languages:**
-
-- TypeScript/JavaScript (tsserver)
-- Python (pyright, pylsp)
-- Rust (rust-analyzer)
-- Go (gopls)
-- And many more via custom LSP servers
-
----
-
-## Most Used Plugins
-
-### 1. Oh My OpenCode (Orchestration)
-
-**GitHub**: https://github.com/code-yeongyu/oh-my-openagent
-
-The main orchestration plugin. Ships with agents, hooks, MCPs, and LSP defaults configured out of the box.
-
-### 2. opencode-prompts
-
-**GitHub**: https://github.com/minipuft/opencode-prompts
-
-Adds chain tracking, gate reminders, and state preservation for prompt engineering workflows.
-
-**Features:**
-
-- Gate enforcement for step validation
-- Chain progress tracking (`Step 2/4`)
-- State preservation across sessions
-
-### 3. open-reload
-
-**GitHub**: https://github.com/veemex/open-reload
-
-Hot-reload MCP meta-plugin for development. Watches plugin files and dynamically reloads tools at runtime.
-
-**Features:**
-
-- Live tool updates without restart
-- Plugin development workflow
-- Context threading
-
-### 4. opencode-mcp
-
-**GitHub**: https://github.com/AlaeddineMessadi/opencode-mcp
-
-MCP server that bridges OpenCode to other AI tools. Gives Claude, Cursor, and VS Code access to OpenCode's capabilities.
-
-**Features:**
-
-- 79 tools
-- Multi-project support
-- Auto-start capability
-
-### 5. Helicone (Session Logging)
-
-**npm**: `opencode-helicone-session`
-
-Session logging and analytics plugin for OpenCode.
-
-### 6. WakaTime (Productivity Tracking)
-
-**npm**: `opencode-wakatime`
-
-Automatic time tracking for your OpenCode sessions.
-
-### 7. MCP Servers (1,200+ Available)
-
-The MCP ecosystem offers 1,200+ servers including:
-
-| Category          | Popular Servers              |
-| :------- | :-------------- |
-| **Browser**       | Playwright, Puppeteer        |
-| **Database**      | PostgreSQL, Supabase, SQLite |
-| **Search**        | Brave Search, Google Search  |
-| **Communication** | Slack, Discord, Linear       |
-| **Cloud**         | AWS, GCP, Azure              |
-| **Development**   | GitHub, GitLab, Docker       |
-
-Browse the full ecosystem at:
-
-- https://github.com/modelcontextprotocol/servers
-- https://github.com/wong2/awesome-mcp-servers
-- https://mcp-awesome.com
-
----
-
-## Configuration
-
-### Configuration Files
-
-Oh My OpenCode looks for configuration in this order:
-
-1. `.opencode/oh-my-openagent.json` (project-specific, highest priority)
-2. `~/.config/opencode/oh-my-openagent.json` (user-wide)
-
-### Example Configuration
-
-```jsonc
-{
-  // Agent configuration
-  "agents": {
-    "planner-sisyphus": {
-      "enabled": true,
-      "replace_plan": true,
-    },
-    "librarian": {
-      "enabled": true,
-    },
-    "explore": {
-      "enabled": true,
-    },
-  },
-
-  // Disable specific hooks
-  "disabled_hooks": ["comment-checker", "startup-toast"],
-
-  // Disable specific MCPs
-  "disabled_mcps": [],
-
-  // LSP configuration
-  "lsp": {
-    "typescript-language-server": {
-      "command": ["typescript-language-server", "--stdio"],
-      "extensions": [".ts", ".tsx"],
-      "priority": 10,
-    },
-  },
-
-  // Experimental features
-  "experimental": {
-    "preemptive_compaction_threshold": 0.85,
-    "truncate_all_tool_outputs": true,
-  },
-}
-```
-
-### Plugin-Specific Configuration
-
-You can also create `oh-my-openagent.json` files for specific plugins:
-
-```json
-{
-  "disabled_tools": ["my_tool", "another_tool"],
-  "disabled_agents": ["some_agent"]
-}
-```
-
----
-
-## Use Cases
-
-### Monorepos
-
-Oh My OpenCode understands multi-repo layouts and can coordinate changes across packages.
-
-### Complex Build Pipelines
-
-Configure custom build systems and have the agent understand your entire pipeline.
-
-### Team Workflows
-
-Share `oh-my-openagent.json` in your repo so the entire team uses the same setup.
-
-### Documentation Projects
-
-Use the Librarian agent for docs-heavy projects and Hugo/React/Vite stacks.
-
-### Large Codebases
-
-Context management hooks prevent token blow-ups in large projects.
-
----
-
-## Comparison with OpenCode
-
-| Feature                | **OpenCode**           | **Oh My OpenCode**                   |
-| :------ | :----------- | :----------------- |
-| **Base Functionality** | Core AI coding agent   | Orchestration layer on top           |
-| **Agents**             | Single default agent   | Sisyphus, Librarian, Explore, Oracle |
-| **Hooks**              | Basic plugin hooks     | 20+ built-in workflow hooks          |
-| **MCPs**               | Manual configuration   | Pre-configured Context7, grep.app    |
-| **LSP**                | Manual setup           | Sensible defaults included           |
-| **Planning**           | Basic task execution   | Structured task planning             |
-| **Setup Time**         | Higher (manual config) | Lower (batteries included)           |
-
-**When to use plain OpenCode:**
-
-- You prefer minimal configuration
-- You need only basic coding assistance
-- You want to configure everything yourself
-
-**When to use Oh My OpenCode:**
-
-- You want reliable defaults out of the box
-- You work with complex projects
-- You need multi-agent coordination
-- You want automated context management
-
----
+    - Every changed file is explained.
+    - The agent stops at the requested boundary.
+    - Tests and formatters pass.
+    - External tools are named in the session record.
+    - You can disable or uninstall the plugin without losing project files.
 
 ## Troubleshooting
 
-### Plugin Not Loading
+When behavior is surprising, reduce the system before adding more settings:
 
-1. Verify OpenCode version (use 1.0.133 or newer):
+1. Disable the plugin and reproduce the task with the host alone.
+2. Re-enable only the plugin, then only the relevant agent or hook.
+3. Check the installed package version and current upstream changelog.
+4. Inspect OpenCode’s MCP status with `opencode mcp list` if an external tool
+   is involved.
+5. Review the first error in logs; a later timeout may only be a symptom.
 
-   ```bash
-   opencode --version
-   ```
+Avoid relying on old version thresholds or fixed feature counts. They are likely
+to drift as both the host and the community project evolve.
 
-2. Check config file syntax:
+## Verification
 
-   ```bash
-   cat ~/.config/opencode/opencode.json
-   ```
+- **Last reviewed:** 2026-09-09
+- **Primary sources:** the upstream Oh My OpenAgent repository and its current
+  installation guide; OpenCode’s MCP documentation.
+- **Scope:** project identity, installation direction, and safety guidance were
+  checked. Package names, editions, commands, defaults, agent lists, and model
+  mappings remain release-dependent.
 
-3. Enable debug logging:
+_Re-check the upstream guide before every upgrade or fresh installation._
 
-   ```bash
-   opencode --debug
-   ```
-
-### MCP Connection Issues
-
-1. Verify MCP is enabled in config:
-
-   ```json
-   {
-     "mcp": {
-       "enabled": true
-     }
-   }
-   ```
-
-2. Check MCP server installation:
-
-   ```bash
-   npx @modelcontextprotocol/server-filesystem --version
-   ```
-
-### Hook Conflicts
-
-Disable problematic hooks in your config:
-
-```json
-{
-  "disabled_hooks": ["problematic-hook"]
-}
-```
-
----
-
-## Further Reading
-
-### Official Documentation
-
-- [Oh My OpenCode Docs](https://ohmyopencode.com/documentation/)
-- [Features Overview](https://ohmyopencode.com/features/)
-- [Configuration Guide](https://ohmyopencode.com/configuration/)
-- [Best OpenCode Plugins](https://ohmyopencode.com/best-opencode-plugins/)
-
-### OpenCode Resources
-
-- [OpenCode Official Site](https://opencode.ai)
-- [OpenCode GitHub](https://github.com/anomalyco/opencode)
-- [OpenCode Plugins Docs](https://opencode.ai/docs/plugins/)
-- [OpenCode Discord](https://discord.gg/opencode)
-
-### MCP Ecosystem
-
-- [Official MCP Servers](https://github.com/modelcontextprotocol/servers)
-- [Awesome MCP Servers](https://github.com/wong2/awesome-mcp-servers)
-- [MCP Specification](https://spec.modelcontextprotocol.io)
-- [MCP Marketplace](https://mcp-awesome.com)
-
-### Community Plugins
-
-- [opencode-prompts](https://github.com/minipuft/opencode-prompts)
-- [open-reload](https://github.com/veemex/open-reload)
-- [opencode-mcp](https://github.com/AlaeddineMessadi/opencode-mcp)
-
-### Comparisons & Reviews
-
-- [Oh My OpenCode vs OpenCode](https://ohmyopencode.com/compare/)
-- [OpenCode vs Cursor](https://opencode.ai/compare/cursor)
-- [OpenCode vs Claude Code](https://opencode.ai/compare/claude-code)
-
----
-
-_Guide last updated: April 2026_
+If you try it, keep a short before-and-after note: what problem you wanted to
+solve, which feature you enabled, what improved, and what became harder to
+understand. That record is more valuable than a permanent claim that the
+plugin is “best.”

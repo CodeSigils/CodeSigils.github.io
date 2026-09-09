@@ -1,6 +1,6 @@
 ---
 title: Dolphin LLM Guide
-description: Guide to Dolphin LLM - an open source, uncensored, and steerable large language model family. Learn about installation, usage, and model options.
+description: Practical guide to Dolphin language-model variants, including model cards, local deployment, quantization, and safe evaluation.
 keywords:
   - dolphin
   - LLM
@@ -17,79 +17,93 @@ keywords:
        alt="Dolphin LLM" />
 </div>
 
-The Dolphin family of LLMs — open source, uncensored, and steerable models from the community.
+The Dolphin family is a community-maintained collection of model variants and
+fine-tunes. Capabilities, licenses, and available weights differ by release;
+check the model card before downloading or deploying one.
+
+!!! warning "Review model cards before use"
+
+    “Uncensored” describes a model's training or fine-tuning claims, not a
+    guarantee of accuracy, safety, or legal suitability. Review the specific
+    model card, license, and intended-use guidance on [Hugging Face](https://huggingface.co/)
+    before using a model with real data.
 
 ## What is Dolphin?
 
-Dolphin is a family of open-source LLMs developed by [Eric Hartford](https://huggingface.co/dphn), [Cognitive Computations](https://huggingface.co/cognitivecomputations), and collaborators.
+Dolphin is a family of community-published language-model variants and
+fine-tunes. The maintainer, base model, training data, license, and intended
+use can differ by checkpoint, so the individual model card is more authoritative
+than a family name.
 
 ### Key Characteristics
 
-- **Uncensored** — Dolphin removes alignment and bias filters, making the model more compliant and steerable
-- **Steerable** — You set the system prompt, you decide the alignment, you have control of your data
-- **Open Source** — Fully open weights under various licenses (Llama, Apache 2.0)
-- **Community Driven** — Trained on curated datasets from the open source community
-- **General Purpose** — Designed to be similar to ChatGPT, Claude, and Gemini but with full user control
+- **Fine-tuned** — Each checkpoint changes the behavior of a base model in a
+  particular way
+- **Steerable** — The runtime and system prompt influence the model's behavior
+- **Open weights** — Access and licensing depend on the checkpoint and its base
+  model
+- **Community maintained** — Documentation and support are supplied by the
+  publishing community
 
 ### The Philosophy
 
 !!! tip "Why Dolphin?"
 
-    Unlike commercial models:
-
-    1. No hidden system prompts that change without notice
-    2. Your data stays private — Dolphin can't see or use your queries
-    3. Full steerability — You control the model's behavior and ethics
-    4. No imposed guidelines — You decide what's appropriate
+    Local inference can give you more control over prompts, logs, and network
+    access, but privacy is a deployment property—not a guarantee of the model
+    family. Review the runtime, telemetry, API provider, and files you send to it.
 
 ## Dolphin Model Family
 
-### Recent Models
+### Choosing a checkpoint
 
-| Model | Size | Base Model | Context | License |
-| :---- | :--- | :--------- | :------ | :------ |
-| **Dolphin 3.0 Llama 3.1 8B** | 8B | Llama 3.1 | 8K+ | Meta Llama 3.1 |
-| **Dolphin 3.0 Llama 3.2 1B** | 1B | Llama 3.2 | 8K+ | Meta Llama 3.2 |
-| **Dolphin 3.0 Llama 3.2 3B** | 3B | Llama 3.2 | 8K+ | Meta Llama 3.2 |
-| **Dolphin 3.0 Qwen 2.5 3B** | 3B | Qwen 2.5 | 8K+ | Apache 2.0 |
-| **Dolphin X1 8B** | 8B | Llama 3.1 8B | 32K | Meta Llama 3.1 |
-| **Dolphin X1 405B** | 405B | Llama 3.1 405B | 32K | Meta Llama 3.1 |
-| **Dolphin 2.9 Llama 3 8B** | 8B | Llama 3 | 8K | Meta Llama 3 |
-| **Dolphin 2.9 Mistral 7B** | 7B | Mistral | 8K+ | Apache 2.0 |
-| **Dolphin 2.8 Mistral 7B** | 7B | Mistral | 8K+ | Apache 2.0 |
+Start with the [Dolphin 3.0 Llama 3.1 8B model card](https://huggingface.co/dphn/Dolphin3.0-Llama3.1-8B)
+as a concrete example. For another checkpoint, compare its base model,
+license, context limit, quantization files, prompt format, and evaluation notes
+before downloading it.
 
 ### Available Quantizations
 
-Dolphin models are available in various GGUF formats for different use cases:
+Dolphin checkpoints may be published in quantized formats such as GGUF:
 
-- **Q4_K_M** — Balance of size and quality
-- **Q5_K_S** — Higher quality  
-- **Q8_0** — Best quality, larger size
-- **EXL2** — Various bit widths (2-8bpw)
+- **Q4_K_M** — Smaller download and lower memory use, with a quality tradeoff
+- **Q5_K_S** — A larger quantized representation with a different quality/memory tradeoff
+- **Q8_0** — Higher precision and larger memory use
+- **EXL2** — A format used by compatible runtimes; follow that runtime's guidance
 
-## Pricing
+!!! info "Technical jargon → In plain language"
 
-!!! tip "Free and Open"
+    **Technical jargon:** Quantization changes how model weights are stored.
 
-    Dolphin is **free** to use! But you'll need some hardware or an API provider.
+    **In plain language:** It can make a model smaller and easier to run, but
+    the choice may affect quality and supported runtimes.
 
-### Cost Options
+    **Why it matters:** Choose a file that your runtime supports, then test the
+    responses on your own prompts before relying on it.
 
-| Method | Cost | Requirements |
-| :----- | :--- | :----------- |
-| **Self-hosted (Ollama/LM Studio)** | Free | GPU with 4-24GB VRAM |
-| **Hugging Face Inference** | Varies | API credits |
-| **Cloud vLLM** | Compute cost | GPU rental |
+## Deployment options
 
-### Hardware Requirements
+!!! tip "Choose a deployment that fits your constraints"
 
-| Model Size | Minimum VRAM | Recommended |
-| :--------- | :----------- | :---------- |
-| 1B parameters | 2GB | 4GB |
-| 3B parameters | 6GB | 8GB |
-| 8B parameters | 16GB | 24GB |
-| 70B parameters | 140GB | 8x A100/H100 |
-| 405B parameters | 800GB+ | Multi-GPU cluster |
+    Model weights may be available for local use, but running them still
+    requires suitable hardware or an API provider. Check the specific model
+    license and provider terms.
+
+### Common deployment paths
+
+| Method | Requirements |
+| :----- | :----------- |
+| **Self-hosted (Ollama/LM Studio)** | Hardware suitable for the selected model |
+| **Hugging Face Inference** | A configured provider account |
+| **Cloud vLLM** | A compatible hosted GPU environment |
+
+### Hardware planning
+
+There is no universal VRAM table: requirements depend on parameter count,
+quantization, context length, runtime overhead, and whether the model is split
+across devices. Start with the model card and runtime estimate, leave headroom
+for the context window, and measure load time and generation speed on the
+machine that will run the workload.
 
 ## Video Overview
 
@@ -123,7 +137,7 @@ ollama pull dolphin3.0-llama3.1-8b
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-model_name = "cognitivecomputations/Dolphin3.0-Llama3.1-8B"
+model_name = "dphn/Dolphin3.0-Llama3.1-8B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 ```
@@ -131,8 +145,14 @@ model = AutoModelForCausalLM.from_pretrained(model_name)
 ### Using vLLM (Production)
 
 ```bash
-vllm serve cognitivecomputations/Dolphin3.0-Llama3.1-8B
+vllm serve dphn/Dolphin3.0-Llama3.1-8B
 ```
+
+## Verification
+
+- **Last reviewed:** 2026-09-09
+- **Primary sources:** [Dolphin 3.0 Llama 3.1 8B model card](https://huggingface.co/dphn/Dolphin3.0-Llama3.1-8B), [Hugging Face model-loading documentation](https://huggingface.co/docs/transformers/models)
+- **Scope:** Model-card ownership, checkpoint naming, Transformers loading, licensing cautions, and deployment guidance were reviewed. Other Dolphin checkpoints and runtime commands require their own current model-card verification.
 
 ## Resources
 
@@ -143,4 +163,6 @@ vllm serve cognitivecomputations/Dolphin3.0-Llama3.1-8B
 
 ---
 
-> **Disclaimer:** Dolphin is an uncensored model. You're responsible for the content you create using it.
+> **Disclaimer:** You are responsible for evaluating model outputs, complying
+> with the applicable model license, and keeping unsafe or sensitive workloads
+> within an environment you control.

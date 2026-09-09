@@ -16,76 +16,86 @@ keywords:
        alt="Perplexity AI via Composio" />
 </div>
 
-Perplexity via Composio is straightforward using either the CLI or MCP method. Both handle authentication securely and enable tasks like AI search, summarization, and multi-turn queries.
+This page describes two ways to connect Perplexity through Composio: the
+Composio-assisted setup and a direct MCP configuration. The exact tools and
+authentication screens may change, so use the current Composio dashboard and
+Hermes MCP documentation when they differ from this example.
 
 ## Prerequisites
 
-Install Node.js (v18+) and ensure Hermes is set up on your machine or server.
+Ensure Hermes is installed and working on your machine or server. Install
+Node.js only if the Composio CLI or a selected local MCP server requires it.
 
-!!! tip "Security"
-    Composio is SOC 2 Type 2 compliant, encrypting all credentials at rest and in transit.
+!!! warning "Review access before connecting"
+    Composio can connect Hermes to external accounts. Read the requested scopes,
+    connect only the Perplexity capability you need, and do not paste API keys
+    into chat messages or commit them to `config.yaml`.
 
 ## CLI Method (Recommended for Personal Use)
 
-1. Install Composio CLI by running the install script or pasting `https://composio.dev/hermes` into Hermes chat — it handles installation automatically.
+1. Install the Composio CLI from the [official Composio setup page](https://composio.dev/hermes),
+   or ask Hermes to use that setup link. The current installer command is:
+
+   ```bash
+   curl -fsSL https://composio.dev/install | bash
+   ```
+
 2. Prompt Hermes: **"Authenticate with Composio"** to link your account.
 
 !!! warning "OAuth required on first use"
-    The Composio MCP endpoint uses OAuth 2.1 PKCE. On first connection, you'll need to run `hermes mcp test composio` in an interactive terminal to complete the browser-based authorization flow. This cannot be done from a non-interactive session.
+    The Composio MCP endpoint uses browser-based OAuth. Complete the first
+    authorization in an interactive session; a headless session may require
+    the redirect or authorization step to be completed separately.
 
-3. Ask Hermes: **"Connect to Perplexity"** or request a Perplexity task (e.g., "Summarize latest AI news via Perplexity") — it prompts OAuth authentication.
-4. Test with a query like **"Generate a story about space travel using Perplexity"** — Hermes now accesses Perplexity tools natively via CLI commands.
+3. Ask Hermes to connect to Perplexity or request a read-only task such as
+   **"Find and summarize the latest official release notes for Zensical"**.
+4. Confirm the returned sources and the connected tool name before attempting
+   any action that writes to an external service.
 
-Then Hermes will report after finishing setup:
+After setup, verify the connection with:
 
 ```text
-Here's what I've done and where things stand:
-
-    Done:
-    - Added composio MCP server to ~/.hermes/config.yaml at https://connect.composio.dev/MCP with OAuth auth
-    - Server is enabled and listed in hermes mcp list
-
-    The OAuth hurdle:
-
-    The Composio MCP endpoint requires OAuth 2.1 PKCE authorization on first use. The MCP SDK tries to open a browser for the login flow, which can't complete in a non-interactive environment like this. The connection fails with "Session terminated" because the OAuth redirect can't be handled without browser interaction.
-
-    To complete setup, run this once in an interactive terminal:
-
-
-    hermes mcp test composio
-
-
-    This will:
-    1. Open a browser window for Composio OAuth login
-    2. After you authorize, it'll show all available Composio tools (1000+ integrations)
-    3. From there you can select which apps you want to connect
-
-    What Composio gives you: 1000+ tool integrations including Gmail, GitHub, HubSpot, Salesforce, Slack, Linear, Notion, Airtable, Stripe, and many more. Since you've been working with GitHub and productivity tools, Composio would let you manage those directly through tool calls rather than browser automation.
-
-    Want me to save this as a skill so we can revisit it, or would you prefer to run the interactive OAuth step now?
+hermes mcp list
 ```
+
+Look for a connected `composio` server and then run a small read-only query.
 
 ## MCP Method (For Advanced/Remote Setups)
 
-1. Visit [dashboard.composio.dev](https://dashboard.composio.dev), copy your Connect MCP URL and API key.
-2. Edit Hermes config file (typically `~/.hermes/config.yaml` or via UI) to add the MCP endpoint:
+1. Visit [Connect my agent in the Composio dashboard](https://dashboard.composio.dev/)
+   and copy the current MCP connection instructions. Prefer the OAuth setup
+   when it is available.
+2. Edit Hermes config file (typically `~/.hermes/config.yaml`) with the URL
+   and authentication shape supplied by Composio:
 
 ```yaml
 mcp_servers:
-    - url: "YOUR_MCP_URL"
-    api_key: "YOUR_API_KEY"
+  composio:
+    url: "https://connect.composio.dev/mcp"
+    auth: oauth
+    timeout: 180
+    connect_timeout: 60
 ```
 
-1. Restart Hermes and prompt **"Connect to Perplexity via MCP"** — it discovers and loads Perplexity tools dynamically.
-2. Verify with a test: Hermes can now select models, refine queries, and retrieve cited answers and images.
+3. Restart Hermes and run `hermes mcp list`.
+4. Ask for a read-only Perplexity search, then inspect the returned citations.
 
 ## Verification and Tips
 
 !!! tip "Inspect tools and schemas"
-    Run `composio tools info perplexityai` in terminal to inspect tools and schemas. This shows the exact parameters available for Perplexity queries.
+    Inspect the connected tools in Hermes before using them. Tool names and
+    schemas are supplied by the current Composio connection and may change.
 
-- For cross-app workflows, connect more apps via Composio (e.g., Slack, Notion).
-- Provide feedback to Hermes for better adaptation.
+- For cross-app workflows, connect additional apps only when the task needs
+  them, and review each requested scope.
+- Treat Perplexity answers as research leads: open the cited sources and verify
+  important claims independently.
 
 !!! warning "Troubleshooting"
     If issues arise, check `composio dev logs tools` or the [Composio docs](https://docs.composio.dev).
+
+## Verification
+
+- **Last reviewed:** 2026-09-09
+- **Primary sources:** [Composio Hermes setup](https://composio.dev/hermes), [Composio Connect MCP with Hermes](https://composio.dev/toolkits/composio_search/framework/hermes-agent), [Hermes MCP documentation](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp)
+- **Scope:** Installer, OAuth-first setup, Hermes configuration shape, and safety guidance were checked against current primary documentation. Perplexity tool names, account requirements, and Composio dashboard labels may change.

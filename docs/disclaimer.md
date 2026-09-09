@@ -25,7 +25,7 @@ This is a personal blog with notes on:
 
 ## Not Responsible For
 
-!!! danger "No Warranty"
+!!! warning "No Warranty"
 
     All content is provided **as-is** without any warranty. Specifically:
 

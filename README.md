@@ -55,14 +55,14 @@ See [disclaimer docs page](./docs/disclaimer.md) for full details.
 ## Local Development
 
 ```bash
-# Install dependencies (pin to version used by this project)
-pip install zensical==0.0.45
+# Sync the locked build environment (UV installs Python 3.13 when needed)
+uv sync --locked
 
 # Build the site
-zensical build --clean
+uv run zensical build --clean
 
 # Serve locally
-zensical serve
+uv run zensical serve
 ```
 
 ## Contributing

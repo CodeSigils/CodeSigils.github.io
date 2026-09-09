@@ -1,0 +1,8 @@
+[project]
+name = "code-sigils"
+version = "0.0.0"
+description = "Code Sigils static site build environment"
+requires-python = ">=3.13"
+dependencies = [
+    "zensical==0.0.60",
+]

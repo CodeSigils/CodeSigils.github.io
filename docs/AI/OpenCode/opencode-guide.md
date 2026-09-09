@@ -46,15 +46,11 @@ OpenCode is an **open source AI coding agent** that helps developers write, debu
   <iframe src="https://www.youtube.com/embed/ul7zuyATDqE" allowfullscreen></iframe>
 </div>
 
-### Key Statistics
+### Project status
 
-| Metric | Value |
-| :----- | :---- |
-| **GitHub Stars** | 140K+ |
-| **Contributors** | 850+ |
-| **Monthly Developers** | 6.5M+ |
-| **Commits** | 11,000+ |
-| **License** | MIT / Apache 2.0 |
+OpenCode is an actively developed open-source project. For current releases,
+supported features, and licensing details, use its [official
+documentation](https://dev.opencode.ai/docs) and [repository](https://github.com/anomalyco/opencode).
 
 ### Core Philosophy
 
@@ -207,13 +203,6 @@ sudo pacman -S opencode           # Stable
 paru -S opencode-bin              # AUR (Latest)
 ```
 
-**Using Go:**
-
-```bash
-# Requires Go 1.21+
-go install github.com/anomalyco/opencode@latest
-```
-
 ### Windows Installation
 
 **Using Chocolatey:**
@@ -351,11 +340,12 @@ OpenCode connects to virtually any LLM via Models.dev:
 | **Local Models** | Ollama, LM Studio, LocalAI |
 | **Subscriptions** | GitHub Copilot, ChatGPT Plus/Pro |
 | **Routers** | OpenRouter, Models.dev |
-| **Open Models** | Hugging Face (17+ providers) |
+| **Open Models** | Hugging Face and other open-model providers |
 
 ### Hugging Face Integration
 
-OpenCode natively supports **Hugging Face Inference Providers** - giving you access to open models from 17+ providers including Hugging Face, Together AI, Hyperbolic, and more.
+OpenCode supports **Hugging Face Inference Providers**, giving you access to
+open models through the providers currently listed by Hugging Face.
 
 #### Quick Setup
 
@@ -426,7 +416,7 @@ A curated list of tested and verified models:
 
 - Benchmarked specifically for coding agents
 - No performance downgrade or routing to cheaper models
-- Pay-as-you-go pricing
+- Provider billing and usage terms vary
 - Team workspace management
 
 **Free Models:**
@@ -897,9 +887,10 @@ jobs:
   opencode:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run OpenCode
-        uses: anomalyco/opencode/github@latest
+        # OpenCode v1.18.30; pin the action to the release commit.
+        uses: anomalyco/opencode/github@3104c1428ec91f809e5ab86631300de41eb6952e
         with:
           model: anthropic/claude-sonnet-4-20250514
           prompt: "Code review for the PR changes"
@@ -953,12 +944,9 @@ Best for: Project setup, large refactors, debugging, testing, code migration.
 
 | Feature | **OpenCode** | **Claude Code** |
 | :------ | :----------- | :-------------- |
-| **GitHub Stars** | 140K+ | 20K+ |
 | **License** | MIT | Proprietary |
-| **Provider Support** | 75+ providers | Anthropic only |
 | **Plugin System** | 20+ events | 3 phases |
 | **Interface** | TUI, Desktop, IDE | CLI only |
-| **Pricing** | Free + optional Zen | Uses Anthropic API |
 
 ### OpenCode vs Cursor
 
@@ -967,7 +955,6 @@ Best for: Project setup, large refactors, debugging, testing, code migration.
 | **Focus** | Terminal-native | IDE-centric |
 | **Model Support** | Any provider | Custom models |
 | **Open Source** | Yes | Partial |
-| **Price** | Free | $20/mo+ |
 
 ### When to Use OpenCode
 

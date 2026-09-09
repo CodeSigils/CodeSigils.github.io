@@ -10,7 +10,16 @@ keywords:
   - AI
 ---
 
-open-mem is a plugin for [OpenCode](https://opencode.ai) that gives your AI assistant memory across sessions. It runs in the background, capturing what you do, compressing it into structured observations, and recalling it next session.
+open-mem is a community plugin for [OpenCode](https://opencode.ai) that aims
+to provide memory across sessions. Its capture, compression, storage, and
+configuration behavior can change between releases; verify the current plugin
+documentation before enabling it on an important project.
+
+!!! warning "Review captured data"
+
+    Treat captured commands, file contents, and summaries as potentially
+    sensitive. Inspect the plugin configuration and local database location
+    before using it in a repository containing credentials or private data.
 
 <div class="image-wrapper">
   <img src="/assets/images/opencode-screenshot.webp"
@@ -257,6 +266,11 @@ Returns `status.queue.mode`:
 | **License** | MIT | AGPL / proprietary |
 
 ---
+
+!!! note "Review status"
+
+    Last editorial review: 2026-09-09. The installation and feature examples
+    still require verification against the plugin's current release.
 
 ## Further Reading
 

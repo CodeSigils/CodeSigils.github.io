@@ -1,6 +1,6 @@
 ---
 title: Hermes AI Agent Guide
-description: Complete guide to Hermes AI Agent - an open source AI agent with 68 built-in tools, memory system, MCP integration, and cross-session recall capabilities.
+description: Practical guide to Hermes Agent, including installation, memory, skills, MCP integrations, and cross-session workflows.
 keywords:
   - hermes
   - AI agent
@@ -16,13 +16,29 @@ keywords:
        alt="Hermes AI Agent" />
 </div>
 
-The self-improving AI agent built by Nous Research — the only AI agent with a built-in learning loop.
+Hermes is an AI agent built by Nous Research with persistent memory, skills,
+and several ways to interact with it.
 
 ## What is Hermes AI Agent?
 
-Hermes AI Agent is an autonomous AI assistant that goes beyond simple chatbots. It learns from your interactions, creates skills from experience, persists knowledge across sessions, and builds a deepening model of who you are over time.
+Hermes Agent is an autonomous assistant that can use tools, retain selected
+context across sessions, and load reusable skills. These features are useful
+when a task spans more than one conversation, but they also make it important
+to understand what data is stored and which tools are enabled.
 
-Unlike traditional AI coding assistants tethered to an IDE, Hermes runs anywhere — from your local terminal to a $5 VPS, Docker container, or serverless infrastructure.
+Unlike traditional AI coding assistants tethered to an IDE, Hermes can run in a
+local terminal, a container, or a hosted environment.
+
+!!! info "Technical jargon → In plain language"
+
+    **Technical jargon:** MCP (Model Context Protocol) lets Hermes connect to
+    tools that run outside the agent itself.
+
+    **In plain language:** You can add a compatible server so Hermes can use a
+    browser, database, or other external service.
+
+    **Why it matters:** Each connection expands what Hermes can access, so add
+    only the servers and tools needed for the task.
 
 ## Key Capabilities
 
@@ -39,14 +55,20 @@ Access Hermes from multiple platforms:
 - Email
 - And more...
 
-### Built-in Learning
+### Memory and Skills
 
-- **Memory System** — MEMORY.md and USER.md persist context across sessions
-- **Skills Creation** — Auto-generates reusable skills from complex tasks
-- **Skill Self-Improvement** — Skills improve during use
-- **Cross-Session Recall** — FTS5 search with LLM summarization
+- **Memory system** — Selected context can persist across sessions
+- **Skills** — Reusable `SKILL.md` instructions can be loaded for specific tasks
+- **Cross-session recall** — Stored observations can be searched and summarized
 
-### 68 Built-in Tools
+!!! warning "Review what the agent can access"
+
+    Hermes can run terminal commands, read and modify files, use networked
+    services, and connect to external MCP servers. Start with the smallest
+    useful toolset, keep credentials out of prompts and configuration files,
+    and use a separate test project until the workflow is understood.
+
+### Built-in Tools
 
 | Category | Tools |
 | :------- | :---- |
@@ -58,11 +80,11 @@ Access Hermes from multiple platforms:
 | Automation | `cronjob`, `send_message` |
 | Delegation | Delegate subagents |
 
-### Research Ready
+### Research and extension surfaces
 
 - **Batch Trajectory Generation** — Generate training data at scale
 - **Atropos RL** — Reinforcement learning environments
-- **MCP Integration** — Connect any MCP server
+- **MCP integration** — Connect compatible external tool servers
 - **Tool-calling Training** — Export to ShareGPT format
 
 <div class="youtube-video-wrapper">
@@ -74,7 +96,7 @@ Access Hermes from multiple platforms:
 !!! tip "Quick Install"
 
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+    curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
     ```
 
 After installation:
@@ -87,14 +109,20 @@ hermes  # Start chatting!
 ## Quick Start
 
 ```bash
-# Interactive CLI
-hermes
+# Interactive setup (recommended first run)
+hermes setup --portal
 
-# Choose your model provider
+# Interactive CLI
+hermes chat
+
+# Choose or change your model provider later
 hermes model
 
 # Configure toolsets
 hermes tools
+
+# Check the installation and configuration
+hermes doctor
 
 # Start messaging gateway
 hermes gateway
@@ -136,7 +164,7 @@ hermes gateway
 **Multi-Model Comparison**
 
 - Mixture of Agents (MOA) routing
-- 200+ models via OpenRouter
+- Multiple models via OpenRouter
 - Benchmark workflows
 
 **Agent Architecture Research**
@@ -176,7 +204,8 @@ Hermes supports multiple providers:
 # Set provider
 hermes model
 
-# Options: Nous Portal, OpenRouter, OpenAI, Kimi, MiniMax, custom
+# Provider options change over time; use the interactive list rather than
+# relying on a static list in an article.
 ```
 
 ### Toolsets
@@ -197,6 +226,12 @@ hermes gateway setup
 hermes gateway start
 ```
 
+## Verification
+
+- **Last reviewed:** 2026-09-09
+- **Primary sources:** [Hermes Agent documentation](https://hermes-agent.nousresearch.com/docs/), [Hermes quickstart](https://hermes-agent.nousresearch.com/docs/getting-started/quickstart), [MCP documentation](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp)
+- **Scope:** Installation, first-run commands, memory/skills wording, and MCP guidance were checked against the current official documentation. Provider names, tool availability, and messaging integrations may change.
+
 ## Resources
 
 - [Official Documentation](https://hermes-agent.nousresearch.com/docs/)
@@ -205,5 +240,3 @@ hermes gateway start
 - [Skills Hub](https://agentskills.io)
 
 ---
-
-> **Last Updated:** April 2026

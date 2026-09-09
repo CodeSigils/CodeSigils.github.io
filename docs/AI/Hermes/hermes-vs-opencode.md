@@ -1,6 +1,6 @@
 ---
 title: Hermes AI vs OpenCode
-description: Comparison between Hermes AI and OpenCode - two powerful open source AI coding agents. Features, tools, memory, and use case differences.
+description: Practical comparison of Hermes Agent and OpenCode by workflow, memory, integrations, and software-development use cases.
 keywords:
   - hermes
   - opencode
@@ -15,7 +15,16 @@ keywords:
        alt="Hermes Agent Banner" />
 </div>
 
-A comparison of two open-source AI agent platforms.
+This comparison is about fit, not a ranking. Hermes is oriented toward a
+persistent general-purpose assistant; OpenCode is oriented toward software
+work in a repository. Both can be extended, and the right choice depends on
+the task you want to repeat.
+
+!!! note "Comparison scope"
+
+    Product capabilities, provider integrations, and account options change.
+    Treat the table as a starting point, then verify the specific workflow in
+    the official documentation before committing to it.
 
 ## Official Links
 
@@ -23,31 +32,28 @@ A comparison of two open-source AI agent platforms.
 
 - **Website**: https://hermes-agent.ai
 - **GitHub**: https://github.com/NousResearch/hermes-agent
-- **Documentation**: https://hermes-agent.nousresearch.com/docs
-- **Cloud Service**: https://flyhermes.ai
+- **Documentation**: https://hermes-agent.nousresearch.com/docs/
 
 ### OpenCode
 
 - **Website**: https://opencode.ai
 - **GitHub**: https://github.com/anomalyco/opencode
-- **Documentation**: https://docs.opencode.ai
-- **Zen (Optimized Models)**: https://opencode.ai/zen
+- **Documentation**: https://dev.opencode.ai/docs
+- **Zen (Curated Models)**: https://opencode.ai/zen
 
 ## Overview
 
 | Feature               | **Hermes AI**                                                 | **OpenCode**                                      |
 | :-------------------- | :------------------------------------------------------------ | :---------------------------------------------- |
-| **Focus**            | General autonomous agent for automation, memory, workflows     | Coding-focused AI assistant                       |
-| **Publisher**        | Nous Research (open source)                                    | Anomaly (open source)                            |
-| **GitHub Stars**     | ~128K                                                        | ~153K                                            |
-| **Persistent Memory**| Built-in, learns and improves over time                        | No (session-based)                               |
-| **Skills System**    | Auto-creates reusable skills from tasks                        | Not built-in                                     |
-| **Scheduling**       | Cron-based task scheduling                                     | Not supported                                    |
-| **Subagents**        | Spawn parallel workers (up to 3 concurrent)                    | Multi-session parallel agents                    |
-| **Built-in Tools**   | 68                                                           | Varies by model                                  |
-| **Platforms**        | Telegram, Discord, Slack, WhatsApp, CLI                        | Terminal, Desktop app, IDE extension             |
-| **Model Support**    | 200+ providers, BYOK, local via Ollama                         | Claude, GPT, Gemini, Copilot, 75+ total          |
-| **Use Case**        | General automation, research, personal assistant               | Software engineering, coding tasks                |
+| **Focus**             | General assistant, automation, memory, and messaging          | Software development in a repository             |
+| **Publisher**         | Nous Research                                               | Anomaly                                           |
+| **Memory**            | Persistent memory can be enabled and configured             | Session context and project instructions         |
+| **Reusable guidance** | Skills and context files                                    | Project instructions, plugins, and MCP servers   |
+| **Scheduling**        | Built-in scheduled workflows                                | Usually handled by an external scheduler         |
+| **Delegation**        | Subagents and multi-agent workflows                         | Parallel sessions and agent workflows            |
+| **Interfaces**        | CLI, desktop, and messaging gateways                        | Terminal, desktop, and editor integrations       |
+| **Model support**     | Multiple providers, including local options                 | Multiple cloud and local providers                |
+| **Best starting point** | A repeatable assistant or automation workflow             | A bounded coding task with tests and review      |
 
 ## Key Differences
 
@@ -55,12 +61,12 @@ A comparison of two open-source AI agent platforms.
 
 Hermes is a **general-purpose autonomous agent** designed for:
 
-- **Persistent memory** that improves over time through usage
-- **Auto-generated skills** from completed tasks
+- **Persistent memory** for selected context across sessions
+- **Reusable skills** and context files for recurring tasks
 - **Multi-platform deployment** (Telegram, Discord, Slack, WhatsApp)
 - **Task scheduling** with cron-like automation
 - **Subagent delegation** for parallel workflows
-- Self-hosting with MIT license or cloud deployment via flyhermes.ai
+- Self-hosting options documented by the project
 
 ### OpenCode
 
@@ -68,22 +74,22 @@ OpenCode is a **coding-focused AI assistant** optimized for:
 
 - **Software development** with LSP support for auto-loading language servers
 - **IDE integration** via desktop app and editor extensions
-- **Shareable sessions** with reference links
-- **GitHub Copilot and ChatGPT Plus/Pro** native integration
+- **Shareable sessions** where supported by the current release
+- **Provider and account integrations** documented by the current release
 - **Multi-session parallel agents** on the same project
-- Privacy-first with no code/context data storage
+- A repository-centered workflow for inspecting, changing, and verifying code
 
 ## Summary
 
 !!! tip "Choose Hermes AI if you need"
     - A personal AI assistant with memory across sessions
     - Multi-platform automation (chat, scheduling, subagents)
-    - Self-improving capabilities that compound over time
+    - Reusable memory, skills, and scheduled workflows
 
 !!! tip "Choose OpenCode if you need"
     - A dedicated coding assistant with IDE support
     - LSP-aware code editing and navigation
-    - Quick integration with GitHub Copilot or ChatGPT accounts
+    - A repository-centered workflow with tests and code review
 
 ## Further Reading
 
@@ -91,13 +97,13 @@ OpenCode is a **coding-focused AI assistant** optimized for:
 
 - [Self-Improving AI Guide](https://hermes-agent.ai/blog/self-improving-ai-guide)
 - [Features Overview](https://hermes-agent.nousresearch.com/docs/user-guide/features/overview/)
-- [Model Agnostic - 200+ Models](https://hermes-agent.ai/features/model-agnostic)
+- [Model-agnostic features](https://hermes-agent.ai/features/model-agnostic)
 - [YouTube: Hermes AI - Automate ANYTHING](https://www.youtube.com/watch?v=YtfROZK1BDM)
 
 ### OpenCode
 
-- [OpenCode Documentation](/docs)
-- [OpenCode Enterprise](/enterprise)
+- [OpenCode Documentation](https://dev.opencode.ai/docs)
+- [OpenCode Repository](https://github.com/anomalyco/opencode)
 - [GitHub Repository README](https://github.com/anomalyco/opencode)
 
 ### Comparisons
@@ -108,4 +114,8 @@ OpenCode is a **coding-focused AI assistant** optimized for:
 
 ---
 
-_Report generated: April 2026_
+## Verification
+
+- **Last reviewed:** 2026-09-09
+- **Primary sources:** [Hermes Agent documentation](https://hermes-agent.nousresearch.com/docs/), [Hermes feature overview](https://hermes-agent.nousresearch.com/docs/user-guide/features/overview/), [OpenCode documentation](https://dev.opencode.ai/docs)
+- **Scope:** Official links and the workflow-level comparison were reviewed. Exact provider support, integrations, and interface availability may change between releases.

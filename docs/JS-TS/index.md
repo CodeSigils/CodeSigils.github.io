@@ -10,8 +10,15 @@ keywords:
   - frontend
 ---
 
-This section covers tools, best practices, and guides
-for JavaScript and TypeScript development.
+This section covers tools, workflows, and practical notes for JavaScript and
+TypeScript development. Tool behavior and recommendations change, so use the
+linked project documentation as the final authority.
+
+!!! note "Review status"
+
+    This landing page is an orientation page, not a complete JavaScript or
+    TypeScript course. Product-specific claims should be checked against the
+    linked official documentation before use. Last editorial review: 2026-09-09.
 
 ## Overview
 
@@ -25,7 +32,7 @@ for productive development.
 TypeScript adds static type checking to JavaScript, helping you catch errors
 early and improve code maintainability:
 
-!!! success "Benefits"
+!!! tip "Benefits"
 
     - **Type Safety**: Catch errors at compile time rather than runtime
     - **Better IDE Support**: Enhanced autocomplete, navigation, and refactoring

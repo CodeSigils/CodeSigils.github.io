@@ -13,18 +13,18 @@ This is a **Zensical** (Python static site generator) personal documentation sit
 
 ```bash
 # Build the site (outputs to ./site/)
-zensical build
+uv run zensical build
 
 # Clean build (removes old artifacts first)
-zensical build --clean
+uv run zensical build --clean
 
 # Local development server
-zensical serve
+uv run zensical serve
 ```
 
 **Important**: Build output goes to `./site/` directory, which is gitignored. Do not edit files in `site/` - edit source in `docs/` instead.
 
-**Current dependency**: zensical 0.0.45 (CI pins `==0.0.45`, `.venv/` uses `>=0.0.45,<0.0.46`)
+**Current dependencies**: `pyproject.toml` declares direct dependencies and the committed `uv.lock` resolves the complete graph. Use `uv sync --locked`; CI uses the same lockfile.
 
 ## Content Structure
 
@@ -85,6 +85,19 @@ GitHub Actions workflow in `.github/workflows/docs.yml`:
 > When adding, moving, or renaming folders under `docs/`, update `docs/admin/config.yml` to match. See [Content Collections](#content-collections-via-sveltia-cms) above.
 
 ## Content Guidelines
+
+These pages are authored technical articles, not search-result summaries. A
+useful page should explain the author’s recommendation and rationale, not only
+repeat vendor documentation or collect links. Lead with a recognizable reader
+problem, explain why before how, include a concrete scenario or experiment when
+appropriate, and close with a practical next step. Research and citations
+support the article’s judgment; they do not replace it. Community advice must
+be attributed and separated from official facts or locally reproduced practice.
+
+After factual verification, perform a developmental editing pass for human
+flow, transitions, examples, pacing, and a clear beginning, middle, and ending.
+Do not invent personal experience or opinions. If the author’s perspective is
+needed but missing, leave an explicit author note for review.
 
 ### No Local Article Links in Index Pages
 
