@@ -25,9 +25,10 @@ capability you can evaluate.
 Oh My OpenAgent (formerly associated with the Oh My OpenCode name) is a
 community project that adds opinionated agents, rules, hooks, skills, and MCP
 integrations around an agent host. It is not part of the OpenCode or OpenAI
-core distributions. Read the project’s current installation guide before
-running an installer: names, editions, defaults, and supported hosts are under
-active development.
+core distributions. Read the project’s [current installation
+guide](https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md)
+before running an installer: names, editions, defaults, and supported hosts are
+under active development.
 
 This page is a decision guide, not a feature catalogue. It helps you decide
 whether the extra layer earns its place in your workflow and how to test it
