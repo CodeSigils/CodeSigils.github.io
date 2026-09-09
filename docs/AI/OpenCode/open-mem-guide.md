@@ -1,6 +1,6 @@
 ---
-title: Open-Mem Plugin
-description: Persistent memory system for OpenCode - automatic session capture, AI compression, and context injection across coding sessions.
+title: Open-Mem for OpenCode
+description: A cautious guide to evaluating open-mem, a community memory plugin for OpenCode that captures and recalls project context.
 keywords:
   - opencode
   - open-mem
@@ -10,10 +10,21 @@ keywords:
   - AI
 ---
 
-open-mem is a community plugin for [OpenCode](https://opencode.ai) that aims
-to provide memory across sessions. Its capture, compression, storage, and
-configuration behavior can change between releases; verify the current plugin
-documentation before enabling it on an important project.
+There is a particular kind of frustration in a long coding project: you explain
+the same decision to an assistant again because the useful context stayed in a
+previous session. [open-mem](https://github.com/clopca/open-mem) is a community
+plugin for [OpenCode](https://opencode.ai) that tries to address that gap by
+capturing activity, compressing it into observations, and recalling selected
+context later.
+
+That convenience is also the reason to be careful. A memory plugin may see
+commands, file contents, and prompts that you would not normally store. I would
+test it on a small, non-sensitive project first and keep it only if the recalled
+context is more useful than the review and privacy burden.
+
+Its capture, compression, storage, and configuration behavior can change
+between releases; verify the current plugin documentation before enabling it on
+an important project.
 
 !!! warning "Review captured data"
 
@@ -26,16 +37,18 @@ documentation before enabling it on an important project.
        alt="OpenCode with open-mem plugin" />
 </div>
 
-## What It Does
+## How the memory pipeline works
 
-open-mem provides persistent memory for AI coding assistants through a three-phase workflow:
+open-mem describes a three-phase workflow:
 
-1. **Capture** — When you read files, run commands, or edit code, open-mem captures the outputs
-2. **Compress** — During idle time, AI compresses captures into structured observations
-3. **Recall** — Next session, a compact summary injects into the system prompt
+1. **Capture** — When you read files, run commands, or edit code, it captures outputs.
+2. **Compress** — During idle time, it turns captures into structured observations.
+3. **Recall** — In a later session, a compact index can be injected into the prompt.
 
 !!! tip "The Memory Pipeline"
-    open-mem captures tool executions automatically, compresses them using AI into typed observations (decision, bugfix, feature, refactor, discovery, change), and stores everything in a local SQLite database. The next session starts with context from where you left off.
+    The project stores its observations in SQLite and supports types such as
+    decisions, discoveries, bug fixes, features, refactors, and changes. Treat
+    recalled context as a suggestion to inspect, not as unquestioned truth.
 
 ---
 
@@ -48,6 +61,13 @@ npx open-mem
 ```
 
 This adds `open-mem` to your OpenCode plugin config automatically. It starts capturing from your next session.
+
+!!! tip "Make the first run reversible"
+
+    Try the plugin in a disposable repository, add `.open-mem/` to that
+    repository's `.gitignore`, and inspect what it records before connecting an
+    AI compression provider. A memory system is only useful when you trust what
+    it remembers.
 
 ### Manual Installation
 
@@ -68,8 +88,8 @@ Then add to your OpenCode config at `~/.config/opencode/opencode.json`:
 By default, open-mem uses a basic metadata extractor. For semantic compression, add an AI provider:
 
 ```bash
-# Google Gemini — free tier available
-export GOOGLE_GENERATIVE_AL_API_KEY=your_key_here
+# Google Gemini (optional)
+export GOOGLE_GENERATIVE_AI_API_KEY=your_key_here
 ```
 
 Also supports Anthropic, AWS Bedrock, OpenAI, and OpenRouter. Auto-detects from environment variables.
@@ -78,7 +98,7 @@ Also supports Anthropic, AWS Bedrock, OpenAI, and OpenRouter. Auto-detects from 
 
 ## Memory Tools
 
-open-mem provides 9 memory tools for interacting with your project memories:
+open-mem provides tools for interacting with project memories:
 
 | Tool | Purpose |
 | :--- | :------ |
@@ -149,17 +169,23 @@ Combines FTS5 full-text search, vector embeddings (via sqlite-vec), knowledge gr
 
 Automatic entity extraction with relationships. Graph-augmented search finds connections across sessions that keyword search would miss.
 
-### Progressive Disclosure
+### Progressive disclosure
 
-A token-budgeted index injects into the system prompt. The agent sees *what* exists and decides *what to fetch*. Typical compression ratio: ~96%.
+A token-budgeted index can be injected into the system prompt. The agent sees
+*what* exists and decides *what to fetch*, reducing the need to load every
+observation at once.
 
 ### Revision Lineage
 
 Observations are immutable. Updates create new revisions that supersede the previous one. Deletes are tombstones with full audit trail.
 
-### Privacy First
+### Privacy and retention
 
-All data stored locally in `.open-mem/`. Automatic redaction of API keys, tokens, passwords. Use `<private>` tags to exclude content entirely.
+The project documents local storage in `.open-mem/` and redaction or exclusion
+options. Verify those guarantees in the installed release, add the directory
+to `.gitignore`, and inspect the database before sharing a repository. Local
+storage does not by itself prevent a configured AI provider from receiving data
+for compression.
 
 !!! warning "Sensitive Data"
     Wrap sensitive content in `<private>` tags to exclude from memory entirely:
@@ -193,7 +219,9 @@ export OPEN_MEM_DASHBOARD=true
 # Access at http://localhost:3737
 ```
 
-Six pages: Timeline, Sessions, Search, Stats, Operations, Settings. The Settings page doubles as a config control plane with live preview and rollback.
+The dashboard includes timeline, session, search, statistics, operations, and
+settings views. Treat its controls as release-dependent and verify the current
+documentation before relying on a particular workflow.
 
 ---
 
@@ -257,7 +285,7 @@ Returns `status.queue.mode`:
 | Feature | open-mem | Typical Alternatives |
 | :------ | :------- | :------------------- |
 | **Vector search** | Embedded (sqlite-vec) | External service |
-| **AI providers** | 5 + fallback chain | 1–3 |
+| **AI providers** | Multiple providers and fallback options | Varies |
 | **Search** | FTS5 + Vector + RRF + Graph | FTS5 only |
 | **Knowledge graph** | Yes | No |
 | **Revision history** | Immutable lineage | No |
@@ -287,6 +315,6 @@ Returns `status.queue.mode`:
 
 ## Official Links
 
-- **GitHub**: https://github.com/clopca/open-mem
-- **npm**: https://www.npmjs.com/package/open-mem
-- **Issues**: https://github.com/clopca/open-mem/issues
+- [GitHub repository](https://github.com/clopca/open-mem)
+- [npm package](https://www.npmjs.com/package/open-mem)
+- [Issue tracker](https://github.com/clopca/open-mem/issues)
