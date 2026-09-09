@@ -206,7 +206,11 @@ These standards **MUST** be followed for all articles in this repo:
 
 ### Admonitions (Important Notes)
 
-Always use admonitions to highlight important information, warnings, tips, and key takeaways. Every article should use them where relevant — they make content scannable and visually distinct.
+Use admonitions to highlight information that benefits from a visible signpost:
+important safety boundaries, practical tips, definitions, decisions, exceptions,
+or optional detail. Every article does not need the same number or type. Do not
+turn ordinary prose or every feature into a callout; keep each one concise and
+useful when scanned on its own.
 
 Supported admonition types in Zensical:
 
