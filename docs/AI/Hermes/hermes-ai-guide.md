@@ -88,7 +88,7 @@ Access Hermes from multiple platforms:
 - **Tool-calling Training** — Export to ShareGPT format
 
 <div class="youtube-video-wrapper">
-  <iframe src="https://www.youtube.com/embed/YtfROZK1BDM" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/YtfROZK1BDM" title="Hermes Agent overview video" allowfullscreen></iframe>
 </div>
 
 ## Installation

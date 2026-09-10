@@ -109,6 +109,7 @@ machine that will run the workload.
 
 <div class="youtube-video-wrapper">
   <iframe src="https://www.youtube.com/embed/xSqnWcLFd6Y"
+          title="Dolphin LLM overview video"
           allowfullscreen>
   </iframe>
 </div>

@@ -114,17 +114,17 @@ Code can also be highlighted inline: `#!python print("Hello, Python!")`.
 
 === "Python"
 
-```plain
-python
-    print("Hello from Python!")
-```
+    ```plain
+    python
+        print("Hello from Python!")
+    ```
 
 === "Rust"
 
-```plain
-rs
-    println!("Hello from Rust!");
-```
+    ```plain
+    rs
+        println!("Hello from Rust!");
+    ```
 
 ## Diagrams
 

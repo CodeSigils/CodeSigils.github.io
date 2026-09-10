@@ -50,7 +50,7 @@ debug, refactor, and understand code. It is primarily terminal-oriented, with
 additional desktop and IDE surfaces that vary by release.
 
 <div class="youtube-video-wrapper">
-  <iframe src="https://www.youtube.com/embed/ul7zuyATDqE" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/ul7zuyATDqE" title="OpenCode overview video" allowfullscreen></iframe>
 </div>
 
 ### Project status
