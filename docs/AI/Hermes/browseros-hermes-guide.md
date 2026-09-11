@@ -89,7 +89,7 @@ BrowserOS provides browser automation capabilities such as:
    # ~/.hermes/config.yaml
    mcp_servers:
      browseros:
-       url: "http://127.0.0.1:9239/mcp"
+       url: "<Server URL copied from chrome://browseros/mcp>"
        timeout: 120
        connect_timeout: 30
    ```
@@ -538,7 +538,7 @@ NVIDIA RTX 5090,in stock,https://newegg.com/product/...
   ```yaml
   mcp_servers:
     browseros:
-      url: "http://127.0.0.1:9239/mcp"
+      url: "<Server URL copied from chrome://browseros/mcp>"
       timeout: 180 # increased from 120
   ```
 
@@ -592,6 +592,10 @@ verified the scope and permissions of the connected tools.
 
 ## Verification
 
-- **Last reviewed:** 2026-09-09
+- **Last reviewed:** 2026-09-11
 - **Primary sources:** [BrowserOS MCP client documentation](https://docs.browseros.com/features/use-with-claude-code), [Hermes MCP documentation](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp)
-- **Scope:** Setup flow, MCP configuration shape, and safety guidance were checked against the current primary documentation. Tool names and optional BrowserOS features remain release-dependent.
+- **Scope:** Setup flow, MCP configuration shape, safety guidance, and the
+  installed BrowserOS tool inventory were checked against the current primary
+  documentation. The current documentation's port is illustrative; copy the
+  installed browser's Server URL. Tool names and optional BrowserOS features
+  remain release-dependent.
