@@ -168,14 +168,31 @@ Index pages (section landing pages like `docs/AI/index.md`, `docs/JS-TS/index.md
 | :---- | :------ | :------ |
 | **title**       | Page title                 | OpenCode Guide                        |
 | **description** | Meta description (~150 chars) | Complete guide to OpenCode...        |
-| **keywords**    | SEO keywords (comma-separated) | opencode, AI coding agent, terminal  |
+| **keywords**    | Optional discovery hints where useful | opencode, AI coding agent, terminal  |
 | **icon**        | Lucide icon name           | lucide/terminal                      |
 
-> **SEO Best Practices**
-> - Always add a unique `description` for each article
-> - Include primary keyword in title and description
-> - Use 3-5 relevant keywords, avoid keyword stuffing
-> - Description appears in search results and social previews
+> **Discoverability guidance**
+> - Use a clear, unique `title` and an accurate `description` when the page's
+>   content warrants them. Metadata helps readers and search engines understand
+>   a page; it does not replace useful, well-structured content.
+> - Do not force keywords, a fixed keyword count, headings, FAQs, or structured
+>   data into an article for ranking purposes. Add keywords only when they are
+>   meaningful metadata under the site's existing convention.
+> - Keep headings, link text, alt text, and visible body content descriptive.
+>   Accessibility is a reader-quality practice, not an SEO shortcut.
+
+### Analytics and indexing decisions
+
+The site declares its canonical URL in `zensical.toml` and its sitemap in
+`docs/robots.txt`. Treat Google Search Console, sitemap submission, analytics,
+cookie consent, and privacy-policy changes as maintainer decisions: inspect the
+deployed output and current provider documentation before proposing a change.
+
+Do not add Google Analytics, third-party tracking, consent banners, or custom
+analytics JavaScript merely because Zensical supports them. Add analytics only
+for a stated measurement question, with explicit authorization and appropriate
+privacy review. Search Console is the lower-burden first step for discovery and
+indexing questions.
 
 ## Local Development
 
