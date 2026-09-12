@@ -20,7 +20,7 @@ keywords:
        height="958" />
 </div>
 
-*Photo: [Tangle of coloured cables and connectors](https://freebie.photography/technology/wires.jpg) from [freebie.photography](https://freebie.photography/about.htm), used under its attribution licence.*
+<p class="image-attribution"><em>Photo: <a href="https://freebie.photography/technology/wires.jpg">Tangle of coloured cables and connectors</a> from <a href="https://freebie.photography/about.htm">freebie.photography</a>, used under its attribution licence.</em></p>
 
 An agent can follow an instruction perfectly and still do the wrong thing when
 the project gives it two slightly different versions of the same rule. I ran
