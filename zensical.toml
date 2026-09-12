@@ -227,10 +227,10 @@ features = [
   # https://zensical.org/docs/setup/navigation/#navigation-tabs
   #"navigation.tabs",
 
-  # When sticky tabs are enabled, navigation tabs will lock below the header
-  # and always remain visible when scrolling down.
+  # Sticky tabs require `navigation.tabs` above. Keep this disabled while the
+  # site uses its sidebar/section navigation.
   # https://zensical.org/docs/setup/navigation/#sticky-navigation-tabs
-  "navigation.tabs.sticky",
+  #"navigation.tabs.sticky",
 
   # A back-to-top button can be shown when the user, after scrolling down,
   # starts to scroll up again.
