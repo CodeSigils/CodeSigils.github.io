@@ -100,6 +100,20 @@ collections:
       - {label: Icon, name: icon, widget: string, required: false}
       - {label: Body, name: body, widget: markdown}
 
+  - name: ai_agent_work
+    label: Agent Work
+    folder: docs/AI/Agent-Work
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Description, name: description, widget: text, required: false, hint: "Meta description (150 chars) for SEO"}
+      - {label: Keywords, name: keywords, widget: list, required: false, hint: "AI agents, agent workflow, skills"}
+      - {label: Icon, name: icon, widget: string, required: false, hint: "lucide/bot"}
+      - {label: Body, name: body, widget: markdown}
+
   - name: ai_opencode
     label: OpenCode
     folder: docs/AI/OpenCode
