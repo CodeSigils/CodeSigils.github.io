@@ -11,11 +11,16 @@ keywords:
 ---
 
 <div class="image-wrapper">
-  <img src="/assets/images/agent-instruction-drift-wires.jpg"
-       alt="An overloaded telecom junction box filled with tangled cables" />
+  <img src="/assets/images/agent-instruction-drift-wires-1440.webp"
+       srcset="/assets/images/agent-instruction-drift-wires-768.webp 768w,
+               /assets/images/agent-instruction-drift-wires-1440.webp 1440w"
+       sizes="(max-width: 768px) calc(100vw - 2rem), 960px"
+       alt="Close-up of tangled coloured network cables and connectors"
+       width="1440"
+       height="958" />
 </div>
 
-*Photo: [Tangled telecom wires](https://commons.wikimedia.org/wiki/File:Tangled_telecom_wires.jpg) by [Tulumnes](https://commons.wikimedia.org/wiki/User:Tulumnes), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+*Photo: [Tangle of coloured cables and connectors](https://freebie.photography/technology/wires.jpg) from [freebie.photography](https://freebie.photography/about.htm), used under its attribution licence.*
 
 An agent can follow an instruction perfectly and still do the wrong thing when
 the project gives it two slightly different versions of the same rule. I ran
