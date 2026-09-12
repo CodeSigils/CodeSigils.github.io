@@ -14,7 +14,12 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/browseros/hermes-browseros-banner.webp"
-       alt="BrowserOS + Hermes Agent" />
+       alt="BrowserOS + Hermes Agent"
+       width="900"
+       height="626"
+       loading="eager"
+       fetchpriority="high"
+       decoding="async" />
 </div>
 
 BrowserOS is a Chromium-based browser with a built-in Model Context Protocol
