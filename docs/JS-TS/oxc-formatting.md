@@ -52,21 +52,21 @@ Or using other package managers:
 
 === "pnpm"
 
-```sh
+    ```sh
     pnpm add -D oxc
-```
+    ```
 
 === "yarn"
 
-```sh
+    ```sh
     yarn add -D oxc
-```
+    ```
 
 === "bun"
 
-```sh
+    ```sh
     bun add -D oxc
-```
+    ```
 
 ### Standalone Formatter (oxcfmt)
 
@@ -74,21 +74,21 @@ You can also install the standalone formatter package [`oxcfmt`](https://www.npm
 
 === "pnpm"
 
-```sh
+    ```sh
     pnpm add -D oxcfmt
-```
+    ```
 
 === "npm"
 
-```sh
+    ```sh
     npm install --save-dev oxcfmt
-```
+    ```
 
 === "yarn"
 
-```sh
+    ```sh
     yarn add -D oxcfmt
-```
+    ```
 
 ## Basic Usage
 
