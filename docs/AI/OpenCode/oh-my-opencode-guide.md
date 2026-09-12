@@ -12,7 +12,9 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/oh-my-opencode.webp"
-       alt="Oh My OpenAgent" />
+       alt="Oh My OpenAgent"
+       width="2000"
+       height="675" />
 </div>
 
 There is a familiar moment in an AI coding project: the basic chat works, but

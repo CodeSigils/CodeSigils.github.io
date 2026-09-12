@@ -11,7 +11,9 @@ keywords:
 
 <div class="logo-wrapper">
   <img src="/assets/images/notebooklm-logo.png"
-       alt="NotebookLM by Google" />
+       alt="NotebookLM by Google"
+       width="800"
+       height="800" />
 </div>
 
 NotebookLM can help organize source material, while OpenCode can use a

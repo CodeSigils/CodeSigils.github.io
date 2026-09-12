@@ -11,7 +11,9 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/opencode-screenshot.webp"
-       alt="OpenCode model selection screen" />
+       alt="OpenCode model selection screen"
+       width="1200"
+       height="978" />
 </div>
 
 If you are trying to learn OpenCode without committing to another bill, the

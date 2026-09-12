@@ -14,7 +14,9 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/opencode-screenshot.webp"
-       alt="OpenCode Screenshot" />
+       alt="OpenCode Screenshot"
+       width="1200"
+       height="978" />
 </div>
 
 OpenCode is the kind of tool that becomes useful before it becomes

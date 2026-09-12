@@ -13,7 +13,9 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/hermes-perplexity.jpg"
-       alt="Perplexity AI via Composio" />
+       alt="Perplexity AI via Composio"
+       width="1200"
+       height="630" />
 </div>
 
 This page describes two ways to connect Perplexity through Composio: the

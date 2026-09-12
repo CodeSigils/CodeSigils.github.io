@@ -13,7 +13,9 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/hermes-banner.png"
-       alt="Hermes AI Agent" />
+       alt="Hermes AI Agent"
+       width="1145"
+       height="196" />
 </div>
 
 Hermes is an AI agent built by Nous Research with persistent memory, skills,

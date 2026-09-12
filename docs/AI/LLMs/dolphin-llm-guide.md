@@ -14,7 +14,9 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/llm-model-dolphincoder.webp"
-       alt="Dolphin LLM" />
+       alt="Dolphin LLM"
+       width="1024"
+       height="512" />
 </div>
 
 The Dolphin family is a community-maintained collection of model variants and

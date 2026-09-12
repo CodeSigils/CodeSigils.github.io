@@ -28,13 +28,17 @@ uv run zensical serve
 
 ## Content Structure
 
-The site uses a flat category convention -- articles live in one-level subfolders under `docs/`:
+The site uses top-level categories under `docs/`. A main category, such as
+`AI/`, may contain multiple subcategories; articles live in the appropriate
+existing category or subcategory:
 
 ```
 docs/
-├── <category>/          # Section or collection (e.g. AI/, JS-TS/)
+├── <category>/          # Top-level section or collection (e.g. AI/, JS-TS/)
 │   ├── index.md         # Section landing page
-│   └── *.md             # Articles in this section
+│   ├── *.md             # Articles directly in this section
+│   └── <subcategory>/   # Optional nested section (e.g. OpenCode/)
+│       └── *.md         # Articles in this subsection
 ├── admin/
 │   └── config.yml       # Sveltia CMS collections
 └── assets/images/       # Images (deployed to /assets/images/)
@@ -42,8 +46,9 @@ docs/
 
 For an exact listing of all articles, run: `find docs/ -name '*.md' | sort`
 
-New categories = new folder under `docs/` + new collection in `docs/admin/config.yml`.
-New articles = new `.md` file inside an existing category folder.
+New top-level categories or subcategories require a matching collection in
+`docs/admin/config.yml`. New articles are `.md` files inside the appropriate
+existing category or subcategory.
 
 ## Content Collections (via Sveltia CMS)
 

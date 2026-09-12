@@ -34,7 +34,10 @@ an important project.
 
 <div class="image-wrapper">
   <img src="/assets/images/opencode-screenshot.webp"
-       alt="OpenCode with open-mem plugin" />
+       alt="OpenCode with open-mem plugin"
+       width="1200"
+       height="978"
+       loading="lazy" />
 </div>
 
 ## How the memory pipeline works

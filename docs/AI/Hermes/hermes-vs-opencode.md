@@ -12,7 +12,9 @@ keywords:
 
 <div class="image-wrapper">
   <img src="/assets/images/hermes-banner.png"
-       alt="Hermes Agent Banner" />
+       alt="Hermes Agent Banner"
+       width="1145"
+       height="196" />
 </div>
 
 This comparison is about fit, not a ranking. Hermes is oriented toward a
