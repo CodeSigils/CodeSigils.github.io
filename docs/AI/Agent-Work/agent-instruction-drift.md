@@ -10,6 +10,13 @@ keywords:
   - maintenance
 ---
 
+<div class="image-wrapper">
+  <img src="/assets/images/agent-instruction-drift-wires.jpg"
+       alt="An overloaded telecom junction box filled with tangled cables" />
+</div>
+
+*Photo: [Tangled telecom wires](https://commons.wikimedia.org/wiki/File:Tangled_telecom_wires.jpg) by [Tulumnes](https://commons.wikimedia.org/wiki/User:Tulumnes), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
 An agent can follow an instruction perfectly and still do the wrong thing when
 the project gives it two slightly different versions of the same rule. I ran
 into that while tightening one of my own agent-assisted projects. The surface
