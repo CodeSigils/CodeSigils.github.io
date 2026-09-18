@@ -87,17 +87,27 @@ learning starts immediately. Requires **OpenCode 1.18 or newer**.
 
 ### Optional model tuning
 
-To set options, turn the plugin entry into a `[name, options]` pair. For
-example, to make extraction use a specific cheap model and shorten the idle
-wait for testing:
+To set options, turn the plugin entry into a `[name, options]` pair. The
+example below overrides the model used for extraction and shortens the idle
+wait for testing. **The model in the example is just an example — any model
+available in your OpenCode provider list works here.** It does not have to be
+`opencode-zen/nemotron-3-ultra-free`; your default `small_model` or any other
+resolvable model ID behaves the same way. The example deliberately uses an
+open-weight model — NVIDIA Nemotron — a popular choice for the cheap,
+high-throughput extraction pass:
 
 ```json
 {
   "plugin": [
-    ["opencode-codex-memory@0.7.2", { "extract_model": "opencode-zen/big-pickle", "min_rollout_idle_hours": 1 }]
+    ["opencode-codex-memory@0.7.2", { "extract_model": "opencode-zen/nemotron-3-ultra-free", "min_rollout_idle_hours": 1 }]
   ]
 }
 ```
+
+Verify a model ID before relying on it: confirm it resolves in your configured
+providers (`opencode models | grep nemotron` lists
+`opencode-zen/nemotron-3-ultra-free`), then run `memory_inspect` after a
+session to see which model each phase actually used.
 
 Model precedence per phase: plugin option (`extract_model` / `consolidation_model`)
 → OpenCode config (`small_model` / `model`) → a `model` on your own
