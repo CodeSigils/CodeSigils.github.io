@@ -22,9 +22,22 @@ conventions, how a repo is built, what worked and what did not — and puts that
 context back in front of the agent in later conversations.
 
 Despite the name, **no Codex subscription or OpenAI account is needed**. The
-plugin is a faithful port of the memory system in OpenAI's Codex, and it works
-out of the box with zero extra configuration, using whatever models you already
-have configured in OpenCode.
+plugin is a port of the memory system in OpenAI's Codex, but it does need a
+model that the account may use for its background helper sessions. Installing
+the plugin is not proof that every model listed by OpenCode will work for
+extraction and consolidation.
+
+!!! warning "Check background-model access before relying on it"
+
+    The plugin makes separate `memorize-extract` and `memorize` model calls;
+    they can have different quota, structured-output, or free-tier eligibility
+    from an interactive chat. In a 2026-09-19 test of plugin v0.7.2 with
+    OpenCode 1.18.31, OpenCode's free `big-pickle` tier rejected those helper
+    calls with “free tier can only be used from within OpenCode”, even though
+    the interactive client was the official OpenCode app. Treat a free tier as
+    unverified until a real extraction succeeds, and consult the
+    [current changelog](https://github.com/moritzfl/opencode-codex-memory/blob/main/CHANGELOG.md)
+    for newer-release behavior.
 
 !!! warning "Memory is still data"
 
@@ -71,12 +84,14 @@ Add the pinned plugin to your OpenCode config at `~/.config/opencode/opencode.js
 
 ```json
 {
-  "plugin": ["opencode-codex-memory@0.7.2"]
+  "plugin": ["opencode-codex-memory@0.7.6"]
 }
 ```
 
-That is it. The memory workspace is created on first use and background
-learning starts immediately. Requires **OpenCode 1.18 or newer**.
+OpenCode downloads the plugin when it loads the configuration. The memory
+workspace is created on first use; eligible sessions are then processed after
+the configured idle wait. Requires **OpenCode 1.18 or newer** and a provider
+that permits the plugin's background model calls.
 
 !!! tip "Pin the version"
 
@@ -88,26 +103,30 @@ learning starts immediately. Requires **OpenCode 1.18 or newer**.
 ### Optional model tuning
 
 To set options, turn the plugin entry into a `[name, options]` pair. The
-example below overrides the model used for extraction and shortens the idle
-wait for testing. **The model in the example is just an example — any model
-available in your OpenCode provider list works here.** It does not have to be
-`opencode-zen/nemotron-3-ultra-free`; your default `small_model` or any other
-resolvable model ID behaves the same way. The example deliberately uses an
-open-weight model — NVIDIA Nemotron — a popular choice for the cheap,
-high-throughput extraction pass:
+example below explicitly sets both background phases and shortens the idle wait
+for testing. Replace the placeholder IDs with models that your account has
+verified for background calls; a model appearing in `opencode models` is not,
+by itself, a guarantee of free-tier access or enough quota.
 
 ```json
 {
   "plugin": [
-    ["opencode-codex-memory@0.7.2", { "extract_model": "opencode-zen/nemotron-3-ultra-free", "min_rollout_idle_hours": 1 }]
+    [
+      "opencode-codex-memory@0.7.6",
+      {
+        "extract_model": "your-provider/your-extraction-model",
+        "consolidation_model": "your-provider/your-consolidation-model",
+        "min_rollout_idle_hours": 1
+      }
+    ]
   ]
 }
 ```
 
 Verify a model ID before relying on it: confirm it resolves in your configured
-providers (`opencode models | grep nemotron` lists
-`opencode-zen/nemotron-3-ultra-free`), then run `memory_inspect` after a
-session to see which model each phase actually used.
+providers with `opencode models`, then run `memory_inspect` after an eligible
+session to see which model each phase actually used and whether either phase
+was rejected or placed in quota backoff.
 
 Model precedence per phase: plugin option (`extract_model` / `consolidation_model`)
 → OpenCode config (`small_model` / `model`) → a `model` on your own
@@ -212,6 +231,17 @@ phase-2 status, effective options, and an eligibility reminder.
 | Pin stuck on old version | OpenCode freezes bare package specs; pin an explicit version and bump it. |
 | Consolidation never runs | Check `phase2_status` and `phase2_last_error`; failed artifacts keep the workspace diff for the next run. |
 | `stage1_error` mentions usage/rate limit | Temporary provider quota; jobs retry automatically once quota returns. |
+| A helper reports a free-tier or provider-access error | The provider may permit interactive chats but reject background helper sessions. Use a model and plan verified for both phases, disable background learning, or remove the plugin. |
+
+### Disable or remove it safely
+
+To stop the background calls without losing stored memories, keep the plugin
+entry and set `"generate_memories": false`. To remove it, delete the plugin
+entry from `opencode.json` and restart OpenCode. Removing the plugin does not
+automatically erase the data it created: back up first if needed, then remove
+its downloaded package under `$XDG_CACHE_HOME/opencode/packages/` and its
+`$XDG_DATA_HOME/opencode/memories/` workspace only if you also want to discard
+the stored summaries and notes.
 
 ---
 
@@ -244,9 +274,10 @@ stays exactly what you wrote.
 
 !!! note "Review status"
 
-    Last editorial review: 2026-09-18. Installation, options, and behavior
-    reflect opencode-codex-memory v0.7.2; verify against the plugin's current
-    release before relying on a particular workflow.
+    Last editorial review: 2026-09-19. Installation examples use
+    opencode-codex-memory v0.7.6. The free-tier helper-call limitation above
+    was observed with v0.7.2 on OpenCode 1.18.31; verify current behavior
+    against the plugin's release notes and your own provider account.
 
 ## Further Reading
 
