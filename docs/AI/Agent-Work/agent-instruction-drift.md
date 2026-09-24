@@ -83,6 +83,16 @@ skills should load, it now routes by what the changed code touches
 and applies each rule only when that rule's own compatibility caveat
 matches.
 
+The tooling vendors describe the same shape. Codex reads `AGENTS.md`
+before it starts, layering concise project guidance over smaller
+override files for specific directories
+([Codex and AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)).
+Copilot keeps one repository-wide `copilot-instructions.md` and adds
+path-scoped instruction files only where a folder genuinely needs its
+own ([repository instructions](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions)).
+Neither treats a second parallel copy of a rule as the fix. The owner
+stays; the exceptions are pointed to and kept small.
+
 !!! tip "Review overlap before adding another rule"
 
     Before adding a new instruction, search for an existing explanation of the
@@ -96,11 +106,22 @@ this project, the first cleanup passes exposed stale paths and references that
 had lost their context. A small check against the current project state is
 useful when it tests a specific claim that has already failed.
 
+A check is also a different kind of surface from an instruction. An
+instruction file says, "This is how we work"; a check says, "Prove it."
+Adding a verification step does not carry the same drift risk as a
+second version of a rule, because a check either passes against the
+current state or it does not. It cannot quietly hold an old wording
+the way duplicated guidance can.
+
 That is different from adding a checker for every imaginable inconsistency.
 Verification should support the source of truth, not become a second source of
 truth with its own unexplained rules. A check can drift too: it may protect the
 wrong path, run at the wrong time, or quietly stop representing the risk it was
-meant to catch.
+meant to catch. It should not outlive its contract either: when the protected
+claim disappears, when the check costs more than the harm it prevents, or when
+a better control replaces it, repair or retire it. A check that stays after its
+reason has left is drift of another kind—process with no memory of why
+it exists.
 
 My working rule is now modest: add a control after an observed failure or a
 clear project contract, keep its purpose easy to explain, and revisit it when
