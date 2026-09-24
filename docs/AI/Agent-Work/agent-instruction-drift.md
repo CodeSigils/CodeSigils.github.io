@@ -66,6 +66,23 @@ document is justified when a rule genuinely applies only to a directory, tool,
 or workflow. Splitting it merely because a heading feels important often creates
 another surface to keep current.
 
+Even a well-justified split can drift. My `py-review` skill is built
+around a routing table: it tells a reviewing agent which focused
+checklist to load for a given kind of code change. Each checklist
+owns its own territory, and the table is the pointer back to it. Then
+the table quietly stopped reaching rules it was meant to point at.
+The checklists carried signals—duplicated logic, string construction,
+constants—that the routing row for style work never listed. A
+reviewer following the table would skip checks the checklists
+documented; one opening a checklist directly would apply them. Two
+catalogs, neither of them wrong on its own
+([the repair](https://github.com/CodeSigils/py-review-skill/commit/a32600df068aac5e0eff25e14f049b1d7ae2104e)).
+The same pass tightened the version guidance: where the router used
+to let a project's Python version decide that all relevant core
+skills should load, it now routes by what the changed code touches
+and applies each rule only when that rule's own compatibility caveat
+matches.
+
 !!! tip "Review overlap before adding another rule"
 
     Before adding a new instruction, search for an existing explanation of the
