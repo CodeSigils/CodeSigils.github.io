@@ -12,10 +12,11 @@ letter about it. The list just slowly stops being true.
 
 I keep an awesome list about agent trust and identity
 ([awesome-agent-trust](https://github.com/CodeSigils/awesome-agent-trust)).
-Writing it was the easy part. Keeping it honest took a year of small
-failures, a validation pipeline, and a maintenance ritual that still
-surprises me with what it catches. This is the story of the machinery,
-and of the real commit history that made each piece necessary.
+Writing it was the easy part. Keeping it honest took a few months of
+small failures, a validation pipeline, and a maintenance ritual that
+still surprises me with what it catches. This is the story of the
+machinery, and of the real commit history that made each piece
+necessary.
 
 ## A list becomes a governed list
 
@@ -69,7 +70,7 @@ surfaced for a human to triage ([advisory-baseline.json](https://github.com/Code
 
 This split matters more than it sounds. If stars blocked inclusion,
 small and honest projects would never get in. If license absence
-blocked inclusion, the list would lose half of the ecosystem's useful
+blocked inclusion, the list would shut out many genuinely useful
 tools before their authors ever added a license. The gate should only
 enforce what the list actually promises — that the thing exists and is
 what it claims to be. Everything else is a question, not a verdict.
@@ -125,10 +126,13 @@ For non-GitHub links generally — documentation sites, specification
 pages, project homes — a separate reporter checks every external link
 and labels it ok, redirect, broken, or unknown, degrading from HEAD to
 GET requests before giving up ([report-external-links.py](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/scripts/report-external-links.py)).
-Because the network itself lies, an API or network error never counts
-as evidence of deletion. A failed request fails closed: it blocks the
-merge rather than pretending the link is gone. It is far better to ask
-a human than to delete an entry on the word of a transient timeout.
+Because the network itself lies, a link the reporter cannot reach is
+labelled unknown, never broken — an API or network error is not
+evidence of deletion. The same principle sits in the gate: when the
+validator's API call fails, that is a hard error, and the merge is
+blocked rather than the entry being dropped on the word of a
+transient timeout. It is far better to ask a human than to delete an
+entry.
 
 ## Submitting a pull request to a governed list
 
