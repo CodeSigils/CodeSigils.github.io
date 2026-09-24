@@ -22,8 +22,9 @@ necessary.
 
 For the first weeks it was just a README with categories, exactly like
 every other awesome list. Then the failures started — dead links,
-archived repositories, entries whose sources no longer resolved. The
-fix was not to be more careful. It was to stop being the only checker.
+archived repositories, entries whose sources no longer resolved.
+What actually fixed it was to stop being the only checker and let the
+machine watch the same links.
 
 The repository grew a criteria file that says what belongs and what
 cannot be merged ([CRITERIA.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/CRITERIA.md)),
