@@ -31,7 +31,8 @@ toward the center of long contexts
 
 The conversation trace is the visible record of that room — what the
 human and agent said to each other. It preserves the dialogue until
-it is pruned, but it records what was said, not what was understood.
+it is pruned, but it keeps the words and loses the understanding
+behind them.
 A decision that looks agreed-upon in the log may never have been
 shared understanding.
 
