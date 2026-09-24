@@ -45,7 +45,8 @@ such as delegating repository exploration or applying shared project rules.
 
 The trade-off is additional behavior to understand and maintain. More agents,
 hooks, and MCP tools also add context and permissions. OpenCode’s own MCP
-documentation warns that a large tool catalog can consume significant context.
+documentation warns that MCP tools add to the model's context and a large
+catalog can exceed its context limit.
 
 The useful test is not whether the plugin looks impressive in a README. It is
 whether a task that matters to you becomes easier to plan, review, and repeat.
@@ -57,17 +58,18 @@ native Codex documentation. It gives you a baseline for what Codex already
 provides, which makes the extension's value—and its extra moving parts—much
 easier to judge:
 
-- [Codex overview](https://developers.openai.com/codex/) — the main map of
+- [Codex overview](https://learn.chatgpt.com/docs) — the main map of
   Codex surfaces and workflows.
-- [Codex CLI](https://developers.openai.com/codex/cli/) — the terminal workflow
+- [Codex CLI](https://learn.chatgpt.com/docs/codex/cli) — the terminal workflow
   and its command reference.
-- [Codex IDE extension](https://developers.openai.com/codex/ide/) — the editor
+- [Codex IDE extension](https://learn.chatgpt.com/docs/codex/ide) — the editor
   integration, when you prefer to work inside an IDE.
-- [Build skills](https://developers.openai.com/codex/skills/) — how reusable
+- [Build skills](https://learn.chatgpt.com/docs/build-skills) — how reusable
   task-specific instructions are packaged and applied.
-- [MCP for Codex](https://developers.openai.com/codex/mcp/) — connecting Codex
-  to external tools and data through the Model Context Protocol.
-- [Configuration reference](https://developers.openai.com/codex/config-reference/)
+- [MCP for Codex](https://learn.chatgpt.com/docs/extend/mcp?surface=cli) —
+  connecting Codex to external tools and data through the Model Context
+  Protocol.
+- [Configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
   — the settings and policy surface to review before changing defaults.
 
 !!! tip "Establish a baseline"
@@ -216,7 +218,7 @@ to drift as both the host and the community project evolve.
 
 ## Verification
 
-- **Last reviewed:** 2026-09-09
+- **Last reviewed:** 2026-09-24
 - **Primary sources:** the upstream Oh My OpenAgent repository and its current
   installation guide; OpenCode’s MCP documentation.
 - **Scope:** project identity, installation direction, and safety guidance were
