@@ -134,6 +134,32 @@ claims only to satisfy search algorithms. Preserve nuance and the author’s
 recommendation even when search-oriented phrasing suggests a simpler “best”
 answer.
 
+### Technical accuracy protocol
+
+For technology articles, investigate factual claims before presenting them as
+settled. This includes product behavior, versions, models, provider limits,
+pricing, compatibility, commands, configuration, security, and “works out of
+the box” claims.
+
+1. Separate documented facts, local observations, community reports, and
+   inferences. Do not present one as another.
+2. Use current primary sources for product-dependent claims and reproduce the
+   decisive workflow when practical. A package installation, listed model, or
+   interactive success alone is not end-to-end evidence.
+3. For volatile, version-sensitive, or decision-critical claims, state the
+   version and relevant provider/account constraints; retain a source URL and
+   review date, and state remaining uncertainty.
+4. Replace a broad claim that cannot be verified with a caveat or
+   `[AUTHOR NOTE: ...]`. Never invent a test result, compatibility guarantee,
+   or personal experience.
+5. Perform factual verification as a separate pass before developmental
+   editing, then run the site’s normal link and build checks.
+
+`/home/sand/projects/digital-basement/docs/editorial-core.md` is the canonical
+editorial and evidence policy. The `/home/sand/projects/zensical-skill`
+workflow is for Zensical content and rendering validation; it does not decide
+factual accuracy or editorial judgment.
+
 ### Agent and skill use
 
 Agents editing articles should behave as bounded research assistants and
