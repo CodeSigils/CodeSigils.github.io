@@ -47,9 +47,9 @@ One copy can be updated, another can keep the old wording, and an agent has no
 reliable way to infer which version is the intended one. Even a human reviewer
 can skim past the difference because the text is familiar.
 
-The lesson was not to force every project into one enormous `AGENTS.md` file.
-Large instruction files have their own failure mode: important rules become
-hard to find. The useful question is narrower:
+Nothing in this diagnosis says to force every project into one enormous
+`AGENTS.md` file; large files have their own failure mode, and important
+rules become hard to find. The useful question is narrower:
 
 > Where is the one place that owns this rule, and what should every other place
 > do instead of repeating it?
