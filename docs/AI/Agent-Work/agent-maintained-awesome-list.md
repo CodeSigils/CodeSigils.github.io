@@ -130,6 +130,48 @@ as evidence of deletion. A failed request fails closed: it blocks the
 merge rather than pretending the link is gone. It is far better to ask
 a human than to delete an entry on the word of a transient timeout.
 
+## Submitting a pull request to a governed list
+
+So what does a valid pull request actually look like? The gate
+itself is the first contract, and branch protection enforces it on
+every merge — including on my own admin commits, because the
+repository does not use approving reviews and I am the only
+maintainer. The validation workflow runs against every pull request
+to main, on every push to main, weekly, and whenever I trigger it by
+hand. The checks are not a suggestion; the branch settings make them
+a condition of merging.
+
+Before a proposal ever reaches that pipeline, the entry must satisfy
+the criteria file — and it doubles as a checklist an agent can run
+through before opening anything. The repository exists and is not
+archived. A software entry carries an open-source license and lives
+on a recognised code host. The description says more than the title;
+the entry follows the list's format and sits in the right
+alphabetical place inside its category. The pipeline refuses what it
+cannot verify; the softer items on that checklist are tracked, not
+ignored — they are the difference between a proposal that is clearly
+valid and one that starts its life trailing advisories.
+
+Stars are advisory and never gate anything. But a proposal for a
+low-star project still brings its evidence: the contribution guide
+asks for independent verification, documented adoption, or foundation
+governance, alongside a request for a `repo-exceptions.json` entry
+naming the project, the exact checks waived, a reason, and a future
+review date ([contributing.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/contributing.md)).
+The waiver is not granted silently; it is requested inside the pull
+request and recorded by the maintainer, so the decision is documented
+at the same moment as the addition.
+
+The human rituals sit on top of the same machine. The contribution
+guide and the pull request template set the shape every submission is
+expected to follow ([pull request
+template](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/pull_request_template.md)),
+and the pre-submission ritual — `npm ci`, `npm run lint`, `npm test`,
+then the two local validator scripts — is the same work the pipeline
+does, run by hand first. An agent that wants to contribute starts
+there: prove the entry against the criteria locally, submit the
+evidence with the proposal, and let branch protection do the arguing.
+
 ## Two state files that never mix
 
 The advisory machinery lives in two files, and keeping them separate
