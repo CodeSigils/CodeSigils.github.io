@@ -189,7 +189,7 @@ availability from a cached screenshot or an old article.
 
 ## Verification
 
-- **Last reviewed:** 2026-09-09
+- **Last reviewed:** 2026-09-25
 - **Primary sources:** OpenCode models, CLI, providers, and Zen documentation;
   Hugging Face’s OpenCode integration documentation.
 - **Scope:** setup flow, model discovery, and the recommendation method were
