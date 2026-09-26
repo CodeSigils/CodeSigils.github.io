@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <link rel="alternate" type="application/rss+xml" title="Code Sigils" href="{{ 'feed.xml' | url }}">
+{% endblock %}
