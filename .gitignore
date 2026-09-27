@@ -3,6 +3,7 @@ site/
 build/
 dist/
 artifacts/
+lychee/
 
 # Build/dependency caches
 .cache/

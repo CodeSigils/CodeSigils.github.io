@@ -1,6 +1,13 @@
-name: External link check
+name: Link check
 
 on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - docs/**
+      - .github/workflows/links.yml
   workflow_dispatch:
   schedule:
     - cron: "23 3 * * 1"
@@ -9,7 +16,27 @@ permissions:
   contents: read
 
 jobs:
-  links:
+  # Deterministic and offline: every root-relative image and internal link must
+  # resolve to a file that exists. This is the check worth blocking on, because
+  # it fails only on something we control.
+  local:
+    name: Local file links
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Resolve local images and internal links
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          # --root-dir is required for root-relative links such as
+          # /assets/images/foo.webp to resolve against docs/.
+          args: --no-progress --offline --root-dir docs --exclude '^mailto:' 'docs/**/*.md'
+
+  # Third-party links rot, and some hosts (npmjs) answer 403 to bots regardless
+  # of whether the page exists. Kept advisory so upstream rot never blocks a
+  # docs deploy; the weekly schedule is the review loop.
+  external:
+    name: External links (advisory)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -18,4 +45,11 @@ jobs:
         continue-on-error: true
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
-          args: --no-progress --exclude '^/' --exclude '^mailto:' 'docs/**/*.md'
+          # --root-dir keeps the local links resolving here too, so this job's
+          # failures are genuinely external rather than unresolvable paths.
+          args: >-
+            --no-progress --max-concurrency 8 --max-retries 2
+            --root-dir docs
+            --exclude '^mailto:'
+            --exclude '^https://www\.npmjs\.com/'
+            'docs/**/*.md'
