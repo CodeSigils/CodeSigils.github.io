@@ -24,11 +24,12 @@ system harder to explain when something goes wrong. My recommendation is to
 earn that complexity gradually: first learn the host, then add only the
 capability you can evaluate.
 
-[Oh My OpenAgent](https://github.com/code-yeongyu/oh-my-openagent) (formerly
-associated with the Oh My OpenCode name) is a community project that adds
-opinionated agents, rules, hooks, skills, and MCP integrations around an agent
-host. It is not part of the OpenCode or OpenAI core distributions. Read the
-project’s [current installation
+[Oh My OpenAgent](https://github.com/code-yeongyu/oh-my-openagent) is the
+project’s current name, while the older Oh My OpenCode name may still appear in
+package and command names. Upstream describes it as a personal side project for
+the community. Its documented editions add opinionated agents, rules, hooks,
+skills, and MCP integrations. It is not part of the OpenCode or OpenAI core
+distributions. Read the project’s [current installation
 guide](https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md)
 before running an installer: names, editions, defaults, and supported hosts are
 under active development.
@@ -51,30 +52,21 @@ catalog can exceed its context limit.
 The useful test is not whether the plugin looks impressive in a README. It is
 whether a task that matters to you becomes easier to plan, review, and repeat.
 
-### Explore the official Codex ecosystem first
+### Explore your native host first
 
-Before adding a community layer, I recommend spending a little time with the
-native Codex documentation. It gives you a baseline for what Codex already
-provides, which makes the extension's value—and its extra moving parts—much
-easier to judge:
+Before adding a community layer, spend a little time with the documentation for
+the host you already use. That gives you a baseline for what it provides and
+makes the extension's value—and its extra moving parts—easier to judge. Read
+the other path only if you expect to use both hosts.
 
-- [Codex overview](https://learn.chatgpt.com/docs) — the main map of
-  Codex surfaces and workflows.
-- [Codex CLI](https://learn.chatgpt.com/docs/codex/cli) — the terminal workflow
-  and its command reference.
-- [Codex IDE extension](https://learn.chatgpt.com/docs/codex/ide) — the editor
-  integration, when you prefer to work inside an IDE.
-- [Build skills](https://learn.chatgpt.com/docs/build-skills) — how reusable
-  task-specific instructions are packaged and applied.
-- [MCP for Codex](https://learn.chatgpt.com/docs/extend/mcp?surface=cli) —
-  connecting Codex to external tools and data through the Model Context
-  Protocol.
-- [Configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
-  — the settings and policy surface to review before changing defaults.
+| Host | Read first |
+| :--- | :--- |
+| OpenCode | [Introduction](https://opencode.ai/docs), [configuration](https://opencode.ai/docs/config/), [agents](https://opencode.ai/docs/agents/), and [MCP servers](https://opencode.ai/docs/mcp-servers/) — the native setup, policy, delegation, and external-tool surfaces. |
+| Codex | [CLI](https://learn.chatgpt.com/docs/codex/cli), [skills](https://learn.chatgpt.com/docs/build-skills), [MCP](https://learn.chatgpt.com/docs/extend/mcp?surface=cli), and [configuration](https://learn.chatgpt.com/docs/config-file/config-reference) — the corresponding workflow and extension surfaces. |
 
 !!! tip "Establish a baseline"
 
-    Try one small task with native Codex, note what you still need, and only
+    Try one small task with the native host, note what you still need, and only
     then evaluate whether the extension solves that specific gap.
 
 ### What you might gain
@@ -98,15 +90,15 @@ For this project, the most interesting reasons to evaluate it are practical:
 
 The same layer can make a workflow harder to explain. Hooks and agents may hide
 why a file changed, MCP tools add context and external access, and configuration
-can drift as the host and extension evolve. The upstream documentation also
-describes an autonomous mode with broad permissions; that is not a sensible
-default for a first evaluation.
+can drift as the host and extension evolve. The upstream documentation describes
+an autonomous mode with broad permissions. For a first evaluation, I would not
+treat that as a sensible default.
 
 I would evaluate it without autonomous permissions in a disposable repository,
 using one bounded task and a short before-and-after record. Keep it only if it
 improves planning, review, or repeatability enough to justify the added
-complexity. If native Codex already handles the task clearly, the extension is
-not necessary.
+complexity. If the native host already handles the task clearly, the extension
+is not necessary.
 
 !!! warning "Treat it as privileged software"
 
@@ -122,11 +114,11 @@ edition, a Codex CLI light edition, and a standalone beta edition. The package
 and command names are in transition, so copy the command from the current
 upstream installation guide rather than from a cached blog post.
 
-Official project links:
+Current references:
 
 - [Repository and README](https://github.com/code-yeongyu/oh-my-openagent)
 - [Current installation guide](https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md)
-- [OpenCode MCP documentation](https://dev.opencode.ai/docs/mcp-servers/)
+- [OpenCode MCP documentation](https://opencode.ai/docs/mcp-servers/)
 
 ## Installation workflow
 
@@ -140,15 +132,27 @@ Official project links:
    features in project notes.
 5. Start with optional features disabled; enable one capability at a time.
 
-The upstream README currently shows this OpenCode command as its primary path:
+The upstream installation material currently gives these host-specific paths:
+
+OpenCode:
 
 ```bash
 bunx oh-my-openagent install
 ```
 
-Treat that command as release-specific. Verify the package and requested
-permissions immediately before execution. Do not pipe an unfamiliar installer
-into a shell without first reading its source or release documentation.
+Codex CLI:
+
+```bash
+npx lazycodex-ai install
+```
+
+Use each command only for the host named above. The standalone beta is outside
+this guide's OpenCode-and-Codex focus, so its command is not reproduced here.
+
+Treat the commands as release-dependent, not as version-pinned references.
+Verify each package and its requested permissions immediately before execution.
+Do not pipe an unfamiliar installer into a shell without first reading its
+source or release documentation.
 
 ## Configuration principles
 
@@ -169,10 +173,10 @@ Use this progression:
 ### MCP tools
 
 **MCP (Model Context Protocol)** lets an agent call tools exposed by another
-process. Prefer a least-privilege configuration: enable only the server needed
-for the task, restrict credentials to the smallest scope, and disable it when
-finished. Ask the agent to name the MCP tool it plans to use before an action
-that changes external state.
+process or a remote service. Prefer a least-privilege configuration: enable
+only the server needed for the task, restrict credentials to the smallest scope,
+and disable it when finished. Ask the agent to name the MCP tool it plans to use
+before an action that changes external state.
 
 ### Agents and hooks
 
@@ -218,9 +222,9 @@ to drift as both the host and the community project evolve.
 
 ## Verification
 
-- **Last reviewed:** 2026-09-24
+- **Last reviewed:** 2026-09-25
 - **Primary sources:** the upstream Oh My OpenAgent repository and its current
-  installation guide; OpenCode’s MCP documentation.
+  installation guide; OpenCode and Codex CLI documentation.
 - **Scope:** project identity, installation direction, and safety guidance were
   checked. Package names, editions, commands, defaults, agent lists, and model
   mappings remain release-dependent.
