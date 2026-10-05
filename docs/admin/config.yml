@@ -74,6 +74,20 @@ collections:
       - {label: Icon, name: icon, widget: string, required: false}
       - {label: Body, name: body, widget: markdown}
 
+  - name: linux
+    label: Linux
+    folder: docs/Linux
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Description, name: description, widget: text, required: false, hint: "Meta description (150 chars) for SEO"}
+      - {label: Keywords, name: keywords, widget: list, required: false, hint: "Linux, system administration, Samba"}
+      - {label: Icon, name: icon, widget: string, required: false, hint: "lucide/terminal"}
+      - {label: Body, name: body, widget: markdown}
+
   - name: ai
     label: AI Section
     folder: docs/AI
@@ -112,6 +126,20 @@ collections:
       - {label: Description, name: description, widget: text, required: false, hint: "Meta description (150 chars) for SEO"}
       - {label: Keywords, name: keywords, widget: list, required: false, hint: "AI agents, agent workflow, skills"}
       - {label: Icon, name: icon, widget: string, required: false, hint: "lucide/bot"}
+      - {label: Body, name: body, widget: markdown}
+
+  - name: ai_admin_work
+    label: Admin Work
+    folder: docs/AI/Admin-Work
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - {label: Title, name: title, widget: string, required: true}
+      - {label: Description, name: description, widget: text, required: false, hint: "Meta description (150 chars) for SEO"}
+      - {label: Keywords, name: keywords, widget: list, required: false, hint: "Linux administration, Samba, AI agents"}
+      - {label: Icon, name: icon, widget: string, required: false, hint: "lucide/server"}
       - {label: Body, name: body, widget: markdown}
 
   - name: ai_opencode
