@@ -1,12 +1,12 @@
 ---
 title: Disclaimer
-icon: lucide/shield-alert
-description: Important disclaimer about this site - personal opinions, no warranty, verify before use.
+description: Important disclaimer about this site - personal opinions, no warranty, must verify before use.
 keywords:
   - disclaimer
   - warranty
   - liability
   - terms
+icon: lucide/shield-alert
 ---
 
 !!! warning "Important Disclaimer"
@@ -61,6 +61,6 @@ Your experience may differ. Always verify against your own research.
 
 For concerns about specific content, please exercise your own judgment after verification.
 
----
+***
 
 _This disclaimer is part of the Code Sigils documentation._
