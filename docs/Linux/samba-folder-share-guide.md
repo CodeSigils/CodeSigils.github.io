@@ -45,11 +45,30 @@ closest to the file first, then work outward.
 
 ## 1. Inspect the machine before changing it
 
-Start with facts. These commands do not alter the system.
+Start with a small map of the machine. These commands do not alter the system.
+They answer the questions that later commands depend on: which distribution is
+running, which disk holds the files, which Linux account owns them, which
+address clients should use, and whether Samba or the firewall already has a
+configuration worth preserving.
+
+Knowing this landscape saves a surprising amount of time. A command that is
+correct for one machine can point at the wrong disk, user, interface, or subnet
+on another. Capture the results before changing anything, then use your own
+values in the steps that follow.
 
 ```bash
 # Distribution and package manager
 cat /etc/os-release
+
+# Confirm the example Linux account exists and learn its numeric user and group IDs
+getent passwd youruser
+id youruser
+
+# Show disks, filesystem types, labels, and UUIDs
+lsblk -f
+
+# List mounted NTFS filesystems, if the machine has any
+findmnt -t ntfs3,ntfs,fuseblk
 
 # The filesystem that actually contains the future share
 findmnt -T /mnt/one -o TARGET,SOURCE,FSTYPE,OPTIONS
@@ -57,19 +76,47 @@ findmnt -T /mnt/one -o TARGET,SOURCE,FSTYPE,OPTIONS
 # Persistent mount declarations, if any
 grep -nE 'ntfs|fuseblk' /etc/fstab
 
-# Network interfaces and routes
+# See the share path and its parent directories as Linux sees them
+ls -ld /mnt /mnt/one /mnt/one/KK_SHARE
+
+# Network interfaces, the addresses assigned to this machine, and its route out
 ip -o -f inet addr show
+hostname -I
 ip route
 
-# Existing Samba configuration and firewall state
-sudo testparm -s
-sudo ufw status verbose
+# Existing Samba service and packages, if Samba is already installed
+systemctl is-active smbd
+systemctl is-enabled smbd
+dpkg -l samba samba-common samba-common-bin smbclient cifs-utils
+
+# Existing Samba configuration, if the test tool is available
+if command -v testparm >/dev/null; then sudo testparm -s; fi
+
+# Existing UFW firewall rules, if UFW is installed
+if command -v ufw >/dev/null; then sudo ufw status verbose; fi
 ```
 
-The first `findmnt` result is especially important. Its `TARGET` column should
-be exactly `/mnt/one`, and its `SOURCE` and `FSTYPE` should describe the disk
-you meant to share. An unmounted mount point still accepts `mkdir`, but any
-files created there land on the filesystem underneath it instead.
+`hostname -I` gives a quick list of the machine's current addresses. Pair it
+with `ip route` to identify the active LAN address and default gateway. On a
+home network, an address such as `192.168.1.23/24` usually means the firewall
+subnet is `192.168.1.0/24`; confirm that from the actual route rather than
+copying the example.
+
+The `findmnt` result is equally important. Its `TARGET` column should be
+exactly `/mnt/one`, and its `SOURCE` and `FSTYPE` should describe the disk you
+meant to share. An unmounted mount point still accepts `mkdir`, but any files
+created there land on the filesystem underneath it instead.
+
+`lsblk -f` helps connect a visible disk to its filesystem type and UUID, while
+the `/etc/fstab` line shows how the system expects to mount it after a reboot.
+The UUID is a useful local identifier, but use a placeholder such as
+`UUID=YOUR-DISK-UUID` in notes you publish.
+
+Finally, read the service, package, Samba, and firewall output before making
+changes. An existing configuration may contain another share or a firewall rule
+you need to preserve. `dpkg -l` can return a non-zero status for an absent
+package; that is normal during this inspection. In its output, `ii` at the
+start of a line means the package is installed.
 
 ### A quick word on NTFS
 
