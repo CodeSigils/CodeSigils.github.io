@@ -9,7 +9,7 @@ media_folder: docs/assets/images
 public_folder: /assets/images
 
 media_library:
-  name: assets
+  name: default
   config:
     image:
       choose_url: true
