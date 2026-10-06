@@ -54,7 +54,7 @@ The initial request sounds like one line: "share this folder in my network",
 but in practice, it contains a handful of quieter questions:
 
 - Is the data disk actually mounted, or is `/mnt/one` only an empty directory
-  on the system disk today?
+  on the system disk today? (It's surprisingly easy to miss this.)
 - Which Linux account owns the files, and which Samba account may connect?
 - Does the server accept only modern SMB3 clients?
 - Is TCP port 445 open only to the home subnet, rather than to every network
@@ -63,22 +63,24 @@ but in practice, it contains a handful of quieter questions:
   devices without opening the share more widely?
 - Will the configuration still make sense when a second share appears later?
 
-None of these questions is exotic. They are exactly why a quick command copied
-from a forum post can be frustrating: it may create a share that works once,
-but leaves its assumptions invisible.
+None of these are exotic. They're the exact reasons why a quick one-liner from
+a forum can work once and then leave you wondering what assumptions were made.
+If you find yourself in that position, it's usually one of those quiet
+questions.
 
 The filesystem mattered especially in my case. The example share lives on an
 NTFS volume mounted at `/mnt/one`. NTFS and Linux do not represent ownership in
 quite the same way, so the mount options decide how Linux presents the files.
-That is not a reason to avoid Samba. It is a reason to check the mount before
-trying to repair a permission problem in Samba.
+That makes the mount the first place to check, before anyone starts repairing
+permission problems inside Samba.
 
 !!! note "A useful mental model"
 
-    Think of the setup as three gates. The disk mount decides whether Linux can
-    reach the files. Samba decides which authenticated network user may ask for
-    them. The firewall decides which machines are allowed to ask at all. A
-    share works only when all three agree.
+    If something goes wrong later, it's worth remembering the three gates: the disk
+    mount (can Linux reach the files?), Samba authentication (which authenticated
+    user can ask for them?), and the firewall (which machines can even reach Samba
+    on port 445). All three need to line up. A small mismatch in any of them tends
+    to produce confusing error messages.
 
 ## Where the agent was actually helpful
 
@@ -98,23 +100,22 @@ supported, but the security trade-offs need an explicit decision. That is a
 better lesson than replacing one slogan with another.
 
 The same happened with cloud-init, macOS NFS behavior, and Windows NFS
-availability. The agent did not merely make the guide longer. It separated
-what was documented, what depended on a particular configuration, and what was
-too broad to state as a rule.
+availability. The useful contribution was structure rather than length: the
+agent separated what was documented, what depended on a particular
+configuration, and what was too broad to state as a rule.
 
 ### It made the safety boundaries visible
 
 The resulting Samba setup has a few deliberately boring properties:
 
-- SMB3 is the minimum protocol, so SMB1 and SMB2 clients do not connect.
+- SMB3 is the minimum protocol, so SMB1 and SMB2 clients don't connect.
 - A named Samba user authenticates; guest access stays off.
-- The firewall permits TCP 445 only from the local subnet, such as
-  `192.168.1.0/24`.
+- The firewall permits TCP 445 only from the known local subnet.
 - Samba's configuration is checked before the service is restarted.
 - A local connection test comes before testing from another device.
 
-None of these is clever. Together, they turn "it seems to work" into a setup
-whose boundaries are easy to explain later.
+None of these are flashy. Together, though, they turn "it seems to work" into a
+setup whose boundaries are easier to explain later and easier to trust.
 
 ### It helped turn a successful command into a maintainable guide
 
@@ -124,8 +125,8 @@ expected outcomes. For example, the guide now distinguishes an unmounted disk
 from an empty-looking mount point, and it explains why appending a second share
 is safer than re-running the command that rewrites the whole `smb.conf` file.
 
-That is where the real time gain landed. Not in typing fewer commands, but in
-spending less time returning to the same uncertainty: which setting mattered,
+That is where the real time gain landed. The typing was never the slow part.
+The slow part was returning to the same uncertainty: which setting mattered,
 what was tested, and whether a convenient shortcut had widened access by
 accident.
 
@@ -152,18 +153,16 @@ mounted where the share expects it.
 ### Then, let the local network in and nobody else
 
 The firewall rule is deliberately narrow. It permits SMB's TCP port 445 from
-the home subnet, `192.168.1.0/24`, and nowhere else:
+the home subnet (for example `192.168.1.0/24`) and nowhere else:
 
 ```bash
-sudo ufw allow from 192.168.1.0/24 to any port 445 proto tcp
+sudo ufw allow from <your-subnet>/24 to any port 445 proto tcp
 sudo ufw status verbose
 ```
 
-`/24` is compact network notation for the addresses beginning with
-`192.168.1.`. It is only an example: the right subnet comes from the machine's
-own network settings. The important part is the shape of the rule: permit the
-known LAN, rather than opening the service to any network the machine happens
-to reach.
+`/24` is compact network notation for a local subnet. The exact value depends
+on your network; look it up from your interface and default route rather than
+assuming. It's far safer to permit only the network you know than to guess.
 
 ### Finally, add a share without erasing the first one
 
@@ -176,17 +175,16 @@ share, I backed up the configuration and used `tee -a`; the `-a` means append.
 sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak.$(date +%Y%m%d_%H%M%S)
 
 sudo tee -a /etc/samba/smb.conf > /dev/null << 'CONF'
-
 [MM_SHARE]
    comment = Second private LAN share
    path = /mnt/two/MM_SHARE
    browseable = yes
    read only = no
    guest ok = no
-   valid users = youruser
+   valid users = <your-user>
 
-   # NTFS3 presents this disk as youruser, so Samba performs file work as youruser too.
-   force user = youruser
+   # NTFS3 presents this disk as <your-user>, so Samba performs file work as <your-user> too.
+   force user = <your-user>
 CONF
 
 sudo testparm -s
@@ -196,12 +194,12 @@ sudo systemctl restart smbd
 The text between `<< 'CONF'` and the final `CONF` is a here-document: a tidy
 way to pass several lines to one command. The quoted marker keeps the shell
 from expanding anything inside it. The result is easy to read, easy to back up,
-and—most importantly—does not pretend that adding a second share is the same
-as rebuilding the whole configuration from scratch.
+and safe to run again, because appending never disturbs the share that is
+already there.
 
 !!! warning "Use your own names and network"
 
-    `MM_SHARE`, `youruser`, `/mnt/two`, and `192.168.1.0/24` describe this example,
+    `MM_SHARE`, `<your-user>`, `/mnt/two`, and `192.168.1.0/24` describe this example,
     not a universal recipe. Check the mount, user, path, and subnet on the
     actual machine before copying a command.
 
@@ -221,15 +219,16 @@ are not the same password store. Creating the share account is an explicit
 step:
 
 ```bash
-sudo smbpasswd -a youruser
-sudo smbpasswd -e youruser
+sudo smbpasswd -a <your-user>
+sudo smbpasswd -e <your-user>
 sudo pdbedit -L
 ```
 
-The first command creates or updates Samba's password for `youruser`; the second
+The first command creates or updates Samba's password for `<your-user>`; the second
 makes sure the account is enabled. `pdbedit -L` confirms that Samba knows about
-the account, but a real connection test is still the final proof that the
-password works.
+the account. If authentication fails later, don't assume a typo; check
+that the account is actually enabled. A real connection test is still the best
+proof.
 
 ### Say clearly which SMB clients are welcome
 
@@ -255,7 +254,7 @@ then restart it, then connect to the actual share:
 ```bash
 sudo testparm -s
 sudo systemctl restart smbd
-smbclient -L //127.0.0.1 -U youruser
+smbclient -L //127.0.0.1 -U <your-user>
 ```
 
 `testparm -s` reports the configuration as Samba understands it and catches
@@ -303,8 +302,7 @@ explain six months later.
 Samba earns its place because so much of everyday computing still happens on a
 local network. Files move between the machines already on a desk, a shelf, or a
 sofa. The useful question is simply whether it fits the people, devices, and
-data already in front of you either on an IPhone, a windows laptop or something
-else.
+data already in front of you: an iPhone, a Windows laptop, or something else.
 
 For this job, it did. The share made a large local folder practical across
 different operating systems. The agent made the process less lonely: it helped
