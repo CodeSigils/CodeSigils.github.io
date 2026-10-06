@@ -670,7 +670,7 @@ A few notes on what just happened:
 
 ## Keep the reasoning with the commands
 
-Once everything works, it is tempting to close the terminal and forget the whole exercise. The most useful output of this kind of work is not only a working share. It is a small record of what was checked, why the firewall is narrow, and how to add the next share without undoing the first one. That turns a one-evening repair into a configuration you can reuse during a rebuild or adapt for another machine.
+Once everything works, it is tempting to close the terminal and forget the whole exercise. Before that happens, it is worth leaving behind a small record of what was checked, why the firewall is narrow, and how to add the next share without undoing the first one. It turns a one-evening repair into a configuration you can reuse during a rebuild or adapt for another machine.
 
 ---
 
