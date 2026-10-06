@@ -18,6 +18,8 @@ This guide builds one authenticated, SMB3-only share that's restricted to your l
 
 The aim is not merely to make a share appear in a file browser. It is to leave behind a setup that has clear boundaries: the disk is mounted, Samba knows who may connect, and the firewall admits only the local network. Just as important, the guide should leave you understanding *why* each piece is there, so you can maintain it later.
 
+Before the first command, it helps to know what Samba is beyond this evening's task. Think of it as the standard open-source bridge between Linux and the Windows world. It is what lets a Linux server join the account system many offices and schools run (Active Directory), and it can even act as the directory controller itself. The same software powers home NAS appliances and enterprise storage clusters alike, so this guide deliberately uses a small, well-worn corner of it: one standalone machine, one or more folders, no domain.
+
 !!! warning "Replace all example values with your own"
     This guide uses placeholders like `<your-user>`, `<your-interface>`, `<your-subnet>`, `<server-ip>`, and `<UUID>`, alongside the example path `/mnt/one/KK_SHARE`. Don't copy these as-is. Run the inspection commands in [Step 1](#1-inspect-your-machine-first) and substitute the values you find for your system.
 
@@ -529,6 +531,7 @@ Once everything works, it is tempting to close the terminal and forget the whole
 
 Samba's own documentation:
 
+- [What Is Samba?](https://www.samba.org/samba/what_is_samba.html) - The project's own plain-language answer, and where the intro's summary comes from
 - [Samba Official Documentation](https://www.samba.org/samba/docs/) - Complete reference for Samba
 - [smb.conf(5) Manual](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html) - All configuration options explained
 - [smbd(8) Manual](https://www.samba.org/samba/docs/current/man-html/smbd.8.html) - The server daemon your `systemctl` commands start and stop
