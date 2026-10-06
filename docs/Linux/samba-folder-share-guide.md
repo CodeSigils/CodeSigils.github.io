@@ -16,12 +16,12 @@ Sharing a folder on a home network should not require a cloud account, a USB dis
 
 This guide builds one authenticated, SMB3-only share that's restricted to your local network, and [Step 11](#11-adding-another-share-later) shows how to add more folders later without disturbing the first. It walks through every step (mounting the disk, teaching Samba who may connect, writing the configuration, opening exactly one firewall port, and testing from each kind of client) and explains the technical terms as they appear.
 
-The aim is not merely to make a share appear in a file browser. It is to leave behind a setup that has clear boundaries: the disk is mounted, Samba knows who may connect, and the firewall admits only the local network. Just as important, the guide should leave you understanding *why* each piece is there, so you can maintain it later.
+The aim is not merely to make a share appear in a file browser. It is to leave behind a setup that has clear boundaries: the disk is mounted, Samba knows who may connect, and the firewall admits only the local network. Just as important, the guide should leave you understanding _why_ each piece is there, so you can maintain it later.
 
 Before the first command, it helps to know what Samba is beyond this evening's task. Think of it as the standard open-source bridge between Linux and the Windows world. It is what lets a Linux server join the account system many offices and schools run (Active Directory), and it can even act as the directory controller itself. The same software powers home NAS appliances and enterprise storage clusters alike, so this guide deliberately uses a small, well-worn corner of it: one standalone machine, one or more folders, no domain.
 
 !!! warning "Replace all example values with your own"
-    This guide uses placeholders like `<your-user>`, `<your-interface>`, `<your-subnet>`, `<server-ip>`, and `<UUID>`, alongside the example path `/mnt/one/KK_SHARE`. Don't copy these as-is. Run the inspection commands in [Step 1](#1-inspect-your-machine-first) and substitute the values you find for your system.
+This guide uses placeholders like `<your-user>`, `<your-interface>`, `<your-subnet>`, `<your-gateway>`, `<your-broadcast>`, `<server-ip>`, and `<UUID>`, alongside the example path `/mnt/one/KK_SHARE`. Don't copy these as-is. Run the inspection commands in [Step 1](#1-inspect-your-machine-first) and substitute the values you find for your system.
 
 ## A few terms worth knowing
 
@@ -29,8 +29,8 @@ If this is your first time sharing files on a Linux network, a handful of terms 
 
 - **SMB** (Server Message Block) — the network protocol Windows uses to share files and printers. When you open `\\server\share` in File Explorer, you're speaking SMB.
 - **Samba** — the free software that speaks SMB on Linux, so a Linux machine can offer folders that Windows, macOS, and other Linux systems understand.
-- **smbd** — the Samba *daemon*, the background program that actually answers connection requests. "Daemon" just means a program that runs quietly in the background waiting for work; it's the thing `systemctl` starts and stops.
-- **Share** — one folder made available on the network under a name (here, `KK_SHARE`). The *path* (`/mnt/one/KK_SHARE`) is where the files live on Linux; the *share name* is what clients see and type.
+- **smbd** — the Samba _daemon_, the background program that actually answers connection requests. "Daemon" just means a program that runs quietly in the background waiting for work; it's the thing `systemctl` starts and stops.
+- **Share** — one folder made available on the network under a name (here, `KK_SHARE`). The _path_ (`/mnt/one/KK_SHARE`) is where the files live on Linux; the _share name_ is what clients see and type.
 - **Mount** — attaching a disk's contents to a directory so Linux can reach them. Until a disk is mounted, its path looks like an ordinary — and misleadingly empty — directory.
 - **Workgroup** — a loose label machines on a network use to find each other. The default `WORKGROUP` is fine for a home setup; it is a naming convention, not a security boundary.
 - **UFW** (Uncomplicated Firewall) — a beginner-friendly front-end to the Linux firewall. It's what we'll use to admit only your local network.
@@ -95,6 +95,107 @@ command -v ufw >/dev/null && sudo ufw status verbose
 
 ### Understanding what you just found
 
+Every one of those commands prints something useful, and none of them changes the machine. Here is the real transcript from one machine that follows this guide — a PikaOS box with two NTFS disks — so you know what you are looking at. Your own output will differ in the details: disk UUIDs are shown as `<UUID>` here, network addresses as placeholders like `<server-ip>`, `<your-subnet>`, and the libvirt bridge addresses as `<libvirt-ip>`, `<libvirt-broadcast>`, and `<libvirt-net>`, the distribution file is trimmed to its identification fields, the `id` group list is cut short, and other disks are omitted from `lsblk`. Two names are deliberately left real: interface names such as `enp8s0` are structural labels that differ from machine to machine but reveal nothing sensitive, and `virbr0` is libvirt's default bridge name, the same string on every machine that has it:
+
+```console
+$ cat /etc/os-release
+PRETTY_NAME="PikaOS 4"
+NAME="PikaOS"
+VERSION_ID="4"
+VERSION_CODENAME=nest
+ID=pika
+ID_LIKE=debian
+DEBIAN_CODENAME=sid
+
+$ getent passwd <your-user>
+<your-user>:x:1000:1000:<your-user>,,,/home/<your-user>:/bin/bash
+
+$ id <your-user>
+uid=1000(<your-user>) gid=1000(<your-user>) groups=1000(<your-user>),4(adm),27(sudo),100(users),…
+
+$ lsblk -f
+NAME        FSTYPE FSVER LABEL    UUID      FSAVAIL FSUSE% MOUNTPOINTS
+└─sda2      ntfs         Store I  <UUID>        1.1T    40% /mnt/one
+└─sdb2      ntfs         Store II <UUID>        1.2T    35% /mnt/two
+# … other disks omitted
+
+$ findmnt -t ntfs3,ntfs,fuseblk
+TARGET   SOURCE    FSTYPE OPTIONS
+/mnt/one /dev/sda2 ntfs3  rw,nosuid,nodev,relatime,uid=1000,gid=1000,dmask=0022,fmask=0133,discard,windows_names,acl,iocharset=utf8,prealloc
+/mnt/two /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=1000,gid=1000,dmask=0022,fmask=0133,discard,windows_names,acl,iocharset=utf8,prealloc
+
+$ findmnt -T /mnt/one -o TARGET,SOURCE,FSTYPE,OPTIONS
+TARGET   SOURCE    FSTYPE OPTIONS
+/mnt/one /dev/sda2 ntfs3  rw,nosuid,nodev,relatime,uid=1000,gid=1000,dmask=0022,fmask=0133,discard,windows_names,acl,iocharset=utf8,prealloc
+
+$ grep -nE 'ntfs|fuseblk' /etc/fstab
+25:/dev/disk/by-uuid/<UUID> /mnt/two ntfs3 rw,relatime,nosuid,nodev,nofail,uid=1000,gid=1000,fmask=133,dmask=022,acl,windows_names,discard,x-gvfs-show,x-gvfs-name=two 0 0
+26:/dev/disk/by-uuid/<UUID> /mnt/one ntfs3 rw,relatime,nosuid,nodev,nofail,uid=1000,gid=1000,fmask=133,dmask=022,acl,windows_names,discard,x-gvfs-show,x-gvfs-name=one 0 0
+
+$ ls -ld /mnt /mnt/one /mnt/one/KK_SHARE
+drwxr-xr-x 4 root root 4096 Feb  7  2026 /mnt
+drwxrwxrwx 1 <your-user> <your-user> 4096 Oct  4 11:30 /mnt/one
+drwxrwxr-x 1 <your-user> <your-user> 8192 Oct  4 16:55 /mnt/one/KK_SHARE
+
+$ ip -o -f inet addr show
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+2: enp8s0    inet <server-ip>/24 brd <your-broadcast> scope global dynamic noprefixroute enp8s0\       valid_lft 77620sec preferred_lft 77620sec
+3: virbr0    inet <libvirt-ip>/24 brd <libvirt-broadcast> scope global virbr0\       valid_lft forever preferred_lft forever
+
+$ hostname -I
+<server-ip> <libvirt-ip>
+
+$ ip route
+default via <your-gateway> dev enp8s0 proto dhcp src <server-ip> metric 100
+<your-subnet>/24 dev enp8s0 proto kernel scope link src <server-ip> metric 100
+<libvirt-net>/24 dev virbr0 proto kernel scope link src <libvirt-ip> linkdown
+
+$ systemctl is-active smbd; systemctl is-enabled smbd
+active
+enabled
+
+$ dpkg -l samba samba-common samba-common-bin smbclient cifs-utils | grep -E '^(ii|un)'
+ii  cifs-utils       2:7.4-1         amd64        Common Internet File System utilities
+ii  samba            2:4.24.5+dfsg-1 amd64        SMB/CIFS file, print, and login server for Unix
+ii  samba-common     2:4.24.5+dfsg-1 all          common files used by both the Samba server and client
+ii  samba-common-bin 2:4.24.5+dfsg-1 amd64        Samba common files used by both the server and the client
+ii  smbclient        2:4.24.5+dfsg-1 amd64        command-line SMB/CIFS clients for Unix
+
+$ sudo testparm -s
+Load smb config files from /etc/samba/smb.conf
+Loaded services file OK.
+Weak crypto is allowed by GnuTLS (e.g. NTLM as a compatibility fallback)
+
+Server role: ROLE_STANDALONE
+
+# Global parameters
+[global]
+	disable netbios = Yes
+	disable spoolss = Yes
+	load printers = No
+	max log size = 1000
+	security = USER
+	server min protocol = SMB3_00
+	server string = %h (PikaOS Samba)
+	idmap config * : backend = tdb
+
+[KK_SHARE]
+	comment = KK_SHARE on PikaOS (/mnt/one)
+	force user = <your-user>
+	path = /mnt/one/KK_SHARE
+	read only = No
+	valid users = <your-user>
+
+$ sudo ufw status verbose
+Status: active
+
+To                         Action      From
+--                         ------      ----
+445/tcp                    ALLOW       <your-subnet>/24
+```
+
+The four questions worth answering from that transcript:
+
 - **Network**: Look for your active interface (e.g. `enp0s3`, `eth0`, `wlan0`) and its IP address with CIDR (like `192.168.1.23/24`). `hostname -I` gives a quick list of the machine's current addresses; pair it with `ip route` to identify the active LAN address and default gateway. On a home network, an address such as `192.168.1.23/24` usually means the firewall subnet is `192.168.1.0/24` — confirm that from the actual route rather than copying the example.
 - **Mount**: `findmnt -T /mnt/one` should show `TARGET` as exactly `/mnt/one`, with `SOURCE` and `FSTYPE` describing the disk you meant to share. If the target doesn't match, the disk isn't mounted there yet. An unmounted mount point still accepts `mkdir`, but any files created there land on the filesystem underneath it instead — which is exactly the kind of mistake that looks fine until you go looking for the files. The `FSTYPE` tells you if you're using `ntfs3` (in-kernel, recommended on modern kernels) or another filesystem.
 - **Ownership**: For a single-user share, you'll want the share directory owned by `<your-user>`. Note the UID/GID from `id <your-user>` — you'll need this if setting up a persistent mount.
@@ -102,7 +203,7 @@ command -v ufw >/dev/null && sudo ufw status verbose
 
 ### A quick word on NTFS
 
-NTFS and Linux do not model file ownership in the same way. NTFS is Microsoft's filesystem — it doesn't natively store the Unix-style user and group ownership that Linux expects. On an NTFS mount, options such as `uid=`, `gid=`, `fmask=`, and `dmask=` tell Linux how the files should *appear* and which permissions new files receive. Linux writes permissions as compact base-eight numbers: `755` means the owner can read, write, and enter a directory, while everyone else can only read and enter it.
+NTFS and Linux do not model file ownership in the same way. NTFS is Microsoft's filesystem — it doesn't natively store the Unix-style user and group ownership that Linux expects. On an NTFS mount, options such as `uid=`, `gid=`, `fmask=`, and `dmask=` tell Linux how the files should _appear_ and which permissions new files receive. Linux writes permissions as compact base-eight numbers: `755` means the owner can read, write, and enter a directory, while everyone else can only read and enter it.
 
 For a simple one-user NTFS share, Samba's `force user` setting (which we'll set in Step 6) ties everything together: after the network user has authenticated, Samba performs file work as one known Linux account. It does not replace authentication; it makes the filesystem side of the arrangement consistent.
 
@@ -134,11 +235,57 @@ The first command prints `active` when the service is running right now. The sec
 
 ## 3. Prepare a Persistent Mount (Recommended)
 
-If your shared folder lives on a separate disk (especially NTFS), mount it persistently via `/etc/fstab` so it's still there after a reboot. `/etc/fstab` is simply the file where Linux keeps its list of filesystems to mount at boot — each line is one disk, its mount point, its type, and a set of options. Editing it feels intimidating because a mistake can affect startup, but the backup and test below catch problems long before a reboot.
+If your shared folder lives on a separate disk (especially NTFS), mount it persistently via `/etc/fstab` so it's still there after a reboot.
+`/etc/fstab` is simply the file where Linux keeps its list of filesystems to mount at boot — each line is one disk, its mount point, its type, and a set of options.
+Editing it feels intimidating because a mistake can affect startup, but the backup and test below catch problems long before a reboot.
+
+### Which NTFS driver to use (and what to install)
+
+Before the options, a package question that catches plenty of people out: NTFS is Windows' own filesystem, so Linux needs a driver for it, and there are two.
+
+`ntfs3` lives inside the kernel itself.
+It arrived in Linux 5.15 in late 2021, it needs no package at all, and it is generally the faster of the two.
+Ubuntu 22.04 and newer, Fedora, and Arch all ship it in their stock kernels and load it automatically on the first mount attempt, so on those distributions there is nothing to install.
+Debian 12 (kernel 6.1) is the notable exception: it does not include `ntfs3` at all, because Debian only enabled the driver with the Debian 13 kernel.
+openSUSE builds it but blacklists it by default.
+On such systems the `ntfs3` type simply does not exist, and the mount fails with:
+
+```
+mount: /mnt/one: unknown filesystem type 'ntfs3'.
+```
+
+The fix is one package: `ntfs-3g`.
+That is the second driver, and it takes a different approach.
+The NTFS code runs in userspace as an ordinary program, talking to the kernel through FUSE (Filesystem in Userspace, a mechanism that lets ordinary programs act as filesystem drivers).
+It works on virtually any Linux, old or new, at the cost of some speed.
+Install it, then use `ntfs-3g` as the filesystem type in the fstab line below instead of `ntfs3`.
+Every option in the table below (`uid`, `gid`, `fmask`, `dmask`, and friends) works unchanged, because both drivers understand them.
+
+- Debian or Ubuntu: `sudo apt install ntfs-3g` (the repair tools come bundled in the same package)
+- Fedora: `sudo dnf install ntfs-3g ntfsprogs`
+- Arch: `sudo pacman -S ntfs-3g ntfsprogs`
+- openSUSE: `sudo zypper install ntfs-3g ntfsprogs`
+
+Three footnotes, and then we move on.
+Samba does not care which driver you choose: it shares the directory _after_ it is mounted, so the decision only affects this machine's own mount line.
+
+Keep the `ntfs-3g` tools installed even when `ntfs3` does the mounting, because `ntfs3` ships no checking or repair tools of its own; `ntfsfix` and the rest come from the ntfs-3g side of the house.
+
+And if `ntfs3` already mounts your disk today, leave it alone. Nothing in this guide requires a switch.
+
+Two small exceptions worth knowing before you paste the options below.
+
+- One, the fstab line spells the filesystem type out on purpose: with recent versions of util-linux,
+  a bare `mount -t auto` may pick a different NTFS driver than the one you expect.
+
+- Two, the `windows_names` option was added to `ntfs3` only in more recent kernels (roughly 6.6 and newer),
+  so if an `ntfs3` mount refuses to start and the kernel log complains about an unrecognized option,
+  drop that one option from the line; `ntfs-3g` has always accepted it.
 
 ### Understand your mount options (especially for NTFS)
 
-If you're working with NTFS, the mount options matter more than they might seem at first — they're the mechanism described in [A quick word on NTFS](#a-quick-word-on-ntfs) above, in practice. Here is every option this guide uses:
+If you're working with NTFS, the mount options matter more than they might seem at first — they're the mechanism described in [A quick word on NTFS](#a-quick-word-on-ntfs) above, in practice.
+Here is every option this guide uses:
 
 | Option                    | Purpose                                                                                                                                                                                                                  |
 | :------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -153,7 +300,7 @@ If you're working with NTFS, the mount options matter more than they might seem 
 | `discard`                 | Enables TRIM for SSDs (harmless on HDDs).                                                                                                                                                                                |
 
 !!! warning "A small trap to avoid"
-    On NTFS, the `fmask`/`dmask` you set here effectively cap what Samba can do. Even if you set Samba's `create mask`/`directory mask` higher, they can't grant permissions the mount takes away. This is exactly why we pair the mount with `force user` later in the Samba config.
+On NTFS, the `fmask`/`dmask` you set here effectively cap what Samba can do. Even if you set Samba's `create mask`/`directory mask` higher, they can't grant permissions the mount takes away. This is exactly why we pair the mount with `force user` later in the Samba config.
 
 ### Add your mount to /etc/fstab
 
@@ -342,10 +489,10 @@ sudo ufw delete <number>
 UFW asks `Proceed with operation (y|n)?` before deleting, so you get a chance to check you have picked the right row. A wider rule left behind would quietly undo the restriction this section just built.
 
 !!! warning "Enabling a firewall is a separate decision"
-    If UFW isn't enabled yet, do not enable it blindly — especially on a remote machine. Make sure the firewall already permits the management access you need (SSH or your management port: `sudo ufw allow ssh`) before running `sudo ufw enable`. It's easy to get distracted and enable UFW before adding that rule; if that happens, you can lock yourself out of remote access.
+If UFW isn't enabled yet, do not enable it blindly — especially on a remote machine. Make sure the firewall already permits the management access you need (SSH or your management port: `sudo ufw allow ssh`) before running `sudo ufw enable`. It's easy to get distracted and enable UFW before adding that rule; if that happens, you can lock yourself out of remote access.
 
 !!! note "Supporting very old devices"
-    With NetBIOS disabled and SMB3 required, the old 137–139 NetBIOS ports are not part of this setup. If you absolutely must support a very old device that can't do SMB3, you'd need to open those ports and lower `server min protocol`. This guide doesn't cover that — SMB3-only is the recommended, safer default. If you go down that route, keep that device isolated as much as you can. For most home networks, it's simply not needed anymore.
+With NetBIOS disabled and SMB3 required, the old 137–139 NetBIOS ports are not part of this setup. If you absolutely must support a very old device that can't do SMB3, you'd need to open those ports and lower `server min protocol`. This guide doesn't cover that — SMB3-only is the recommended, safer default. If you go down that route, keep that device isolated as much as you can. For most home networks, it's simply not needed anymore.
 
 ---
 
@@ -438,18 +585,18 @@ This order separates disk, configuration, service, authentication, and network p
 
 One term first: `veto files` is an optional setting that hides files matching a pattern list (old tutorials often add it). This guide's configuration doesn't include it — but if your `smb.conf` does, the last three rows apply.
 
-| Symptom                                              | Likely Cause                               | Fix                                                                                                                                                                          |
-| ---------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Windows says "incorrect password" but it is correct  | Cached credentials                         | Clear the saved entry in Credential Manager, then run `net use * /delete` to drop open sessions; the two are separate stores. If it still refuses, try `.\<your-user>` as the username.                                  |
-| Share not found from other devices                   | Firewall, service not running, or wrong IP | Check `systemctl is-active smbd`, `sudo ufw status`, and confirm you're using the correct `<server-ip>` from the same subnet.                                                |
-| Can connect but get "permission denied" when writing | Filesystem permissions/mount options       | Verify `findmnt -T /mnt/one` shows expected options. Check ownership with `ls -ld /mnt/one/KK_SHARE`. Ensure `force user = <your-user>` is in smb.conf and the user matches. |
-| `smbd` won't start                                   | Config syntax error                        | Run `sudo testparm -s` to catch parse errors. Check `journalctl -u smbd -n 50 --no-pager` for details. If it fails right after editing, your last change is usually the culprit. |
-| Dotfiles invisible                                   | Veto patterns                              | If `veto files` includes `.*`, that hides dotfiles. Remove or narrow that pattern if you need to see them.                                                                   |
+| Symptom                                              | Likely Cause                               | Fix                                                                                                                                                                                                                |
+| ---------------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Windows says "incorrect password" but it is correct  | Cached credentials                         | Clear the saved entry in Credential Manager, then run `net use * /delete` to drop open sessions; the two are separate stores. If it still refuses, try `.\<your-user>` as the username.                            |
+| Share not found from other devices                   | Firewall, service not running, or wrong IP | Check `systemctl is-active smbd`, `sudo ufw status`, and confirm you're using the correct `<server-ip>` from the same subnet.                                                                                      |
+| Can connect but get "permission denied" when writing | Filesystem permissions/mount options       | Verify `findmnt -T /mnt/one` shows expected options. Check ownership with `ls -ld /mnt/one/KK_SHARE`. Ensure `force user = <your-user>` is in smb.conf and the user matches.                                       |
+| `smbd` won't start                                   | Config syntax error                        | Run `sudo testparm -s` to catch parse errors. Check `journalctl -u smbd -n 50 --no-pager` for details. If it fails right after editing, your last change is usually the culprit.                                   |
+| Dotfiles invisible                                   | Veto patterns                              | If `veto files` includes `.*`, that hides dotfiles. Remove or narrow that pattern if you need to see them.                                                                                                         |
 | Directory deletion fails saying "not empty"          | Hidden files (like `.DS_Store` from macOS) | Add `delete veto files = yes` under the share if you want Samba to clean up vetoed files on deletion. This is convenient, but be deliberate about it - it means Samba will remove files that match your veto list. |
-| Slow directory listings with many files              | Broad veto patterns                        | Narrow your `veto files` pattern - scanning against many patterns is expensive.                                                                                              |
+| Slow directory listings with many files              | Broad veto patterns                        | Narrow your `veto files` pattern - scanning against many patterns is expensive.                                                                                                                                    |
 
 !!! note "AppArmor on Ubuntu and similar systems"
-    Ubuntu ships AppArmor profiles for Samba. A profile in *complain* mode only logs what it would block; in enforce mode it actually denies access. Run `sudo aa-status` to see whether profiles for `smbd` are loaded, look for `AppArmor: ... DENIED` entries in `/var/log/syslog` when a path fails for no visible reason, and check `/sys/kernel/security/lsm` to see which security modules are active at all.
+Ubuntu ships AppArmor profiles for Samba. A profile in _complain_ mode only logs what it would block; in enforce mode it actually denies access. Run `sudo aa-status` to see whether profiles for `smbd` are loaded, look for `AppArmor: ... DENIED` entries in `/var/log/syslog` when a path fails for no visible reason, and check `/sys/kernel/security/lsm` to see which security modules are active at all.
 
 ### Quick diagnostic commands
 
@@ -513,10 +660,10 @@ sudo systemctl restart smbd
 
 A few notes on what just happened:
 
-- The `-a` in `tee -a` means *append* — add to the end without replacing what's there.
+- The `-a` in `tee -a` means _append_ — add to the end without replacing what's there.
 - The text between `<< 'CONF'` and the final `CONF` is a here-document: a tidy way to pass several lines of text to one command. The quoted marker prevents the shell from expanding anything inside it, so your `<your-user>` placeholder stays literal.
 - Check the new path with `findmnt` first. An absent disk can leave behind an empty-looking mount point, and that is exactly the kind of problem a little preparation prevents.
-- The name inside `[...]` becomes the folder name clients see, so choose it deliberately. Avoid `/` and `\` — the SMB specification forbids them in share names even though Samba's parser accepts them, and Windows addressing (`\\server\share`) depends on those characters staying special. Spaces are legal but behave inconsistently across clients, so a name like `ANOTHER_SHARE` is the safe habit. Do not reuse the special section names `[global]`, `[homes]`, or `[printers]`, and leave `print$` and `IPC$` alone — Windows treats those as its own. A name that *ends* in `$` still works but is hidden from browse lists, which is how administrative shares stay out of sight.
+- The name inside `[...]` becomes the folder name clients see, so choose it deliberately. Avoid `/` and `\` — the SMB specification forbids them in share names even though Samba's parser accepts them, and Windows addressing (`\\server\share`) depends on those characters staying special. Spaces are legal but behave inconsistently across clients, so a name like `ANOTHER_SHARE` is the safe habit. Do not reuse the special section names `[global]`, `[homes]`, or `[printers]`, and leave `print$` and `IPC$` alone — Windows treats those as its own. A name that _ends_ in `$` still works but is hidden from browse lists, which is how administrative shares stay out of sight.
 - No new firewall rules are needed — Samba is already listening on TCP 445 for your LAN.
 
 ---
