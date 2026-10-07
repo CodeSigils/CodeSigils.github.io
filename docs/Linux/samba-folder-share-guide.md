@@ -446,6 +446,10 @@ The important lines are deliberately plain:
 
   Create the probe **inside the share path**, not in `/tmp` — the point is to test the filesystem that actually backs the share, and a pass on a `tmpfs` `/tmp` proves nothing about it. Expect `xattr::user.samba_fruit_probe: verified` in the `gio info` output. If the attribute round-trips, the storage side is fine; reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
 
+!!! warning "Keep every share consistent"
+
+    Samba negotiates the Apple (AAPL) extensions on a client's first connection to the server, so a share *without* the fruit lines can disable them for every share — keep the setting on all of them, including shares you add later (that's why [Step 11](#11-adding-another-share-later) repeats it).
+
 This is a single-user home-network example. A family share, an office, an Active Directory domain, or access from outside the home deserves a different identity and security design.
 
 ### Validate the configuration
