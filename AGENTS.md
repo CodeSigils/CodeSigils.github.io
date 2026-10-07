@@ -321,3 +321,8 @@ Common icons: `lucide/terminal`, `lucide/box`, `lucide/fish`, `lucide/cpu`, `luc
 
 Use the same `image-wrapper` / `youtube-video-wrapper` CSS wrappers from existing articles for images and videos.
 MD033 (no inline HTML) is **disabled** in `.markdownlint.json` for this repo.
+## Git Commit Policy
+
+**No AI attribution.** Never add "Co-authored-by: Sisyphus" or any other AI contributor attribution to commits for this repository. This is a personal blog. Commits must remain clean and reflect only human authorship.
+
+
