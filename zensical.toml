@@ -354,5 +354,10 @@ icon = "fontawesome/brands/github"
 link = "https://github.com/CodeSigils"
 
 [[project.extra.social]]
+icon = "fontawesome/solid/rss"
+link = "https://codesigils.github.io/feed.xml"
+name = "RSS"
+
+[[project.extra.social]]
 icon = "fontawesome/brands/npm"
 link = "https://www.npmjs.com/package/zero-md-formatter"

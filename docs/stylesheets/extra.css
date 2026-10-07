@@ -47,3 +47,14 @@
   height: auto;
   border-radius: 4px;
 }
+
+.md-social__link--rss {
+  width: auto;
+  white-space: nowrap;
+}
+
+.md-social__link--rss .md-social__label {
+  margin-left: 0.15rem;
+  font-size: 0.64rem;
+  vertical-align: 0.1em;
+}
