@@ -185,6 +185,8 @@ Server role: ROLE_STANDALONE
 	path = /mnt/one/KK_SHARE
 	read only = No
 	valid users = <your-user>
+	vfs objects = fruit streams_xattr
+	fruit:resource = file
 
 $ sudo ufw status verbose
 Status: active
@@ -415,6 +417,10 @@ Edit `/etc/samba/smb.conf` (`sudoedit /etc/samba/smb.conf`). If you already have
 
     # Pin all operations to the designated user (critical for NTFS mounts)
     force user = <your-user>
+
+    # Apple metadata support for macOS/iOS clients (Finder and Files previews)
+    vfs objects = fruit streams_xattr
+    fruit:resource = file
 ```
 
 ### Why these choices matter
@@ -426,6 +432,18 @@ The important lines are deliberately plain:
 - **Authenticated access only** (`security = user`, `guest ok = no`, `valid users = <your-user>`): Every connection must authenticate as your specified user. There is no anonymous "everyone" path.
 - **`force user = <your-user>`**: Ensures all file work happens as that Linux user — the setting promised back in [A quick word on NTFS](#a-quick-word-on-ntfs). It matters most on NTFS mounts where ownership is synthesised. Skip it and you can end up with files owned in a way that looks fine from Samba but causes confusion when you look at them directly on the Linux filesystem. It's a small setting that prevents a lot of head-scratching later.
 - **`ntlm auth = ntlmv2-only`**: Allows the modern NTLMv2 authentication method and refuses the weaker old variants.
+- **`vfs objects = fruit streams_xattr`**: Loads Samba's Apple compatibility modules for this share. `fruit` enables Apple's SMB2+ extension (AAPL) and handles the macOS-specific metadata that Finder and the iOS Files app expect during directory reads; `streams_xattr` supplies the named-stream storage that `fruit` defers to for everything it does not handle itself. Order matters — `fruit` must come before `streams_xattr`. These are per-share settings: they belong inside the `[KK_SHARE]` block, not `[global]`, and a share section that sets `vfs objects` replaces (does not merge with) a global one.
+- **`fruit:resource = file`**: Stores larger resource forks as `._` AppleDouble sidecar files instead of filesystem extended attributes. This is the default and the safe choice on Linux — the `xattr` alternative only works on filesystems with large-xattr support such as ZFS or Solaris, and `stream` is marked experimental.
+- **Why bother?** Without these lines, macOS and iOS clients still connect and transfer files, but Apple-specific metadata has nowhere to live. The visible symptom is in Finder and the iOS Files app: previews show **"File preview not available"** (or the file simply won't open in Quick Look) until you disconnect and reconnect. The share works otherwise, which is exactly why it is easy to miss. One practical note: `streams_xattr` needs user extended attributes to actually work on the underlying filesystem — on Linux this is standard for ext4/btrfs/xfs, but if previews still fail (common with some NTFS mounts), verify with a quick probe before blaming the config:
+
+  ```bash
+  probe=$(mktemp /tmp/.samba-xattr-probe.XXXXXX)
+  gio set -t string "$probe" xattr::user.samba_fruit_probe verified
+  gio info -a 'xattr::user.samba_fruit_probe' "$probe"
+  gio remove "$probe" xattr::user.samba_fruit_probe; rm -f "$probe"
+  ```
+
+  If the attribute round-trips, the storage side is fine; reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
 
 This is a single-user home-network example. A family share, an office, an Active Directory domain, or access from outside the home deserves a different identity and security design.
 
@@ -594,6 +612,7 @@ One term first: `veto files` is an optional setting that hides files matching a 
 | Dotfiles invisible                                   | Veto patterns                              | If `veto files` includes `.*`, that hides dotfiles. Remove or narrow that pattern if you need to see them.                                                                                                         |
 | Directory deletion fails saying "not empty"          | Hidden files (like `.DS_Store` from macOS) | Add `delete veto files = yes` under the share if you want Samba to clean up vetoed files on deletion. This is convenient, but be deliberate about it - it means Samba will remove files that match your veto list. |
 | Slow directory listings with many files              | Broad veto patterns                        | Narrow your `veto files` pattern - scanning against many patterns is expensive.                                                                                                                                    |
+| macOS/iOS preview says "File preview not available"  | Missing Apple metadata modules             | Add `vfs objects = fruit streams_xattr` and `fruit:resource = file` to the share section (see [Why these choices matter](#why-these-choices-matter)), run `sudo testparm -s`, restart `smbd`, then disconnect and reconnect the client. |
 
 !!! note "AppArmor on Ubuntu and similar systems"
 Ubuntu ships AppArmor profiles for Samba. A profile in _complain_ mode only logs what it would block; in enforce mode it actually denies access. Run `sudo aa-status` to see whether profiles for `smbd` are loaded, look for `AppArmor: ... DENIED` entries in `/var/log/syslog` when a path fails for no visible reason, and check `/sys/kernel/security/lsm` to see which security modules are active at all.
@@ -651,6 +670,8 @@ sudo tee -a /etc/samba/smb.conf > /dev/null << 'CONF'
     guest ok = no
     valid users = <your-user>
     force user = <your-user>
+    vfs objects = fruit streams_xattr
+    fruit:resource = file
 CONF
 
 # Validate and restart
@@ -687,6 +708,8 @@ Samba's own documentation:
 - [smbstatus(1) Manual](https://www.samba.org/samba/docs/current/man-html/smbstatus.1.html) - The connection and protocol inspection used in Step 9
 - [Standalone server role (smb.conf(5))](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html#server-role-g) - Why `testparm` reports `ROLE_STANDALONE`
 - [Samba Server Security](https://www.samba.org/samba/docs/server_security.html) - Deeper dive into hardening
+- [vfs_fruit(8) Manual](https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html) - The Apple metadata module used in Step 6, with every `fruit:` option explained
+- [Configure Samba to Work Better with Mac OS X (SambaWiki)](https://wiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X) - Community-maintained fruit tuning guide, including Time Machine shares
 
 The system side:
 
