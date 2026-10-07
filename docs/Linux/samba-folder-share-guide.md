@@ -438,13 +438,24 @@ The important lines are deliberately plain:
 
   ```bash
   probe=$(mktemp /mnt/one/KK_SHARE/.samba-xattr-probe.XXXXXX)
+  setfattr -n user.samba_fruit_probe -v verified "$probe"
+  getfattr --only-values -n user.samba_fruit_probe "$probe"
+  rm -f "$probe"
+  ```
+
+  Create the probe **inside the share path**, not in `/tmp` — the point is to test the filesystem that actually backs the share, and a pass on a `tmpfs` `/tmp` proves nothing about it. `setfattr` and `getfattr` come from the small `attr` package (`sudo apt install attr`); they exercise the same `setxattr(2)`/`getxattr(2)` system calls that `streams_xattr` will use, which makes them the most direct test available. Run the lines exactly as written — no `&&` chaining — so `rm -f "$probe"` still executes and removes the temp file even if an earlier line fails. A pass prints `verified`; a filesystem that cannot store extended attributes fails the `setfattr` line with a non-zero exit status and a clear error such as `Operation not supported`, and that is the stop signal. (The `getfattr: Removing leading '/' from absolute path names` note on stderr is harmless, and the `user.` attribute prefix keeps the test unprivileged.)
+
+  No `attr` package at hand? The same probe works through GNOME's `gio` (GLib), present on most desktop Linux systems:
+
+  ```bash
+  probe=$(mktemp /mnt/one/KK_SHARE/.samba-xattr-probe.XXXXXX)
   gio set -t string "$probe" xattr::user.samba_fruit_probe verified
   gio info -a 'xattr::user.samba_fruit_probe' "$probe"
   gio set -d "$probe" xattr::user.samba_fruit_probe
   gio remove "$probe"
   ```
 
-  Create the probe **inside the share path**, not in `/tmp` — the point is to test the filesystem that actually backs the share, and a pass on a `tmpfs` `/tmp` proves nothing about it. Expect `xattr::user.samba_fruit_probe: verified` in the `gio info` output. If the attribute round-trips, the storage side is fine; reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
+  Expect `xattr::user.samba_fruit_probe: verified` in the `gio info` output. Whichever probe you use, if the attribute round-trips, the storage side is fine; reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
 
 !!! warning "Keep every share consistent"
 
