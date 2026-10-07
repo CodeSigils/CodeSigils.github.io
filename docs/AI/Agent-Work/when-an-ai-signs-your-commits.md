@@ -273,18 +273,21 @@ What exists in this repository now:
   Policy section: no `Co-authored-by:` trailers of any kind, no bot accounts,
   no agent branding lines, no `--no-verify`. My local agent instructions
   carry the same rule.
-
-What I am adding next, and did not exist at the time of writing:
-
 - **A local `commit-msg` hook** rejecting forbidden trailers and branding
-  lines. Candidates for the implementation are
-  [pre-commit](https://pre-commit.com/), a plain
-  [gitlint](https://jorisroovers.com/gitlint/) rule, or
-  [commitlint](https://commitlint.js.org/) with a custom rule.
+  lines, built on [pre-commit](https://pre-commit.com/) with a pygrep rule.
+  It fires on `commit`, `commit --amend`, and interactive reword. It does not
+  fire on cherry-picks, and `--no-verify` walks past it — which is why it is
+  the first layer, not the only one. The other candidates I evaluated:
+  [gitlint](https://jorisroovers.com/gitlint/) has been dormant since its
+  2023 release and offers no must-not-match rule at all, and
+  [commitlint](https://commitlint.js.org/) would need a custom plugin for a
+  deny rule.
 - **A CI backstop** that scans pushed commit messages and fails the build on
   the same patterns. A hook can be skipped with `--no-verify`, which my
   policy treats as a violation in itself; a CI check cannot be skipped from
-  a laptop.
+  a laptop. It cannot refuse the push itself — on a push event it can only
+  flag what has already landed — but a red run on `master` is a signal that
+  triggers the rewrite procedure above.
 
 ## What I took from it
 
