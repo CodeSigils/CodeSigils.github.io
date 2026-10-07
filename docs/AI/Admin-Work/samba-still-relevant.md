@@ -271,11 +271,14 @@ explain six months later.
 
 Samba earns its place because so much of everyday computing still happens on a
 local network. Files move between the machines already on a desk, a shelf, or a
-sofa. The useful question is simply whether it fits the people, devices, and
+sofa. The protocol is worth the setup when it fits the people, devices, and
 data already in front of you: an iPhone, a Windows laptop, or something else.
 
-For this job, it did. The share made a large local folder practical across
-different operating systems. The agent made the process less lonely: it helped
+Mine was that kind of network, for one afternoon at least. The project was
+casual, no deadline and no one waiting on it, but it still made me research and
+study: I discovered new corners of Samba and remembered older ones I had half
+forgotten. The share made a large local folder practical across different
+operating systems, and the agent made the process less lonely: it helped
 research the corners, challenge shaky assumptions, and leave behind a guide
 that explains why the configuration is shaped the way it is.
 
