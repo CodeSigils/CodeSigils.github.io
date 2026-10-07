@@ -130,6 +130,30 @@ The slow part was returning to the same uncertainty: which setting mattered,
 what was tested, and whether a convenient shortcut had widened access by
 accident.
 
+### A preview failure became a metadata question
+
+One small failure made that method feel practical. Sometimes a file on the
+share would report “File preview not available” in macOS Finder or iOS Files,
+then preview normally after reconnecting to the server. Because the same file
+worked after a reconnect, a fixed file-size limit was not a convincing
+explanation. The more useful question was what the client had cached about the
+file and what metadata Samba was offering during the next connection.
+
+The inspection found an SMB3-only share on an NTFS3-backed disk, with no Apple
+compatibility VFS module configured. Rather than copying a pile of macOS Samba
+tweaks, the agent reduced it to a testable sequence: verify that the actual
+filesystem can create, read, and remove a small extended attribute; only then
+enable Samba's `vfs_fruit` Apple metadata support and its named-stream backend;
+validate the configuration before restarting; then reconnect the clients and
+repeat the preview. Keeping resource forks in files rather than generic
+extended attributes avoids turning a small metadata compatibility fix into a
+large-xattr storage assumption.
+
+That does not prove every unavailable preview is a server bug—client session
+state and Wi-Fi interruptions still matter. It does turn an intermittent,
+vague complaint into a bounded investigation with a clear reason for every
+step. The companion guide records the complete, reversible procedure.
+
 ## The agent helped me satisfy my curiosity
 
 The agent did far more than suggest the commands for a Samba share. It became a
@@ -279,9 +303,11 @@ For the commands and the reasoning behind them, see the companion
   for the meaning and scope of configuration settings.
 - [Linux NTFS3 documentation](https://docs.kernel.org/filesystems/ntfs3.html)
   for the mount options that shape how NTFS permissions appear on Linux.
+- [Samba `vfs_fruit(8)`](https://www.samba.org/samba/docs/current/man-html/vfs_fruit.8.html)
+  for Apple SMB metadata and resource-fork interoperability.
 - [Ubuntu's firewall documentation](https://documentation.ubuntu.com/server/how-to/security/firewalls/)
   for UFW concepts and command examples.
 
-_Technical claims and source links were reviewed on 2026-10-05. Network layout,
+_Technical claims and source links were reviewed on 2026-10-07. Network layout,
 Samba versions, and operating-system behavior should still be checked against
 the machine being configured._
