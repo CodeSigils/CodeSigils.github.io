@@ -437,13 +437,14 @@ The important lines are deliberately plain:
 - **Why bother?** Without these lines, macOS and iOS clients still connect and transfer files, but Apple-specific metadata has nowhere to live. The visible symptom is in Finder and the iOS Files app: previews show **"File preview not available"** (or the file simply won't open in Quick Look) until you disconnect and reconnect. The share works otherwise, which is exactly why it is easy to miss. One practical note: `streams_xattr` needs user extended attributes to actually work on the underlying filesystem — on Linux this is standard for ext4/btrfs/xfs, but if previews still fail (common with some NTFS mounts), verify with a quick probe before blaming the config:
 
   ```bash
-  probe=$(mktemp /tmp/.samba-xattr-probe.XXXXXX)
+  probe=$(mktemp /mnt/one/KK_SHARE/.samba-xattr-probe.XXXXXX)
   gio set -t string "$probe" xattr::user.samba_fruit_probe verified
   gio info -a 'xattr::user.samba_fruit_probe' "$probe"
-  gio remove "$probe" xattr::user.samba_fruit_probe; rm -f "$probe"
+  gio set -d "$probe" xattr::user.samba_fruit_probe
+  gio remove "$probe"
   ```
 
-  If the attribute round-trips, the storage side is fine; reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
+  Create the probe **inside the share path**, not in `/tmp` — the point is to test the filesystem that actually backs the share, and a pass on a `tmpfs` `/tmp` proves nothing about it. Expect `xattr::user.samba_fruit_probe: verified` in the `gio info` output. If the attribute round-trips, the storage side is fine; reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
 
 This is a single-user home-network example. A family share, an office, an Active Directory domain, or access from outside the home deserves a different identity and security design.
 
