@@ -47,24 +47,3 @@
   height: auto;
   border-radius: 4px;
 }
-
-.md-social__link--rss {
-  display: inline-flex;
-  align-items: center;
-  width: auto;
-  height: 1.6rem;
-  gap: 0.12rem;
-  font-size: 0.56rem;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-.md-social__link--rss:hover,
-.md-social__link--rss:focus {
-  text-decoration: none;
-}
-
-.md-social__link--rss .md-social__label {
-  font-size: 1em;
-  line-height: 1;
-}

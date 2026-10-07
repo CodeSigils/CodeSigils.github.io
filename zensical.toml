@@ -350,13 +350,12 @@ toggle.name = "Switch to light mode"
 # The "extra" section contains miscellaneous settings.
 # ----------------------------------------------------------------------------
 [[project.extra.social]]
-icon = "fontawesome/brands/github"
-link = "https://github.com/CodeSigils"
-
-[[project.extra.social]]
 icon = "fontawesome/solid/rss"
 link = "https://codesigils.github.io/feed.xml"
-name = "RSS"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/CodeSigils"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/npm"
