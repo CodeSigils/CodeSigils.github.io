@@ -323,6 +323,34 @@ Use the same `image-wrapper` / `youtube-video-wrapper` CSS wrappers from existin
 MD033 (no inline HTML) is **disabled** in `.markdownlint.json` for this repo.
 ## Git Commit Policy
 
-**No AI attribution.** Never add "Co-authored-by: Sisyphus" or any other AI contributor attribution to commits for this repository. This is a personal blog. Commits must remain clean and reflect only human authorship.
+**Human-only commits. No bots. No AI attribution. No exceptions.**
+
+This is a personal blog. Every commit must reflect human authorship only, and the
+repository history and contributors list must show only @CodeSigils.
+
+**Forbidden in every commit message:**
+
+- Any `Co-authored-by:` trailer — regardless of identity. No AI agents
+  (`clio-agent@sisyphuslabs.ai`, `Sisyphus`, ...), no accounts matching the
+  `*[bot]` pattern (`github-actions[bot]`, `dependabot[bot]`,
+  `renovate[bot]`, ...), no other automation or AI identity. AI contributors
+  are forbidden unless explicitly authorised by the repository owner in
+  advance — the default is none, and no such authorisation currently exists
+  for this blog.
+- Any agent branding or signature line: `Ultraworked with ...`,
+  `Assisted-by: ...`, `Prompted-by: ...`, `Generated-with: ...`,
+  `Tool: ...`, or links to agent/framework repositories in commit messages,
+  trailers, or PR descriptions.
+- Any attribution appended by tooling, hooks, templates, or `init.templateDir`
+  defaults. Tooling must never write trailers of its own accord.
+
+**If a violation lands anyway** (amend, rebase, or cherry-pick reintroduces
+one): rewrite it out of history before pushing — amend or
+`git rebase` + `git push --force-with-lease`. Never leave it in a pushed
+commit. This rule is enforced by a local `commit-msg` hook
+(`.pre-commit-config.yaml`, bootstrapped once per clone with
+`uvx pre-commit install`) and a CI check
+(`.github/workflows/commit-message-guard.yml`); do not bypass them
+(`--no-verify` is itself a violation).
 
 

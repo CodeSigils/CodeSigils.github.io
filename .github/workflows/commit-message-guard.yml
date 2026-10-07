@@ -1,0 +1,39 @@
+# CI backstop for the zero-AI-attribution policy (see AGENTS.md,
+# "Git Commit Policy"). The local commit-msg hook cannot run on pushes
+# from the web UI or other machines, so every push is re-scanned here.
+# Note: on a push event this detects and fails after the fact; it cannot
+# refuse the push itself.
+name: commit-message-guard
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Scan pushed commits
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          ZERO=0000000000000000000000000000000000000000
+          if [ "$BEFORE" = "$ZERO" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            RANGE="$AFTER"   # new ref or force-push fallback
+          else
+            RANGE="$BEFORE..$AFTER"
+          fi
+          PATTERN='^[[:space:]]*co-authored-by[[:space:]]*:|ultraworked|sisyphus|clio-agent|\[bot\]'
+          HITS=$(git log --format='%an%n%ae%n%cn%n%ce%n%B' "$RANGE" | grep -iE "$PATTERN" || true)
+          if [ -n "$HITS" ]; then
+            echo "::error::Bot/AI attribution found in pushed commits:"
+            echo "$HITS"
+            exit 1
+          fi

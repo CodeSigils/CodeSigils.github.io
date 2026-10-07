@@ -1,0 +1,15 @@
+# Commit-message guard for the zero-AI-attribution policy (see AGENTS.md,
+# "Git Commit Policy"). Primary local layer; the CI backstop lives in
+# .github/workflows/commit-message-guard.yml.
+#
+# Bootstrap once per clone:  uvx pre-commit install
+# (installs both the default pre-commit hook and the commit-msg hook below).
+default_install_hook_types: [pre-commit, commit-msg]
+repos:
+  - repo: local
+    hooks:
+      - id: forbid-bot-attribution
+        name: Forbid bot/AI attribution in commit message
+        entry: '(?i)^[ \t]*co-authored-by[ \t]*:|ultraworked|sisyphus|clio-agent|github-actions\[bot\]|dependabot\[bot\]'
+        language: pygrep
+        stages: [commit-msg]
