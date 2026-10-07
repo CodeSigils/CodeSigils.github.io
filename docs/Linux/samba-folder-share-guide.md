@@ -565,7 +565,7 @@ Now test from another device on the same network using `<server-ip>` (the IP you
 
 **macOS (Finder):** Go → Connect to Server → `smb://<server-ip>/KK_SHARE`. macOS uses SMB 3 by default. Authenticate with `<your-user>` and your Samba password; if a dialog asks for a workgroup name, `WORKGROUP` is the correct answer. If the connection fails without ever prompting for a password, try `smb://<your-user>:*@<server-ip>/KK_SHARE` (the `*` is a placeholder that tells macOS to ask for the password).
 
-**Linux (temporary mount):**
+**Linux (temporary mount):** Logically, you can already reach the share from any Linux file manager that supports network sharing — in GNOME, for example, open Files and click *Network* in the sidebar; the server and its shares appear there once you pick the machine and authenticate (some releases group it under *Other Locations* instead). The command-line mount below is the stricter test, because it exercises the filesystem layer itself rather than the file manager's browsing of it:
 
 ```bash
 mkdir -p ~/smbtest
