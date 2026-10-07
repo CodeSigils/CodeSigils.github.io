@@ -130,82 +130,28 @@ The slow part was returning to the same uncertainty: which setting mattered,
 what was tested, and whether a convenient shortcut had widened access by
 accident.
 
-## Three small commands that made the setup feel solid
+## The agent helped me satisfy my curiosity
 
-The finished configuration was not complicated. What impressed me was how much
-confidence came from asking each command one clear question.
+The agent did far more than suggest the commands for a Samba share. It became a
+research partner for the questions that would otherwise have stayed as small,
+unsettling doubts: what does NTFS support actually look like in the current
+Linux kernel, which Samba security concerns are real for a private LAN, and
+which ones are warnings better suited to a public-facing server?
 
-### First, check the disk rather than trusting the directory
+It also helped me compare the alternatives instead of treating Samba as the
+default by inertia. NFS remains a good fit in some Linux-first environments,
+but its client support and authentication model make it a different trade-off
+for a household that includes Windows and macOS. A NAS could solve this problem
+too, but for one machine sharing a disk on a trusted home network, it would add
+cost and another system to maintain without solving a problem I actually had.
 
-An empty mount point can still look perfectly normal. If the data disk is not
-mounted, creating a directory under `/mnt/two` creates it on the system disk
-instead. This command makes that mistake visible:
-
-```bash
-findmnt -T /mnt/two -o TARGET,SOURCE,FSTYPE,OPTIONS
-```
-
-For the intended setup, `TARGET` should be exactly `/mnt/two`, and the source
-and filesystem type should be the expected disk and `ntfs3`. If the command
-reports `/` instead, that is not a Samba problem yet. The disk has not been
-mounted where the share expects it.
-
-### Then, let the local network in and nobody else
-
-The firewall rule is deliberately narrow. It permits SMB's TCP port 445 from
-the home subnet (for example `192.168.1.0/24`) and nowhere else:
-
-```bash
-sudo ufw allow from <your-subnet>/24 to any port 445 proto tcp
-sudo ufw status verbose
-```
-
-`/24` is compact network notation for a local subnet. The exact value depends
-on your network; look it up from your interface and default route rather than
-assuming. It's far safer to permit only the network you know than to guess.
-
-### Finally, add a share without erasing the first one
-
-This was the command that made me slow down. The first version of `smb.conf`
-was written with `tee`, which replaces a file. That is useful once, but
-re-running it later would quietly remove the existing share. For a second
-share, I backed up the configuration and used `tee -a`; the `-a` means append.
-
-```bash
-sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak.$(date +%Y%m%d_%H%M%S)
-
-sudo tee -a /etc/samba/smb.conf > /dev/null << 'CONF'
-[MM_SHARE]
-   comment = Second private LAN share
-   path = /mnt/two/MM_SHARE
-   browseable = yes
-   read only = no
-   guest ok = no
-   valid users = <your-user>
-
-   # NTFS3 presents this disk as <your-user>, so Samba performs file work as <your-user> too.
-   force user = <your-user>
-CONF
-
-sudo testparm -s
-sudo systemctl restart smbd
-```
-
-The text between `<< 'CONF'` and the final `CONF` is a here-document: a tidy
-way to pass several lines to one command. The quoted marker keeps the shell
-from expanding anything inside it. The result is easy to read, easy to back up,
-and safe to run again, because appending never disturbs the share that is
-already there.
-
-!!! warning "Use your own names and network"
-
-    `MM_SHARE`, `<your-user>`, `/mnt/two`, and `192.168.1.0/24` describe this example,
-    not a universal recipe. Check the mount, user, path, and subnet on the
-    actual machine before copying a command.
-
-The companion [Samba folder-share guide](../../Linux/samba-folder-share-guide.md)
-walks through the complete setup, validation, client tests, and troubleshooting
-sequence.
+Most importantly, the conversation followed the curiosity behind the setup.
+Rather than stopping at “make this folder visible,” it kept asking what each
+choice meant: why SMB is still relevant, where the security boundary really
+is, how the filesystem affects the share, and what I would be giving up by
+choosing a different protocol or appliance. That made the final configuration
+feel less like a borrowed recipe and more like a decision I could explain,
+maintain, and revisit later.
 
 ## The checks I would keep even in a short guide
 
