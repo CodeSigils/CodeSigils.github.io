@@ -185,7 +185,7 @@ old SHAs stay alive locally and the cleanup looks incomplete to the next
 
 **3. Re-queue GitHub's metadata refresh.** An empty commit with a mundane
 message (`chore: refresh repository metadata`) gives GitHub's jobs something
-new to index. This alone does not clear the sidebar.
+new to index, but this alone does not clear the sidebar.
 
 **4. Toggle the default branch.** This sequence flushed the widget cache:
 
@@ -201,8 +201,8 @@ git push origin --delete refresh/sidebar-flush
 `gh auth status` confirms that the token carries the administrative permission
 needed to change the default branch. The commands push `master` to a temporary
 branch, make it the default, wait 90 seconds for GitHub to recompute the route
-data, restore `master`, and delete the temporary branch. Repository content is
-unchanged.
+data, restore `master`, and delete the temporary branch without touching the
+repo's actual content.
 
 !!! warning "Flush only after the index is clean"
 
