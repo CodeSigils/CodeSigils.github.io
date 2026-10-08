@@ -225,7 +225,7 @@ clean.
 I consider non-consensual AI attribution in commit messages an unethical
 practice, and the cleanup is what convinced me.
 
-A commit trailer is an assertion of authorship. When tooling writes that
+A commit trailer is an assertion of authorship. Period. When tooling writes that
 assertion in my commits by default, it makes a provenance claim I never
 approved and presents an AI agent as a co-author of my writing in a public
 record. The author must later find and remove that claim.
