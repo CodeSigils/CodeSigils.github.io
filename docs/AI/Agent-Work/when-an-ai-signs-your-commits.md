@@ -94,16 +94,15 @@ Nobody in those threads is trying to get attribution out of their history.
 Purpose-built scrubbers now exist. The
 [git-attribution](https://github.com/Londopy/git-attribution) tool scans
 history for trailers from seven known agents, rewrites them out, and
-installs a pre-push guard so they do not come back. A tool category for
-removing default attribution suggests that the default is not serving
-everyone.
+installs a pre-push guard so they do not come back. The existence of a tool
+for removing default attribution suggests the default is not serving everyone.
 
 ## Two caches, two answers
 
 The first cleanup pass rewrote the three affected commit messages while
 leaving the file contents byte-identical (verified with `git diff` against a
 backup ref before the backup was removed), but after inspecting the results I
-realised the surfaces were in tension:
+realised the three checks did not agree:
 
 - The REST `/contributors` endpoint returned exactly one account, mine.
 - The homepage sidebar widget still credited the AI agent.
@@ -161,8 +160,8 @@ the question in one request.
 
 ## The cleanup, step by step
 
-The remediation uses straightforward steps whose sequence no single document
-lists.
+Each step is straightforward, but I could not find one source that put them
+in order.
 
 **1. Remove the trailers from commit messages.** A `git filter-branch` pass with a
 message filter over the affected range strips the offending lines while
@@ -250,13 +249,13 @@ clear remedy for removing it.
 
 ## What keeps it from happening again
 
-Attribution needs enforcement at more than one layer because instructions can
-be ignored. The
-claude-code discussion is the clearest evidence: one reporter's
-`attribution` settings were configured to suppress commits and pull-request
-credits, and the trailer appeared anyway; the conclusion reached in that
-thread was that only a command-level hook inspecting tool calls before they
-run, plus a CI gate failing on attribution patterns, can be trusted.
+Settings and written instructions are useful, but they do not reliably stop
+attribution on their own, so the safeguard needs more than one layer. In the
+claude-code discussion, one reporter had configured `attribution` to suppress
+credits in both commits and pull requests, yet a trailer still appeared. The
+discussion's practical conclusion was that a command-level hook, which checks
+tool calls before they run, and a CI gate that fails on attribution patterns
+are the only reliable backstops.
 
 What exists in this repository now:
 
