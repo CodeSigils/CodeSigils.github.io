@@ -71,7 +71,7 @@ for that default to change.
   there too, after a trailer reached a private organisation repository and
   needed `git commit --amend` plus `--force-with-lease`.
 
-The complaint is ethical as much as technical. One recurring theme across
+The complaint is ethical as much as technical, in my opinion. One recurring theme across
 those threads is that the trailer presents the tool as a co-author of the
 user's work, in the user's name, without anything the user would recognise
 as an approval step.
@@ -95,21 +95,23 @@ Purpose-built scrubbers now exist. The
 [git-attribution](https://github.com/Londopy/git-attribution) tool scans
 history for trailers from seven known agents, rewrites them out, and
 installs a pre-push guard so they do not come back. A tool category for
-removing a default is its own verdict on the default.
+removing default attribution suggests that the default is not serving
+everyone.
 
 ## Two caches, two answers
 
-The first cleanup pass rewrote the three affected commit messages, and the
-file contents stayed byte-identical (verified with `git diff` against a backup
-ref before the backup was removed). Then the surfaces started disagreeing:
+The first cleanup pass rewrote the three affected commit messages while
+leaving the file contents byte-identical (verified with `git diff` against a
+backup ref before the backup was removed), but after inspecting the results I
+realised the surfaces were in tension:
 
 - The REST `/contributors` endpoint returned exactly one account, mine.
 - The homepage sidebar widget still credited the AI agent.
 - The Insights contributors graph had already forgotten it after the
   force-push.
 
-That split is the finding worth keeping. The best measurements I found come
-from [declaudify](https://github.com/ParkerrDev/declaudify), a tool built
+The best measurements I found come from
+[declaudify](https://github.com/ParkerrDev/declaudify), a tool built
 precisely to flush this kind of stale attribution. Its author tested the
 behaviour: GitHub renders contributors from two
 separate caches, a force-push clears the Insights graph but not the homepage
