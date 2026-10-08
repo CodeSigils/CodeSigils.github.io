@@ -29,7 +29,7 @@ branding line above. Both were added by agent tooling during an ordinary
 work session, the way these frameworks credit the tool that produced the
 change. GitHub parses commit messages at render time, so a trailer written
 months ago can change a widget today ([GitHub's co-author
-documentation](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-commits-with-co-authored-attributions)
+documentation](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
 explains the format and how GitHub turns trailers into credits).
 
 What made this easy to miss is that `git log`'s default view shows subjects,
@@ -216,7 +216,7 @@ Rewritten commits can remain reachable by their old
 SHA and through `refs/pull/N/head` if pull requests existed. Neither surface
 feeds the contributor widgets, but in the claude-code discussion above, one
 reporter's old commits stayed alive through three open pull requests and
-required GitHub Support to delete them, over two rounds of tickets. This
+required GitHub Support to delete them, **over two rounds of tickets**. This
 repository had no pull requests holding the old objects, so the purge was
 clean.
 
@@ -338,7 +338,7 @@ history as my responsibility.
 **Official documentation**
 
 - [Creating commits with co-authored
-  attributions](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-commits-with-co-authored-attributions)
+  attributions](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
   — GitHub's format and rendering rules.
 - [pre-commit](https://pre-commit.com/), [gitlint](https://jorisroovers.com/gitlint/),
   [commitlint](https://commitlint.js.org/) — candidate enforcement frameworks.
