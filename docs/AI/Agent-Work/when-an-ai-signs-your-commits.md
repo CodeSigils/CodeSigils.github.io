@@ -304,19 +304,22 @@ configured GPG, SSH, or S/MIME key created the commit. It does not make an AI
 trailer true, nor does it settle who wrote the change; it proves control of a
 key at the time the commit was made.
 
-After creating a signing key and adding its public half to GitHub, I can make
-signing the default for this repository with:
+The placeholder in `user.signingkey` is not one universal value: Git reads it
+through the selected signing format. For SSH, the complete default setup is:
 
 ```bash
-git config user.signingkey YOUR_SIGNING_KEY
-git config commit.gpgsign true
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true
 ```
 
-Use `--global` on those commands only if every repository on the machine
-should use that key. A one-off signed commit is `git commit -S -m "message"`.
-GitHub shows a **Verified** badge when it can validate the signature, while
-`git log --show-signature -1` is a quick local check. The precise key setup
-varies by GPG, SSH, or S/MIME, so I use GitHub's
+For GPG, `openpgp` is the default format and `user.signingkey` is usually the
+long key ID. S/MIME uses the `x509` format and its configured signing program.
+Drop `--global` when a repository needs a different key. A one-off signed
+commit is `git commit -S -m "message"`. GitHub shows a **Verified** badge when
+it can validate the signature, while `git log --show-signature -1` is a quick
+local check. The precise key setup varies by GPG, SSH, or S/MIME, so I use
+GitHub's
 [signing commits guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
 rather than copying a key recipe from a random terminal snippet.
 
