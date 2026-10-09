@@ -64,6 +64,16 @@ for that default to change.
 - [Issue #7422](https://github.com/anthropics/claude-code/issues/7422)
   records the trailer being added even when the project's `CLAUDE.md` says,
   in those words, "DO NOT put this in the commit message".
+- [Issue #617](https://github.com/anthropics/claude-code/issues/617) asks for
+  a setting to disable the generated-with line and co-author trailer, citing
+  an organisation whose one-line commit standard leaves no room for either.
+- [Issue #5458](https://github.com/anthropics/claude-code/issues/5458) makes
+  the same consent argument directly: the reporter says attribution continued
+  despite an explicit instruction not to add it.
+- [Issue #24590](https://github.com/anthropics/claude-code/issues/24590)
+  documents a separate reliability problem: the co-author trailer named an
+  Opus model while the reporter was using Sonnet, strengthening the case for
+  a generic tool identity or no automatic trailer at all.
 - [Issue #53259](https://github.com/anthropics/claude-code/issues/53259)
   catalogues the failed escape hatches: `settings.json`, `CLAUDE.md`, custom
   skills, and explicit in-session instructions, with different commit code
