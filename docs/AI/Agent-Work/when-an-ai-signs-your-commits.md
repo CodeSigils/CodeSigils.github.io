@@ -10,6 +10,13 @@ keywords:
   - commit provenance
 ---
 
+<div class="image-wrapper">
+  <img src="/assets/images/contributors-01.webp"
+       alt="GitHub contributors widget listing CodeSigils, dependabot[bot], and sisyphus-dev-ai"
+       width="579"
+       height="390" />
+</div>
+
 The contributors widget on a GitHub repository looks like a plain statement of
 fact: avatars, names, a count. When this blog's repository started listing an
 AI agent next to my own account, I checked whether the widget was accurate.
