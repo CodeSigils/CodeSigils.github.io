@@ -296,6 +296,30 @@ What exists in this repository now:
   flag what has already landed — but a red run on `master` is a signal that
   triggers the rewrite procedure above.
 
+## Sign the commits you mean to stand behind
+
+Commit signing solves a different problem, but it is a useful companion to
+the checks above. A signature lets GitHub verify that the person holding a
+configured GPG, SSH, or S/MIME key created the commit. It does not make an AI
+trailer true, nor does it settle who wrote the change; it proves control of a
+key at the time the commit was made.
+
+After creating a signing key and adding its public half to GitHub, I can make
+signing the default for this repository with:
+
+```bash
+git config user.signingkey YOUR_SIGNING_KEY
+git config commit.gpgsign true
+```
+
+Use `--global` on those commands only if every repository on the machine
+should use that key. A one-off signed commit is `git commit -S -m "message"`.
+GitHub shows a **Verified** badge when it can validate the signature, while
+`git log --show-signature -1` is a quick local check. The precise key setup
+varies by GPG, SSH, or S/MIME, so I use GitHub's
+[signing commits guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
+rather than copying a key recipe from a random terminal snippet.
+
 ## A practical takeaway
 
 GitHub's sidebar and API can rely on different indexes. I now check the data
