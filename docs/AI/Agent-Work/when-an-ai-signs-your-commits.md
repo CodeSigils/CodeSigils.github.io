@@ -155,55 +155,58 @@ Community reports match the shape of that problem:
   and [#198886](https://github.com/orgs/community/discussions/198886) report
   sidebar staleness measured in weeks.
 
-| Surface | What it reads | How it actually refreshed |
+| Surface | What it reads | What the evidence can show |
 | :--- | :--- | :--- |
-| Insights graph | the rewritten history | force-push (per declaudify's tests) |
-| REST `/contributors` | commit authorship, no co-authors | updated with the rewrite |
-| Homepage sidebar widget | its own cache of parsed trailers | default-branch toggle, staff refresh, or the documented wait |
+| Insights graph | the rewritten history | a force-push updated it in this case |
+| REST `/contributors` | author-email contributor counts | it can be cached for hours and is not a trailer audit |
+| Homepage sidebar widget | an undocumented contributor view | it can disagree with the API; GitHub documents no cache-refresh control |
 
-I also found a cheap way to check the widget's real data source without a
-browser: GitHub's JSON payload for the repository route. A `GET` on the
-repository page with `Accept: application/json` returns the rendered route,
-and the same header on the `/_sidebar` path returns the widget's feed
-directly:
+The REST endpoint is useful as one signal, not a verdict. GitHub documents it
+as an author-email-based contributor count and warns that the response can be
+cached for hours.
+
+### A read-only look at the widget
+
+For a quick, browser-free observation of the homepage widget, GitHub currently
+serves an undocumented sidebar payload at `/_sidebar` when asked for JSON:
 
 ```bash
 curl -s -H "Accept: application/json" \
   https://github.com/CodeSigils/CodeSigils.github.io/_sidebar
 ```
 
-After the flush, that feed reported `contributorCount: 1`. The feed answered
-the question in one request.
+This is a `GET`: it is not destructive and does not clear or repair a cache.
+In this incident it exposed `contributorCount: 1` before the visible widget
+caught up. Use it as a complementary diagnostic beside the REST endpoint and
+the rendered sidebar, not as a stable interface or a fix to automate.
 
 ## The cleanup, step by step
 
-Each step is straightforward, but I could not find one source that put them
-in order.
+Each step needs a review point; I could not find one source that puts the
+whole recovery in order.
 
-**1. Remove the trailers from commit messages.** A `git filter-branch` pass with a
-message filter over the affected range strips the offending lines while
-leaving every file byte-identical:
+**1. Remove the trailers from commit messages.** First make a fresh clone or
+backup, identify the exact refs to rewrite, and inspect the proposed result
+before pushing it. Git now warns that `filter-branch` has safety and
+performance traps and recommends [filter-repo](https://github.com/newren/filter-repo)
+instead. I used `filter-branch` for this small historical repair, but would not
+present its shell filter as a copy-and-run recipe for another repository.
 
-```bash
-git filter-branch -f --msg-filter \
-  "grep -v -e '^Co-authored-by: ' -e '^Ultraworked with '" \
-  3deab8c..master
-```
+**2. Push the rewrite deliberately.** Once the rewritten messages are correct,
+`git push --force-with-lease` updates the remote while refusing to overwrite an
+unexpected remote change. Local reflog expiry and `git gc --prune=now` are
+optional, destructive housekeeping: they discard recovery paths on this clone;
+they are not a documented way to refresh GitHub's contributor views.
 
-[filter-repo](https://github.com/newren/filter-repo) also supports this job. I
-used `filter-branch` for this three-commit range.
+**3. Let GitHub catch up, then ask for help if it does not.** GitHub documents
+that its contributors API may be cached for hours. I found no supported API or
+CLI command that flushes the homepage contributor widget. Changing a
+repository's default branch is an administrative API operation, not a
+documented cache remedy.
 
-**2. Push the rewrite and purge the remnants.** `git push --force-with-lease`
-updates the remote, then the local backup refs, `ORIG_HEAD`, and reflogs have
-to go (`git reflog expire --expire=now --all && git gc --prune=now`), or the
-old SHAs stay alive locally and the cleanup looks incomplete to the next
-`git fsck`.
-
-**3. Re-queue GitHub's metadata refresh.** An empty commit with a mundane
-message (`chore: refresh repository metadata`) gives GitHub's jobs something
-new to index, but this alone does not clear the sidebar.
-
-**4. Toggle the default branch.** This sequence flushed the widget cache:
+**4. A last-resort widget-cache nudge that worked here.** When every other
+check was clean and the widget was still wrong, this sequence finally cleared
+it:
 
 ```bash
 gh auth status
@@ -214,20 +217,21 @@ gh api -X PATCH /repos/CodeSigils/CodeSigils.github.io -f default_branch=master
 git push origin --delete refresh/sidebar-flush
 ```
 
-`gh auth status` confirms that the token carries the administrative permission
-needed to change the default branch. The commands push `master` to a temporary
-branch, make it the default, wait 90 seconds for GitHub to recompute the route
-data, restore `master`, and delete the temporary branch without touching the
-repo's actual content.
+`gh auth status` confirms the active account, but not the administrative
+permission required to change the default branch. The commands push `master`
+to a temporary branch, make it the default, wait, restore `master`, and delete
+the temporary branch. GitHub documents the branch update but does not promise
+that it refreshes contributor data; this is a personal-repository observation,
+not a supported general remedy. Use it only after confirming the rewritten
+history, understanding the temporary default-branch impact, and exhausting the
+normal wait-and-Support route.
 
 !!! warning "Flush only after the index is clean"
 
-    The author of [declaude](https://github.com/ediiloupatty/declaude) warns
-    that flushing caches while GitHub still serves the old commit index can
-    rebuild the graph from the old history and re-insert the AI credit. Verify
-    through the API and commit search that the remote history is clean first,
-    then flush, then verify again, retrying up to three times if the widget
-    comes back wrong.
+    Verify through the contributors API and commit search that the remote
+    history is clean first. The default-branch sequence changes repository
+    behaviour for visitors and automation, so it is a maintainer decision,
+    not a routine cleanup command.
 
 Rewritten commits can remain reachable by their old
 SHA and through `refs/pull/N/head` if pull requests existed. Neither surface
@@ -280,21 +284,30 @@ What exists in this repository now:
   Policy section: no `Co-authored-by:` trailers of any kind, no bot accounts,
   no agent branding lines, no `--no-verify`. My local agent instructions
   carry the same rule.
-- **A local `commit-msg` hook** rejecting forbidden trailers and branding
-  lines, built on [pre-commit](https://pre-commit.com/) with a pygrep rule.
-  It covers `commit`, `commit --amend`, and interactive reword. Cherry-picks
-  and `--no-verify` bypass it, so CI supplies a second check. The other
+- **A local `commit-msg` hook** rejecting `Co-authored-by` plus known
+  attribution markers, including Ultraworked, Sisyphus, Claude, and the named
+  bot accounts seen here. It is built on [pre-commit](https://pre-commit.com/)
+  with a pygrep rule. It covers `commit`, `commit --amend`, and interactive
+  reword. `--no-verify` bypasses it, and its pattern is intentionally narrower
+  than the written policy, so CI supplies a second check. The other
   candidates I evaluated:
   [gitlint](https://jorisroovers.com/gitlint/) has been dormant since its
   2023 release and offers no must-not-match rule at all, and
   [commitlint](https://commitlint.js.org/) would need a custom plugin for a
   deny rule.
-- **A CI backstop** that scans pushed commit messages and fails the build on
-  the same patterns. A hook can be skipped with `--no-verify`, which my
-  policy treats as a violation in itself; a CI check cannot be skipped from
-  a laptop. It cannot refuse the push itself — on a push event it can only
-  flag what has already landed — but a red run on `master` is a signal that
-  triggers the rewrite procedure above.
+- **A CI backstop** that scans pushed commit messages for the same attribution
+  classes, with a generic bot-account match. A hook can be skipped with
+  `--no-verify`, which my policy treats as a violation in itself; CI cannot
+  refuse the push and runs only after the fact. A red run on `master` is a
+  signal to investigate and, if necessary, rewrite the affected history.
+
+This repository deliberately blocks `dependabot[bot]`, but that is a
+maintainer choice, not a universal conclusion. Dependabot is GitHub's
+dependency-update automation: it opens security and version-update pull
+requests rather than asserting co-authorship of a human-directed change. A
+maintainer may reasonably allow it while still rejecting AI attribution. The
+important part is deciding which automated identities may enter the history,
+then making the hook and CI rule match that decision.
 
 ## Sign the commits you mean to stand behind
 
@@ -305,7 +318,8 @@ trailer true, nor does it settle who wrote the change; it proves control of a
 key at the time the commit was made.
 
 The placeholder in `user.signingkey` is not one universal value: Git reads it
-through the selected signing format. For SSH, the complete default setup is:
+through the selected signing format. After adding the public SSH key to GitHub
+as a signing key, the complete SSH default setup is:
 
 ```bash
 git config --global gpg.format ssh
@@ -384,6 +398,17 @@ history as my responsibility.
 - [Creating commits with co-authored
   attributions](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
   — GitHub's format and rendering rules.
+- [Git hooks](https://git-scm.com/docs/githooks) — which commands invoke the
+  `commit-msg` hook and how `--no-verify` bypasses it.
+- [Git history rewriting](https://git-scm.com/docs/git-filter-branch) — the
+  warning against new `filter-branch` use and its recommendation of
+  `filter-repo`.
+- [GitHub repository API](https://docs.github.com/en/rest/repos/repos) —
+  default-branch updates and cached contributor responses.
+- [GitHub commit signing](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
+  — signing defaults and verification.
+- [Dependabot version updates](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-version-updates)
+  — GitHub's automated dependency-update pull requests.
 - [pre-commit](https://pre-commit.com/), [gitlint](https://jorisroovers.com/gitlint/),
   [commitlint](https://commitlint.js.org/) — candidate enforcement frameworks.
 

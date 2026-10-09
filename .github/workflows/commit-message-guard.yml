@@ -30,7 +30,7 @@ jobs:
           else
             RANGE="$BEFORE..$AFTER"
           fi
-          PATTERN='^[[:space:]]*co-authored-by[[:space:]]*:|ultraworked|sisyphus|clio-agent|\[bot\]'
+          PATTERN='^[[:space:]]*co-authored-by[[:space:]]*:|ultraworked|sisyphus|clio-agent|claude|\[bot\]'
           HITS=$(git log --format='%an%n%ae%n%cn%n%ce%n%B' "$RANGE" | grep -iE "$PATTERN" || true)
           if [ -n "$HITS" ]; then
             echo "::error::Bot/AI attribution found in pushed commits:"

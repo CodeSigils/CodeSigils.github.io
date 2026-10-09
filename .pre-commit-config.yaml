@@ -10,6 +10,6 @@ repos:
     hooks:
       - id: forbid-bot-attribution
         name: Forbid bot/AI attribution in commit message
-        entry: '(?i)^[ \t]*co-authored-by[ \t]*:|ultraworked|sisyphus|clio-agent|github-actions\[bot\]|dependabot\[bot\]'
+        entry: '(?i)^[ \t]*co-authored-by[ \t]*:|ultraworked|sisyphus|clio-agent|claude|github-actions\[bot\]|dependabot\[bot\]'
         language: pygrep
         stages: [commit-msg]
