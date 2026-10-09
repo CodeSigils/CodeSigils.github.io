@@ -241,6 +241,84 @@ required GitHub Support to delete them, **over two rounds of tickets**. This
 repository had no pull requests holding the old objects, so the purge was
 clean.
 
+### The whole sequence, as an example
+
+The steps above are the reasoning. What follows is **one illustrative example**
+of the complete pass in a single block, not the exact commands run on the
+incident repository. It is written around `filter-repo` (the tool Git now
+recommends over `filter-branch`, which is what the real cleanup used); treat it
+as a template to adapt, not a script to paste blindly. Set the placeholders,
+keep the mirror backup in step 0, and read each block before it runs.
+
+```bash
+# Requires: git-filter-repo (pip install git-filter-repo), git, gh, curl
+REPO="CodeSigils/CodeSigils.github.io"     # owner/name
+BRANCH="master"                            # default branch
+WORK="/tmp/attribution-cleanup"            # scratch copy, rewritten
+BACKUP="/tmp/attribution-cleanup.bak.git"  # mirror backup, never rewritten
+
+# --- 0. Back up the original history, then work on a fresh clone. ----------
+#     filter-repo refuses to run outside a fresh clone; the mirror is the
+#     escape hatch if the rewrite goes wrong.
+git clone --mirror "https://github.com/${REPO}.git" "${BACKUP}"
+git clone "https://github.com/${REPO}.git" "${WORK}"
+cd "${WORK}"
+BEFORE="$(git rev-parse "refs/heads/${BRANCH}^{tree}")"
+
+# --- 1. See exactly what will change. --------------------------------------
+#     git log shows subjects only, so grep the full message (bodies included).
+git log --format='%h %s' -iE --grep='co-authored-by|ultraworked|generated with'
+
+# --- 2. Rewrite the messages only. -----------------------------------------
+#     filter-repo deletes the origin remote on purpose; it is re-added in 4.
+git filter-repo --force --message-callback '
+import re
+drop = re.compile(
+    rb"(?i)(co-authored-by:.*(sisyphus|claude|opencode|codex|copilot|cursor|devin)"
+    rb"|(ultraworked|generated|assisted) with\b.*)"
+)
+kept = [line for line in message.split(b"\n") if not drop.match(line)]
+while kept and not kept[-1].strip():
+    kept.pop()
+return b"\n".join(kept) + b"\n"
+'
+
+# --- 3. Verify: messages changed, file contents did not. -------------------
+#     The rewritten tip must point at the same tree as the original.
+test "$(git rev-parse "refs/heads/${BRANCH}^{tree}")" = "${BEFORE}" \
+  && echo "tree unchanged: message-only rewrite confirmed"
+git log --format='%B' | grep -niE 'co-authored-by|ultraworked|sisyphus' \
+  && echo "STOP: attribution still present" \
+  || echo "clean: no attribution found"
+
+# --- 4. Publish the rewrite. ----------------------------------------------
+#     Restore origin and fetch so --force-with-lease has a tracking ref to
+#     compare against before it overwrites the remote.
+git remote add origin "https://github.com/${REPO}.git"
+git fetch origin "${BRANCH}"
+git push --force-with-lease origin "${BRANCH}"
+
+# --- 5. Check the surfaces, then let the caches catch up. -----------------
+curl -s "https://api.github.com/repos/${REPO}/contributors" | grep '"login"'
+# Insights follows the force-push; the homepage widget keeps its own cache.
+
+# --- 6. Last resort: nudge the sidebar cache by toggling the default. -----
+#     Run only after 1-5 are clean, Support has had time to answer, and you
+#     accept the temporary default-branch change. See the warning above.
+gh auth status
+git push origin "${BRANCH}:refresh/sidebar-flush"
+gh api -X PATCH "/repos/${REPO}" -f default_branch=refresh/sidebar-flush
+sleep 90
+gh api -X PATCH "/repos/${REPO}" -f default_branch="${BRANCH}"
+git push origin --delete refresh/sidebar-flush
+```
+
+Each numbered block maps to the prose step of the same number. The two safety
+points to keep are the mirror backup in step 0 and the tree comparison in step
+3, which together show the rewrite changed commit messages and nothing else.
+Note that `filter-repo` rewrites every ref it is handed, so if the repository
+carries tags, confirm them with `git tag` against the backup before pushing.
+
 ## Why I consider the default unethical
 
 I consider non-consensual AI attribution in commit messages an unethical
