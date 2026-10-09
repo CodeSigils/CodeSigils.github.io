@@ -265,9 +265,11 @@ git clone "https://github.com/${REPO}.git" "${WORK}"
 cd "${WORK}"
 BEFORE="$(git rev-parse "refs/heads/${BRANCH}^{tree}")"
 
-# --- 1. See exactly what will change. --------------------------------------
-#     git log shows subjects only, so grep the full message (bodies included).
-git log --format='%h %s' -iE --grep='co-authored-by|ultraworked|generated with'
+# --- 1. See exactly what step 2 will drop (mirrors its pattern). -----------
+#     --grep searches whole messages (subject and body); --format only picks
+#     what is printed, here the subject line via %h %s.
+git log --format='%h %s' -i -E \
+  --grep='co-authored-by:.*(sisyphus|claude|opencode|codex|copilot|cursor|devin)|(ultraworked|generated|assisted) with'
 
 # --- 2. Rewrite the messages only. -----------------------------------------
 #     filter-repo deletes the origin remote on purpose; it is re-added in 4.
@@ -284,12 +286,17 @@ return b"\n".join(kept) + b"\n"
 '
 
 # --- 3. Verify: messages changed, file contents did not. -------------------
-#     The rewritten tip must point at the same tree as the original.
-test "$(git rev-parse "refs/heads/${BRANCH}^{tree}")" = "${BEFORE}" \
-  && echo "tree unchanged: message-only rewrite confirmed"
-git log --format='%B' | grep -niE 'co-authored-by|ultraworked|sisyphus' \
-  && echo "STOP: attribution still present" \
-  || echo "clean: no attribution found"
+if test "$(git rev-parse "refs/heads/${BRANCH}^{tree}")" != "${BEFORE}"; then
+  echo "STOP: tree changed; expected a message-only rewrite"
+  exit 1
+fi
+echo "tree unchanged: message-only rewrite confirmed"
+if git log --format='%B' | grep -n -i -E \
+  'co-authored-by:.*(sisyphus|claude|opencode|codex|copilot|cursor|devin)|(ultraworked|generated|assisted) with'; then
+  echo "STOP: attribution still present"
+  exit 1
+fi
+echo "clean: no attribution found"
 
 # --- 4. Publish the rewrite. ----------------------------------------------
 #     Restore origin and fetch so --force-with-lease has a tracking ref to
