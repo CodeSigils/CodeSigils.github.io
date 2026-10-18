@@ -154,8 +154,9 @@ rely on when making a decision.
 
 ## Research you can still trust
 
-I keep a broader set of notes in a private lab repository, and its research
-directory holds material I consider valuable. The wider observations need
+I keep a broader set of notes in the agent-concepts-study private repo. Its
+research directory holds a lot of material I consider valuable and
+challenging to keep. The wider observations need
 more caution. A substantial share is outdated, incomplete, or simply wrong
 now, which is why that repository stays private for now. They were useful
 when written. They should not automatically be treated as current guidance.
@@ -299,16 +300,17 @@ standard (3.14)", and I read the configuration back through the API to
 confirm what was live: both contexts required, no admin enforcement, strict
 status checks off so the maintainer can still push directly when needed.
 
-Then I wrote an incident report. Not a sprawling one. A dated file with a
-short header: the date, a status line, an owner-of-record pointing at the
-research register, and a scope note. A summary. Two findings, each with its
-evidence. A remediation section appended the same day, recording what was
-changed and how it was verified. A sources section listing the official
-GitHub documentation pages the claims rested on. The report recorded one
-thing I could not repair in the repository itself: a private sibling where
-the same API call returns a 403 explaining that branch protection needs a
-paid plan or a public repository. That limitation stands, it is documented,
-and the decision about it lives with the owner, outside the public tree.
+Then I wrote an incident report, and I kept it short. The file carries a
+dated header with a status line, an owner-of-record pointing at the research
+register, and a scope note. The body holds a summary, two findings with the
+evidence behind each, a remediation section I appended the same day to
+record what was changed and how it was verified, and a sources section
+listing the official GitHub documentation pages the claims rested on. The
+report also recorded one thing I could not repair in the repository itself:
+a private sibling where the same API call returns a 403 explaining that
+branch protection needs a paid plan or a public repository. That limitation
+stands, it is documented, and the decision about it lives with the owner,
+outside the public tree.
 
 Writing that report surfaced the hole. Nothing in the repository validated
 reports like it. A report file could be added, orphaned from the register,
