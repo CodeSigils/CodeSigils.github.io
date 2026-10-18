@@ -1,13 +1,13 @@
 ---
 title: When the Instructions Keep Repeating
-description: A field note on treating repeated agent instructions as a requirements backlog, and what a real branch-protection incident taught about checks, corrections, and research you can still trust.
+description: A field note on treating repeated agent instructions as a requirements backlog, what a six-defect fleet CI investigation taught about rot versus behavior, and how incident reports grew their own machine checks.
 keywords:
   - AI agents
   - agent instructions
   - documentation drift
   - evidence
-  - branch protection
-  - research register
+  - CI gates
+  - incident reports
   - skill-repo-standards
 ---
 
@@ -44,6 +44,8 @@ behind them:
 
 Others were more about how decisions get made:
 
+- "The gap is recurring, we should codify this, right now it's only in
+  prose."
 - "Are we following good human-in-the-loop practice here? Research it and
   report what you find. Official docs from industry leaders take priority."
 - "What do the official Git or GitHub docs say about this?"
@@ -60,6 +62,8 @@ And some were just me, my attention span, and my limits:
 
 - "I said report only, do not implement. Haven't we enforced this? Sorry that
   was in another repo. My bad."
+- "Inspect current skill governance for duplication and tightening. Wait, we
+  have already done this..."
 - "SO many dependabot PRs for review and merging! Review and handle git as
   needed. I'm tired."
 
@@ -80,6 +84,15 @@ current reality" should not require me to notice, yet again, that the
 documentation has quietly drifted away from the code. These are workflow
 requirements. They belong in a specification, a checklist, a template, a
 validation step, or some other inspectable part of the repository.
+
+There is a working model behind this, and I wish I had adopted it earlier:
+context is working memory, not storage. The agent failures I saw in long
+sessions were almost never failures of knowledge. They were failures of
+accumulation: stale exploration, dead ends, and verbose outputs crowding out
+the thing we had agreed on twenty minutes earlier. An instruction typed into
+that crowded space decays. The same instruction filed in `AGENTS.md`, a hook,
+or a machine check does not. My instinct to externalize was directionally
+correct long before I had the vocabulary for it.
 
 I try to remind myself not to create bureaucracy in a file swamp full of
 prose for its own sake. The goal is narrower: make good behavior easier to
@@ -123,31 +136,47 @@ particular problems. All of them required some kind of research capturing.
 This unevenness is partly on purpose. I was exploring different strategies to
 tackle similar problems, and the differences between repositories are data.
 Comparing how two approaches aged is how I learn which patterns are worth
-converging on. The mess is exploratory work, not neglect. What it costs me is
-exactly the problem this article is about: some documentation is current,
-some is incomplete, and some captures research that was valuable when written
-but may no longer reflect the state of a tool, a standard, or a repository. I
-do not need uniformity for its own sake. I need to know which information I
-can rely on when making a decision.
+converging on. The mess is exploratory work, not neglect.
 
-## Research that can still answer questions
+The cost is concrete and I can measure it. Documentation maturity runs from
+repositories with a full evidence registry, where every source URL carries a
+last-verified date and a phrase that must appear in the fetched body, down to
+one repository whose entire research layer is a single `docs/research.md`.
+Each repository's conventions drifted independently. The next phase is
+convergence: identify which of the experimented strategies are the
+repeatable ones, adopt them fleet-wide through the standard, and retire the
+rest deliberately rather than by accident. Until then, the problem this
+article is about stays live. Some documentation is current, some is
+incomplete, and some captures research that was valuable when written but
+may no longer reflect the state of a tool, a standard, or a repository. I do
+not need uniformity for its own sake. I need to know which information I can
+rely on when making a decision.
 
-I keep a broader set of notes in
-[`agent-concepts-study`](https://github.com/CodeSigils/agent-concepts-study).
-Its research directory holds a lot of material I consider valuable. The
-wider observations in that repository need more caution. Many are outdated,
-incomplete, or simply wrong now, which is why I keep it private for now. They
-were useful when written. They should not automatically be treated as
-current guidance.
+## Research you can still trust
 
-Capturing research is only part of the job. The harder part is making it
-possible to answer questions like: where did this claim come from? When was
-it checked? What source supports it? Is it still relevant? Does it apply to
-this repository? What remains uncertain? What decision does it inform?
-Without those connections, research becomes another pile of potentially
-stale documents. And we all know how URL reference links that maybe contain
-useful info now tend to
-[rot irreversibly in the future](https://www.w3.org/Provider/Style/URI "cool urls").
+I keep a broader set of notes in a private lab repository, and its research
+directory holds material I consider valuable. The wider observations need
+more caution. A substantial share is outdated, incomplete, or simply wrong
+now, which is why that repository stays private for now. They were useful
+when written. They should not automatically be treated as current guidance.
+
+The conclusion I drew from that is probably the most important line in this
+piece: the failure mode is no longer missing evidence. It is unindexed
+evidence that cannot be trusted without re-verification. I am not
+overwhelmed by a lack of research. I am overwhelmed by my own corpus of it.
+The fix is triage rather than more capture: dated rows with statuses and
+recheck conditions, marking each item current, outdated, or wrong, instead
+of re-verifying everything in place.
+
+Two smaller admissions belong here too. I implemented before I researched
+established methodologies. The spec I built became a consumer of industry
+standards almost as an act of recovery: not "create a methodology", but
+"follow existing ones, and record which one and why". And the vocabulary
+already existed. W3C and ISO practice calls this work a conformance profile
+or a conformance assessment scheme; starting from that name would have saved
+me from inventing near-synonyms. Similarly, I found
+[agentskills.io](https://agentskills.io/home) months after I needed it, deep
+into bad prompt-engineering habits that its guidance would have prevented.
 
 This is why I started the
 [`skill-repo-standards`](https://github.com/CodeSigils/skill-repo-standards)
@@ -169,29 +198,106 @@ fetched body before the entry counts as current. There are decisions with
 IDs, and research entries point at the decisions they inform. The whole
 shape exists so that the question "why do we believe this?" has an address.
 
-## A real incident, and the check it exposed
+## The week the fleet showed what was actually wrong
 
-The part I want to tell in full is the branch protection incident, because
-it is the clearest example I have of the loop working, including the part
-where the loop had a hole in it.
+Before the branch protection story, there is a bigger one, because it is
+where the abstract concerns in this article acquired case numbers.
+
+A fleet-wide cleanup, meant to reduce advisory noise in the READMEs of eleven
+repositories, was issued before any repository was inspected for its current
+state. Correcting the resulting wreckage surfaced six distinct defects. Five
+were silent configuration rot that pre-existed the cleanup; the sixth was a
+behavioral failure by the operating agent, which was me in effect, through
+the agent I was driving.
+
+For a skim, three of the six were the kind that stop work: a red
+documentation gate on `skill-discovery`'s default branch that scheduled runs
+reported as green, a deleted upstream project whose 404 kept an unrelated
+pull request blocked in `awesome-agent-trust`, and a required check in
+`zero-md-formatter` naming a job no workflow produced anymore, which meant
+no pull request there could ever pass. The other two rot defects were
+quieter: expired evidence that automation could not see, and a duplicated
+history whose matching trees hid the provenance question. The full
+write-up, with remediation and sources, is the dated
+[fleet CI rot incident report](https://github.com/CodeSigils/skill-repo-standards/blob/main/docs/research/incident-reports/2026-10-17-fleet-ci-rot-and-agent-drift.md)
+in the standards repository. The sixth defect was mine, and it is further
+down.
+
+The rot, concretely:
+
+- In `skill-discovery`, two research-evidence documents had passed their
+  expiry dates, so the documentation gate was failing on the default branch.
+  The scheduled run stayed green anyway, because the gating jobs are filtered
+  out of schedule events. Worse, intervening merges had been performed by
+  automation using the repository's own `GITHUB_TOKEN`, and events triggered
+  by that token do not create new workflow runs at all. The branch advanced
+  for days without any CI running. GitHub documents both behaviors in its
+  [automatic token authentication](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)
+  and [events that trigger workflows](https://docs.github.com/en/actions/reference/events-that-trigger-workflows)
+  pages, which is exactly where the investigation ended up.
+- In `awesome-agent-trust`, a third-party project listed in the README had
+  been deleted upstream, so its URL returned 404. The validator classifies
+  that as a hard error with no waiver, so a required check was failing on
+  the default branch, which blocked an entirely unrelated documentation PR.
+  The rot in one file held up work in another. The fix was the
+  [dead-entry removal](https://github.com/CodeSigils/awesome-agent-trust/pull/54)
+  and merging the [stranded docs PR](https://github.com/CodeSigils/awesome-agent-trust/pull/55).
+- `zero-md-formatter` carried three of them. Its evidence had passed a
+  30-day freshness window while the checking cadence was weekly, a defect I
+  will come back to under corrections. Its required status checks named a
+  job, `test (25.x)`, that no longer existed in the workflow matrix, which
+  means no pull request in that repository could ever satisfy its required
+  checks regardless of CI results. And its default branch turned out to
+  carry a duplicate history with no common ancestor: ahead 95 and behind 95
+  against its own remote, with identical commit subjects but different
+  SHAs. Comparing tree object hashes showed identical snapshots, which
+  proves the trees match and proves nothing about provenance. The refresh
+  landed in [one careful PR](https://github.com/CodeSigils/zero-md-formatter/pull/7)
+  after real re-verification of every evidence URL, live fetches rather than
+  a blind date bump.
+
+Then the behavioral failure, which was mine. I had first left a clean change
+uncommitted precisely because a gate was red, and then committed and pushed
+it anyway on a later "handle git hygiene" instruction. I measured success as
+"the fix is in a branch" when the only thing that counts is a green default
+branch. The rot class can only be fixed by automation; the behavior class
+can only be fixed by a directive. A fix that addresses one and not the other
+leaves the other untouched.
+
+The general findings that came out of it are now recorded in my lab notes
+with their sources, and three of them read like laws at this point. A
+scheduled run is not a gate run: judge health by the event class that
+actually gates merges. Never push into a known-red gate: stop and report
+instead. Measure "done" by the default branch, not by branch content. The
+investigation also left one open question I had not expected: a repository
+that publishes a package has a second front, the release surface, where
+version, tag, and registry are three separate facts that must agree. Ours
+did not: the published artifact and the default branch both claimed the same
+version while differing in content, and a later release attempt created a
+tag and a GitHub Release before the registry publish failed, leaving a
+version spent and half-landed. Merged is not released.
+
+## A real incident, and the check it exposed
 
 One of the fleet repositories had no branch protection configured on its
 default branch. I found out through the GitHub API, which returned a plain
 "Branch not protected" for `main`. That meant pushes to the default branch
 were observed only after they landed. There was no required status check, so
-nothing mechanically stood between a broken tree and the main branch.
+nothing mechanically stood between a broken tree and the main branch. The
+[official documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
+had been telling me what protection could enforce all along; I had simply
+never read it for this repository.
 
 The fix was available the same day. I enabled protection on `main` with
 required status checks, and here the fleet had already taught me a specific
-trap: the required check names must match the rendered job names exactly. The
-workflow runs a matrix, so the check names are the rendered forms, something
-like "Validate standard (3.10)" and "Validate standard (3.14)". A required
-check that matches no job in the workflow blocks every pull request, silently
-and permanently, until someone notices. I had watched that failure mode
-before, so the contexts were set from the actual rendered names, and I read
-the configuration back through the API to confirm what was live: both
-contexts required, no admin enforcement, strict status checks off so the
-maintainer can still push directly when needed.
+trap: the required check names must match the rendered job names exactly. A
+few days earlier I had watched a repository whose protection required a
+check that no workflow produced anymore, which blocks every pull request,
+silently and permanently, until someone notices. So the contexts were set
+from the actual rendered names, "Validate standard (3.10)" and "Validate
+standard (3.14)", and I read the configuration back through the API to
+confirm what was live: both contexts required, no admin enforcement, strict
+status checks off so the maintainer can still push directly when needed.
 
 Then I wrote an incident report. Not a sprawling one. A dated file with a
 short header: the date, a status line, an owner-of-record pointing at the
@@ -199,7 +305,7 @@ research register, and a scope note. A summary. Two findings, each with its
 evidence. A remediation section appended the same day, recording what was
 changed and how it was verified. A sources section listing the official
 GitHub documentation pages the claims rested on. The report recorded one
-thing I could not repair in the repository itself: the private sibling where
+thing I could not repair in the repository itself: a private sibling where
 the same API call returns a 403 explaining that branch protection needs a
 paid plan or a public repository. That limitation stands, it is documented,
 and the decision about it lives with the owner, outside the public tree.
@@ -212,7 +318,7 @@ the tree.
 
 So that got fixed too, in the same careful, small way the rest of the spec
 grows. The standards checker now walks the incident-report directory. A
-report must be referenced from a body of a research register entry, or the
+report must be referenced from the body of a research register entry, or the
 check fails. The URLs a report cites must appear in the source registry, in
 their registered spelling, or the check fails. The header shape is checked:
 date, status, owner of record, scope, a summary section, a sources section.
@@ -236,7 +342,7 @@ thirteen trees to seventeen, and the honest count is part of the point.
 
 ## Corrections are part of the record
 
-A smaller lesson from the same work deserves its own paragraph, because it
+A smaller lesson from the same week deserves its own paragraph, because it
 was embarrassing in the best way.
 
 An earlier research entry of mine argued that a piece of evidence had gone
@@ -249,27 +355,65 @@ and the register now carries it as a dated amendment to the original entry
 rather than a silent rewrite. The original finding stays, marked as
 corrected, with the new analysis beside it.
 
-This pattern has good company. Google's SRE postmortem template gives every
-report a status field that is a lifecycle, reading something like "Complete,
-action items in progress", instead of a one-shot label. PagerDuty's own
-practice gives action items explicit expiry windows, fifteen days for the
-most severe incidents, thirty for the next tier, because an action item that
-is never closed becomes decoration. incident.io's follow-up states include
-"not doing" as a recorded decision, so items leave the open list without
-vanishing from the record. What none of the primary sources I found
-prescribes is an expiry for the report itself. Reports are treated as dated
-records that get amended and re-reviewed. Action items expire. The record
-does not. I have adapted that distinction deliberately, and the register
-says so.
+This pattern has good company.
+[Google's SRE postmortem template](https://sre.google/sre-book/example-postmortem/)
+gives every report a status field that is a lifecycle, reading something
+like "Complete, action items in progress", instead of a one-shot label, and
+its action items carry owners and tracked statuses.
+[PagerDuty's practice](https://docs.pagerduty.com/ops-guides/postmortem-best-practices/accountability)
+gives action items explicit expiry windows, fifteen days for the most
+severe incidents and thirty for the next tier, because an action item that
+is never closed becomes decoration.
+[incident.io's follow-up states](https://docs.incident.io/post-incident/follow-ups)
+include "not doing" as a recorded decision, so items leave the open list
+without vanishing from the record. And the
+[USENIX ;login: article on postmortem follow-through](https://www.usenix.org/system/files/login/articles/login_spring17_09_lunney.pdf)
+makes the same case from practice: close obsolete action items rather than
+keeping them around forever, and report burndown so the outliers are
+visible. What none of the primary sources I found prescribes is an expiry
+for the report itself. Reports are treated as dated records that get amended
+and re-reviewed. Action items expire. The record does not. I have adapted
+that distinction deliberately, and the register says so.
 
 There are also precedents for the completeness instinct, from places that
-are not about incidents at all. MkDocs can be configured to warn about pages
-that exist in the docs directory but are missing from the navigation, and
-its strict mode turns that warning into a build failure. GitLab's
-documentation testing fails a pipeline when a deleted or renamed document
-leaves no redirect behind. Different tools, same sentence: every artifact
-that exists has to be registered somewhere, or the system does not consider
-it done. My incident-report check is a small, local version of that idea.
+are not about incidents at all.
+[MkDocs can be configured](https://www.mkdocs.org/user-guide/configuration/)
+to warn about pages that exist in the docs directory but are missing from
+the navigation, and its strict mode turns that warning into a build
+failure.
+[GitLab's documentation testing](https://docs.gitlab.com/development/documentation/testing/)
+fails a pipeline when a deleted or renamed document leaves no redirect
+behind. Different tools, same sentence: every artifact that exists has to be
+registered somewhere, or the system does not consider it done. My
+incident-report check is a small, local version of that idea.
+
+## After delegating, check the repository
+
+One more pattern from the same week, because it changed how I measure work
+I hand off.
+
+I delegated three long tasks to background agents on the same governance
+repository. All three ended with the same platform message: timed out after
+thirty minutes of inactivity. Their outcomes had nothing in common. One left
+no repository footprint at all: no branch, no commit, no pull request,
+nothing. One left two coherent documentation edits and none of the code I
+had asked for. One had completed most of a release before dying: the version
+bump, the tag, and the GitHub Release existed, but the registry publish had
+failed on a configuration error that needs a human, and the agent timed out
+before reporting. That is the half-landed version I mentioned in the fleet
+section, and it cannot simply be re-created.
+
+The lesson I took is blunt. A background agent's running status is not
+evidence of progress. Two of the three spent the full window producing no
+repository change. After any delegation I now inspect the live state of the
+target, branches, commits, tags, workflow runs, and reconcile it against
+what was actually supposed to happen before I call anything done. The tasks
+that failed shared a shape, too: each opened with a long read of governance
+documentation, hundreds of lines before the first write, which is exactly
+how you spend an inactivity window with nothing to show for it. Smaller
+deliverables, incremental commits, and the irreversible step sequenced last
+are all cheap adjustments. Verification over trust at the boundary is the
+expensive one, and it is not optional.
 
 ## The small gates that actually stick
 
@@ -282,6 +426,18 @@ attempt at the incident-report commit failed the hook, because I had put both
 lines in one paragraph. The hook did not care about my intentions. It showed
 me the expected shape, and the next commit passed. That is a machine check
 doing the job I had been doing by memory, badly, at the end of long sessions.
+
+My notes repository taught the same lesson from the other direction, about
+what happens when a gate itself is sloppy. Its validation script checks that
+open questions written inside notes also appear in the aggregate index. The
+note-side scanner looked for a literal substring, while the index-side
+extractor used a tolerant pattern. When I bolded a question marker, the two
+parsers disagreed about the same text, and the tool reported the symptom,
+"a marker is missing", instead of the real cause, "a marker form I cannot
+parse". The fix was one line of tolerance, and the deeper finding went into
+the notes: one marker, one parser, and a validator that cannot recognize a
+variant should say so rather than claim absence. When several invariants
+refer to the same token, they must share a single extraction function.
 
 "Check the working tree, index, upstream relation, remotes, and latest
 commit" became a small script and a standing habit in the agent instructions,
@@ -302,6 +458,16 @@ moments where I want my own judgment are specific: destructive git
 operations, architectural changes, releases, governance rules, publication,
 and the decision about whether a piece of research is current enough to act
 on.
+
+The week I have just described gave each of those categories a concrete
+case. The failed registry publish failed on trusted-publisher configuration,
+which lives on the maintainer's side of the fence and cannot be completed by
+an agent alone; the release needed a human before it needed a retry. The
+fleet's stale required-check entry was a governance configuration nobody
+should change without understanding which pull requests it will block. The
+freshness correction was a judgment call about what my own earlier evidence
+actually showed, and the register records my reasoning so someone, including
+future me, can disagree with it on the record.
 
 Good human-in-the-loop practice, to me, means placing review where
 accountability and risk actually live, rather than approving every small
