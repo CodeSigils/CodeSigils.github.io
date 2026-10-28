@@ -321,6 +321,13 @@ Common icons: `lucide/terminal`, `lucide/box`, `lucide/fish`, `lucide/cpu`, `luc
 
 Use the same `image-wrapper` / `youtube-video-wrapper` CSS wrappers from existing articles for images and videos.
 MD033 (no inline HTML) is **disabled** in `.markdownlint.json` for this repo.
+## Git Workflow
+
+- **Default branch:** `master` (also accepts `main` in some workflows). Treat it as protected.
+- **Changes:** Work on a feature branch, open a pull request, and merge via PR (see `.github/workflows/docs.yml` for deployment triggers). Direct pushes to `master` are discouraged; branch protection may block them.
+- **Branch hygiene:** Delete merged branches locally and remotely.
+- **Commit policy:** See [Git Commit Policy](#git-commit-policy) below. Enforced locally by `.pre-commit-config.yaml` (hook) and in CI by [`.github/workflows/commit-message-guard.yml`](.github/workflows/commit-message-guard.yml).
+
 ## Git Commit Policy
 
 **Human-only commits. No bots. No AI attribution. No exceptions.**
