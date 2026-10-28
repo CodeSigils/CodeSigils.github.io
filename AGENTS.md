@@ -325,7 +325,7 @@ MD033 (no inline HTML) is **disabled** in `.markdownlint.json` for this repo.
 
 - **Default branch:** `master` (also accepts `main` in some workflows). Treat it as protected.
 - **Changes:** Work on a feature branch, open a pull request, and merge via PR (see `.github/workflows/docs.yml` for deployment triggers). Direct pushes to `master` are discouraged; branch protection may block them.
-- **Branch hygiene:** Delete merged branches locally and remotely.
+- **Branch hygiene:** Delete merged branches locally and remotely (e.g. `git branch -d <branch>` and `git push origin --delete <branch>` or enable "Automatically delete head branches" in GitHub settings). Keep only long-lived branches.
 - **Commit policy:** See [Git Commit Policy](#git-commit-policy) below. Enforced locally by `.pre-commit-config.yaml` (hook) and in CI by [`.github/workflows/commit-message-guard.yml`](.github/workflows/commit-message-guard.yml).
 
 ## Git Commit Policy
