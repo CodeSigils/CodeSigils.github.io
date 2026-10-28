@@ -238,13 +238,12 @@ API with eight concurrent workers and fails on hard errors only. One
 scans the full git history for leaked secrets with a SHA-pinned
 gitleaks action behind an allow-list.
 
-The restraint is as deliberate as the checks. There is no Python
-formatter or type checker in CI, even though the scripts are Python —
-not because they are optional, but because their cost and maintenance
-were weighed consciously and deferred. A check that exists because it
-was cheap to add is how pipelines learn to cry wolf. The scripts are
-stdlib-only, typed, and covered by regression tests, and the lint
-pass runs periodically as a maintainer ritual instead of a gate
+The restraint is as deliberate as the checks. I don't add a Python
+formatter or type checker to CI. The scripts are stdlib-only, typed,
+and covered by regression tests, so the upkeep would outweigh the
+benefit for now. A check that goes in just because it's easy to add
+is how pipelines learn to cry wolf. The lint pass runs periodically
+as a maintainer ritual instead of a gate
 ([#20](https://github.com/CodeSigils/awesome-agent-trust/commit/919631a)).
 
 Even the workflow's permissions are lean: read-only contents access,
