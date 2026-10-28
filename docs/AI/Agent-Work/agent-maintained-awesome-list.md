@@ -147,15 +147,15 @@ hand. The checks are not a suggestion; the branch settings make them
 a condition of merging.
 
 Before a proposal ever reaches that pipeline, the entry must satisfy
-the criteria file — and it doubles as a checklist an agent can run
-through before opening anything. The repository exists and is not
-archived. A software entry carries an open-source license and lives
-on a recognised code host. The description says more than the title;
-the entry follows the list's format and sits in the right
-alphabetical place inside its category. The pipeline refuses what it
-cannot verify; the softer items on that checklist are tracked, not
-ignored — they are the difference between a proposal that is clearly
-valid and one that starts its life trailing advisories.
+the criteria file. It doubles as a checklist an agent can run through
+before opening anything. The repository exists and is not archived.
+A software entry carries an open-source license and lives on a recognised
+code host. The description needs to say more than the title, and the
+entry must follow the list's format and sit in the right alphabetical
+place inside its category. The pipeline refuses what it cannot verify.
+The softer items on that checklist are tracked, not ignored. That is
+the difference between a proposal that is clearly valid and one that
+starts its life trailing advisories.
 
 Stars are advisory and never gate anything. But a proposal for a
 low-star project still brings its evidence: the contribution guide
