@@ -23,17 +23,16 @@ keywords:
 <p class="image-attribution"><em>Photo: <a href="https://freebie.photography/technology/wires.jpg">Tangle of coloured cables and connectors</a> from <a href="https://freebie.photography/about.htm">freebie.photography</a>, used under its attribution licence.</em></p>
 
 An agent can follow an instruction perfectly and still do the wrong thing when
-the project gives it two slightly different versions of the same rule. I ran
-into that while tightening one of my own agent-assisted projects. The surface
-problems were ordinary: stale paths, old counts, and references that had moved.
-The more interesting problem appeared later, when the obvious clutter was out
-of the way: the guidance itself had begun to repeat.
+a project gives it two slightly different versions of the same rule. I ran into
+that while tightening one of my own agent-assisted projects. The first problems
+were ordinary: stale paths, old counts, and references that had moved. Once the
+obvious clutter was gone, a harder problem remained. The guidance itself had
+started to repeat.
 
-The same search order appeared in more than one mode. A list of authority
-files existed in more than one place. A small catalog overlapped with a larger
-one. None of those copies was wildly wrong. That was the problem. Each looked
-reasonable on its own, so the maintenance dependency between them stayed
-invisible.
+The same search order appeared in more than one mode, and a compact list of
+authority files overlapped with a larger one elsewhere. Neither copy was
+wildly wrong. That made the dependency between them hard to see. Each looked
+reasonable in isolation, even though every future edit had to keep both aligned.
 
 ## Drift is usually a maintenance problem first
 
@@ -47,9 +46,9 @@ One copy can be updated, another can keep the old wording, and an agent has no
 reliable way to infer which version is the intended one. Even a human reviewer
 can skim past the difference because the text is familiar.
 
-Nothing in this diagnosis says to force every project into one enormous
-`AGENTS.md` file; large files have their own failure mode, and important
-rules become hard to find. The useful question is narrower:
+This does not mean every project needs one enormous `AGENTS.md` file. Large
+files have their own failure mode because important rules become hard to find.
+The useful question is narrower:
 
 > Where is the one place that owns this rule, and what should every other place
 > do instead of repeating it?
@@ -71,17 +70,16 @@ around a routing table: it tells a reviewing agent which focused
 checklist to load for a given kind of code change. Each checklist
 owns its own territory, and the table is the pointer back to it. Then
 the table quietly stopped reaching rules it was meant to point at.
-The checklists carried signals—duplicated logic, string construction,
-constants—that the routing row for style work never listed. A
-reviewer following the table would skip checks the checklists
-documented; one opening a checklist directly would apply them. Two
-catalogs, neither of them wrong on its own
+The checklists carried signals for duplicated logic, string construction, and
+constants that the routing row for style work never named. A reviewer following
+the table would skip checks the checklists documented. A reviewer opening a
+checklist directly would apply them. Two catalogs described the same work from
+different angles, neither wrong on its own
 ([the repair](https://github.com/CodeSigils/py-review-skill/commit/a32600df068aac5e0eff25e14f049b1d7ae2104e)).
-The same pass tightened the version guidance: where the router used
-to let a project's Python version decide that all relevant core
-skills should load, it now routes by what the changed code touches
-and applies each rule only when that rule's own compatibility caveat
-matches.
+The same pass also tightened the version guidance. The router used to let a
+project's Python version decide that every relevant core skill should load. It
+now routes by what the changed code touches and applies a rule only when that
+rule's own compatibility caveat matches.
 
 The tooling vendors describe the same shape. Codex reads `AGENTS.md`
 before it starts, layering concise project guidance over smaller
@@ -90,8 +88,8 @@ override files for specific directories
 Copilot keeps one repository-wide `copilot-instructions.md` and adds
 path-scoped instruction files only where a folder genuinely needs its
 own ([repository instructions](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions)).
-Neither treats a second parallel copy of a rule as the fix. The owner
-stays; the exceptions are pointed to and kept small.
+Neither treats a second parallel copy of a rule as the fix. The owner stays.
+Exceptions point back to it and remain small.
 
 !!! tip "Review overlap before adding another rule"
 
@@ -106,22 +104,19 @@ this project, the first cleanup passes exposed stale paths and references that
 had lost their context. A small check against the current project state is
 useful when it tests a specific claim that has already failed.
 
-A check is also a different kind of surface from an instruction. An
-instruction file says, "This is how we work"; a check says, "Prove it."
-Adding a verification step does not carry the same drift risk as a
-second version of a rule, because a check either passes against the
-current state or it does not. It cannot quietly hold an old wording
-the way duplicated guidance can.
+A check is a different kind of surface from an instruction. An instruction
+file says how the project works. A check compares a specific claim with the
+current state. That makes it useful when a known failure needs a repeatable
+test, but it does not make the check immune to drift. Its assumptions still
+need an owner and a reason to exist.
 
-That is different from adding a checker for every imaginable inconsistency.
+That does not justify a checker for every imaginable inconsistency.
 Verification should support the source of truth, not become a second source of
-truth with its own unexplained rules. A check can drift too: it may protect the
-wrong path, run at the wrong time, or quietly stop representing the risk it was
-meant to catch. It should not outlive its contract either: when the protected
-claim disappears, when the check costs more than the harm it prevents, or when
-a better control replaces it, repair or retire it. A check that stays after its
-reason has left is drift of another kind—process with no memory of why
-it exists.
+truth with unexplained rules. A check can protect the wrong path, run at the
+wrong time, or stop representing the risk it was meant to catch. When the
+protected claim disappears, the check costs more than the harm it prevents, or
+a better control replaces it, repair or retire it. Process that has lost its
+reason is another form of drift.
 
 My working rule is now modest: add a control after an observed failure or a
 clear project contract, keep its purpose easy to explain, and revisit it when
@@ -131,9 +126,9 @@ the protected part of the project changes.
 
 When an agent-assisted project starts feeling harder to steer, I do not begin
 by adding more instructions. I look for repeated guidance, unclear ownership,
-and claims that no longer match the repository. The first useful repair is
-often a pointer, a deletion, or one small verification step—not another layer
-of process.
+and claims that no longer match the repository. The first repair is often a
+pointer, a deletion, or one small verification step. More process is useful
+only when it protects a specific, observed problem.
 
 That does not make an agent infallible. It makes the project easier for both
 the agent and its maintainer to understand next time.

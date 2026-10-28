@@ -1,6 +1,6 @@
 ---
 title: When an AI Agent Signs Your Commits
-description: A field note on finding non-consensual AI attribution in a blog's git history, what GitHub's contributor caches hide, and the layered cleanup that cleared it.
+description: A field note on finding non-consensual AI attribution in a blog's git history, why GitHub contributor surfaces can disagree, and the layered cleanup that cleared it.
 keywords:
   - AI attribution
   - Co-authored-by
@@ -31,11 +31,11 @@ remove it completely.
 ## What the history actually contained
 
 The trailers were small. One documentation commit ended with
-`Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>`; another ended with the
+`Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>`. Another ended with the
 branding line above. Both were added by agent tooling during an ordinary
 work session, the way these frameworks credit the tool that produced the
-change. GitHub parses commit messages at render time, so a trailer written
-months ago can change a widget today ([GitHub's co-author
+change. GitHub recognises co-author trailers in commit messages, so an old
+trailer can still produce a visible credit ([GitHub's co-author
 documentation](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
 explains the format and how GitHub turns trailers into credits).
 
@@ -48,14 +48,14 @@ an attribution trailer sitting 123 commits deep before anyone noticed, with
 tags, open pull requests, and uncollected garbage keeping the old objects
 reachable long after the author had decided to remove it.
 
-## The same complaint, filed by hundreds
+## Reports across tools
 
-My trailer came from an agent framework. Users have reported the same pattern
-across multiple tools. Claude Code is the most documented case: its
-commit workflow appends `Co-Authored-By: Claude <noreply@anthropic.com>` by
-default, and a long trail of issues in the
-[claude-code](https://github.com/anthropics/claude-code/issues) tracker asks
-for that default to change.
+My trailer came from an agent framework. Users have reported similar problems
+across multiple tools. Claude Code has the largest public issue trail I found.
+Those reports describe its commit workflow adding
+`Co-Authored-By: Claude <noreply@anthropic.com>` and ask for an opt-in default.
+They are reports from affected users, not a substitute for a current product
+contract.
 
 - [Issue #48145](https://github.com/anthropics/claude-code/issues/48145),
   titled "should be opt-in", reports a user finding the trailer on every
@@ -81,7 +81,7 @@ for that default to change.
   maintainer in [issue #79909](https://github.com/anthropics/claude-code/issues/79909)
   states that an empty `attribution.commit` setting is the supported switch
   and verifies it, while other reporters say the same key did nothing for
-  them; even that disagreement is part of the problem.
+  them. That disagreement is part of the problem.
 - [Issue #64019](https://github.com/anthropics/claude-code/issues/64019)
   describes the same repair I ended up running here: a full `filter-branch`
   pass and force push across the whole history. The reporter in #79909 got
@@ -93,28 +93,23 @@ those threads is that the trailer presents the tool as a co-author of the
 user's work, in the user's name, without anything the user would recognise
 as an approval step.
 
-Codex, by contrast, has so far followed the cleaner practice. Its CLI does
-not append a co-author trailer by default: a January 2026 analysis on
-OpenAI's community forum, examining a dataset of AI-assisted commits, found
-no commit-level attribution or metadata in Codex-associated commits at all
+My observations of Codex point in a different direction: I have not seen it
+append a co-author trailer in this work, and a January 2026 community analysis
+reported the same result in its sample
 ([community analysis](https://community.openai.com/t/does-openai-codex-add-any-default-commit-level-metadata-in-git-workflows/1371947)).
-The option is behind an opt-in feature flag
-(`codex_git_commit`, with `commit_attribution = ""` disabling even that),
-introduced in early 2026
-([issue #19799](https://github.com/openai/codex/issues/19799) tracks the
-remaining documentation ambiguity). The request threads run in the opposite
-direction from Claude's: [discussion #2807](https://github.com/openai/codex/discussions/2807)
-and [issue #938](https://github.com/openai/codex/issues/938) ask Codex to
-*add* a trailer for teams that want disclosure, as parity with Claude Code.
-Nobody in those threads is trying to get attribution out of their history.
+That is a dated observation, not a permanent product guarantee. The current
+official CLI reference does not establish the configuration details that were
+previously described here. Teams that want attribution or want to prohibit it
+should set and enforce their own repository policy rather than infer a durable
+default from an issue thread.
 
 Purpose-built scrubbers now exist. The
 [git-attribution](https://github.com/Londopy/git-attribution) tool scans
-history for trailers from seven known agents, rewrites them out, and
-installs a pre-push guard so they do not come back. The existence of a tool
-for removing default attribution suggests the default is not serving everyone.
+history for trailers from known agents, rewrites them out, and installs a
+pre-push guard. Its existence is useful evidence that some teams want a way to
+remove or prevent this metadata.
 
-## Two caches, two answers
+## When contribution surfaces disagree
 
 The first cleanup pass rewrote the three affected commit messages while
 leaving the file contents byte-identical (verified with `git diff` against a
@@ -126,16 +121,15 @@ realised the three checks did not agree:
 - The Insights contributors graph had already forgotten it after the
   force-push.
 
-The best measurements I found come from
-[declaudify](https://github.com/ParkerrDev/declaudify), a tool built
-precisely to flush this kind of stale attribution. Its author tested the
-behaviour: GitHub renders contributors from two
-separate caches, a force-push clears the Insights graph but not the homepage
-sidebar, extra commits do not help, and archive/unarchive does nothing.
-Toggling the default branch cleared the sidebar after a short delay in those
-tests. The REST `/contributors`
-endpoint omits co-authors entirely, which is why an API check can look clean
-while the widget still names an AI account.
+The most useful comparison I found comes from
+[declaudify](https://github.com/ParkerrDev/declaudify), a tool built for stale
+attribution. Its author observed that the Insights graph, the REST endpoint,
+and the homepage sidebar could update on different schedules. A force-push
+cleared the Insights graph in those tests but did not immediately change the
+sidebar. That observation explains the disagreement I saw, but it is not a
+documented model of GitHub's internal caches. The REST `/contributors` endpoint
+does not audit trailers, so a clean API response cannot settle what the sidebar
+will show.
 
 Community reports match the shape of that problem:
 
@@ -159,7 +153,7 @@ Community reports match the shape of that problem:
 | :--- | :--- | :--- |
 | Insights graph | the rewritten history | a force-push updated it in this case |
 | REST `/contributors` | author-email contributor counts | it can be cached for hours and is not a trailer audit |
-| Homepage sidebar widget | an undocumented contributor view | it can disagree with the API; GitHub documents no cache-refresh control |
+| Homepage sidebar widget | an undocumented contributor view | it can disagree with the API. GitHub documents no cache-refresh control |
 
 The REST endpoint is useful as one signal, not a verdict. GitHub documents it
 as an author-email-based contributor count and warns that the response can be
@@ -167,22 +161,22 @@ cached for hours.
 
 ### A read-only look at the widget
 
-For a quick, browser-free observation of the homepage widget, GitHub currently
-serves an undocumented sidebar payload at `/_sidebar` when asked for JSON:
+During this incident, GitHub served an undocumented sidebar payload at
+`/_sidebar` when asked for JSON:
 
 ```bash
 curl -s -H "Accept: application/json" \
   https://github.com/CodeSigils/CodeSigils.github.io/_sidebar
 ```
 
-This is a `GET`: it is not destructive and does not clear or repair a cache.
+This is a `GET`. It is not destructive and does not clear or repair a cache.
 In this incident it exposed `contributorCount: 1` before the visible widget
 caught up. Use it as a complementary diagnostic beside the REST endpoint and
 the rendered sidebar, not as a stable interface or a fix to automate.
 
 ## The cleanup, step by step
 
-Each step needs a review point; I could not find one source that puts the
+Each step needs a review point. I could not find one source that puts the
 whole recovery in order.
 
 **1. Remove the trailers from commit messages.** First make a fresh clone or
@@ -195,8 +189,8 @@ present its shell filter as a copy-and-run recipe for another repository.
 **2. Push the rewrite deliberately.** Once the rewritten messages are correct,
 `git push --force-with-lease` updates the remote while refusing to overwrite an
 unexpected remote change. Local reflog expiry and `git gc --prune=now` are
-optional, destructive housekeeping: they discard recovery paths on this clone;
-they are not a documented way to refresh GitHub's contributor views.
+optional, destructive housekeeping. They discard recovery paths on this clone
+and are not a documented way to refresh GitHub's contributor views.
 
 **3. Let GitHub catch up, then ask for help if it does not.** GitHub documents
 that its contributors API may be cached for hours. I found no supported API or
@@ -204,27 +198,13 @@ CLI command that flushes the homepage contributor widget. Changing a
 repository's default branch is an administrative API operation, not a
 documented cache remedy.
 
-**4. A last-resort widget-cache nudge that worked here.** When every other
-check was clean and the widget was still wrong, this sequence finally cleared
-it:
-
-```bash
-gh auth status
-git push origin master:refresh/sidebar-flush
-gh api -X PATCH /repos/CodeSigils/CodeSigils.github.io -f default_branch=refresh/sidebar-flush
-sleep 90
-gh api -X PATCH /repos/CodeSigils/CodeSigils.github.io -f default_branch=master
-git push origin --delete refresh/sidebar-flush
-```
-
-`gh auth status` confirms the active account, but not the administrative
-permission required to change the default branch. The commands push `master`
-to a temporary branch, make it the default, wait, restore `master`, and delete
-the temporary branch. GitHub documents the branch update but does not promise
-that it refreshes contributor data; this is a personal-repository observation,
-not a supported general remedy. Use it only after confirming the rewritten
-history, understanding the temporary default-branch impact, and exhausting the
-normal wait-and-Support route.
+**4. Treat a default-branch change as a last-resort administrative decision.**
+When every other check was clean and the widget was still wrong, temporarily
+changing this repository's default branch appeared to clear the sidebar cache.
+GitHub documents the branch update but does not promise that it refreshes
+contributor data. I am deliberately not presenting that incident as a reusable
+command sequence. It affects visitors and automation, and it belongs behind a
+maintainer's explicit review after normal waiting and Support have been tried.
 
 !!! warning "Flush only after the index is clean"
 
@@ -233,105 +213,26 @@ normal wait-and-Support route.
     behaviour for visitors and automation, so it is a maintainer decision,
     not a routine cleanup command.
 
-Rewritten commits can remain reachable by their old
-SHA and through `refs/pull/N/head` if pull requests existed. Neither surface
-feeds the contributor widgets, but in the claude-code discussion above, one
-reporter's old commits stayed alive through three open pull requests and
-required GitHub Support to delete them, **over two rounds of tickets**. This
-repository had no pull requests holding the old objects, so the purge was
-clean.
+Rewritten commits can remain reachable by their old SHA and through
+`refs/pull/N/head` if pull requests existed. Neither surface is known to feed
+the contributor widgets. They still matter when deciding whether old objects
+are genuinely gone. In the claude-code discussion above, one reporter's old
+commits stayed alive through three open pull requests and required GitHub
+Support to remove them. This repository had no pull requests holding the old
+objects, so the purge was clean.
 
-### The whole sequence, as an example
-
-The steps above are the reasoning. What follows is **one illustrative example**
-of the complete pass in a single block, not the exact commands run on the
-incident repository. It is written around `filter-repo` (the tool Git now
-recommends over `filter-branch`, which is what the real cleanup used); treat it
-as a template to adapt, not a script to paste blindly. Set the placeholders,
-keep the mirror backup in step 0, and read each block before it runs.
-
-```bash
-# Requires: git-filter-repo (pip install git-filter-repo), git, gh, curl
-REPO="CodeSigils/CodeSigils.github.io"     # owner/name
-BRANCH="master"                            # default branch
-WORK="/tmp/attribution-cleanup"            # scratch copy, rewritten
-BACKUP="/tmp/attribution-cleanup.bak.git"  # mirror backup, never rewritten
-
-# --- 0. Back up the original history, then work on a fresh clone. ----------
-#     filter-repo refuses to run outside a fresh clone; the mirror is the
-#     escape hatch if the rewrite goes wrong.
-git clone --mirror "https://github.com/${REPO}.git" "${BACKUP}"
-git clone "https://github.com/${REPO}.git" "${WORK}"
-cd "${WORK}"
-BEFORE="$(git rev-parse "refs/heads/${BRANCH}^{tree}")"
-
-# --- 1. See exactly what step 2 will drop (mirrors its pattern). -----------
-#     --grep searches whole messages (subject and body); --format only picks
-#     what is printed, here the subject line via %h %s.
-git log --format='%h %s' -i -E \
-  --grep='co-authored-by:.*(sisyphus|claude|opencode|codex|copilot|cursor|devin)|(ultraworked|generated|assisted) with'
-
-# --- 2. Rewrite the messages only. -----------------------------------------
-#     filter-repo deletes the origin remote on purpose; it is re-added in 4.
-git filter-repo --force --message-callback '
-import re
-drop = re.compile(
-    rb"(?i)(co-authored-by:.*(sisyphus|claude|opencode|codex|copilot|cursor|devin)"
-    rb"|(ultraworked|generated|assisted) with\b.*)"
-)
-kept = [line for line in message.split(b"\n") if not drop.match(line)]
-while kept and not kept[-1].strip():
-    kept.pop()
-return b"\n".join(kept) + b"\n"
-'
-
-# --- 3. Verify: messages changed, file contents did not. -------------------
-if test "$(git rev-parse "refs/heads/${BRANCH}^{tree}")" != "${BEFORE}"; then
-  echo "STOP: tree changed; expected a message-only rewrite"
-  exit 1
-fi
-echo "tree unchanged: message-only rewrite confirmed"
-if git log --format='%B' | grep -n -i -E \
-  'co-authored-by:.*(sisyphus|claude|opencode|codex|copilot|cursor|devin)|(ultraworked|generated|assisted) with'; then
-  echo "STOP: attribution still present"
-  exit 1
-fi
-echo "clean: no attribution found"
-
-# --- 4. Publish the rewrite. ----------------------------------------------
-#     Restore origin and fetch so --force-with-lease has a tracking ref to
-#     compare against before it overwrites the remote.
-git remote add origin "https://github.com/${REPO}.git"
-git fetch origin "${BRANCH}"
-git push --force-with-lease origin "${BRANCH}"
-
-# --- 5. Check the surfaces, then let the caches catch up. -----------------
-curl -s "https://api.github.com/repos/${REPO}/contributors" | grep '"login"'
-# Insights follows the force-push; the homepage widget keeps its own cache.
-
-# --- 6. Last resort: nudge the sidebar cache by toggling the default. -----
-#     Run only after 1-5 are clean, Support has had time to answer, and you
-#     accept the temporary default-branch change. See the warning above.
-gh auth status
-git push origin "${BRANCH}:refresh/sidebar-flush"
-gh api -X PATCH "/repos/${REPO}" -f default_branch=refresh/sidebar-flush
-sleep 90
-gh api -X PATCH "/repos/${REPO}" -f default_branch="${BRANCH}"
-git push origin --delete refresh/sidebar-flush
-```
-
-Each numbered block maps to the prose step of the same number. The two safety
-points to keep are the mirror backup in step 0 and the tree comparison in step
-3, which together show the rewrite changed commit messages and nothing else.
-Note that `filter-repo` rewrites every ref it is handed, so if the repository
-carries tags, confirm them with `git tag` against the backup before pushing.
+The safe part of the recovery is intentionally ordinary: make a backup, name
+the exact messages to change, verify that the tree is unchanged after the
+rewrite, inspect every affected ref, and publish only with an explicit owner
+decision. A copy-and-run history-rewrite recipe would hide more risk than it
+removes.
 
 ## Why I consider the default unethical
 
 I consider non-consensual AI attribution in commit messages an unethical
 practice, and the cleanup is what convinced me.
 
-A commit trailer is an assertion of authorship. Period. When tooling writes that
+A commit trailer makes a public claim about authorship. When tooling writes that
 assertion in my commits by default, it makes a provenance claim I never
 approved and presents an AI agent as a co-author of my writing in a public
 record. The author must later find and remove that claim.
@@ -339,7 +240,7 @@ record. The author must later find and remove that claim.
 I found no official guidance addressing unwanted attribution from agent
 tooling. GitHub's
 documentation explains how to add co-authors and how to remove one from a
-commit before it is shared; once the commit is pushed and the caches have
+commit before it is shared. Once the commit is pushed and the caches have
 eaten it, the published remedy for stale contributor data amounts to "wait up
 to 24 hours, then contact Support," as quoted by staff in
 [discussion #205858](https://github.com/orgs/community/discussions/205858).
@@ -356,12 +257,13 @@ clear remedy for removing it.
 ## What keeps it from happening again
 
 Settings and written instructions are useful, but they do not reliably stop
-attribution on their own, so the safeguard needs more than one layer. In the
+attribution on their own. The safeguard needs more than one layer. In the
 claude-code discussion, one reporter had configured `attribution` to suppress
 credits in both commits and pull requests, yet a trailer still appeared. The
-discussion's practical conclusion was that a command-level hook, which checks
-tool calls before they run, and a CI gate that fails on attribution patterns
-are the only reliable backstops.
+discussion points toward two stronger backstops: a command-level hook, which
+checks tool calls before they run, and a CI gate that fails on attribution
+patterns. Neither is absolute. The hook can be bypassed and CI detects a bad
+commit only after it reaches the server.
 
 What exists in this repository now:
 
@@ -382,7 +284,7 @@ What exists in this repository now:
   deny rule.
 - **A CI backstop** that scans pushed commit messages for the same attribution
   classes, with a generic bot-account match. A hook can be skipped with
-  `--no-verify`, which my policy treats as a violation in itself; CI cannot
+  `--no-verify`, which my policy treats as a violation in itself. CI cannot
   refuse the push and runs only after the fact. A red run on `master` is a
   signal to investigate and, if necessary, rewrite the affected history.
 
@@ -399,7 +301,7 @@ then making the hook and CI rule match that decision.
 Commit signing solves a different problem, but it is a useful companion to
 the checks above. A signature lets GitHub verify that the person holding a
 configured GPG, SSH, or S/MIME key created the commit. It does not make an AI
-trailer true, nor does it settle who wrote the change; it proves control of a
+trailer true or settle who wrote the change. It proves control of a
 key at the time the commit was made.
 
 The placeholder in `user.signingkey` is not one universal value: Git reads it
@@ -432,76 +334,71 @@ history as my responsibility.
 
 **Incidents and community reports**
 
-- [Community discussion #205858](https://github.com/orgs/community/discussions/205858)
-  — staff refresh reply, 24-hour guidance quoted, multiple affected repositories.
-- [Community discussion #201982](https://github.com/orgs/community/discussions/201982)
-  — stale beyond a month, nudge checklist.
+- [Community discussion #205858](https://github.com/orgs/community/discussions/205858):
+  staff refresh reply, 24-hour guidance quoted, multiple affected repositories.
+- [Community discussion #201982](https://github.com/orgs/community/discussions/201982):
+  stale beyond a month, nudge checklist.
 - [Discussions #205779](https://github.com/orgs/community/discussions/205779),
   [#204093](https://github.com/orgs/community/discussions/204093),
   [#202538](https://github.com/orgs/community/discussions/202538),
   [#202540](https://github.com/orgs/community/discussions/202540),
-  [#198886](https://github.com/orgs/community/discussions/198886) — sidebar
+  [#198886](https://github.com/orgs/community/discussions/198886): sidebar
   staleness and API/widget disagreement.
 - [anthropics/claude-code issue #83813](https://github.com/anthropics/claude-code/issues/83813)
-  — instruction-level attribution settings losing, deep-trailer incident,
+  instruction-level attribution settings losing, deep-trailer incident,
   PR-held objects, machine-enforcement conclusion.
 
 **Other agents' defaults**
 
-- [claude-code #48145](https://github.com/anthropics/claude-code/issues/48145)
-  — "this should be opt-in", consent argument.
-- [claude-code #7422](https://github.com/anthropics/claude-code/issues/7422)
-  — trailer added against explicit `CLAUDE.md` instructions.
-- [claude-code #53259](https://github.com/anthropics/claude-code/issues/53259)
-  — catalogue of failed overrides and code-path inconsistency.
-- [claude-code #79909](https://github.com/anthropics/claude-code/issues/79909)
-  — recurrence after in-conversation instruction; maintainer's supported
+- [claude-code #48145](https://github.com/anthropics/claude-code/issues/48145):
+  "this should be opt-in", consent argument.
+- [claude-code #7422](https://github.com/anthropics/claude-code/issues/7422):
+  trailer added against explicit `CLAUDE.md` instructions.
+- [claude-code #53259](https://github.com/anthropics/claude-code/issues/53259):
+  catalogue of failed overrides and code-path inconsistency.
+- [claude-code #79909](https://github.com/anthropics/claude-code/issues/79909):
+  recurrence after in-conversation instruction. Maintainer's supported
   `attribution.commit` switch.
-- [claude-code #64019](https://github.com/anthropics/claude-code/issues/64019)
-  — full-history `filter-branch` cleanup account.
+- [claude-code #64019](https://github.com/anthropics/claude-code/issues/64019):
+  full-history `filter-branch` cleanup account.
 - [OpenAI community analysis of AI-assisted commits](https://community.openai.com/t/does-openai-codex-add-any-default-commit-level-metadata-in-git-workflows/1371947)
-  — no commit-level metadata found in Codex commits (January 2026).
-- [openai/codex #19799](https://github.com/openai/codex/issues/19799) —
-  attribution behaviour documentation gap.
-- [openai/codex discussion #2807](https://github.com/openai/codex/discussions/2807)
-  and [#938](https://github.com/openai/codex/issues/938) — requests to add
-  a trailer, not remove one.
-- [Londopy/git-attribution](https://github.com/Londopy/git-attribution) —
+  dated observation of no commit-level metadata in Codex commits (January 2026).
+- [Londopy/git-attribution](https://github.com/Londopy/git-attribution):
   multi-agent trailer scanner, rewriter, and pre-push guard.
 
 **Tools and measurements**
 
-- [ParkerrDev/declaudify](https://github.com/ParkerrDev/declaudify) —
+- [ParkerrDev/declaudify](https://github.com/ParkerrDev/declaudify):
   two-cache model, default-branch toggle timings, REST endpoint behaviour.
-- [ediiloupatty/declaude](https://github.com/ediiloupatty/declaude) — flush
+- [ediiloupatty/declaude](https://github.com/ediiloupatty/declaude): flush
   ordering caution and retry guidance.
-- [newren/filter-repo](https://github.com/newren/filter-repo) — history
+- [newren/filter-repo](https://github.com/newren/filter-repo): history
   rewriting.
 
 **Official documentation**
 
 - [Creating commits with co-authored
   attributions](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
-  — GitHub's format and rendering rules.
-- [Git hooks](https://git-scm.com/docs/githooks) — which commands invoke the
+  GitHub's format and rendering rules.
+- [Git hooks](https://git-scm.com/docs/githooks): which commands invoke the
   `commit-msg` hook and how `--no-verify` bypasses it.
-- [Git history rewriting](https://git-scm.com/docs/git-filter-branch) — the
+- [Git history rewriting](https://git-scm.com/docs/git-filter-branch): the
   warning against new `filter-branch` use and its recommendation of
   `filter-repo`.
-- [GitHub repository API](https://docs.github.com/en/rest/repos/repos) —
+- [GitHub repository API](https://docs.github.com/en/rest/repos/repos):
   default-branch updates and cached contributor responses.
 - [GitHub commit signing](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
-  — signing defaults and verification.
+  signing defaults and verification.
 - [Dependabot version updates](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-version-updates)
-  — GitHub's automated dependency-update pull requests.
+  GitHub's automated dependency-update pull requests.
 - [pre-commit](https://pre-commit.com/), [gitlint](https://jorisroovers.com/gitlint/),
-  [commitlint](https://commitlint.js.org/) — candidate enforcement frameworks.
+  [commitlint](https://commitlint.js.org/): candidate enforcement frameworks.
 
 **On this site**
 
-- [When Agent Instructions Start to Drift](./agent-instruction-drift.md) —
+- [When Agent Instructions Start to Drift](./agent-instruction-drift.md):
   the maintenance problem that duplicated rules create.
-- [Agent Memory Is a Surface, Not an Archive](./agent-memory-surfaces.md) —
+- [Agent Memory Is a Surface, Not an Archive](./agent-memory-surfaces.md):
   what agent-side persistence actually keeps.
 
 Links were reachable when this article was written in October 2026.
