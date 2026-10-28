@@ -7,7 +7,7 @@ keywords: [agents, awesome list, maintenance, drift, CI, freshness, license, url
 An awesome list is a promise. Someone reads it, trusts one of its
 links, and builds a decision on top of a project you pointed at last
 winter. When that repository has since vanished, gone dark, or quietly
-dropped its license, the promise is broken — and nobody sends you a
+dropped its license, the promise is broken. Nobody sends you a
 letter about it. The list just slowly stops being true.
 
 I keep an awesome list about agent trust and identity
@@ -49,7 +49,7 @@ the list reads like an obituary column:
   ([#20](https://github.com/CodeSigils/awesome-agent-trust/commit/919631a)).
 
 None of these is dramatic. That is the point. An awesome list does not
-fail in one spectacular moment; it fails in a hundred quiet ones, and
+fail in one spectacular moment. It fails in a hundred quiet ones, and
 each quiet failure looks like a judgement call until you notice the
 pattern. The pattern here was: links rot, sources vanish, metadata
 drifts, and the maintainer is the only witness.
@@ -143,7 +143,7 @@ every merge — including on my own admin commits, because the
 repository does not use approving reviews and I am the only
 maintainer. The validation workflow runs against every pull request
 to main, on every push to main, weekly, and whenever I trigger it by
-hand. The checks are not a suggestion; the branch settings make them
+hand. The checks are not a suggestion. The branch settings make them
 a condition of merging.
 
 Before a proposal ever reaches that pipeline, the entry must satisfy
@@ -163,7 +163,7 @@ asks for independent verification, documented adoption, or foundation
 governance, alongside a request for a `repo-exceptions.json` entry
 naming the project, the exact checks waived, a reason, and a future
 review date ([contributing.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/contributing.md)).
-The waiver is not granted silently; it is requested inside the pull
+The waiver is not granted silently. It is requested inside the pull
 request and recorded by the maintainer, so the decision is documented
 at the same moment as the addition.
 
@@ -192,7 +192,7 @@ list already knows, it does not approve anything.
 is the only place a soft advisory can be waived — and even then under
 conditions: the entry names the exact checks being waived, a reason,
 and a future review date. Exceptions expire. An expired exception is a
-configuration error, not a nag; the pipeline refuses to treat a stale
+configuration error, not a nag. The pipeline refuses to treat a stale
 waiver as a current decision, and a human must re-decide.
 
 Mixing the two would be drift dressed up as automation. One file says
@@ -217,7 +217,7 @@ summary:
 The word that matters here is *report*. The freshness workflow never
 blocks anything. It always exits successfully and writes its findings
 where a human reads them. Gating freshness would punish the list for
-the upstream world's carelessness; reporting it lets the maintainer
+the upstream world's carelessness. Reporting it lets the maintainer
 decide what is urgent. It also deliberately does not replace
 Dependabot — tooling freshness and repository freshness are different
 problems, and the report keeps them apart.
@@ -273,9 +273,10 @@ the machine handles the checks, and the human keeps the judgement call.
 ## What I look for now
 
 When I look at any project that wants to call itself maintained, I
-check for three things: whether its checks fail closed or pass
-silently; whether its state files separate what we know from what we
-decided; and whether its freshness ritual reports before it gates.
+check three things. First, whether its checks fail closed or pass
+silently. Second, whether its state files separate what we know from
+what we decided. Third, whether its freshness ritual reports before
+it gates.
 An awesome list kept this way is not guaranteed to stay true. But when
 something rots, the list will notice out loud, and a human will be
 standing there to decide what it means.
