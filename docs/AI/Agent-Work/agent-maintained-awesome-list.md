@@ -214,13 +214,12 @@ summary:
 - a triage report of exceptions and their review dates, flagging any
   that are overdue ([report-advisory-triage.py](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/scripts/report-advisory-triage.py)).
 
-The word that matters here is *report*. The freshness workflow never
-blocks anything. It always exits successfully and writes its findings
-where a human reads them. Gating freshness would punish the list for
-the upstream world's carelessness. Reporting it lets the maintainer
-decide what is urgent. It also deliberately does not replace
-Dependabot. tooling freshness and repository freshness are different
-problems, and the report keeps them apart.
+The freshness workflow only reports. It never blocks merges, always
+exits successfully, and writes findings to the workflow summary for
+a human to review. That keeps the list from being punished for upstream
+rot while still surfacing what needs attention. It also does not
+replace Dependabot. Tooling freshness and repository freshness are
+different problems, so the report keeps them separate.
 
 On top of the weekly pulse sits a cadence: monthly triage of new and
 overdue advisories, and a quarterly audit of the low-star baseline
