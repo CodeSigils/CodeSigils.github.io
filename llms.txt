@@ -1,0 +1,42 @@
+# Code Sigils
+
+> Personal blog on technology, programming, AI tools, books, tutorials, and experimentation. Built with Zensical and hosted on GitHub Pages.
+
+## For AI Agents
+
+When working with this Zensical blog repository, use the [zensical skill](https://github.com/CodeSigils/zensical-skill) to review, edit, and polish articles. The skill handles tone/voice improvements, removal of AI slop, follows site editorial rules, validates links and components, and works correctly with Zensical's structure in `docs/`.
+
+## Core Documentation
+
+- [README](README.md): Project overview, build instructions, and local development
+- [AGENTS.md](AGENTS.md): Repository conventions, git workflow, commit policy, and content guidelines
+- [Contributing Guide](docs/admin/README.md): Notes on content management (if present)
+- [Disclaimer](docs/disclaimer.md): Important usage disclaimers
+
+## Blog Categories
+
+- [AI](docs/AI/index.md): AI tools, agents, LLMs, and agent workflows
+- [AI/Agent-Work](docs/AI/Agent-Work/): Field notes on agent instructions, memory, commits, and maintaining agent lists
+- [AI/OpenCode](docs/AI/OpenCode/): OpenCode guides, tutorials, and integrations
+- [AI/Hermes](docs/AI/Hermes/): Hermes agent guides and integrations
+- [AI/LLMs](docs/AI/LLMs/): LLM guides and resources
+- [JS-TS](docs/JS-TS/index.md): JavaScript/TypeScript tooling and notes
+- [Linux](docs/Linux/index.md): Linux guides and setup notes
+
+## Key Articles
+
+- [When an AI Agent Signs Your Commits](docs/AI/Agent-Work/when-an-ai-signs-your-commits.md): Removing non-consensual AI attribution from git history
+- [What Keeps an Awesome List Honest](docs/AI/Agent-Work/agent-maintained-awesome-list.md): Governance, validation, and freshness for curated lists
+- [When the Instructions Keep Repeating](docs/AI/Agent-Work/when-the-instructions-keep-repeating.md): Turning repeated agent instructions into system rules
+- [Agent Instruction Drift](docs/AI/Agent-Work/agent-instruction-drift.md): Managing drift in agent instructions
+- [Where an Agent's Memory Actually Lives](docs/AI/Agent-Work/agent-memory-surfaces.md): Understanding agent memory surfaces
+
+## Configuration
+
+- [Zensical Config](zensical.toml): Site configuration
+- [PyProject](pyproject.toml): Dependencies and build configuration
+- [Admin Config](docs/admin/config.yml): Sveltia CMS configuration
+
+## Optional
+
+- [Markdown Guide](docs/markdown.md): Markdown syntax and features used on the site
