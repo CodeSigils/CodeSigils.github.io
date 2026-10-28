@@ -26,6 +26,8 @@ uv run zensical serve
 
 **Current dependencies**: `pyproject.toml` declares direct dependencies and the committed `uv.lock` resolves the complete graph. Use `uv sync --locked`; CI uses the same lockfile.
 
+**LLMs.txt**: This repo maintains `/llms.txt` as a curated entrypoint for AI agents. When adding, removing, or reorganizing articles/categories, update `llms.txt` to keep it current.
+
 ## Content Structure
 
 The site uses top-level categories under `docs/`. A main category, such as
