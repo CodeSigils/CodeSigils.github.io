@@ -28,6 +28,10 @@ uv run zensical serve
 
 **LLMs.txt**: This repo maintains `/llms.txt` as a curated entrypoint for AI agents. When adding, removing, or reorganizing articles/categories, update `llms.txt` to keep it current.
 
+## Editorial Workflow
+
+When creating, drafting, or substantially editing articles in `docs/`, load the `zensical` skill for editorial guidance. Apply its article-review checklist during drafting (tone, structure, AI slop) rather than as a post-hoc cleanup pass. Follow the target repo's editorial rules and avoid em dashes, dramatic antithesis, and other AI tells.
+
 ## Content Structure
 
 The site uses top-level categories under `docs/`. A main category, such as
