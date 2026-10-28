@@ -43,7 +43,7 @@ a Mac can use Finder, and another Linux machine can mount it when that is
 useful. The data stays local, so a large copy travels across the LAN instead of
 waiting for an upload and download through somebody else's server.
 
-That is the time saving that matters to me. The first setup needs care; after
+That is the time saving that matters to me. The first setup needs care. after
 that, the folder is simply where the folder is supposed to be. The same share
 works from the machines already in the house, and a rebuild has a documented
 path back to the same result.
@@ -109,7 +109,7 @@ configuration, and what was too broad to state as a rule.
 The resulting Samba setup has a few deliberately boring properties:
 
 - SMB3 is the minimum protocol, so SMB1 and SMB2 clients don't connect.
-- A named Samba user authenticates; guest access stays off.
+- A named Samba user authenticates. guest access stays off.
 - The firewall permits TCP 445 only from the known local subnet.
 - Samba's configuration is checked before the service is restarted.
 - A local connection test comes before testing from another device.
@@ -142,14 +142,13 @@ file and what metadata Samba was offering during the next connection.
 The inspection found an SMB3-only share on an NTFS3-backed disk, with no Apple
 compatibility VFS module configured. Rather than copying a pile of macOS Samba
 tweaks, the agent reduced it to a testable sequence: verify that the actual
-filesystem can create, read, and remove a small extended attribute; only then
-enable Samba's `vfs_fruit` Apple metadata support and its named-stream backend;
-validate the configuration before restarting; then reconnect the clients and
+filesystem can create, read, and remove a small extended attribute. only then
+enable Samba's `vfs_fruit` Apple metadata support and its named-stream backend. validate the configuration before restarting. then reconnect the clients and
 repeat the preview. Keeping resource forks in files rather than generic
 extended attributes avoids turning a small metadata compatibility fix into a
 large-xattr storage assumption.
 
-That does not prove every unavailable preview is a server bug—client session
+That does not prove every unavailable preview is a server bug. client session
 state and Wi-Fi interruptions still matter. It does turn an intermittent,
 vague complaint into a bounded investigation with a clear reason for every
 step. The companion guide records the complete, reversible procedure.
@@ -196,7 +195,7 @@ sudo pdbedit -L
 
 The first command creates or updates Samba's password for `<your-user>`; the second
 makes sure the account is enabled. `pdbedit -L` confirms that Samba knows about
-the account. If authentication fails later, don't assume a typo; check
+the account. If authentication fails later, don't assume a typo. check
 that the account is actually enabled. A real connection test is still the best
 proof.
 
@@ -244,7 +243,7 @@ Those are administrator decisions. So is the final check: connect from a real
 client, create and remove a harmless test file, and confirm that the share is
 both usable and limited to the intended people.
 
-That division of work felt healthy. The machine remained understandable; the
+That division of work felt healthy. The machine remained understandable. the
 agent reduced the amount of guesswork around it.
 
 ## A practical shape for a small home share

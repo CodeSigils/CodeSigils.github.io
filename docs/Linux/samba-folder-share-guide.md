@@ -29,10 +29,10 @@ If this is your first time sharing files on a Linux network, a handful of terms 
 
 - **SMB** (Server Message Block) — the network protocol Windows uses to share files and printers. When you open `\\server\share` in File Explorer, you're speaking SMB.
 - **Samba** — the free software that speaks SMB on Linux, so a Linux machine can offer folders that Windows, macOS, and other Linux systems understand.
-- **smbd** — the Samba _daemon_, the background program that actually answers connection requests. "Daemon" just means a program that runs quietly in the background waiting for work; it's the thing `systemctl` starts and stops.
-- **Share** — one folder made available on the network under a name (here, `KK_SHARE`). The _path_ (`/mnt/one/KK_SHARE`) is where the files live on Linux; the _share name_ is what clients see and type.
-- **Mount** — attaching a disk's contents to a directory so Linux can reach them. Until a disk is mounted, its path looks like an ordinary — and misleadingly empty — directory.
-- **Workgroup** — a loose label machines on a network use to find each other. The default `WORKGROUP` is fine for a home setup; it is a naming convention, not a security boundary.
+- **smbd** — the Samba _daemon_, the background program that actually answers connection requests. "Daemon" just means a program that runs quietly in the background waiting for work. it's the thing `systemctl` starts and stops.
+- **Share** — one folder made available on the network under a name (here, `KK_SHARE`). The _path_ (`/mnt/one/KK_SHARE`) is where the files live on Linux. the _share name_ is what clients see and type.
+- **Mount** — attaching a disk's contents to a directory so Linux can reach them. Until a disk is mounted, its path looks like an ordinary. and misleadingly empty. directory.
+- **Workgroup** — a loose label machines on a network use to find each other. The default `WORKGROUP` is fine for a home setup. it is a naming convention, not a security boundary.
 - **UFW** (Uncomplicated Firewall) — a beginner-friendly front-end to the Linux firewall. It's what we'll use to admit only your local network.
 - **Subnet and `/24`** — the range of addresses that make up your local network. You'll derive yours in Step 1; you never need to guess it.
 
@@ -50,7 +50,7 @@ If a share fails, this model keeps the investigation calm. Check the gate closes
 
 ## 1. Inspect Your Machine First
 
-Before making changes, get a clear picture of your system. Start with a small map of the machine: these commands do not alter anything. They answer the questions that later steps depend on — which disk holds the files, which Linux account owns them, which address clients should use, and whether Samba or the firewall already has a configuration worth preserving.
+Before making changes, get a clear picture of your system. Start with a small map of the machine: these commands do not alter anything. They answer the questions that later steps depend on. which disk holds the files, which Linux account owns them, which address clients should use, and whether Samba or the firewall already has a configuration worth preserving.
 
 Knowing this landscape saves a surprising amount of time. A command that is correct for one machine can point at the wrong disk, user, interface, or subnet on another. Capture the results before changing anything, then use your own values in the steps that follow.
 
@@ -83,7 +83,7 @@ hostname -I
 ip route
 
 # Check Samba status (if installed)
-systemctl is-active smbd; systemctl is-enabled smbd
+systemctl is-active smbd. systemctl is-enabled smbd
 dpkg -l samba samba-common samba-common-bin smbclient cifs-utils 2>/dev/null | grep -E '^(ii|un)'
 
 # Check existing Samba config
@@ -95,7 +95,7 @@ command -v ufw >/dev/null && sudo ufw status verbose
 
 ### Understanding what you just found
 
-Every one of those commands prints something useful, and none of them changes the machine. Here is the real transcript from one machine that follows this guide — a PikaOS box with two NTFS disks — so you know what you are looking at. Your own output will differ in the details: disk UUIDs are shown as `<UUID>` here, network addresses as placeholders like `<server-ip>`, `<your-subnet>`, and the libvirt bridge addresses as `<libvirt-ip>`, `<libvirt-broadcast>`, and `<libvirt-net>`, the distribution file is trimmed to its identification fields, the `id` group list is cut short, and other disks are omitted from `lsblk`. Two names are deliberately left real: interface names such as `enp8s0` are structural labels that differ from machine to machine but reveal nothing sensitive, and `virbr0` is libvirt's default bridge name, the same string on every machine that has it:
+Every one of those commands prints something useful, and none of them changes the machine. Here is the real transcript from one machine that follows this guide. a PikaOS box with two NTFS disks. so you know what you are looking at. Your own output will differ in the details: disk UUIDs are shown as `<UUID>` here, network addresses as placeholders like `<server-ip>`, `<your-subnet>`, and the libvirt bridge addresses as `<libvirt-ip>`, `<libvirt-broadcast>`, and `<libvirt-net>`, the distribution file is trimmed to its identification fields, the `id` group list is cut short, and other disks are omitted from `lsblk`. Two names are deliberately left real: interface names such as `enp8s0` are structural labels that differ from machine to machine but reveal nothing sensitive, and `virbr0` is libvirt's default bridge name, the same string on every machine that has it:
 
 ```console
 $ cat /etc/os-release
@@ -150,7 +150,7 @@ default via <your-gateway> dev enp8s0 proto dhcp src <server-ip> metric 100
 <your-subnet>/24 dev enp8s0 proto kernel scope link src <server-ip> metric 100
 <libvirt-net>/24 dev virbr0 proto kernel scope link src <libvirt-ip> linkdown
 
-$ systemctl is-active smbd; systemctl is-enabled smbd
+$ systemctl is-active smbd. systemctl is-enabled smbd
 active
 enabled
 
@@ -198,16 +198,16 @@ To                         Action      From
 
 The four questions worth answering from that transcript:
 
-- **Network**: Look for your active interface (e.g. `enp0s3`, `eth0`, `wlan0`) and its IP address with CIDR (like `192.168.1.23/24`). `hostname -I` gives a quick list of the machine's current addresses; pair it with `ip route` to identify the active LAN address and default gateway. On a home network, an address such as `192.168.1.23/24` usually means the firewall subnet is `192.168.1.0/24` — confirm that from the actual route rather than copying the example.
-- **Mount**: `findmnt -T /mnt/one` should show `TARGET` as exactly `/mnt/one`, with `SOURCE` and `FSTYPE` describing the disk you meant to share. If the target doesn't match, the disk isn't mounted there yet. An unmounted mount point still accepts `mkdir`, but any files created there land on the filesystem underneath it instead — which is exactly the kind of mistake that looks fine until you go looking for the files. The `FSTYPE` tells you if you're using `ntfs3` (in-kernel, recommended on modern kernels) or another filesystem.
+- **Network**: Look for your active interface (e.g. `enp0s3`, `eth0`, `wlan0`) and its IP address with CIDR (like `192.168.1.23/24`). `hostname -I` gives a quick list of the machine's current addresses. pair it with `ip route` to identify the active LAN address and default gateway. On a home network, an address such as `192.168.1.23/24` usually means the firewall subnet is `192.168.1.0/24` — confirm that from the actual route rather than copying the example.
+- **Mount**: `findmnt -T /mnt/one` should show `TARGET` as exactly `/mnt/one`, with `SOURCE` and `FSTYPE` describing the disk you meant to share. If the target doesn't match, the disk isn't mounted there yet. An unmounted mount point still accepts `mkdir`, but any files created there land on the filesystem underneath it instead. which is exactly the kind of mistake that looks fine until you go looking for the files. The `FSTYPE` tells you if you're using `ntfs3` (in-kernel, recommended on modern kernels) or another filesystem.
 - **Ownership**: For a single-user share, you'll want the share directory owned by `<your-user>`. Note the UID/GID from `id <your-user>` — you'll need this if setting up a persistent mount.
-- **Existing configuration**: Read the service, package, Samba, and firewall output before making changes; an existing config may contain another share or a firewall rule you need to preserve. `dpkg -l` can return a non-zero status for an absent package — that's normal during this inspection. In its output, `ii` at the start of a line means the package is installed.
+- **Existing configuration**: Read the service, package, Samba, and firewall output before making changes. an existing config may contain another share or a firewall rule you need to preserve. `dpkg -l` can return a non-zero status for an absent package. that's normal during this inspection. In its output, `ii` at the start of a line means the package is installed.
 
 ### A quick word on NTFS
 
-NTFS and Linux do not model file ownership in the same way. NTFS is Microsoft's filesystem — it doesn't natively store the Unix-style user and group ownership that Linux expects. On an NTFS mount, options such as `uid=`, `gid=`, `fmask=`, and `dmask=` tell Linux how the files should _appear_ and which permissions new files receive. Linux writes permissions as compact base-eight numbers: `755` means the owner can read, write, and enter a directory, while everyone else can only read and enter it.
+NTFS and Linux do not model file ownership in the same way. NTFS is Microsoft's filesystem. it doesn't natively store the Unix-style user and group ownership that Linux expects. On an NTFS mount, options such as `uid=`, `gid=`, `fmask=`, and `dmask=` tell Linux how the files should _appear_ and which permissions new files receive. Linux writes permissions as compact base-eight numbers: `755` means the owner can read, write, and enter a directory, while everyone else can only read and enter it.
 
-For a simple one-user NTFS share, Samba's `force user` setting (which we'll set in Step 6) ties everything together: after the network user has authenticated, Samba performs file work as one known Linux account. It does not replace authentication; it makes the filesystem side of the arrangement consistent.
+For a simple one-user NTFS share, Samba's `force user` setting (which we'll set in Step 6) ties everything together: after the network user has authenticated, Samba performs file work as one known Linux account. It does not replace authentication. it makes the filesystem side of the arrangement consistent.
 
 ---
 
@@ -238,7 +238,7 @@ The first command prints `active` when the service is running right now. The sec
 ## 3. Prepare a Persistent Mount (Recommended)
 
 If your shared folder lives on a separate disk (especially NTFS), mount it persistently via `/etc/fstab` so it's still there after a reboot.
-`/etc/fstab` is simply the file where Linux keeps its list of filesystems to mount at boot — each line is one disk, its mount point, its type, and a set of options.
+`/etc/fstab` is simply the file where Linux keeps its list of filesystems to mount at boot. each line is one disk, its mount point, its type, and a set of options.
 Editing it feels intimidating because a mistake can affect startup, but the backup and test below catch problems long before a reboot.
 
 ### Which NTFS driver to use (and what to install)
@@ -286,7 +286,7 @@ Two small exceptions worth knowing before you paste the options below.
 
 ### Understand your mount options (especially for NTFS)
 
-If you're working with NTFS, the mount options matter more than they might seem at first — they're the mechanism described in [A quick word on NTFS](#a-quick-word-on-ntfs) above, in practice.
+If you're working with NTFS, the mount options matter more than they might seem at first. they're the mechanism described in [A quick word on NTFS](#a-quick-word-on-ntfs) above, in practice.
 Here is every option this guide uses:
 
 | Option                    | Purpose                                                                                                                                                                                                                  |
@@ -306,7 +306,7 @@ On NTFS, the `fmask`/`dmask` you set here effectively cap what Samba can do. Eve
 
 ### Add your mount to /etc/fstab
 
-First, back up your fstab — a timestamped copy you can always fall back on:
+First, back up your fstab. a timestamped copy you can always fall back on:
 
 ```bash
 sudo cp /etc/fstab /etc/fstab.bak.$(date +%Y%m%d_%H%M%S)
@@ -328,7 +328,7 @@ sudo mount -a
 findmnt -T /mnt/one
 ```
 
-`mount -a` reads `/etc/fstab` and mounts everything listed in it (apart from lines marked `noauto`), so it's a safe way to prove your new line works without rebooting. It doesn't stop at the first failure, so read any error output it prints; silence means every line worked. If `findmnt` then shows the correct options, your persistent mount is working.
+`mount -a` reads `/etc/fstab` and mounts everything listed in it (apart from lines marked `noauto`), so it's a safe way to prove your new line works without rebooting. It doesn't stop at the first failure, so read any error output it prints. silence means every line worked. If `findmnt` then shows the correct options, your persistent mount is working.
 
 ---
 
@@ -343,9 +343,9 @@ sudo chmod u+rwx,go-rwx /mnt/one/KK_SHARE
 ls -ld /mnt/one/KK_SHARE
 ```
 
-The `-p` means the command succeeds quietly if the directory already exists, and it never removes anything. The `chown` and `chmod` below are deliberately non-recursive too — they set up the folder itself, not any content you may already have inside it. (Step 11 uses plain `mkdir` on purpose: without `-p`, an existing directory makes the command fail and gives you a chance to stop and inspect it first.)
+The `-p` means the command succeeds quietly if the directory already exists, and it never removes anything. The `chown` and `chmod` below are deliberately non-recursive too. they set up the folder itself, not any content you may already have inside it. (Step 11 uses plain `mkdir` on purpose: without `-p`, an existing directory makes the command fail and gives you a chance to stop and inspect it first.)
 
-You should see the directory owned by `<your-user>` with permissions `drwx------` (owner can read, write, and enter; nobody else can). On NTFS, the effective permissions are shaped by the mount options above instead. Check the final `ls -ld` output rather than assuming every NTFS mount handles later `chown` and `chmod` calls in the same way — and don't try to "fix" it by loosening mount options until you understand what they're doing.
+You should see the directory owned by `<your-user>` with permissions `drwx------` (owner can read, write, and enter. nobody else can). On NTFS, the effective permissions are shaped by the mount options above instead. Check the final `ls -ld` output rather than assuming every NTFS mount handles later `chown` and `chmod` calls in the same way. and don't try to "fix" it by loosening mount options until you understand what they're doing.
 
 ---
 
@@ -360,10 +360,10 @@ sudo pdbedit -L
 ```
 
 - `smbpasswd -a` adds the account and asks for a Samba password.
-- `smbpasswd -e` enables it — a disabled account masquerades as a wrong password, which sends you hunting in the wrong direction.
+- `smbpasswd -e` enables it. a disabled account masquerades as a wrong password, which sends you hunting in the wrong direction.
 - `pdbedit -L` lists the accounts Samba knows about.
 
-The password doesn't need to match your Linux login password — it's the password clients will use to connect to the share. `pdbedit -L` confirming your account exists is good evidence, but a real connection test in Step 9 is still the final proof that the password works.
+The password doesn't need to match your Linux login password. it's the password clients will use to connect to the share. `pdbedit -L` confirming your account exists is good evidence, but a real connection test in Step 9 is still the final proof that the password works.
 
 ---
 
@@ -383,7 +383,7 @@ sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak.$(date +%Y%m%d_%H%M%S)
 
 ### Write the secure configuration
 
-Edit `/etc/samba/smb.conf` (`sudoedit /etc/samba/smb.conf`). If you already have other shares configured, preserve them — only replace/add what you need. For a fresh setup, use this minimal, SMB3-only configuration:
+Edit `/etc/samba/smb.conf` (`sudoedit /etc/samba/smb.conf`). If you already have other shares configured, preserve them. only replace/add what you need. For a fresh setup, use this minimal, SMB3-only configuration:
 
 ```ini
 [global]
@@ -430,11 +430,11 @@ The important lines are deliberately plain:
 - **SMB3-only** (`server min protocol = SMB3_00`, `server max protocol = SMB3_11`): Blocks legacy SMB1/SMB2 connections — SMB1 is decades old and has known security problems. Modern clients (Windows 10+, macOS, current Linux) support SMB3 just fine.
 - **No NetBIOS** (`disable netbios = yes`): SMB3 works over TCP port 445 directly. Disabling NetBIOS removes legacy name resolution and the associated ports (137–139), so the firewall only ever needs one rule.
 - **Authenticated access only** (`security = user`, `guest ok = no`, `valid users = <your-user>`): Every connection must authenticate as your specified user. There is no anonymous "everyone" path.
-- **`force user = <your-user>`**: Ensures all file work happens as that Linux user — the setting promised back in [A quick word on NTFS](#a-quick-word-on-ntfs). It matters most on NTFS mounts where ownership is synthesised. Skip it and you can end up with files owned in a way that looks fine from Samba but causes confusion when you look at them directly on the Linux filesystem. It's a small setting that prevents a lot of head-scratching later.
+- **`force user = <your-user>`**: Ensures all file work happens as that Linux user. the setting promised back in [A quick word on NTFS](#a-quick-word-on-ntfs). It matters most on NTFS mounts where ownership is synthesised. Skip it and you can end up with files owned in a way that looks fine from Samba but causes confusion when you look at them directly on the Linux filesystem. It's a small setting that prevents a lot of head-scratching later.
 - **`ntlm auth = ntlmv2-only`**: Allows the modern NTLMv2 authentication method and refuses the weaker old variants.
 - **`vfs objects = fruit streams_xattr`**: Loads Samba's Apple compatibility modules for this share. `fruit` enables Apple's SMB2+ extension (AAPL) and handles the macOS-specific metadata that Finder and the iOS Files app expect during directory reads; `streams_xattr` supplies the named-stream storage that `fruit` defers to for everything it does not handle itself. Order matters — `fruit` must come before `streams_xattr`. These are per-share settings: they belong inside the `[KK_SHARE]` block, not `[global]`, and a share section that sets `vfs objects` replaces (does not merge with) a global one.
-- **`fruit:resource = file`**: Stores larger resource forks as `._` AppleDouble sidecar files instead of filesystem extended attributes. This is the default and the safe choice on Linux — the `xattr` alternative only works on filesystems with large-xattr support such as ZFS or Solaris, and `stream` is marked experimental.
-- **Why bother?** Without these lines, macOS and iOS clients still connect and transfer files, but Apple-specific metadata has nowhere to live. The visible symptom is in Finder and the iOS Files app: previews show **"File preview not available"** (or the file simply won't open in Quick Look) until you disconnect and reconnect. The share works otherwise, which is exactly why it is easy to miss. One practical note: `streams_xattr` needs user extended attributes to actually work on the underlying filesystem — on Linux this is standard for ext4/btrfs/xfs, but if previews still fail (common with some NTFS mounts), verify with a quick probe before blaming the config:
+- **`fruit:resource = file`**: Stores larger resource forks as `._` AppleDouble sidecar files instead of filesystem extended attributes. This is the default and the safe choice on Linux. the `xattr` alternative only works on filesystems with large-xattr support such as ZFS or Solaris, and `stream` is marked experimental.
+- **Why bother?** Without these lines, macOS and iOS clients still connect and transfer files, but Apple-specific metadata has nowhere to live. The visible symptom is in Finder and the iOS Files app: previews show **"File preview not available"** (or the file simply won't open in Quick Look) until you disconnect and reconnect. The share works otherwise, which is exactly why it is easy to miss. One practical note: `streams_xattr` needs user extended attributes to actually work on the underlying filesystem. on Linux this is standard for ext4/btrfs/xfs, but if previews still fail (common with some NTFS mounts), verify with a quick probe before blaming the config:
 
   ```bash
   probe=$(mktemp /mnt/one/KK_SHARE/.samba-xattr-probe.XXXXXX)
@@ -443,7 +443,7 @@ The important lines are deliberately plain:
   rm -f "$probe"
   ```
 
-  Create the probe **inside the share path**, not in `/tmp` — the point is to test the filesystem that actually backs the share, and a pass on a `tmpfs` `/tmp` proves nothing about it. `setfattr` and `getfattr` come from the small `attr` package (`sudo apt install attr`); they exercise the same `setxattr(2)`/`getxattr(2)` system calls that `streams_xattr` will use, which makes them the most direct test available. Run the lines exactly as written — no `&&` chaining — so `rm -f "$probe"` still executes and removes the temp file even if an earlier line fails. A pass prints `verified`; a filesystem that cannot store extended attributes fails the `setfattr` line with a non-zero exit status and a clear error such as `Operation not supported`, and that is the stop signal. (The `getfattr: Removing leading '/' from absolute path names` note on stderr is harmless, and the `user.` attribute prefix keeps the test unprivileged.)
+  Create the probe **inside the share path**, not in `/tmp` — the point is to test the filesystem that actually backs the share, and a pass on a `tmpfs` `/tmp` proves nothing about it. `setfattr` and `getfattr` come from the small `attr` package (`sudo apt install attr`); they exercise the same `setxattr(2)`/`getxattr(2)` system calls that `streams_xattr` will use, which makes them the most direct test available. Run the lines exactly as written. no `&&` chaining. so `rm -f "$probe"` still executes and removes the temp file even if an earlier line fails. A pass prints `verified`; a filesystem that cannot store extended attributes fails the `setfattr` line with a non-zero exit status and a clear error such as `Operation not supported`, and that is the stop signal. (The `getfattr: Removing leading '/' from absolute path names` note on stderr is harmless, and the `user.` attribute prefix keeps the test unprivileged.)
 
   No `attr` package at hand? The same probe works through GNOME's `gio` (GLib), present on most desktop Linux systems:
 
@@ -455,11 +455,11 @@ The important lines are deliberately plain:
   gio remove "$probe"
   ```
 
-  Expect `xattr::user.samba_fruit_probe: verified` in the `gio info` output. Whichever probe you use, if the attribute round-trips, the storage side is fine; reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
+  Expect `xattr::user.samba_fruit_probe: verified` in the `gio info` output. Whichever probe you use, if the attribute round-trips, the storage side is fine. reconnect the macOS/iOS client after `sudo systemctl restart smbd` and the previews return. `fruit:aapl` defaults to `yes` in current Samba, so it needs no explicit line.
 
 !!! warning "Keep every share consistent"
 
-    Samba negotiates the Apple (AAPL) extensions on a client's first connection to the server, so a share *without* the fruit lines can disable them for every share — keep the setting on all of them, including shares you add later (that's why [Step 11](#11-adding-another-share-later) repeats it).
+    Samba negotiates the Apple (AAPL) extensions on a client's first connection to the server, so a share *without* the fruit lines can disable them for every share. keep the setting on all of them, including shares you add later (that's why [Step 11](#11-adding-another-share-later) repeats it).
 
 This is a single-user home-network example. A family share, an office, an Active Directory domain, or access from outside the home deserves a different identity and security design.
 
@@ -471,17 +471,17 @@ Before restarting, test that Samba can parse your config:
 sudo testparm -s
 ```
 
-Never make a syntax test depend on whether a service happened to restart. `testparm -s` shows the configuration exactly as Samba parsed it, so a mistake surfaces here — while the old, working config is still the one running. You should see `[global]` and `[KK_SHARE]` in the dump, and the line `Loaded services file OK.` confirms the file parsed. A completely broken file prints `Error loading services.` instead and exits with a non-zero status; that is the moment to fix, not to restart.
+Never make a syntax test depend on whether a service happened to restart. `testparm -s` shows the configuration exactly as Samba parsed it, so a mistake surfaces here. while the old, working config is still the one running. You should see `[global]` and `[KK_SHARE]` in the dump, and the line `Loaded services file OK.` confirms the file parsed. A completely broken file prints `Error loading services.` instead and exits with a non-zero status. that is the moment to fix, not to restart.
 
-Do not be alarmed when lines you wrote seem to vanish. `testparm` omits every setting that equals Samba's built-in default, so `workgroup`, `ntlm auth`, `guest ok`, `browseable`, and `server max protocol` are all absent from a healthy dump — that is normal, not a failed save. Conversely, one line you never wrote may appear anyway: `idmap config * : backend = tdb`, which Samba injects into every load. The dump also normalizes what it prints: `security = user` comes back as `security = USER`, and yes/no settings as `Yes` or `No`.
+Do not be alarmed when lines you wrote seem to vanish. `testparm` omits every setting that equals Samba's built-in default, so `workgroup`, `ntlm auth`, `guest ok`, `browseable`, and `server max protocol` are all absent from a healthy dump. that is normal, not a failed save. Conversely, one line you never wrote may appear anyway: `idmap config * : backend = tdb`, which Samba injects into every load. The dump also normalizes what it prints: `security = user` comes back as `security = USER`, and yes/no settings as `Yes` or `No`.
 
-Finally, look for `Server role: ROLE_STANDALONE` — it confirms a standalone, non-domain-joined server, which is what this guide builds. A `WARNING:` line about a deprecated option is usually a reminder rather than a failure, but any `ERROR:` line or non-zero exit status deserves a careful read before you continue. You may also see informational messages such as the GnuTLS weak-crypto note; these are normal and not related to your config.
+Finally, look for `Server role: ROLE_STANDALONE` — it confirms a standalone, non-domain-joined server, which is what this guide builds. A `WARNING:` line about a deprecated option is usually a reminder rather than a failure, but any `ERROR:` line or non-zero exit status deserves a careful read before you continue. You may also see informational messages such as the GnuTLS weak-crypto note. these are normal and not related to your config.
 
 ---
 
 ## 7. Apply and Start Samba
 
-Until now, the configuration has been text on a disk; the running service only reads it when it restarts, which is why validation came first. Two commands finish the job: one loads the new configuration now, the other makes Samba return after a reboot. Run them only once `testparm` passes:
+Until now, the configuration has been text on a disk. the running service only reads it when it restarts, which is why validation came first. Two commands finish the job: one loads the new configuration now, the other makes Samba return after a reboot. Run them only once `testparm` passes:
 
 ```bash
 sudo systemctl restart smbd
@@ -491,20 +491,20 @@ systemctl is-active smbd
 
 If `smbd` fails to start, run `sudo testparm -s` and `journalctl -u smbd -n 50 --no-pager` to see the error details. If it fails right after editing, your last change is usually the culprit.
 
-One more habit worth keeping: after any Samba upgrade, run `sudo testparm -s` again. Options that were fine yesterday can start emitting deprecation warnings once a new version arrives, and the Samba project explicitly asks users to re-run `testparm` after upgrading — it is the cheapest health check there is.
+One more habit worth keeping: after any Samba upgrade, run `sudo testparm -s` again. Options that were fine yesterday can start emitting deprecation warnings once a new version arrives, and the Samba project explicitly asks users to re-run `testparm` after upgrading. it is the cheapest health check there is.
 
 ---
 
 ## 8. Restrict Access to Your Local Network (Firewall)
 
-A firewall decides which network traffic is allowed through. Only SMB should come from your home network — nothing else on the internet needs to reach TCP 445. First identify the real local subnet:
+A firewall decides which network traffic is allowed through. Only SMB should come from your home network. nothing else on the internet needs to reach TCP 445. First identify the real local subnet:
 
 ```bash
 ip -4 addr show <your-interface>
 ip route | grep default
 ```
 
-For most home routers, if your IP is `192.168.1.XX/24`, your subnet is `192.168.1.0/24`. The `/24` is compact notation for all addresses beginning with `192.168.1.`. Adjust if yours differs (common alternatives: `10.0.0.0/24`, `172.16.0.0/24`). Your network may be different — the safety property is the narrow source range, not the example numbers.
+For most home routers, if your IP is `192.168.1.XX/24`, your subnet is `192.168.1.0/24`. The `/24` is compact notation for all addresses beginning with `192.168.1.`. Adjust if yours differs (common alternatives: `10.0.0.0/24`, `172.16.0.0/24`). Your network may be different. the safety property is the narrow source range, not the example numbers.
 
 Allow TCP port 445 from that subnet only:
 
@@ -523,7 +523,7 @@ sudo ufw delete <number>
 UFW asks `Proceed with operation (y|n)?` before deleting, so you get a chance to check you have picked the right row. A wider rule left behind would quietly undo the restriction this section just built.
 
 !!! warning "Enabling a firewall is a separate decision"
-If UFW isn't enabled yet, do not enable it blindly — especially on a remote machine. Make sure the firewall already permits the management access you need (SSH or your management port: `sudo ufw allow ssh`) before running `sudo ufw enable`. It's easy to get distracted and enable UFW before adding that rule; if that happens, you can lock yourself out of remote access.
+If UFW isn't enabled yet, do not enable it blindly. especially on a remote machine. Make sure the firewall already permits the management access you need (SSH or your management port: `sudo ufw allow ssh`) before running `sudo ufw enable`. It's easy to get distracted and enable UFW before adding that rule. if that happens, you can lock yourself out of remote access.
 
 !!! note "Supporting very old devices"
 With NetBIOS disabled and SMB3 required, the old 137–139 NetBIOS ports are not part of this setup. If you absolutely must support a very old device that can't do SMB3, you'd need to open those ports and lower `server min protocol`. This guide doesn't cover that — SMB3-only is the recommended, safer default. If you go down that route, keep that device isolated as much as you can. For most home networks, it's simply not needed anymore.
@@ -532,7 +532,7 @@ With NetBIOS disabled and SMB3 required, the old 137–139 NetBIOS ports are not
 
 ## 9. Test the Share
 
-A configuration that parses is not yet a share; it is only a promise. Testing is where the three gates meet, and the order matters as much as the tests themselves. Start on the server itself, where only the mount and Samba can be at fault, and move to another device once that passes, so a failure at any point points at exactly one gate. When everything works, confirm the negotiated protocol instead of assuming it: a login that succeeds proves authentication, not SMB3.
+A configuration that parses is not yet a share. it is only a promise. Testing is where the three gates meet, and the order matters as much as the tests themselves. Start on the server itself, where only the mount and Samba can be at fault, and move to another device once that passes, so a failure at any point points at exactly one gate. When everything works, confirm the negotiated protocol instead of assuming it: a login that succeeds proves authentication, not SMB3.
 
 ### Test locally on the server first
 
@@ -559,13 +559,13 @@ If these succeed without errors, authentication and filesystem permissions are w
 
 ### Test from another device on your LAN
 
-Now test from another device on the same network using `<server-ip>` (the IP you found in step 1, e.g. `192.168.1.23`). Use the server's current IP address if local DNS or name discovery is not part of your network — that's less elegant than a hostname, but far easier to diagnose.
+Now test from another device on the same network using `<server-ip>` (the IP you found in step 1, e.g. `192.168.1.23`). Use the server's current IP address if local DNS or name discovery is not part of your network. that's less elegant than a hostname, but far easier to diagnose.
 
 **Windows (File Explorer):** Open `\\<server-ip>\KK_SHARE`. When prompted, enter `<your-user>` and your Samba password. If Windows insists the password is wrong, it is usually holding an old one. Windows keeps credentials in two separate places, so clear both: delete the saved entry for `<server-ip>` in Credential Manager, and run `net use * /delete` to drop any open sessions.
 
-**macOS (Finder):** Go → Connect to Server → `smb://<server-ip>/KK_SHARE`. macOS uses SMB 3 by default. Authenticate with `<your-user>` and your Samba password; if a dialog asks for a workgroup name, `WORKGROUP` is the correct answer. If the connection fails without ever prompting for a password, try `smb://<your-user>:*@<server-ip>/KK_SHARE` (the `*` is a placeholder that tells macOS to ask for the password).
+**macOS (Finder):** Go → Connect to Server → `smb://<server-ip>/KK_SHARE`. macOS uses SMB 3 by default. Authenticate with `<your-user>` and your Samba password. if a dialog asks for a workgroup name, `WORKGROUP` is the correct answer. If the connection fails without ever prompting for a password, try `smb://<your-user>:*@<server-ip>/KK_SHARE` (the `*` is a placeholder that tells macOS to ask for the password).
 
-**Linux (temporary mount):** Logically, you can already reach the share from any Linux file manager that supports network sharing — in GNOME, for example, open Files and click *Network* in the sidebar; the server and its shares appear there once you pick the machine and authenticate (some releases group it under *Other Locations* instead). The command-line mount below is the stricter test, because it exercises the filesystem layer itself rather than the file manager's browsing of it:
+**Linux (temporary mount):** Logically, you can already reach the share from any Linux file manager that supports network sharing. in GNOME, for example, open Files and click *Network* in the sidebar. the server and its shares appear there once you pick the machine and authenticate (some releases group it under *Other Locations* instead). The command-line mount below is the stricter test, because it exercises the filesystem layer itself rather than the file manager's browsing of it:
 
 ```bash
 mkdir -p ~/smbtest
@@ -576,11 +576,11 @@ touch ~/smbtest/.probe && rm ~/smbtest/.probe  # Test write
 sudo umount ~/smbtest
 ```
 
-If the mount fails with `error(95) Operation not supported`, try `vers=3.0` instead of `3.1.1`. `seal` (encryption) is optional — you can add it if desired, but not all clients need it. Error 95 is Samba's generic "this dialect or feature is not supported" complaint, so an explicit `vers=` plus dropping `seal` if you added it resolves the usual cases.
+If the mount fails with `error(95) Operation not supported`, try `vers=3.0` instead of `3.1.1`. `seal` (encryption) is optional. you can add it if desired, but not all clients need it. Error 95 is Samba's generic "this dialect or feature is not supported" complaint, so an explicit `vers=` plus dropping `seal` if you added it resolves the usual cases.
 
 ### Confirm the protocol actually negotiated
 
-A successful login proves authentication; it does not by itself prove SMB3 was used. On the server, run:
+A successful login proves authentication. it does not by itself prove SMB3 was used. On the server, run:
 
 ```bash
 smbstatus -b
@@ -594,13 +594,13 @@ For a stricter check, ask a client to negotiate an older dialect and confirm the
 smbclient -L //<server-ip> -U <your-user> --option='client max protocol=SMB2'
 ```
 
-This should fail with a protocol negotiation error — exactly what a server with `server min protocol = SMB3_00` is supposed to do when a client asks for anything older.
+This should fail with a protocol negotiation error. exactly what a server with `server min protocol = SMB3_00` is supposed to do when a client asks for anything older.
 
 ---
 
 ## 10. Troubleshooting
 
-Everything worked yesterday. Today the laptop reports a wrong password, or the share has quietly vanished from the file browser, and the natural reaction is to start changing settings until something improves. That reaction is understandable, and it is also how a one-line fix turns into an evening of mystery. Most Samba problems live in one of a few places; finding them is a matter of order rather than luck.
+Everything worked yesterday. Today the laptop reports a wrong password, or the share has quietly vanished from the file browser, and the natural reaction is to start changing settings until something improves. That reaction is understandable, and it is also how a one-line fix turns into an evening of mystery. Most Samba problems live in one of a few places. finding them is a matter of order rather than luck.
 
 ### Troubleshooting in a useful order
 
@@ -613,15 +613,15 @@ When a client cannot connect, work from the local system outward:
 5. `sudo ufw status numbered` — is TCP 445 allowed from, and limited to, the intended LAN?
 6. Test another device using the server IP address.
 
-This order separates disk, configuration, service, authentication, and network problems — the three gates, checked from the inside out. It is much quicker than changing several things at once and hoping one of them helped.
+This order separates disk, configuration, service, authentication, and network problems. the three gates, checked from the inside out. It is much quicker than changing several things at once and hoping one of them helped.
 
 ### By symptom
 
-One term first: `veto files` is an optional setting that hides files matching a pattern list (old tutorials often add it). This guide's configuration doesn't include it — but if your `smb.conf` does, the last three rows apply.
+One term first: `veto files` is an optional setting that hides files matching a pattern list (old tutorials often add it). This guide's configuration doesn't include it. but if your `smb.conf` does, the last three rows apply.
 
 | Symptom                                              | Likely Cause                               | Fix                                                                                                                                                                                                                |
 | ---------------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Windows says "incorrect password" but it is correct  | Cached credentials                         | Clear the saved entry in Credential Manager, then run `net use * /delete` to drop open sessions; the two are separate stores. If it still refuses, try `.\<your-user>` as the username.                            |
+| Windows says "incorrect password" but it is correct  | Cached credentials                         | Clear the saved entry in Credential Manager, then run `net use * /delete` to drop open sessions. the two are separate stores. If it still refuses, try `.\<your-user>` as the username.                            |
 | Share not found from other devices                   | Firewall, service not running, or wrong IP | Check `systemctl is-active smbd`, `sudo ufw status`, and confirm you're using the correct `<server-ip>` from the same subnet.                                                                                      |
 | Can connect but get "permission denied" when writing | Filesystem permissions/mount options       | Verify `findmnt -T /mnt/one` shows expected options. Check ownership with `ls -ld /mnt/one/KK_SHARE`. Ensure `force user = <your-user>` is in smb.conf and the user matches.                                       |
 | `smbd` won't start                                   | Config syntax error                        | Run `sudo testparm -s` to catch parse errors. Check `journalctl -u smbd -n 50 --no-pager` for details. If it fails right after editing, your last change is usually the culprit.                                   |
@@ -631,11 +631,11 @@ One term first: `veto files` is an optional setting that hides files matching a 
 | macOS/iOS preview says "File preview not available"  | Missing Apple metadata modules             | Add `vfs objects = fruit streams_xattr` and `fruit:resource = file` to the share section (see [Why these choices matter](#why-these-choices-matter)), run `sudo testparm -s`, restart `smbd`, then disconnect and reconnect the client. |
 
 !!! note "AppArmor on Ubuntu and similar systems"
-Ubuntu ships AppArmor profiles for Samba. A profile in _complain_ mode only logs what it would block; in enforce mode it actually denies access. Run `sudo aa-status` to see whether profiles for `smbd` are loaded, look for `AppArmor: ... DENIED` entries in `/var/log/syslog` when a path fails for no visible reason, and check `/sys/kernel/security/lsm` to see which security modules are active at all.
+Ubuntu ships AppArmor profiles for Samba. A profile in _complain_ mode only logs what it would block. in enforce mode it actually denies access. Run `sudo aa-status` to see whether profiles for `smbd` are loaded, look for `AppArmor: ... DENIED` entries in `/var/log/syslog` when a path fails for no visible reason, and check `/sys/kernel/security/lsm` to see which security modules are active at all.
 
 ### Quick diagnostic commands
 
-Four questions cover most situations where the answer isn't obvious: what sessions does the server actually see, what files are open right now, what is Samba saying at this moment, and what changed in the configuration since the last copy you knew was good? None of these commands change anything — they are a report, not a repair, which is why they are safe to run at any point in the troubleshooting order.
+Four questions cover most situations where the answer isn't obvious: what sessions does the server actually see, what files are open right now, what is Samba saying at this moment, and what changed in the configuration since the last copy you knew was good? None of these commands change anything. they are a report, not a repair, which is why they are safe to run at any point in the troubleshooting order.
 
 ```bash
 # Check active connections and negotiated protocol
@@ -652,10 +652,10 @@ ls -lt /etc/samba/smb.conf.bak.* | head -1
 sudo diff -u $(ls -t /etc/samba/smb.conf.bak.* | head -1) /etc/samba/smb.conf
 ```
 
-- **`smbstatus -b`** lists each active session together with the protocol version it negotiated. It answers the question clients rarely report accurately: whether a connection exists at all, and whether it arrived at SMB3 or fell back. A login attempt that failed on the server never appears here, so an empty list during a failed test is itself a clue — the problem is authentication or earlier, not the share itself.
+- **`smbstatus -b`** lists each active session together with the protocol version it negotiated. It answers the question clients rarely report accurately: whether a connection exists at all, and whether it arrived at SMB3 or fell back. A login attempt that failed on the server never appears here, so an empty list during a failed test is itself a clue. the problem is authentication or earlier, not the share itself.
 - **`smbstatus -S`** shows which shares are open and which file handles are in use. When Windows refuses to rename a directory, or a file is locked by "another user", the holder is usually a session you cannot see from the file manager, and this is where it shows up.
-- **`tail -f /var/log/samba/log.smbd`** streams the server's own account of events while you work. The client reports a symptom ("network path not found"); the log gives the reason behind it. Leave it running, retry the failing action on the client, and read the lines that appear — then Ctrl+C.
-- **The `diff`** compares the live `smb.conf` against your newest backup, the last state you deliberately wrote. If trouble started right after an edit, this isolates the change instead of inviting you to re-read the whole file; the leading `ls -lt` simply shows you which backup is newest before the comparison picks it automatically. The `-u` flag adds surrounding context, so a line that merely moved looks different from one that was added or removed.
+- **`tail -f /var/log/samba/log.smbd`** streams the server's own account of events while you work. The client reports a symptom ("network path not found"); the log gives the reason behind it. Leave it running, retry the failing action on the client, and read the lines that appear. then Ctrl+C.
+- **The `diff`** compares the live `smb.conf` against your newest backup, the last state you deliberately wrote. If trouble started right after an edit, this isolates the change instead of inviting you to re-read the whole file. the leading `ls -lt` simply shows you which backup is newest before the comparison picks it automatically. The `-u` flag adds surrounding context, so a line that merely moved looks different from one that was added or removed.
 
 ---
 
