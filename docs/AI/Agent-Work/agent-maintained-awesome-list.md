@@ -1,6 +1,6 @@
 ---
 title: What Keeps an Awesome List Honest
-description: How a curated list turned into a governed one — hard gates, soft advisories, two state files, and freshness reporting against a real git history.
+description: How a curated list turned into a governed one. It has hard gates, soft advisories, two state files, and freshness reporting against a real git history.
 keywords: [agents, awesome list, maintenance, drift, CI, freshness, license, url rot]
 ---
 
@@ -289,9 +289,9 @@ is the same problem wearing a different coat.
 
 ## Related reading
 
-- [awesome-agent-trust](https://github.com/CodeSigils/awesome-agent-trust) — the repository itself; every check and file mentioned above is real and visible there.
-- [CRITERIA.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/CRITERIA.md) — the gate contract: hard failures, soft advisories, and the licence rule.
-- [MAINTENANCE.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/docs/MAINTENANCE.md) — the ritual: three automation layers, review cadence, and handover procedure.
-- [validate-repos.py](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/scripts/validate-repos.py) — the validator: eight-worker API checking, hard/soft signals, and the quarterly baseline audit.
-- [dependency-freshness.yml](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/workflows/dependency-freshness.yml) — the weekly freshness ritual in one file.
-- [commit #31](https://github.com/CodeSigils/awesome-agent-trust/commit/7e8327f1b7f300526dfcd32aadf02be879f3459d) — the silent-skip fix, the most instructive bug in the project.
+- [awesome-agent-trust](https://github.com/CodeSigils/awesome-agent-trust) - every check and file mentioned above is real and visible there.
+- [CRITERIA.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/CRITERIA.md) - the gate contract covering hard failures, soft advisories, and the licence rule.
+- [MAINTENANCE.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/docs/MAINTENANCE.md) - three automation layers, review cadence, and handover procedure.
+- [validate-repos.py](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/scripts/validate-repos.py) - eight-worker API checking, hard/soft signals, and the quarterly baseline audit.
+- [dependency-freshness.yml](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/workflows/dependency-freshness.yml) - the weekly freshness ritual.
+- [commit #31](https://github.com/CodeSigils/awesome-agent-trust/commit/7e8327f1b7f300526dfcd32aadf02be879f3459d) - the silent-skip fix was the most instructive bug in the project.
