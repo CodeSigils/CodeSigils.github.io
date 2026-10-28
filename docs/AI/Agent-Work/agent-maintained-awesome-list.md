@@ -21,8 +21,9 @@ necessary.
 ## A list becomes a governed list
 
 For the first weeks it was just a README with categories, exactly like
-every other awesome list. Then the failures started — dead links,
-archived repositories, entries whose sources no longer resolved.
+every other awesome list. Then the failures started. Dead links,
+archived repositories, and entries whose sources no longer resolved
+were common.
 What actually fixed it was to stop being the only checker and let the
 machine watch the same links.
 
@@ -59,8 +60,8 @@ drifts, and the maintainer is the only witness.
 The first design decision was to split every possible problem into two
 classes: hard failures and soft advisories.
 
-A hard failure means the entry cannot safely be in the list at all —
-the repository is missing, it is archived, or it cannot be verified.
+A hard failure means the entry cannot safely be in the list at all. The
+repository may be missing, archived, or unverifiable.
 When the validator finds one, CI fails and the PR does not merge
 ([validate.yml](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/workflows/validate.yml)).
 
@@ -73,7 +74,7 @@ This split matters more than it sounds. If stars blocked inclusion,
 small and honest projects would never get in. If license absence
 blocked inclusion, the list would shut out many genuinely useful
 tools before their authors ever added a license. The gate should only
-enforce what the list actually promises — that the thing exists and is
+enforce what the list actually promises: that the thing exists and is
 what it claims to be. Everything else is a question, not a verdict.
 
 !!! tip "Let the gate enforce the promise, not the taste"
@@ -87,8 +88,8 @@ One soft signal turned out to deserve a much firmer role: the license.
 An awesome list is only as open as the projects it vouches for, and
 "open" has a testable meaning. Over time the criteria hardened into a
 plain rule: software entries normally require an open-source license,
-and they must live on a recognised code host — GitHub, GitLab,
-Codeberg, sr.ht, Bitbucket, or similar ([#32](https://github.com/CodeSigils/awesome-agent-trust/commit/342e890aebce93e8d1f8af9c2afea8d13b58df33)).
+and they must live on a recognised code host (GitHub, GitLab,
+Codeberg, sr.ht, Bitbucket, or similar) ([#32](https://github.com/CodeSigils/awesome-agent-trust/commit/342e890aebce93e8d1f8af9c2afea8d13b58df33)).
 
 The change also closed a loophole the criteria had been carrying: an
 old clause allowed "a public repository or documentation site", which
@@ -99,7 +100,7 @@ The validator flags missing licenses as advisories rather than hard
 failures, so the list stays inclusive of projects that are still
 sorting their licensing out. But the baseline makes the absence
 visible, and the recognised-host rule means a non-GitHub entry is
-never silently assumed to be fine — the checks that GitHub lets us
+never silently assumed to be fine. the checks that GitHub lets us
 automate cannot run there, so a human must confirm existence, license,
 and activity by hand ([#31](https://github.com/CodeSigils/awesome-agent-trust/commit/7e8327f1b7f300526dfcd32aadf02be879f3459d)).
 
@@ -107,8 +108,7 @@ and activity by hand ([#31](https://github.com/CodeSigils/awesome-agent-trust/co
 
 The most instructive bug in the whole project was about URL rot of a
 second kind. The validator extracts every repository URL from the
-README and checks it against the GitHub API. That worked beautifully
-— and it silently ignored everything that was not a GitHub link.
+README and checks it against the GitHub API. That worked beautifully. and it silently ignored everything that was not a GitHub link.
 
 Entries pointing at websites or other code hosts skipped every
 validation gate without anyone noticing. No warning, no advisory, no
@@ -123,12 +123,12 @@ workflows: a checker that quietly skips what it does not understand is
 worse than no checker, because it manufactures confidence. The fix is
 to make the skip itself visible.
 
-For non-GitHub links generally — documentation sites, specification
-pages, project homes — a separate reporter checks every external link
+For non-GitHub links (documentation sites, specification
+pages, project homes), a separate reporter checks every external link
 and labels it ok, redirect, broken, or unknown, degrading from HEAD to
 GET requests before giving up ([report-external-links.py](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/scripts/report-external-links.py)).
 Because the network itself lies, a link the reporter cannot reach is
-labelled unknown, never broken — an API or network error is not
+labelled unknown, never broken. An API or network error is not
 evidence of deletion. The same principle sits in the gate: when the
 validator's API call fails, that is a hard error, and the merge is
 blocked rather than the entry being dropped on the word of a
@@ -139,7 +139,7 @@ entry.
 
 So what does a valid pull request actually look like? The gate
 itself is the first contract, and branch protection enforces it on
-every merge — including on my own admin commits, because the
+every merge. including on my own admin commits, because the
 repository does not use approving reviews and I am the only
 maintainer. The validation workflow runs against every pull request
 to main, on every push to main, weekly, and whenever I trigger it by
@@ -171,8 +171,8 @@ The human rituals sit on top of the same machine. The contribution
 guide and the pull request template set the shape every submission is
 expected to follow ([pull request
 template](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/pull_request_template.md)),
-and the pre-submission ritual — `npm ci`, `npm run lint`, `npm test`,
-then the two local validator scripts — is the same work the pipeline
+and the pre-submission ritual (`npm ci`, `npm run lint`, `npm test`),
+then the two local validator scripts. is the same work the pipeline
 does, run by hand first. An agent that wants to contribute starts
 there: prove the entry against the criteria locally, submit the
 evidence with the proposal, and let branch protection do the arguing.
@@ -189,7 +189,7 @@ with no detected license. It is monitoring state. It records what the
 list already knows, it does not approve anything.
 
 [`repo-exceptions.json`](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/repo-exceptions.json)
-is the only place a soft advisory can be waived — and even then under
+is the only place a soft advisory can be waived. and even then under
 conditions: the entry names the exact checks being waived, a reason,
 and a future review date. Exceptions expire. An expired exception is a
 configuration error, not a nag. The pipeline refuses to treat a stale
@@ -208,7 +208,7 @@ summary:
 
 - whether pinned GitHub Actions still match their latest tags
   ([report-action-freshness.py](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/scripts/report-action-freshness.py));
-- how the advisory baseline has drifted — what is new, known,
+- how the advisory baseline has drifted. what is new, known,
   resolved, or accepted ([validate-repos.py](https://github.com/CodeSigils/awesome-agent-trust/blob/main/.github/scripts/validate-repos.py));
 - the health of every non-GitHub link in the README;
 - a triage report of exceptions and their review dates, flagging any
@@ -219,14 +219,14 @@ blocks anything. It always exits successfully and writes its findings
 where a human reads them. Gating freshness would punish the list for
 the upstream world's carelessness. Reporting it lets the maintainer
 decide what is urgent. It also deliberately does not replace
-Dependabot — tooling freshness and repository freshness are different
+Dependabot. tooling freshness and repository freshness are different
 problems, and the report keeps them apart.
 
 On top of the weekly pulse sits a cadence: monthly triage of new and
 overdue advisories, and a quarterly audit of the low-star baseline
 that classifies every entry as resolved, still below, or unavailable
 before anything is cleared. A star count is not evidence of a
-resolution by itself — a temporary bump above the threshold changes
+resolution by itself. a temporary bump above the threshold changes
 nothing until the entry has genuinely earned its way out.
 
 ## A small CI on purpose
@@ -257,8 +257,7 @@ Underneath all of it sits the part most awesome lists never write: a
 maintenance guide and a roadmap that are read like contracts
 ([MAINTENANCE.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/docs/MAINTENANCE.md),
 [ROADMAP.md](https://github.com/CodeSigils/awesome-agent-trust/blob/main/docs/ROADMAP.md)).
-The guide must be revisited before *and* after every relevant action —
-a merge, an exception, a criteria change. If the guide and the roadmap
+The guide must be revisited before *and* after every relevant action. a merge, an exception, a criteria change. If the guide and the roadmap
 disagree, that contradiction is drift to resolve before anything else
 happens, not a detail to fix later.
 
@@ -267,8 +266,8 @@ document is authoritative before they touch anything ([#35](https://github.com/C
 Agents read the maintenance guide first, so a future automated
 contributor starts from the same contract as the human one. Auto-merge
 is on for our own PRs, but external pull requests are never merged
-automatically ([#38](https://github.com/CodeSigils/awesome-agent-trust/commit/d1a6186f875ea09cb47b150bdce739f7ecba99ee)) —
-the machine handles the checks, and the human keeps the judgement call.
+automatically ([#38](https://github.com/CodeSigils/awesome-agent-trust/commit/d1a6186f875ea09cb47b150bdce739f7ecba99ee)).
+The machine handles the checks, and the human keeps the judgement call.
 
 ## What I look for now
 
