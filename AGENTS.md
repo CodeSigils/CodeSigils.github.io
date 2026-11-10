@@ -30,7 +30,26 @@ uv run zensical serve
 
 ## Editorial Workflow
 
-When creating, drafting, or substantially editing articles in `docs/`, load the `zensical` skill for editorial guidance. Apply its article-review checklist during drafting (tone, structure, AI slop) rather than as a post-hoc cleanup pass. Follow the target repo's editorial rules and avoid em dashes, dramatic antithesis, and other AI tells.
+Load the `zensical` skill for editorial guidance when creating, drafting, or
+editing an article in `docs/`. Apply its article-review checklist during
+drafting, not as a post-hoc cleanup pass. Editing means any change a reader
+would notice in the prose: a rewritten section, a new opening, a reordered
+argument, a claim replaced by a sharper one. A correction limited to a typo, a
+broken link, a version number, or formatting does not need the review.
+
+Two authorities apply, and this file is the stricter one:
+
+- `zensical` supplies the review mechanics: how to characterize the voice
+  already present, which tell families to walk, and how to report a finding.
+- This file and the [Voice model](#voice-model) supply the rules. Where the
+  portable checklist allows a load-bearing contrast, an em dash for a genuine
+  interruption, or a semicolon between balanced clauses, this blog still
+  disallows them. A rule here wins over a general allowance there.
+
+Review once before drafting and once after fixing, and stop there. For an edit
+that reaches a reader, say in the change what you checked, including the tell
+families that turned up nothing. `zensical build` proves links and rendering
+only, so a clean build is not evidence that anyone read the prose.
 
 ## Content Structure
 
@@ -113,8 +132,10 @@ Research and citations support the article’s judgment; they do not replace it.
 Community advice must be attributed and separated from official facts or locally
 reproduced practice.
 
-For the editorial rationale and flexible article forms, read
-`/home/sand/projects/digital-basement/docs/blog-editorial-charter.md`.
+For the editorial rationale and the seven article forms, the maintainer keeps a
+charter at `docs/blog-editorial-charter.md` in a separate local project. It is
+not part of this repository, so treat the guidance in this file as complete on
+its own and the charter as background reading when it happens to be available.
 
 After factual verification, perform a developmental editing pass for human
 flow, transitions, examples, pacing, and a clear beginning, middle, and ending.
@@ -188,7 +209,22 @@ another writer’s subject matter. What to aim for:
     End the sentence and start another one, or name the relation with a word.
     Code, configuration, and quoted source keep their own punctuation.
 
-Two rules keep the model honest:
+Four corrections show the shape better than another description:
+
+- `The files in those commits were fine; their public provenance was the
+  problem.` becomes `The files in those commits were fine. Their public
+  provenance was the problem.`
+- `They are reports from affected users, not a substitute for a current product
+  contract.` becomes `I read those as reports of what happened to the writer. I
+  could not find a current product contract that settles the default.`
+- The heading `Additional considerations` becomes `What the recovery cannot
+  promise`.
+- The close `That does not make an agent infallible. It makes the project easier
+  for both the agent and its maintainer to understand next time.` becomes `The
+  routing table is the part I reread after every checklist change.`, followed by
+  a link a reader can act on.
+
+Rules that keep the model honest:
 
 - **Never manufacture an observation, measurement, or incident.** If the author
   did not run, build, break, or measure the thing, the article does not get a
@@ -197,6 +233,10 @@ Two rules keep the model honest:
 - **Do not pad a reference page into an essay.** The model applies to field
   notes, experiment reports, and essays. A page whose real job is retrieval
   stays short and direct.
+- **Apply the model to the text being changed.** The older corpus still carries
+  semicolons, em dashes, and negated contrasts. Clean an article when you are
+  already editing it, or as a pass of its own, and keep that sweep out of an
+  unrelated change.
 
 ### Technical accuracy protocol
 
