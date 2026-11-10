@@ -140,6 +140,56 @@ claims only to satisfy search algorithms. Preserve nuance and the author’s
 recommendation even when search-oriented phrasing suggests a simpler “best”
 answer.
 
+### Voice model
+
+The reference register for an authored technical article is Jan Brennenstuhl’s
+writing (<https://www.janbrennenstuhl.eu/writing/>). Treat it as a model for how
+a field note sounds, not as a template to copy and not as permission to borrow
+another writer’s subject matter. What to aim for:
+
+1. **Open with motive, method, and finding in one short dek.** Three clauses:
+   what I wanted to know, what I did about it, what I found. Do not warm up with
+   a repository inventory or a mission statement.
+2. **Use the first person singular in the active voice** for anything the author
+   did. “I made the check reject the trailer” reads as a decision; “the trailer
+   was rejected” reads as a system description.
+3. **Own the author’s own mistakes, not only other people’s reports.** A
+   regression the author introduced and then fixed is stronger evidence of a real
+   practice than a link to someone else’s bug.
+4. **Interpret every number in the same breath as the number.** A count or a
+   table cell without a sentence saying what it means is decoration. Say what it
+   shows, what it does not show, and what the reader should take from it.
+5. **Make hedges orient the reader.** State the limit of the evidence once,
+   beside the claim it bounds, and say how much weight to give it. A disclaimer
+   after every sentence reads as fear.
+6. **State judgment as a decision, a reason, and a consequence.** If the article
+   does not rank something, say so, and say what that costs the reader.
+7. **Let evidence trail the claim as an aside.** The sentence carries the
+   assertion, and the issue number or link is a parenthetical on it. A list of
+   sources is not a substitute for the argument that cites them.
+8. **Use plain noun-phrase headings, and let some of them carry the argument.**
+   “How far the check may go” is a heading; “Additional considerations” is not.
+9. **Keep one register throughout:** plain, dry, specific, and occasionally
+   self-deprecating. Do not mix audit formality with slang.
+10. **Close on what is unfinished and how a reader can help**, with a concrete
+    route such as an issue, a page, or a command. A moral is the weaker close.
+11. **State the point once, in the affirmative.** The negated contrast is the
+    most recognisable AI cadence in prose: “X, not Y”, “this rather than that”,
+    “do this instead of that”. Write the claim you mean and let the opposite go
+    unstated. Name a possible misreading in a full sentence of its own only when
+    a reader could plausibly hold it, and keep “instead” for a literal
+    substitution of one action for another.
+
+Two rules keep the model honest:
+
+- **Never manufacture an observation, measurement, or incident.** If the author
+  did not run, build, break, or measure the thing, the article does not get a
+  first-person scene and the historical record is not adjusted to supply one.
+  Write the shorter page the evidence supports, or choose a different question.
+- **Do not pad a reference page into an essay.** The model applies to field
+  notes, experiment reports, and essays. A page whose real job is retrieval
+  stays short and direct.
+
 ### Technical accuracy protocol
 
 For technology articles, investigate factual claims before presenting them as
