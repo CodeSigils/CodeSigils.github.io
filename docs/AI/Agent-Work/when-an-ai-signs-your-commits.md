@@ -43,7 +43,7 @@ line I never saw became a visible credit beside my name
 ([GitHub's co-author documentation](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
 describes the format and how it is rendered).
 
-The files in those commits were fine; their public provenance was the problem. A
+The files in those commits were fine. Their public provenance was the problem. A
 trailer is a claim about who wrote the work, and this one had been published
 under my name without my agreeing to it.
 
@@ -80,7 +80,7 @@ Three recurring points mattered to me:
 
 All three have the same shape. The tooling writes the trailer by default, and
 the person who has to undo it finds out afterwards. Removing the lines is
-mechanical; deciding who may write them is the part I keep arguing about.
+mechanical. Deciding who may write them is the part I keep arguing about.
 
 My own observation of Codex points the other way. In this work I have not seen it
 append a co-author trailer, and a January 2026 community analysis reported the

@@ -179,6 +179,14 @@ another writer’s subject matter. What to aim for:
     unstated. Name a possible misreading in a full sentence of its own only when
     a reader could plausibly hold it, and keep “instead” for a literal
     substitution of one action for another.
+12. **Write sentences you would say out loud.** The test is a colleague at a
+    coffee break: would you tell them this, in these words? A sentence that only
+    works on the page is usually doing something a speaker would not do. The
+    clearest case is the semicolon. Speech joins two independent clauses with a
+    full stop, with “but” or “while”, or with a comma and a conjunction. A
+    semicolon in prose drops written register into the middle of an explanation.
+    End the sentence and start another one, or name the relation with a word.
+    Code, configuration, and quoted source keep their own punctuation.
 
 Two rules keep the model honest:
 
