@@ -17,31 +17,31 @@ keywords:
        height="390" />
 </div>
 
-The contributors widget on a GitHub repository is often read as a summary of
-who contributed to a project. When this blog's repository began listing an AI
-agent beside my account, I inspected the affected commit messages. Two of them
-contained attribution I had not approved: a `Co-authored-by` trailer naming an
-AI agent and a branding line at the bottom of a commit message reading
-`Ultraworked with [Sisyphus](https://github.com/...)`.
+An AI account appeared beside mine in this repository's GitHub contributors
+widget. I had not added it as a co-author. The explanation was in two old
+commit messages. One carried a `Co-authored-by` trailer for an AI agent. The
+other ended with `Ultraworked with [Sisyphus](https://github.com/...)`.
 
-The incident required two different kinds of work. I needed to remove the
-unwanted lines from the history without changing the files in those commits,
-and then establish a repeatable way to detect and prevent the same problem.
+The files in those commits were not the problem. Their public provenance was.
+I needed to remove the unwanted lines without changing the trees, then make
+the same surprise less likely for the next commit.
+It led to [ai-repo-sanitize](https://github.com/CodeSigils/ai-repo-sanitize),
+a small tool that checks, previews, and safely rewrites known AI-attribution
+lines. This field note records the incident, the limits of GitHub's contributor
+views, and the safeguards I now use.
 
 ## What the history contained
 
-The trailers were small. One documentation commit ended with
+The trailers were easy to overlook. One documentation commit ended with
 `Co-authored-by: Sisyphus <clio-agent@sisyphuslabs.ai>`. Another ended with the
 branding line above. Both were added by agent tooling during an ordinary
-work session, the way these frameworks credit the tool that produced the
-change. GitHub recognises co-author trailers in commit messages, so an old
-trailer can still produce a visible credit ([GitHub's co-author
-documentation](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
-explains the format and how GitHub turns trailers into credits).
+work session. GitHub recognises co-author trailers in commit messages, so a
+trailer can become a visible credit ([GitHub's co-author documentation](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors)
+describes the format and how it is rendered).
 
-What made this easy to miss is that `git log`'s default view shows subjects,
-not bodies. The trailers sat several lines down in messages I had no reason to
-reopen. The same experience shows up well beyond this repository: a
+`git log`'s default view shows subjects, not bodies. These lines sat several
+lines down in messages I had no reason to reopen. The problem is not unique to
+this repository: a
 [claude-code
 discussion](https://github.com/anthropics/claude-code/issues/83813) describes
 an attribution trailer sitting 123 commits deep before anyone noticed, with
@@ -50,12 +50,11 @@ reachable long after the author had decided to remove it.
 
 ## Reports across tools
 
-My trailer came from an agent framework. Users have reported similar problems
-across multiple tools. Claude Code has the largest public issue trail I found.
-Those reports describe its commit workflow adding
+My incident came from one agent framework. Users report similar problems
+across several tools. Claude Code has the largest public issue trail I found.
+Those reports describe commit workflows adding
 `Co-Authored-By: Claude <noreply@anthropic.com>` and ask for an opt-in default.
-They are reports from affected users, not a substitute for a current product
-contract.
+They are reports from affected users, not a substitute for a current product contract.
 
 Three recurring points matter here:
 
@@ -73,9 +72,9 @@ Three recurring points matter here:
   shows the cost of discovering the trailer after publication. The reported
   recovery involved rewriting history and force-pushing it.
 
-The concern is ethical as well as technical. A trailer presents the tool as a
-co-author of the user's work in the user's name. Adding it without a clear
-approval step turns a provenance decision into an unexpected cleanup task.
+The technical problem is small. The provenance decision is not. A trailer
+presents a tool as a co-author of work published in the user's name. That
+choice belongs to the author, before the commit is created.
 
 My observations of Codex point in a different direction: I have not seen it
 append a co-author trailer in this work, and a January 2026 community analysis
@@ -93,41 +92,38 @@ history for trailers from known agents, rewrites them out, and installs a
 pre-push guard. Its existence is useful evidence that some teams want a way to
 remove or prevent this metadata.
 
-For this incident, I later built
+I later built
 [ai-repo-sanitize](https://github.com/CodeSigils/ai-repo-sanitize). It turns
-the recovery into a checked process rather than a collection of shell commands:
-`check` scans the reachable local and fetched history, `preview` identifies the
-messages that match, and `rewrite` removes only matching attribution lines. The
-rewrite verifies that the resulting tree is unchanged, creates a mirror backup,
-and does not push unless the maintainer explicitly supplies `--push`. The same
-scanner supplies a read-only CI check.
+the recovery into a checked process: `check` scans reachable local and fetched
+history, `preview` identifies matching messages, and `rewrite` removes only
+matching attribution lines. The rewrite verifies that the resulting tree is
+unchanged, creates a mirror backup, and never pushes unless the maintainer adds
+`--push`. The scanner also provides a read-only CI check.
 
-The tool is not a substitute for repository policy or owner review. It is a
-way to make the technical parts of that policy consistent: human co-author
-trailers remain intact, matched AI attribution is removed line by line, and a
-history rewrite cannot quietly become a remote change.
+That does not replace policy or owner review. It makes the technical boundary
+enforceable: human co-author trailers remain intact, matching AI attribution is
+removed line by line, and a history rewrite cannot quietly become a remote
+change.
 
-## When contribution surfaces disagree
+## GitHub's contributor views can disagree
 
-The cleanup rewrote the three affected commit messages while leaving the file
-contents byte-identical. I compared the rewritten tree with a backup ref before
-removing that backup. After the rewrite, the available GitHub views did not
-agree:
+The cleanup rewrote three commit messages while leaving their file contents
+byte-identical. I compared the rewritten tree with a backup ref before
+removing it. GitHub then gave me three different answers:
 
 - The REST `/contributors` result listed my account as the only contributor.
 - The homepage sidebar still credited the AI agent.
 - The Insights contributors graph no longer showed the agent after the
   force-push.
 
-The most useful comparison I found comes from
+The closest comparison I found is
 [declaudify](https://github.com/ParkerrDev/declaudify), a tool built for stale
-attribution. Its author observed that the Insights graph, the REST endpoint,
-and the homepage sidebar could update on different schedules. A force-push
-cleared the Insights graph in those tests but did not immediately change the
-sidebar. That observation explains the disagreement I saw, but it is not a
-documented model of GitHub's internal caches. The REST `/contributors` endpoint
-does not audit trailers, so a clean API response cannot settle what the sidebar
-will show.
+attribution. Its author observed that the Insights graph, REST endpoint, and
+homepage sidebar can update on different schedules. A force-push cleared the
+Insights graph in those tests but did not immediately change the sidebar. That
+matches my result, but it is not a documented model of GitHub's internal
+caches. The REST `/contributors` endpoint does not audit trailers, so a clean
+API response cannot settle what the sidebar will show.
 
 Community reports match the shape of that problem:
 
@@ -167,18 +163,17 @@ curl -s -H "Accept: application/json" \
   https://github.com/CodeSigils/CodeSigils.github.io/_sidebar
 ```
 
-This is a `GET`. It is not destructive and does not clear or repair a cache.
-In this incident it exposed `contributorCount: 1` before the visible widget
-caught up. Use it as a complementary diagnostic beside the REST endpoint and
-the rendered sidebar, not as a stable interface or a fix to automate.
+This `GET` does not clear or repair a cache. It exposed `contributorCount: 1`
+before the visible widget caught up. Treat it as a complementary diagnostic
+beside the REST endpoint and rendered sidebar, not as a stable interface or an
+automated fix.
 
 ## A safer recovery process
 
 The original repair used a one-off `filter-branch` pass. Git now warns about
 that command's safety and performance limits and recommends
-[filter-repo](https://github.com/newren/filter-repo) for new work. The
-repeatable remedy is therefore `ai-repo-sanitize`, which uses `filter-repo` and
-keeps the decision points visible.
+[filter-repo](https://github.com/newren/filter-repo) for new work. I would use
+`ai-repo-sanitize`, which wraps `filter-repo`, for the same situation now.
 
 1. Run `check` and `preview` first. They are read-only and establish which
    reachable commits match the attribution pattern.
@@ -204,15 +199,14 @@ discussion above, old commits stayed alive through open pull requests and
 required GitHub Support to remove them. This repository had no pull requests
 holding the old objects, so that particular concern did not apply here.
 
-## Why I consider the default unethical
+## Why consent belongs in the workflow
 
-I consider non-consensual AI attribution in commit messages an unethical
-practice, and the cleanup is what convinced me.
+I consider non-consensual AI attribution in commit messages unethical. The
+cleanup made the reason concrete.
 
-A commit trailer makes a public claim about authorship. When tooling writes that
-assertion in my commits by default, it makes a provenance claim I never
-approved and presents an AI agent as a co-author of my writing in a public
-record. The author must later find and remove that claim.
+A commit trailer makes a public claim about authorship. When tooling writes
+that claim into my commits by default, it assigns a co-author to work published
+in my name without my approval. The author then has to discover and remove it.
 
 I found no official guidance addressing unwanted attribution from agent
 tooling. GitHub's
@@ -231,10 +225,10 @@ the widget and API disagree, rewrite history, and trigger the cache refresh.
 The tooling creates a false authorship claim, while the platform offers no
 clear remedy for removing it.
 
-## What keeps it from happening again
+## The safeguards I now use
 
-Settings and written instructions express the policy, but they do not enforce
-it. A practical safeguard has three layers:
+Settings and written instructions state the policy. They do not enforce it. I
+use three layers instead:
 
 1. Write the repository policy in the instructions that agents and maintainers
    actually read. In this repository, that means no agent attribution trailers,
@@ -260,13 +254,13 @@ maintainer may reasonably allow it while still rejecting AI attribution. The
 important part is deciding which automated identities may enter the history,
 then making the hook and CI rule match that decision.
 
-## Sign the commits you mean to stand behind
+## Signing is useful, but it answers a different question
 
-Commit signing solves a different problem, but it is a useful companion to
-the checks above. A signature lets GitHub verify that the person holding a
-configured GPG, SSH, or S/MIME key created the commit. It does not make an AI
-trailer true or settle who wrote the change. It proves control of a
-key at the time the commit was made.
+Commit signing is a useful companion to these checks, but it solves a different
+problem. A signature lets GitHub verify that the person holding a configured
+GPG, SSH, or S/MIME key created the commit. It does not make an AI trailer true
+or settle who wrote the change. It proves control of a key at the time of the
+commit.
 
 The placeholder in `user.signingkey` is not one universal value: Git reads it
 through the selected signing format. After adding the public SSH key to GitHub
@@ -290,12 +284,11 @@ rather than copying a key recipe from a random terminal snippet.
 
 ## A practical takeaway
 
-Contributor surfaces answer different questions and can update at different
-times. Inspect the commit messages first, then use the REST result, Insights,
-and the rendered sidebar as separate diagnostics. For a repair, prefer a tool
-that previews its scope, verifies a message-only rewrite, keeps a backup, and
-requires an explicit push decision. That is more useful than treating a
-contributor widget as the source of truth for authorship.
+Start with the commit messages. GitHub's REST result, Insights graph, and
+sidebar are separate diagnostics that can update at different times. If you
+need a repair, use a tool that previews its scope, verifies a message-only
+rewrite, keeps a backup, and requires an explicit push decision. A contributor
+widget is not an authorship audit.
 
 ## Sources and discussions
 
