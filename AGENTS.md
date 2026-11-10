@@ -30,7 +30,26 @@ uv run zensical serve
 
 ## Editorial Workflow
 
-When creating, drafting, or substantially editing articles in `docs/`, load the `zensical` skill for editorial guidance. Apply its article-review checklist during drafting (tone, structure, AI slop) rather than as a post-hoc cleanup pass. Follow the target repo's editorial rules and avoid em dashes, dramatic antithesis, and other AI tells.
+Load the `zensical` skill for editorial guidance when creating, drafting, or
+editing an article in `docs/`. Apply its article-review checklist during
+drafting, not as a post-hoc cleanup pass. Editing means any change a reader
+would notice in the prose: a rewritten section, a new opening, a reordered
+argument, a claim replaced by a sharper one. A correction limited to a typo, a
+broken link, a version number, or formatting does not need the review.
+
+Two authorities apply, and this file is the stricter one:
+
+- `zensical` supplies the review mechanics: how to characterize the voice
+  already present, which tell families to walk, and how to report a finding.
+- This file and the [Voice model](#voice-model) supply the rules. Where the
+  portable checklist allows a load-bearing contrast, an em dash for a genuine
+  interruption, or a semicolon between balanced clauses, this blog still
+  disallows them. A rule here wins over a general allowance there.
+
+Review once before drafting and once after fixing, and stop there. For an edit
+that reaches a reader, say in the change what you checked, including the tell
+families that turned up nothing. `zensical build` proves links and rendering
+only, so a clean build is not evidence that anyone read the prose.
 
 ## Content Structure
 
@@ -113,8 +132,10 @@ Research and citations support the article’s judgment; they do not replace it.
 Community advice must be attributed and separated from official facts or locally
 reproduced practice.
 
-For the editorial rationale and flexible article forms, read
-`/home/sand/projects/digital-basement/docs/blog-editorial-charter.md`.
+For the editorial rationale and the seven article forms, the maintainer keeps a
+charter at `docs/blog-editorial-charter.md` in a separate local project. It is
+not part of this repository, so treat the guidance in this file as complete on
+its own and the charter as background reading when it happens to be available.
 
 After factual verification, perform a developmental editing pass for human
 flow, transitions, examples, pacing, and a clear beginning, middle, and ending.
@@ -139,6 +160,83 @@ find and understand a page. Never add keywords, headings, FAQs, statistics, or
 claims only to satisfy search algorithms. Preserve nuance and the author’s
 recommendation even when search-oriented phrasing suggests a simpler “best”
 answer.
+
+### Voice model
+
+The reference register for an authored technical article is Jan Brennenstuhl’s
+writing (<https://www.janbrennenstuhl.eu/writing/>). Treat it as a model for how
+a field note sounds, not as a template to copy and not as permission to borrow
+another writer’s subject matter. What to aim for:
+
+1. **Open with motive, method, and finding in one short dek.** Three clauses:
+   what I wanted to know, what I did about it, what I found. Do not warm up with
+   a repository inventory or a mission statement.
+2. **Use the first person singular in the active voice** for anything the author
+   did. “I made the check reject the trailer” reads as a decision; “the trailer
+   was rejected” reads as a system description.
+3. **Own the author’s own mistakes, not only other people’s reports.** A
+   regression the author introduced and then fixed is stronger evidence of a real
+   practice than a link to someone else’s bug.
+4. **Interpret every number in the same breath as the number.** A count or a
+   table cell without a sentence saying what it means is decoration. Say what it
+   shows, what it does not show, and what the reader should take from it.
+5. **Make hedges orient the reader.** State the limit of the evidence once,
+   beside the claim it bounds, and say how much weight to give it. A disclaimer
+   after every sentence reads as fear.
+6. **State judgment as a decision, a reason, and a consequence.** If the article
+   does not rank something, say so, and say what that costs the reader.
+7. **Let evidence trail the claim as an aside.** The sentence carries the
+   assertion, and the issue number or link is a parenthetical on it. A list of
+   sources is not a substitute for the argument that cites them.
+8. **Use plain noun-phrase headings, and let some of them carry the argument.**
+   “How far the check may go” is a heading; “Additional considerations” is not.
+9. **Keep one register throughout:** plain, dry, specific, and occasionally
+   self-deprecating. Do not mix audit formality with slang.
+10. **Close on what is unfinished and how a reader can help**, with a concrete
+    route such as an issue, a page, or a command. A moral is the weaker close.
+11. **State the point once, in the affirmative.** The negated contrast is the
+    most recognisable AI cadence in prose: “X, not Y”, “this rather than that”,
+    “do this instead of that”. Write the claim you mean and let the opposite go
+    unstated. Name a possible misreading in a full sentence of its own only when
+    a reader could plausibly hold it, and keep “instead” for a literal
+    substitution of one action for another.
+12. **Write sentences you would say out loud.** The test is a colleague at a
+    coffee break: would you tell them this, in these words? A sentence that only
+    works on the page is usually doing something a speaker would not do. The
+    clearest case is the semicolon. Speech joins two independent clauses with a
+    full stop, with “but” or “while”, or with a comma and a conjunction. A
+    semicolon in prose drops written register into the middle of an explanation.
+    End the sentence and start another one, or name the relation with a word.
+    Code, configuration, and quoted source keep their own punctuation.
+
+Four corrections show the shape better than another description:
+
+- `The files in those commits were fine; their public provenance was the
+  problem.` becomes `The files in those commits were fine. Their public
+  provenance was the problem.`
+- `They are reports from affected users, not a substitute for a current product
+  contract.` becomes `I read those as reports of what happened to the writer. I
+  could not find a current product contract that settles the default.`
+- The heading `Additional considerations` becomes `What the recovery cannot
+  promise`.
+- The close `That does not make an agent infallible. It makes the project easier
+  for both the agent and its maintainer to understand next time.` becomes `The
+  routing table is the part I reread after every checklist change.`, followed by
+  a link a reader can act on.
+
+Rules that keep the model honest:
+
+- **Never manufacture an observation, measurement, or incident.** If the author
+  did not run, build, break, or measure the thing, the article does not get a
+  first-person scene and the historical record is not adjusted to supply one.
+  Write the shorter page the evidence supports, or choose a different question.
+- **Do not pad a reference page into an essay.** The model applies to field
+  notes, experiment reports, and essays. A page whose real job is retrieval
+  stays short and direct.
+- **Apply the model to the text being changed.** The older corpus still carries
+  semicolons, em dashes, and negated contrasts. Clean an article when you are
+  already editing it, or as a pass of its own, and keep that sweep out of an
+  unrelated change.
 
 ### Technical accuracy protocol
 
