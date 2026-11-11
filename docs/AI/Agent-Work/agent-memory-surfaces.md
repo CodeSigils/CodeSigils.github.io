@@ -43,8 +43,9 @@ shared understanding.
 
 Tool outputs are memory at its freshest: exact, byte-level, and
 valid only at the moment of the call. They snapshot an external
-system. They are not the system. The bill arrives a turn later, when
-the agent reasons from a snapshot that no longer matches the system.
+system, and the system moves on after the call returns. The bill
+arrives a turn later, when the agent reasons from a snapshot that
+no longer matches the system.
 And each new session starts from a clean room. The whole room is
 re-earned, or carried over only through a summary someone bothered
 to write. Every other surface in this article exists to fill that gap.
