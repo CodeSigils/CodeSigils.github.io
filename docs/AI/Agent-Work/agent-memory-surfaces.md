@@ -51,10 +51,11 @@ to write. Every other surface in this article exists to fill that gap.
 
 ## The filing cabinet
 
-The room resets, so the work gets written down, and the repository
-is the first place it lands. Repository files are the memory the
-project checks in: structure, behavior, documented conventions,
-decision records. They are
+Each new session starts with no memory of the last one, so anything
+worth keeping has to be saved into a file, and the project's own
+files are the first place that happens. Repository files are the
+memory the project checks in: structure, behavior, documented
+conventions, decision records. They are
 immutable per commit, and they forget by omission: the reasoning
 behind a decision, the alternatives that were rejected, anything
 nobody wrote down. They are also read only when the agent decides to
