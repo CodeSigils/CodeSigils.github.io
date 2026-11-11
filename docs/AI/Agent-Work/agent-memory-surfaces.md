@@ -10,12 +10,15 @@ definition, in a user profile field, in a session summary. Every one
 of those places holds onto something and quietly drops something
 else.
 
-I wanted to know where an agent's memory actually lives, so I mapped
-the surfaces from my own work with Hermes, Claude Code, Codex,
-Cursor, and Copilot, and from the documentation those tools publish
-today. I checked the platform details against current docs instead
-of re-testing each behavior myself. Every platform claim below
-carries that limit.
+The failures that pushed me to write this were my own. A repository
+tree I had already built a guard for drifted again a month later. My
+instruction files kept outliving their reasons, and that failure
+earned its own article. I mapped the surfaces where an agent's
+memory actually lives, from my own work across Hermes, Claude Code,
+Codex, Cursor, and Copilot, and from the documentation those tools
+publish today. I checked the platform details against current docs
+instead of re-testing each behavior myself, and every platform claim
+below carries that limit.
 
 ## The room that resets
 
@@ -28,6 +31,8 @@ the same thing as full resolution. The classic "lost in the middle"
 finding showed performance dropping as relevant information moves
 toward the center of long contexts
 ([Liu et al., 2023](https://arxiv.org/abs/2307.03172)).
+So the middle of a long prompt is the last place to leave anything
+the answer depends on.
 
 The conversation trace is the visible record of that room: what the
 human and agent said to each other. It preserves the dialogue until
@@ -38,14 +43,18 @@ shared understanding.
 
 Tool outputs are memory at its freshest: exact, byte-level, and
 valid only at the moment of the call. They snapshot an external
-system. They are not the system. And each new session starts from a
-clean room. The whole room is re-earned, or carried over only
-through a summary someone bothered to write.
+system. They are not the system. The bill arrives a turn later, when
+the agent reasons from a snapshot that no longer matches the system.
+And each new session starts from a clean room. The whole room is
+re-earned, or carried over only through a summary someone bothered
+to write. Every other surface in this article exists to fill that gap.
 
 ## The filing cabinet
 
-Repository files are the memory the project checks in: structure,
-behavior, documented conventions, decision records. They are
+The room resets, so the work gets written down, and the repository
+is the first place it lands. Repository files are the memory the
+project checks in: structure, behavior, documented conventions,
+decision records. They are
 immutable per commit, and they forget by omission: the reasoning
 behind a decision, the alternatives that were rejected, anything
 nobody wrote down. They are also read only when the agent decides to
@@ -62,8 +71,9 @@ wired it into CI
 About a month later the tree had drifted again anyway and needed a
 manual correction
 ([docs: keep repository tree current](https://github.com/CodeSigils/python-project-workflow-skill/commit/6c1a5c2b67e934b35cc2633626875248ff346b12)).
-The file remembered its content. Nothing remembered its promise to
-stay current.
+The guard was already in CI, and I was still correcting the same
+drift by hand. The file remembered its content. Nothing remembered
+its promise to stay current.
 
 Instruction files are the exception to that. AGENTS.md, CLAUDE.md,
 `.cursorrules`, and repository Copilot instructions are loaded at
@@ -78,17 +88,22 @@ auto-memory notes
 That make-believe power comes with a trap. Instruction files forget
 the rationale behind their own rules, the exceptions, the "this
 applied during phase one" qualifiers. They drift when conventions
-change and the old rule stays. Two instruction files in one
+change and the old rule stays. The file gives the agent no way to
+tell a live rule from a dead one, because both load with the same
+authority. Two instruction files in one
 project, or a long one with rules appended and never pruned, quietly
 become two different memories competing for the same session.
 
 ## Memory outside the repo
 
-A user profile is durable memory with a human's name on it:
+When the files themselves drift, the next move is to carry the
+memory outside the project. A user profile is durable memory with a
+human's name on it:
 preferences, recurring corrections, identity. Its blind spots are the
 difference between a one-time instruction and a durable preference,
 and profile entries that generalized further than their owner
-intended.
+intended. An entry that generalized too far keeps acting in every
+session that follows it.
 
 External docs and knowledge bases are memory held at a distance.
 They preserve reference facts and platform specifications, and they
@@ -99,14 +114,16 @@ and the reader may never know.
 
 ## The muscle memory
 
-Skills and personalities are memory in the form of procedure: a
+The surfaces above answer forgetting. Skills and personalities
+answer recurrence. They are memory in the form of procedure: a
 reusable definition of how to do a recurring kind of work. They load
 at session start like instruction files do. Unlike them, a skill
 does not learn from repeated use. The same mistake recurs identically
 next month. And loaded skills interact in ways nobody fully
 controls: order matters, conflicting guidance composes silently, and
 a skill written for one domain can be pulled into another where it
-does not fit.
+does not fit. Adding a skill can change how your other skills
+behave, and nothing announces the change.
 
 ## The compression layer
 
@@ -115,7 +132,9 @@ to fit more history into less space, and they forget by design:
 nuance, tone, the chain of reasoning that led to a conclusion.
 Errors compound across chained summaries, and the summarizer's idea
 of what mattered quietly becomes the session's idea of what
-happened. A "lossless" compaction is rarely lossless.
+happened. Each summary in a chain inherits the omissions of the one
+before it and adds its own. A "lossless" compaction is rarely
+lossless.
 
 ## Every surface forgets differently
 
@@ -123,7 +142,11 @@ Put the surfaces side by side and a pattern appears: each one has
 its own failure mode. The context window forgets by position, traces
 by pruning, repo files by omission, summaries by compression, and
 skills by not learning. If you plan for one kind of forgetting, you
-will be surprised by the others.
+will be surprised by the others. Read the sections in order and a
+chain appears: the session resets, so the work gets written into
+files. The files drift, so memory moves outside the repo. That
+drifts too, so procedure becomes skills and history becomes
+summaries, each move landing on a surface with its own forgetting.
 
 Since then, two observations have been the most useful to me.
 
@@ -132,7 +155,8 @@ traces record what was said, but neither reliably keeps the
 reasoning, the rejected alternatives, or the constraints at the
 time. This is the most common source of drift I see: a rule survives
 in an instruction file long after the context that justified it has
-gone. I wrote
+gone. The day you need to change one of those rules, the reasoning
+that would tell you whether it still applies is already gone. I wrote
 about that in
 [When Agent Instructions Start to Drift](agent-instruction-drift.md).
 This is the same story from the other side. That one is about
@@ -144,7 +168,8 @@ a user profile, and a few loaded skills can *feel* well-memoried.
 Each layer adds its own confidence zone: "it's documented," "it was
 in the session," "it's in my preferences." When the layers disagree,
 the agent resolves the conflict silently, by recency, by position,
-or by whichever file loaded last.
+or by whichever file loaded last. The reader sees one confident
+answer with no sign of the disagreement underneath it.
 
 !!! tip "When a rule keeps getting forgotten"
     Ask which surface was supposed to hold it, and how that surface
@@ -154,7 +179,8 @@ or by whichever file loaded last.
 
 ## What I look for now
 
-When something goes missing, I ask three questions:
+When something goes missing, I ask three questions. If you arrived
+mid-debug, these three are the part to keep.
 
 Where was this supposed to live? If the answer is "nowhere
 specific," that is the diagnosis. Memory that has no surface is
