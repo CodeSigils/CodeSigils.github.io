@@ -1,6 +1,6 @@
 ---
 title: Where an Agent's Memory Actually Lives
-description: A field note on the places "memory" shows up when working with AI agents — and how each one forgets differently.
+description: A field note on the places "memory" shows up when working with AI agents, and how each one forgets differently.
 keywords: AI agents, agent memory, context window, CLAUDE.md, AGENTS.md, context engineering
 ---
 
@@ -8,14 +8,14 @@ keywords: AI agents, agent memory, context window, CLAUDE.md, AGENTS.md, context
 in the model's context window, in a project's CLAUDE.md, in a skill
 definition, in a user profile field, in a session summary. Every one
 of those places holds onto something and quietly drops something
-else. The question I kept coming back to was simple: where does an
-agent's memory actually live?
+else.
 
-I started from my own work across a few tools — Hermes, Claude Code,
-Codex, Cursor, Copilot — and from the documentation they publish
-today. This is a map, not a benchmark: I checked the platform
-details against current docs rather than re-testing each behavior
-myself.
+I wanted to know where an agent's memory actually lives, so I mapped
+the surfaces from my own work with Hermes, Claude Code, Codex,
+Cursor, and Copilot, and from the documentation those tools publish
+today. I checked the platform details against current docs instead
+of re-testing each behavior myself. Every platform claim below
+carries that limit.
 
 ## The room that resets
 
@@ -24,12 +24,12 @@ currently in the prompt, from system instructions to the latest tool
 output. It is also the most temporary surface there is. Content
 beyond the window falls away, and in long contexts the material in
 the middle is the least reliably attended to. A large window is not
-the same thing as full resolution — the classic "lost in the middle"
+the same thing as full resolution. The classic "lost in the middle"
 finding showed performance dropping as relevant information moves
 toward the center of long contexts
 ([Liu et al., 2023](https://arxiv.org/abs/2307.03172)).
 
-The conversation trace is the visible record of that room — what the
+The conversation trace is the visible record of that room: what the
 human and agent said to each other. It preserves the dialogue until
 it is pruned, but it keeps the words and loses the understanding
 behind them.
@@ -38,15 +38,15 @@ shared understanding.
 
 Tool outputs are memory at its freshest: exact, byte-level, and
 valid only at the moment of the call. They snapshot an external
-system; they are not the system. And each new session starts from a
-clean room — the whole room is re-earned, or carried over only
+system. They are not the system. And each new session starts from a
+clean room. The whole room is re-earned, or carried over only
 through a summary someone bothered to write.
 
 ## The filing cabinet
 
 Repository files are the memory the project checks in: structure,
 behavior, documented conventions, decision records. They are
-immutable per commit, and they forget by omission — the reasoning
+immutable per commit, and they forget by omission: the reasoning
 behind a decision, the alternatives that were rejected, anything
 nobody wrote down. They are also read only when the agent decides to
 go looking. A comprehensive README does not mean a well-understood
@@ -62,7 +62,7 @@ wired it into CI
 About a month later the tree had drifted again anyway and needed a
 manual correction
 ([docs: keep repository tree current](https://github.com/CodeSigils/python-project-workflow-skill/commit/6c1a5c2b67e934b35cc2633626875248ff346b12)).
-The file remembered its content; nothing remembered its promise to
+The file remembered its content. Nothing remembered its promise to
 stay current.
 
 Instruction files are the exception to that. AGENTS.md, CLAUDE.md,
@@ -82,11 +82,11 @@ change and the old rule stays. Two instruction files in one
 project, or a long one with rules appended and never pruned, quietly
 become two different memories competing for the same session.
 
-## Beyond the repo
+## Memory outside the repo
 
 A user profile is durable memory with a human's name on it:
-preferences, recurring corrections, identity. Its blind spot is the
-difference between a one-time instruction and a durable preference —
+preferences, recurring corrections, identity. Its blind spots are the
+difference between a one-time instruction and a durable preference,
 and profile entries that generalized further than their owner
 intended.
 
@@ -102,7 +102,7 @@ and the reader may never know.
 Skills and personalities are memory in the form of procedure: a
 reusable definition of how to do a recurring kind of work. They load
 at session start like instruction files do. Unlike them, a skill
-does not learn from repeated use — the same mistake recurs identically
+does not learn from repeated use. The same mistake recurs identically
 next month. And loaded skills interact in ways nobody fully
 controls: order matters, conflicting guidance composes silently, and
 a skill written for one domain can be pulled into another where it
@@ -120,42 +120,44 @@ happened. A "lossless" compaction is rarely lossless.
 ## Every surface forgets differently
 
 Put the surfaces side by side and a pattern appears: each one has
-its own failure mode. The context window forgets by position. Traces
-forget by pruning. Repo files forget by omission. Summaries forget
-by compression. Skills forget by not learning. If you plan for one
-kind of forgetting, you will be surprised by the others.
+its own failure mode. The context window forgets by position, traces
+by pruning, repo files by omission, summaries by compression, and
+skills by not learning. If you plan for one kind of forgetting, you
+will be surprised by the others.
 
-Two observations have been the most useful to me since.
+Since then, two observations have been the most useful to me.
 
-Nothing preserves *why*. Repo files record what was decided; traces
-record what was said; neither reliably keeps the reasoning, the
-rejected alternatives, or the constraints at the time. This is the
-most common source of drift I see: a rule survives in an instruction
-file long after the context that justified it has gone. I wrote
+Nothing preserves *why*. Repo files record what was decided and
+traces record what was said, but neither reliably keeps the
+reasoning, the rejected alternatives, or the constraints at the
+time. This is the most common source of drift I see: a rule survives
+in an instruction file long after the context that justified it has
+gone. I wrote
 about that in
-[When Agent Instructions Start to Drift](agent-instruction-drift.md),
-and this is the same story from the other side — memory scattered
-across surfaces, rather than guidance repeated across files.
+[When Agent Instructions Start to Drift](agent-instruction-drift.md).
+This is the same story from the other side. That one is about
+guidance repeated across files, and this one is about memory
+scattered across surfaces.
 
 And false confidence compounds. A project with AGENTS.md, CLAUDE.md,
 a user profile, and a few loaded skills can *feel* well-memoried.
 Each layer adds its own confidence zone: "it's documented," "it was
 in the session," "it's in my preferences." When the layers disagree,
-the agent resolves the conflict silently — by recency, by position,
+the agent resolves the conflict silently, by recency, by position,
 or by whichever file loaded last.
 
 !!! tip "When a rule keeps getting forgotten"
     Ask which surface was supposed to hold it, and how that surface
     forgets. A rule buried in a deep doc is memory only if the agent
-    decides to go looking; a rule in an instruction file is memory
+    decides to go looking. A rule in an instruction file is memory
     whether or not it is still true.
 
 ## What I look for now
 
-Three questions, when something goes missing:
+When something goes missing, I ask three questions:
 
 Where was this supposed to live? If the answer is "nowhere
-specific," that is the diagnosis — memory that has no surface is
+specific," that is the diagnosis. Memory that has no surface is
 memory that was never really kept.
 
 Which forgetting does this surface have? A stale rule in an
@@ -169,23 +171,15 @@ instruction stops being true.
 
 ## Related reading
 
-- [When Agent Instructions Start to Drift](agent-instruction-drift.md)
-  — the companion field note on guidance that repeats and drifts.
-- [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
-  — the evidence that position, not just size, shapes what a context
-  window remembers.
-- [How Claude remembers your project](https://code.claude.com/docs/en/memory)
-  — a current example of instruction files plus auto-memory as the
-  two session-to-session surfaces.
-- [Custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
-  — how Codex discovers and layers project guidance before working.
-- [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
-  — a wider view of context as a finite resource to be curated.
-- [Cool URIs don't change](https://www.w3.org/Provider/Style/URI.html)
-  — why stable identifiers matter for any memory that lives in files
-  and links.
+- [When Agent Instructions Start to Drift](agent-instruction-drift.md) - the companion field note on guidance that repeats and drifts.
+- [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172) - the evidence that both position and size shape what a context window remembers.
+- [How Claude remembers your project](https://code.claude.com/docs/en/memory) - a current example of instruction files plus auto-memory as the two session-to-session surfaces.
+- [Custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md) - how Codex discovers and layers project guidance before working.
+- [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) - a wider view of context as a finite resource to be curated.
+- [Cool URIs don't change](https://www.w3.org/Provider/Style/URI.html) - why stable identifiers matter for any memory that lives in files and links.
 
-The platform pages above change; the links were reachable when this
-article was written in September 2026. None of this makes an agent
-remember everything. It makes the places where it remembers easier
-to see — and the next forgotten thing a little less mysterious.
+The platform pages above change. The links were reachable when this
+article was written in September 2026. An agent that uses all of
+these surfaces still forgets. The map makes the places where it
+remembers easier to see, and the next forgotten thing a little less
+mysterious.
