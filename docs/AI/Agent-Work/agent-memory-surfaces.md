@@ -51,11 +51,10 @@ to write. Every other surface in this article exists to fill that gap.
 
 ## The filing cabinet
 
-Each new session starts with no memory of the last one, so anything
-worth keeping has to be saved into a file, and the project's own
-files are the first place that happens. Repository files are the
-memory the project checks in: structure, behavior, documented
-conventions, decision records. They are
+The room resets, so the work gets written down, and the repository
+is the first place it lands. Repository files are the memory the
+project checks in: structure, behavior, documented conventions,
+decision records. They are
 immutable per commit, and they forget by omission: the reasoning
 behind a decision, the alternatives that were rejected, anything
 nobody wrote down. They are also read only when the agent decides to
@@ -195,6 +194,16 @@ Is the *why* stored next to the rule? When I write a rule, I try to
 leave its justification one line beneath it, or point to where it
 lives. The note is worth more than the instruction the day the
 instruction stops being true.
+
+This is why the article says the room resets, so the work gets
+written down, and the repository is the first place it lands. The
+room is the context window, the working memory of a single session,
+everything the model can see at once. It resets because each new
+session starts empty, carrying nothing from the last one unless a
+summary was written first. The work gets written down because the
+room that holds it empties. The repository is where it lands first
+because it is the memory the project itself checks in, the record
+closest to the work it describes.
 
 ## Related reading
 
