@@ -11,71 +11,38 @@ keywords:
   - skill-repo-standards
 ---
 
-I have been working on a growing collection of repositories under
-[CodeSigils](https://github.com/CodeSigils). Most of them are still works in
-progress and personal exploration: skills, research notes, review tools,
-documentation experiments, and the occasional small spike used to test an idea
-before committing to something larger. They are all trying to answer a similar
-question: how do I work with AI agents in a way that is useful, repeatable, and
-grounded in evidence?
+I kept asking agents to check the working tree before committing, to compare a
+README with the code and CI, and to report before making a change. The wording
+varied. The request did not. I eventually treated that repetition as evidence
+of a missing requirement.
 
-Along the way I noticed something mildly embarrassing. I kept typing the same
-instructions. Again. And again. And that is a no-no for me, in code and in
-life.
+This field note follows what happened when I gave those repeated instructions a
+home in the repository: a directive when an agent needed to see the rule, a
+machine check when a failure was deterministic, and a clearer route to an
+existing rule when I had merely lost it in the documentation.
 
 ## The instructions I kept repeating
 
-Some were small practical reminders. They hide a lot of laugh and tears
-behind them:
+Some were small practical reminders:
 
 - "Is the information in `README.md` still accurate? Review it carefully and
   report any staleness or drift."
-- "Are the docs updated?"
-- "Is `ROADMAP.md` aware of this? Do we have a gap?"
-- "Is `AGENTS.md` aware of this?"
 - "Check git status for pending changes before committing."
 - "Review the code first for bugs, duplication, drift, and conventions. Why
   did you commit before doing that?"
 - "Check the working tree, index, upstream relation, remotes, and latest
   commit. I want the full status, not just 'clean' or 'dirty'."
-- "Tighten the README so it matches what CI actually does."
-- "Audit the README against the repository structure, executable checks,
-  current-state record, and recent history. Report only. Do NOT implement."
 
-Others were more about how decisions get made:
-
-- "The gap is recurring, we should codify this, right now it's only in
-  prose."
-- "Are we following good human-in-the-loop practice here? Research it and
-  report what you find. Official docs from industry leaders take priority."
-- "What do the official Git or GitHub docs say about this?"
-- "Those recommendations should be evidence based, not speculative. Read the
-  research already captured in the docs."
-- "Do we have a directive somewhere? This was supposed to be evidence based
-  first."
-- "Why is this the best next step? Did we skip a previous one because of my
-  new query? What is the best next step now, and why?"
-- "Check the stated backlog against the current implementation and release
-  state before making a recommendation."
-
-And some were just me, my attention span, and my limits:
-
-- "I said report only, do not implement. Haven't we enforced this? Sorry that
-  was in another repo. My bad."
-- "Inspect current skill governance for duplication and tightening. Wait, we
-  have already done this..."
-- "SO many dependabot PRs for review and merging! Review and handle git as
-  needed. I'm tired."
-
-At first these felt like separate annoyances that added to my fatigue. Then
-my pre-AI-generation brain eventually caught up with the pattern.
+Others governed evidence and scope: read the existing research before making a
+recommendation, keep `ROADMAP.md` and `AGENTS.md` aware of a material change,
+and honour “report only.” I had said each of these often enough that the
+repetition stopped looking like an attention problem.
 
 ## A repeated instruction is a signal
 
-When I have to repeat an instruction once, it may be a lapse in attention.
-When I have to repeat it across sessions, repositories, and different kinds
-of work, it usually means something else: the rule needs a home outside the
-conversation.
+One repeated instruction may be a lapse in attention. A pattern across
+sessions, repositories, and kinds of work means the rule needs a home outside
+the conversation.
 
 "Check git status before committing" should not depend on whether I remember
 to say it. "Use evidence rather than speculation" should not depend on the
@@ -85,72 +52,37 @@ documentation has quietly drifted away from the code. These are workflow
 requirements. They belong in a specification, a checklist, a template, a
 validation step, or some other inspectable part of the repository.
 
-There is a working model behind this, and I wish I had adopted it earlier:
-context is working memory, not storage. The agent failures I saw in long
-sessions were almost never failures of knowledge. They were failures of
-accumulation: stale exploration, dead ends, and verbose outputs crowding out
-the thing we had agreed on twenty minutes earlier. An instruction typed into
-that crowded space decays. The same instruction filed in `AGENTS.md`, a hook,
-or a machine check does not. My instinct to externalize was directionally
+There is a working model behind this, and I wish I had adopted it earlier.
+Context behaves like working memory. Durable rules need storage outside the
+conversation. The agent failures I saw in long sessions were usually failures
+of accumulation: stale exploration, dead ends, and verbose outputs crowding
+out the thing we had agreed on twenty minutes earlier. An instruction typed
+into that crowded space decays. The same instruction filed in `AGENTS.md`, a
+hook, or a machine check persists. My instinct to externalize was directionally
 correct long before I had the vocabulary for it.
 
-I try to remind myself not to create bureaucracy in a file swamp full of
-prose for its own sake. The goal is narrower: make good behavior easier to
-repeat than the alternative. That is harder than it sounds, and I am still
-not good at it.
+I want to avoid creating a file swamp full of prose for its own sake. The goal
+is narrower. Good behavior should be easier to repeat than the failure it is
+meant to prevent.
 
 Over time each recurring instruction sorted itself into one of three
 destinations. It can become a machine check that fails loudly when the rule
 is broken. It can become a durable directive written into the repository's
 own agent instructions, so any agent that reads them starts from the right
-place. Or, occasionally, I notice the rule is already covered somewhere I
-forgot, and the repetition was really a signal that I could not find the
-existing one. Dropping it then means making the existing rule easier to
-find, not just typing it one more time and moving on.
+place. Occasionally, the rule is already covered somewhere I forgot. That
+repetition calls for a better route to the existing rule.
 
 ## The fleet is messy on purpose
 
-The CodeSigils repositories cover a range of concerns:
+The CodeSigils repositories are deliberately uneven. Some are skills, some
+are research records, and some are small spikes that test an idea before it
+becomes a maintained project. The difference is useful evidence. It shows
+which practices survive more than one context.
 
-- [`ai-repo-sanitize`](https://github.com/CodeSigils/ai-repo-sanitize)
-- [`awesome-agent-trust`](https://github.com/CodeSigils/awesome-agent-trust)
-- [`py-review-skill`](https://github.com/CodeSigils/py-review-skill)
-- [`python-project-workflow`](https://github.com/CodeSigils/python-project-workflow)
-- [`repo-architecture-skill`](https://github.com/CodeSigils/repo-architecture-skill)
-- [`repo-health-scan`](https://github.com/CodeSigils/repo-health-scan)
-- [`skill-discovery`](https://github.com/CodeSigils/skill-discovery)
-- [`tina-cms-skill`](https://github.com/CodeSigils/tina-cms-skill)
-- [`zensical-skill`](https://github.com/CodeSigils/zensical-skill)
-- [`zola-skill`](https://github.com/CodeSigils/zola-skill)
-- [`zero-md-formatter`](https://github.com/CodeSigils/zero-md-formatter)
-- [`neovim-latest-ubuntu`](https://github.com/CodeSigils/neovim-latest-ubuntu)
-
-Some are skills. Some are research repositories. Some contain companion
-spikes, such as [`repo-architecture-inspect-spike`](https://github.com/CodeSigils/repo-architecture-inspect-spike)
-and [`markdown-oxc-spike`](https://github.com/CodeSigils/markdown-oxc-spike).
-Others are mainly places to collect notes and references for later
-evaluation. The neovim one was exploring DevOps and the Linux packaging
-world, mostly for the fun of collaborating with an agent through some
-particular problems. All of them required some kind of research capturing.
-
-This unevenness is partly on purpose. I was exploring different strategies to
-tackle similar problems, and the differences between repositories are data.
-Comparing how two approaches aged is how I learn which patterns are worth
-converging on. The mess is exploratory work, not neglect.
-
-The cost is concrete and I can measure it. Documentation maturity runs from
-repositories with a full evidence registry, where every source URL carries a
-last-verified date and a phrase that must appear in the fetched body, down to
-one repository whose entire research layer is a single `docs/research.md`.
-Each repository's conventions drifted independently. The next phase is
-convergence: identify which of the experimented strategies are the
-repeatable ones, adopt them fleet-wide through the standard, and retire the
-rest deliberately rather than by accident. Until then, the problem this
-article is about stays live. Some documentation is current, some is
-incomplete, and some captures research that was valuable when written but
-may no longer reflect the state of a tool, a standard, or a repository. I do
-not need uniformity for its own sake. I need to know which information I can
-rely on when making a decision.
+It also makes drift visible. One repository may carry a dated evidence
+registry while another has only a research note. The work is to identify the
+repeatable parts, adopt them deliberately, and retire the rest with an
+explicit decision. I need to know which information supports a decision now.
 
 ## Research you can still trust
 
@@ -165,17 +97,14 @@ The conclusion I drew from that is probably the most important line in this
 piece: the failure mode is no longer missing evidence. It is unindexed
 evidence that cannot be trusted without re-verification. I am not
 overwhelmed by a lack of research. I am overwhelmed by my own corpus of it.
-The fix is triage rather than more capture: dated rows with statuses and
-recheck conditions, marking each item current, outdated, or wrong, instead
-of re-verifying everything in place.
+The fix is triage. Dated rows with statuses and recheck conditions mark each
+item current, outdated, or wrong without re-verifying everything in place.
 
 Two smaller admissions belong here too. I implemented before I researched
-established methodologies. The spec I built became a consumer of industry
-standards almost as an act of recovery: not "create a methodology", but
-"follow existing ones, and record which one and why". And the vocabulary
-already existed. W3C and ISO practice calls this work a conformance profile
-or a conformance assessment scheme; starting from that name would have saved
-me from inventing near-synonyms. Similarly, I found
+established methodologies. The spec I built became a consumer of existing
+standards and recorded which source informed each decision. The vocabulary
+already existed. Conformance profiles and assessment schemes gave me better
+names for work I had been describing with near-synonyms. Similarly, I found
 [agentskills.io](https://agentskills.io/home) months after I needed it, deep
 into bad prompt-engineering habits that its guidance would have prevented.
 
@@ -201,15 +130,17 @@ shape exists so that the question "why do we believe this?" has an address.
 
 ## The week the fleet showed what was actually wrong
 
-Before the branch protection story, there is a bigger one, because it is
-where the abstract concerns in this article acquired case numbers.
+The following case study is from October 2026. The dated [fleet CI rot incident
+report](https://github.com/CodeSigils/skill-repo-standards/blob/main/docs/research/incident-reports/2026-10-17-fleet-ci-rot-and-agent-drift.md)
+holds its detailed evidence and remediation. The point here is the repeated
+instruction it exposed.
 
 A fleet-wide cleanup, meant to reduce advisory noise in the READMEs of eleven
 repositories, was issued before any repository was inspected for its current
 state. Correcting the resulting wreckage surfaced six distinct defects. Five
-were silent configuration rot that pre-existed the cleanup; the sixth was a
-behavioral failure by the operating agent, which was me in effect, through
-the agent I was driving.
+were silent configuration rot that pre-existed the cleanup. The sixth was a
+behavioral failure by the operating agent, which was me in effect, through the
+agent I was driving.
 
 For a skim, three of the six were the kind that stop work: a red
 documentation gate on `skill-discovery`'s default branch that scheduled runs
@@ -218,11 +149,8 @@ pull request blocked in `awesome-agent-trust`, and a required check in
 `zero-md-formatter` naming a job no workflow produced anymore, which meant
 no pull request there could ever pass. The other two rot defects were
 quieter: expired evidence that automation could not see, and a duplicated
-history whose matching trees hid the provenance question. The full
-write-up, with remediation and sources, is the dated
-[fleet CI rot incident report](https://github.com/CodeSigils/skill-repo-standards/blob/main/docs/research/incident-reports/2026-10-17-fleet-ci-rot-and-agent-drift.md)
-in the standards repository. The sixth defect was mine, and it is further
-down.
+history whose matching trees hid the provenance question. The sixth defect was
+mine, and it is further down.
 
 The rot, concretely:
 
@@ -254,26 +182,25 @@ The rot, concretely:
   SHAs. Comparing tree object hashes showed identical snapshots, which
   proves the trees match and proves nothing about provenance. The refresh
   landed in [one careful PR](https://github.com/CodeSigils/zero-md-formatter/pull/7)
-  after real re-verification of every evidence URL, live fetches rather than
-  a blind date bump.
+  after real re-verification of every evidence URL through live fetches. No
+  blind date bump was used.
 
 Then the behavioral failure, which was mine. I had first left a clean change
-uncommitted precisely because a gate was red, and then committed and pushed
-it anyway on a later "handle git hygiene" instruction. I measured success as
-"the fix is in a branch" when the only thing that counts is a green default
-branch. The rot class can only be fixed by automation; the behavior class
-can only be fixed by a directive. A fix that addresses one and not the other
-leaves the other untouched.
+uncommitted because a gate was red, then committed and pushed it anyway on a
+later “handle git hygiene” instruction. I measured success as “the fix is in a
+branch” when the relevant state was a green default branch. Configuration rot
+calls for an automated guard. A behavior failure calls for a directive. Each
+needs its own repair.
 
 The general findings that came out of it are now recorded in my lab notes
 with their sources, and three of them read like laws at this point. A
-scheduled run is not a gate run: judge health by the event class that
-actually gates merges. Never push into a known-red gate: stop and report
-instead. Measure "done" by the default branch, not by branch content. The
-investigation also left one open question I had not expected: a repository
+scheduled run is not a gate run. Judge health by the event class that actually
+gates merges. A known-red gate calls for a stop-and-report decision. Measure
+“done” by the default branch. The investigation also left one open question I
+had not expected. A repository
 that publishes a package has a second front, the release surface, where
 version, tag, and registry are three separate facts that must agree. Ours
-did not: the published artifact and the default branch both claimed the same
+did not. The published artifact and the default branch both claimed the same
 version while differing in content, and a later release attempt created a
 tag and a GitHub Release before the registry publish failed, leaving a
 version spent and half-landed. Merged is not released.
@@ -286,7 +213,7 @@ default branch. I found out through the GitHub API, which returned a plain
 were observed only after they landed. There was no required status check, so
 nothing mechanically stood between a broken tree and the main branch. The
 [official documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
-had been telling me what protection could enforce all along; I had simply
+had been telling me what protection could enforce all along. I had simply
 never read it for this repository.
 
 The fix was available the same day. I enabled protection on `main` with
@@ -333,8 +260,8 @@ path segment, and I had used a path variant of a documentation page that
 differed from the registered one. Both pages exist. Both resolve. But the
 registry spells them one way, and a citation that only almost matches a
 registered source is exactly the kind of quiet drift the whole system is
-meant to catch. That felt good, in the way a test that fails on your own bug
-always does.
+meant to catch. The check caught an error in the record it was designed to
+protect.
 
 The new checks come with fixtures, in the spirit of the conformance corpus
 the repository already keeps: small synthetic trees, one per behavior, with
@@ -352,10 +279,9 @@ stale faster than the cadence that was supposed to check it. The reasoning
 was tidy and wrong. On rechecking, the evidence window was thirty days, and
 the checking cadence was weekly. The window was longer than the cadence, so
 the evidence expired inside its own window while the weekly check kept
-reporting green. Checking is not refreshing. That is the whole correction,
-and the register now carries it as a dated amendment to the original entry
-rather than a silent rewrite. The original finding stays, marked as
-corrected, with the new analysis beside it.
+reporting green. Checking is not refreshing. That is the whole correction.
+The register carries it as a dated amendment to the original entry. The
+original finding stays, marked as corrected, with the new analysis beside it.
 
 This pattern has good company.
 [Google's SRE postmortem template](https://sre.google/sre-book/example-postmortem/)
@@ -405,17 +331,14 @@ failed on a configuration error that needs a human, and the agent timed out
 before reporting. That is the half-landed version I mentioned in the fleet
 section, and it cannot simply be re-created.
 
-The lesson I took is blunt. A background agent's running status is not
-evidence of progress. Two of the three spent the full window producing no
-repository change. After any delegation I now inspect the live state of the
-target, branches, commits, tags, workflow runs, and reconcile it against
-what was actually supposed to happen before I call anything done. The tasks
-that failed shared a shape, too: each opened with a long read of governance
-documentation, hundreds of lines before the first write, which is exactly
-how you spend an inactivity window with nothing to show for it. Smaller
-deliverables, incremental commits, and the irreversible step sequenced last
-are all cheap adjustments. Verification over trust at the boundary is the
-expensive one, and it is not optional.
+A background agent's running status is not evidence of progress. Two of the
+three spent the full window producing no repository change. After any
+delegation I inspect the live state of the target, branches, commits, tags,
+and workflow runs before I call anything done. The tasks that failed shared a
+shape. Each opened with a long read of governance documentation, hundreds of
+lines before the first write. Smaller deliverables, incremental commits, and
+the irreversible step sequenced last are practical adjustments. Verification
+at the boundary remains necessary.
 
 ## The small gates that actually stick
 
@@ -438,20 +361,19 @@ parsers disagreed about the same text, and the tool reported the symptom,
 "a marker is missing", instead of the real cause, "a marker form I cannot
 parse". The fix was one line of tolerance, and the deeper finding went into
 the notes: one marker, one parser, and a validator that cannot recognize a
-variant should say so rather than claim absence. When several invariants
-refer to the same token, they must share a single extraction function.
+variant should say what it cannot parse. When several invariants refer to the
+same token, they must share a single extraction function.
 
 "Check the working tree, index, upstream relation, remotes, and latest
 commit" became a small script and a standing habit in the agent instructions,
 so the full status arrives before any commit conversation starts. "Report
 only, do not implement" is now a phrase I say once at the start of a task,
 and the better repositories carry it as a directive in their own agent
-instructions, which makes it findable instead of remembered.
+instructions. The directive makes the boundary findable.
 
-None of this is novel. It is the same instinct that makes a linter better
-than a style guide you reread when you remember to. The novel part, for me,
-was noticing that my chat history had become a style guide I reread
-constantly and still failed.
+None of this is novel. A linter makes a rule available at the point of use.
+My chat history had become a style guide that I reread constantly and still
+failed to apply.
 
 ## Where human review belongs
 
@@ -464,16 +386,16 @@ on.
 The week I have just described gave each of those categories a concrete
 case. The failed registry publish failed on trusted-publisher configuration,
 which lives on the maintainer's side of the fence and cannot be completed by
-an agent alone; the release needed a human before it needed a retry. The
+an agent alone. The release needed a human before it needed a retry. The
 fleet's stale required-check entry was a governance configuration nobody
 should change without understanding which pull requests it will block. The
 freshness correction was a judgment call about what my own earlier evidence
 actually showed, and the register records my reasoning so someone, including
 future me, can disagree with it on the record.
 
-Good human-in-the-loop practice, to me, means placing review where
-accountability and risk actually live, rather than approving every small
-action. A human may approve a destructive git operation while the agent
+Good human-in-the-loop practice, to me, puts review where accountability and
+risk actually live. Small reversible actions can remain delegated. A human may
+approve a destructive git operation while the agent
 warns and proposes the safer path. A human may review an architectural
 change after the agent has clarified the options and reported the gaps. A
 human may decide whether a research finding is current enough to act on,
@@ -484,9 +406,8 @@ implementing, with the agent's findings in view before the first edit.
 
 The agent gathers status, compares documentation with implementation,
 identifies gaps, warns on destructive actions, summarizes research, and
-proposes a next step that respects the backlog rather than the most
-immediately interesting thread. Only then can I decide whether the proposal
-makes sense and whether the evidence is sufficient. That division of labor
+proposes a next step aligned with the backlog. Only then can I decide whether
+the proposal makes sense and whether the evidence is sufficient. That division of labor
 feels healthier than either extreme, and it only works if the gathering half
 is trustworthy, which is what all the checks are for.
 
@@ -494,23 +415,18 @@ is trustworthy, which is what all the checks are for.
 
 I would like a workflow where the current state is easy to establish, the
 relevant rules are discoverable, and research is connected to the decisions
-it supports. Documentation with a clearer relationship to reality. Git
-hygiene that is explicit instead of remembered under pressure.
+it supports. Documentation with a clearer relationship to reality. Explicit
+Git hygiene that remains available under pressure.
 Recommendations that show their evidence and name what remains uncertain.
 Quality review before the commit, not after the regret.
 
 Most of all, I would like to stop typing the same instructions. If a rule
 keeps recurring, it is probably trying to become part of the system: a
 specification, a checklist, a template, a validation script, a workflow
-gate. The repetitions were never really annoyances. They were the backlog
-talking, patiently, in my own words, waiting for me to file them somewhere
-an agent can find them too.
-
-And when I do, the interesting part begins. Because a rule that survives
-contact with real repositories, real fixtures, and real incidents stops
-being something I believe and becomes something the repository knows. The
-agent drifts less. I type less. And the final laugh, when it comes, belongs
-to the checks.
+gate. The next time I notice one, I will add it to the backlog with an owner,
+an evidence boundary, and the smallest check that can prove it is working.
+That gives the next agent a rule it can find and gives me a record I can
+challenge when the rule no longer fits.
 
 ## Related reading
 
